@@ -29,7 +29,7 @@ const CustomerLoginScreen = () => {
         <View style={styles.welcomeTextContainer}>
           <Text style={styles.welcomeText}>Welcome!</Text>
           <Text style={styles.subWelcomeText}>
-            Hello there, sign up to continue!
+            Hello there, sign in to continue!
           </Text>
         </View>
         <View style={styles.loginFieldsContainer}>
@@ -37,18 +37,18 @@ const CustomerLoginScreen = () => {
             <Text style={styles.fieldHeader}>Email Address</Text>
             <TextInput
               style={styles.inputContainer}
-              placeholder='owner@gmail.com'
+              placeholder='customer@gmail.com'
             />
           </View>
 
-          <View style={styles.fieldParent}>
+          {/* <View style={styles.fieldParent}>
             <Text style={styles.fieldHeader}>Owner ID</Text>
             <TextInput style={styles.inputContainer} placeholder='345910' />
-          </View>
+          </View> */}
 
           <View style={styles.fieldParent}>
             <Text style={styles.fieldHeader}>Password</Text>
-            <TextInput style={styles.inputContainer} secureTextEntrygjj />
+            <TextInput style={styles.inputContainer} secureTextEntry />
           </View>
         </View>
         <TouchableOpacity style={styles.forgotPassword}>
@@ -78,14 +78,14 @@ const CustomerLoginScreen = () => {
           </View>
           <Text style={styles.otherProviderText}>Continue with Google</Text>
         </TouchableOpacity>
-        <View style={styles.businessAccountContainer}>
-          <View style={styles.subOneText}>
-            <Text>Want to setup a business?</Text>
-          </View>
-          <TouchableOpacity>
-            <Text style={styles.subTwoText}>Register!</Text>
-          </TouchableOpacity>
+      </View>
+      <View style={styles.businessAccountContainer}>
+        <View style={styles.subOneText}>
+          <Text>Don’t have an account?</Text>
         </View>
+        <TouchableOpacity>
+          <Text style={styles.subTwoText}>Register!</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

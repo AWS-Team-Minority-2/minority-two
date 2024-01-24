@@ -2,6 +2,7 @@
   flex: 1;
   display: flex;
   background-color: #fcfcfc;
+  justify-content: space-between;
 }
 
 .welcomeText {
@@ -107,6 +108,7 @@
 
 .screenAdjustment {
   margin-left: 20px;
+  margin-top: 20px;
 }
 
 .otherProviderText {
