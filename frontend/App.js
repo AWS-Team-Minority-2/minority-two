@@ -1,4 +1,4 @@
-import { Homescreen } from './screens';
+import { Homescreen, CustomerLoginScreen } from './screens';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -13,6 +13,7 @@ export default function App() {
         }}
       >
         <Stack.Screen name='Home' component={Homescreen} />
+        <Stack.Screen name='CustomerLogin' component={CustomerLoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

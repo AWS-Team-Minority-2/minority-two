@@ -7,11 +7,14 @@ import {
 } from 'react-native';
 import React from 'react';
 import { useFonts } from 'expo-font';
+import { useNavigation } from '@react-navigation/native';
 
+// styles
 import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
 import styles from './sass/Homescreen.scss';
 
 const Homescreen = () => {
+  const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
     BebasNeue_400Regular,
   });
@@ -30,7 +33,10 @@ const Homescreen = () => {
           style={styles.logoContainer}
         />
         <View>
-          <TouchableOpacity style={styles.landingBtnsContainer}>
+          <TouchableOpacity
+            style={styles.landingBtnsContainer}
+            onPress={() => navigation.navigate('CustomerLogin')}
+          >
             {fontsLoaded ? (
               <Text style={styles.bttnText}>Customer</Text>
             ) : (
