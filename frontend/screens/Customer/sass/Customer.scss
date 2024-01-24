@@ -1,0 +1,144 @@
+.screenLayout {
+  flex: 1;
+  display: flex;
+  background-color: #fcfcfc;
+  justify-content: space-between;
+}
+
+.welcomeText {
+  color: #191919;
+  font-size: 30px;
+  font-family: 'BebasNeue_400Regular';
+}
+
+.welcomeTextContainer {
+  padding-top: 20px;
+}
+
+.subWelcomeText {
+  padding-top: 10px;
+
+  font-size: 15px;
+  width: 165.933px;
+}
+
+.loginFieldsContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.inputContainer {
+  width: 330px;
+  height: 48.177px;
+  flex-shrink: 0;
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+
+  border: 1px solid #00000040;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-top: 10px;
+}
+
+.fieldParent {
+}
+
+.fieldHeader {
+  color: #3a4750;
+
+  font-size: 16px;
+}
+
+.forgotPassword {
+  display: flex;
+  align-items: flex-end;
+  right: 80px;
+}
+
+.forgotPasswordText {
+  color: #000;
+  font-size: 14px;
+  font-weight: bolder;
+}
+
+.subOptions {
+  display: flex;
+  align-items: center;
+  right: 20px;
+  padding-top: 10px;
+}
+
+.loginBttn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 331px;
+  height: 59px;
+  flex-shrink: 0;
+  background-color: #f2998d;
+  margin: 20px 20px;
+  border-radius: 10px;
+}
+
+.loginText {
+  font-family: 'BebasNeue_400Regular';
+  font-size: 22px;
+  color: #fff;
+}
+.subOptionsText {
+  font-size: 10px;
+  font-weight: light;
+  padding-bottom: 5px;
+}
+
+.otherProviderContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* Center the content horizontally */
+  align-items: center;
+  width: 347.15px;
+  height: 58.575px;
+  flex-shrink: 0;
+  background-color: #f5f5f5;
+  border: 1px solid #00000040;
+  margin: 10px 20px;
+  border-radius: 10px;
+}
+
+.screenAdjustment {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.otherProviderText {
+  color: #303841;
+  font-size: 13px;
+}
+
+.image {
+  margin-left: 10px;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.imageContainer {
+  padding-right: 50px;
+}
+
+.businessAccountContainer {
+  margin-top: 30px;
+  right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.subOneText {
+  margin-right: 3px;
+}
+.subTwoText {
+  color: #007bff;
+}
