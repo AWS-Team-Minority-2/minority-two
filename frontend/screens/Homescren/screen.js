@@ -1,10 +1,23 @@
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import React from 'react';
-import styles from './sass/Homescreen.scss';
-import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
 import { useFonts } from 'expo-font';
 
+import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
+import styles from './sass/Homescreen.scss';
+
 const Homescreen = () => {
+  const [fontsLoaded] = useFonts({
+    BebasNeue_400Regular,
+  });
+  if (!fontsLoaded) {
+    return <Text>Loading...</Text>;
+  }
   return (
     <>
       <View style={styles.container}>
@@ -18,10 +31,18 @@ const Homescreen = () => {
         />
         <View>
           <TouchableOpacity style={styles.landingBtnsContainer}>
-            <Text style={styles.bttnText}>Customer</Text>
+            {fontsLoaded ? (
+              <Text style={styles.bttnText}>Customer</Text>
+            ) : (
+              <ActivityIndicator />
+            )}
           </TouchableOpacity>
           <TouchableOpacity style={styles.landingBtnsContainer}>
-            <Text style={styles.bttnText}>Business Owner</Text>
+            {fontsLoaded ? (
+              <Text style={styles.bttnText}>Business Owner</Text>
+            ) : (
+              <ActivityIndicator />
+            )}
           </TouchableOpacity>
         </View>
       </View>
