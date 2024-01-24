@@ -19,3 +19,26 @@
   align-items: center;
   display: flex;
 }
+.logoContainer {
+  position: relative;
+  bottom: 60px;
+  width: 365.708px;
+  height: 145.905px;
+}
+
+.landingBtnsContainer {
+  margin: 10px 0;
+  width: 197px;
+  height: 48px;
+  flex-shrink: 0;
+  background-color: #e6d67a;
+  display: flex;
+  justify-content: center;
+}
+
+.bttnText {
+  color: #fff;
+  text-align: center;
+  font-family: 'BebasNeue_400Regular';
+  font-size: 22px;
+}

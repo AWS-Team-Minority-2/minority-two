@@ -1,15 +1,29 @@
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
-import Appstyles from './sass/Homescreen.scss';
+import styles from './sass/Homescreen.scss';
+import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
+import { useFonts } from 'expo-font';
 
 const Homescreen = () => {
   return (
     <>
-      <View style={Appstyles.container}>
-        <Image source={require('./bg.png')} style={Appstyles.image} />
+      <View style={styles.container}>
+        <Image source={require('./assets/bg.png')} style={styles.image} />
       </View>
-      <View style={Appstyles.overlay}>
-        <Text>dev line</Text>
+      <View style={styles.overlay}>
+        <View />
+        <Image
+          source={require('./assets/nexa.png')}
+          style={styles.logoContainer}
+        />
+        <View>
+          <TouchableOpacity style={styles.landingBtnsContainer}>
+            <Text style={styles.bttnText}>Customer</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.landingBtnsContainer}>
+            <Text style={styles.bttnText}>Business Owner</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );
