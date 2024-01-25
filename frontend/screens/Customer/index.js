@@ -1,1 +1,2 @@
-export { CustomerLoginScreen } from './Login';
+export { CustomerLoginScreen } from "./Login";
+export { CustomerRegisterScreen } from "./Register";

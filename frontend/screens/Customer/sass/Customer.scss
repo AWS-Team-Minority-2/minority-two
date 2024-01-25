@@ -10,6 +10,7 @@
 .screenAdjustment {
   margin-left: 22px;
   margin-top: 20px;
+  padding-bottom: 25px;
 }
 
 .leftIcon{
@@ -160,4 +161,59 @@
 
 //Register Section
 
+.subCreateText{
+  padding-top: 10px;
+  font-size: 15px;
+  width: 250px;
+}
 
+.registerBttn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 330px;
+  height: 56.514px;
+  flex-shrink: 0;
+  background-color: #f2998d;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+.RegisterotherProviderContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; /* Center the content horizontally */
+  align-items: center;
+  width: 330px;
+  height: 58px;
+  flex-shrink: 0;
+  background-color: #f5f5f5;
+  border: 1px solid #00000040;
+  margin: 10px 1px;
+  border-radius: 10px;
+  // right: 6px;
+}
+
+.RegistersubOptions{
+  display: flex;
+  align-items: center;
+  right: 10px;
+  margin-top: 20px;
+}
+
+.RegistersubOptionsText{
+  font-size: 10px;
+  font-weight: light;
+  padding-bottom: 5px;
+  right: 8px;
+}
+
+.RegisterbusinessAccountContainer{
+  // left: 10px;
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  justify-content: center;
+  margin: 15px 0;
+  right: 10px;
+}
