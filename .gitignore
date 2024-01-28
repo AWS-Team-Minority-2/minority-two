@@ -1,37 +1,39 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
-node_modules
-.pnp
-.pnp.js
+node_modules/
 
-# testing
-coverage
+# Expo
+.expo/
+dist/
+web-build/
 
-# next.js
-.next/
-.swc/
-out/
-build
+# Native
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
 
-# expo
-.expo
-
-# misc
-.DS_Store
-*.pem
-dist
+# Metro
+.metro-health-check*
 
 # debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
 
 # local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*.local
 
-# turbo
-.turbo
+# typescript
+*.tsbuildinfo
+
+
+**/node_modules
+**/.expo
