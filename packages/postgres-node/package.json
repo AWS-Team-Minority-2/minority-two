@@ -1,0 +1,37 @@
+{
+  "name": "@min-two/postgres-node",
+  "version": "0.0.1",
+  "main": "index.js",
+  "private": true,
+  "type": "module",
+  "types": "types.d.ts",
+  "scripts": {
+    "dev": "echo '1'",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean": "./take/scripts/cleaner.sh ",
+    "lint": "eslint . --max-warnings 0",
+    "bundle": "node ../../esbuild.config.js",
+    "generate:component": "turbo gen react-component"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "copyfiles": "^2.4.1",
+    "esbuild-css-modules-plugin": "^3.1.0",
+    "esbuild-sass-plugin": "^2.16.0",
+    "eslint": "^8.53.0",
+    "react": "^18.2.0",
+    "sass": "^1.69.5",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@graphql-tools/schema": "^10.0.0",
+    "antd": "^5.12.4",
+    "esbuild": "^0.19.8",
+    "graphql-modules": "^2.1.2",
+    "node-sass": "^9.0.0",
+    "pg": "^8.11.3"
+  }
+}
