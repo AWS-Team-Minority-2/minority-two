@@ -6,8 +6,6 @@ import { getAppliedMigrations } from './getAppliedMigrations';
 
 const appliedMigrations = await getAppliedMigrations();
 
-console.log(appliedMigrations);
-
 // // Function to run a single migration file
 async function runMigration(fileName: string): Promise<void> {
   const client = await pool.connect();
@@ -35,8 +33,6 @@ async function runMigrations(): Promise<void> {
   // Use new URL() to extract the directory name
   const currentDir = path.dirname(new URL(currentModuleUrl).pathname);
   const sqlDir = path.join(currentDir, '/sql');
-
-  console.log(sqlDir);
 
   try {
     // Read the list of files in the SQL directory

@@ -2,7 +2,8 @@
   "private": true,
   "name": "@min-two/monorepo",
   "scripts": {
-    "dev": "turbo dev"
+    "dev": "pnpm migrate && turbo dev",
+    "migrate": "cd ./apps/migrations && pnpm migrate"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -24,6 +25,7 @@
     "eslint-plugin-import": "^2.27.5",
     "prettier": "^2.8.8",
     "turbo": "^1.9.9",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "ts-node": "^10.9.1"
   }
 }
