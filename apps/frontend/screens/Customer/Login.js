@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,11 @@ import {
   Path,
   svg,
   Image,
-} from "react-native";
-import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+} from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-import styles from "./sass/Customer.scss";
+import styles from './sass/Customer.scss';
 
 const CustomerLoginScreen = () => {
   const navigation = useNavigation();
@@ -22,9 +22,9 @@ const CustomerLoginScreen = () => {
       <View style={styles.screenAdjustment}>
         <TouchableOpacity
           style={styles.leftIcon}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate('Home')}
         >
-          <Feather name="chevron-left" size={40} color="black" />
+          <Feather name='chevron-left' size={40} color='black' />
         </TouchableOpacity>
         <View style={styles.welcomeTextContainer}>
           <Text style={styles.welcomeText}>Welcome!</Text>
@@ -37,7 +37,7 @@ const CustomerLoginScreen = () => {
             <Text style={styles.fieldHeader}>Email Address</Text>
             <TextInput
               style={styles.inputContainer}
-              placeholder="customer@gmail.com"
+              placeholder='customer@gmail.com'
             />
           </View>
 
@@ -63,7 +63,7 @@ const CustomerLoginScreen = () => {
         <TouchableOpacity style={styles.otherProviderContainer}>
           <View style={styles.imageContainer}>
             <Image
-              source={require("./assets/amazon.png")}
+              source={require('./assets/amazon.png')}
               style={styles.image}
             />
           </View>
@@ -72,7 +72,7 @@ const CustomerLoginScreen = () => {
         <TouchableOpacity style={styles.otherProviderContainer}>
           <View style={styles.imageContainer}>
             <Image
-              source={require("./assets/google.png")}
+              source={require('./assets/google.png')}
               style={styles.image}
             />
           </View>
@@ -86,7 +86,7 @@ const CustomerLoginScreen = () => {
         <TouchableOpacity>
           <Text
             style={styles.subTwoText}
-            onPress={() => navigation.navigate("CustomerRegister")}
+            onPress={() => navigation.navigate('CustomerRegister')}
           >
             Register
           </Text>

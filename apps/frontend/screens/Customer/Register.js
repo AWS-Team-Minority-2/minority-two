@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
@@ -9,11 +9,11 @@ import {
   svg,
   Image,
   ScrollView,
-} from "react-native";
-import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+} from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-import styles from "./sass/Customer.scss";
+import styles from './sass/Customer.scss';
 
 const CustomerRegisterScreen = () => {
   const navigation = useNavigation();
@@ -23,9 +23,9 @@ const CustomerRegisterScreen = () => {
       <ScrollView contentContainerStyle={styles.screenAdjustment}>
         <TouchableOpacity
           style={styles.leftIcon}
-          onPress={() => navigation.navigate("CustomerLogin")}
+          onPress={() => navigation.navigate('CustomerLogin')}
         >
-          <Feather name="chevron-left" size={40} color="black" />
+          <Feather name='chevron-left' size={40} color='black' />
         </TouchableOpacity>
 
         <View style={styles.welcomeTextContainer}>
@@ -57,7 +57,7 @@ const CustomerRegisterScreen = () => {
             <Text style={styles.fieldHeader}>Email Address</Text>
             <TextInput
               style={styles.inputContainer}
-              placeholder="customer@gmail.com"
+              placeholder='customer@gmail.com'
             />
           </View>
 
@@ -76,7 +76,7 @@ const CustomerRegisterScreen = () => {
             <Text style={styles.fieldHeader}>Address</Text>
             <TextInput
               style={styles.inputContainer}
-              placeholder="123 StreetName Rd"
+              placeholder='123 StreetName Rd'
             />
           </View>
           <View style={styles.fieldParent}>
@@ -102,7 +102,7 @@ const CustomerRegisterScreen = () => {
           <TouchableOpacity style={styles.RegisterotherProviderContainer}>
             <View style={styles.imageContainer}>
               <Image
-                source={require("./assets/amazon.png")}
+                source={require('./assets/amazon.png')}
                 style={styles.image}
               />
             </View>
@@ -111,7 +111,7 @@ const CustomerRegisterScreen = () => {
           <TouchableOpacity style={styles.RegisterotherProviderContainer}>
             <View style={styles.imageContainer}>
               <Image
-                source={require("./assets/google.png")}
+                source={require('./assets/google.png')}
                 style={styles.image}
               />
             </View>
@@ -126,7 +126,7 @@ const CustomerRegisterScreen = () => {
           <TouchableOpacity>
             <Text
               style={styles.subTwoText}
-              onPress={() => navigation.navigate("CustomerLogin")}
+              onPress={() => navigation.navigate('CustomerLogin')}
             >
               Login
             </Text>
