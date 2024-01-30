@@ -25,12 +25,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-<<<<<<< HEAD:apps/frontend/package.json
     "@types/react": "~18.0.27"
   }
-=======
-    "react-native-vector-icons": "^10.0.3"
-  },
-  "private": true
->>>>>>> main:frontend/package.json
 }
