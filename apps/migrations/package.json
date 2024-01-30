@@ -1,0 +1,23 @@
+{
+  "name": "@min-two/migrations",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "migrate": "node --loader ts-node/esm ./runner.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@min-two/postgres-node": "workspace:*",
+    "@types/node": "^20.10.5",
+    "@types/pg": "^8.10.2",
+    "body-parser": "^1.20.2",
+    "ckey": "^1.0.3",
+    "nodemon": "^3.0.2"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
