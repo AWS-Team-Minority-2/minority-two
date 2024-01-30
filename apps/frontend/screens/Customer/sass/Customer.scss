@@ -13,7 +13,7 @@
   padding-bottom: 25px;
 }
 
-.leftIcon{
+.leftIcon {
   margin: 0;
   padding: 0;
 }
@@ -55,8 +55,8 @@
   margin-top: 10px;
 }
 
-.fieldParent {
-}
+// .fieldParent {
+// }
 
 .fieldHeader {
   color: #3a4750;
@@ -74,7 +74,6 @@
   font-size: 14px;
   font-weight: bolder;
 }
-
 
 .loginBttn {
   display: flex;
@@ -94,7 +93,6 @@
   font-size: 22px;
   color: #fff;
 }
-
 
 .subOptions {
   display: flex;
@@ -123,7 +121,6 @@
   border-radius: 10px;
   right: 6px;
 }
-
 
 .otherProviderText {
   color: #303841;
@@ -158,16 +155,15 @@
   color: #007bff;
 }
 
-
 //Register Section
 
-.subCreateText{
+.subCreateText {
   padding-top: 10px;
   font-size: 15px;
   width: 250px;
 }
 
-.registerBttn{
+.registerBttn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,7 +175,7 @@
   border-radius: 10px;
 }
 
-.RegisterotherProviderContainer{
+.RegisterotherProviderContainer {
   display: flex;
   flex-direction: row;
   justify-content: flex-start; /* Center the content horizontally */
@@ -194,21 +190,21 @@
   // right: 6px;
 }
 
-.RegistersubOptions{
+.RegistersubOptions {
   display: flex;
   align-items: center;
   right: 10px;
   margin-top: 20px;
 }
 
-.RegistersubOptionsText{
+.RegistersubOptionsText {
   font-size: 10px;
   font-weight: light;
   padding-bottom: 5px;
   right: 8px;
 }
 
-.RegisterbusinessAccountContainer{
+.RegisterbusinessAccountContainer {
   // left: 10px;
   display: flex;
   flex-direction: row;

@@ -2,7 +2,7 @@
   "private": true,
   "name": "@min-two/frontend",
   "version": "1.0.0",
-  "main": "./src/App.js",
+  "main": "./App.js",
   "scripts": {
     "dev": "expo start --ios"
   },
