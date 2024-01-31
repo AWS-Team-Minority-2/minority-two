@@ -8,7 +8,7 @@ const getPostgresPool = () => {
     host: 'localhost',
     database: 'nexa',
     password: '',
-    port: 5432, // Default PostgreSQL port is 5432
+    port: 5000, // Default PostgreSQL port is 5432
   });
   return pool;
 };
