@@ -213,3 +213,34 @@
   margin: 15px 0;
   right: 10px;
 }
+
+.inputContainerError {
+  width: 330px;
+  height: 48.177px;
+  flex-shrink: 0;
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+
+  border: 2px solid #b91414;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-top: 10px;
+}
+
+.formErrorText {
+  position: relative;
+  bottom: 10;
+  color: #b91414cc;
+}
+
+.registerBttnDisabled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 330px;
+  height: 56.514px;
+  flex-shrink: 0;
+  background-color: #c6c6c6;
+  margin: 10px 0;
+  border-radius: 10px;
+}
