@@ -25,6 +25,7 @@ export class PostgresUserStore {
         user.zipCode,
       ];
       this.pool.query(registerUserQuery, values);
+
       return {
         message: 'User added successfully',
       };

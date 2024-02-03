@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 import { REGISTER_USER } from '../gql';
-// import { UPLOAD_USER_DATA } from '../gql/index';
 
 /* Hook that handles users forms **/
 export function useRegisterForm() {
@@ -14,7 +13,7 @@ export function useRegisterForm() {
     address: '',
     city: '',
     state: '',
-    zipCode: '',
+    zipCode: 0,
   });
   const [passwordInit, setPasswordInit] = useState(true);
   const [validatorInit, setValidatorInit] = useState(true);
@@ -28,6 +27,18 @@ export function useRegisterForm() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
   };
+
+  const [testFormData, setFosrmData] = useState({
+    firstName: 'd',
+    lastName: 'd',
+    phoneNumber: 'd',
+    email: 'd',
+    password: 'd',
+    address: 'd',
+    city: 'd',
+    state: 'd',
+    zipCode: 1234,
+  });
 
   const [formErrors, setFormErrors] = useState({
     password: '',
@@ -43,6 +54,13 @@ export function useRegisterForm() {
       setFormErrors((prevData) => ({ ...prevData, ['email']: '' }));
     }
   }, [formData.email]);
+
+  useEffect(() => {
+    if (formData.zipCode) {
+      const i = parseInt(formData.zipCode);
+      setFormData((prevData) => ({ ...prevData, ['zipCode']: i }));
+    }
+  }, [formData.zipCode]);
 
   useEffect(() => {
     let message = '';
@@ -85,15 +103,22 @@ export function useRegisterForm() {
   };
   const canFormBeSubmitted =
     Object.values(formErrors).every((error) => error === '') &&
-    Object.values(formData).every((v) => v !== '');
+    Object.values(formData).every((v) => v !== '' && v !== 0);
 
-  // const [uploadUserData, { loading, error }] = useMutation(UPLOAD_USER_DATA);
+  console.log(canFormBeSubmitted);
+  const [registerUser, { loading, error }] = useMutation(REGISTER_USER);
 
   const submit = useCallback(async () => {
-    console.log('data to backend', formData);
-    setIsLoading(true);
-    // Add your logic to send data to the backend
-  }, [formData]); // Dependencies for useCallback
+    try {
+      await registerUser({
+        variables: {
+          user: formData,
+        },
+      });
+    } catch (err) {
+      console.log('error', err);
+    }
+  }, [formData, registerUser, setFormData]); // Dependencies for useCallback
 
   return {
     handleFormChange,
@@ -103,6 +128,6 @@ export function useRegisterForm() {
     validatorFailed: formErrors.validator && !validatorInit ? true : false,
     canFormBeSubmitted,
     register: submit,
-    submitting: isLoading,
+    submitting: loading,
   };
 }
