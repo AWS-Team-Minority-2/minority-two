@@ -1,0 +1,5 @@
+/apps/frontend/** @AWS-Team-Minority-2/Frontend
+/apps/backend/** @AWS-Team-Minority-2/Backend-Database
+/apps/migrations/** @AWS-Team-Minority-2/Backend-Database
+/packages/postgres-node/** @AWS-Team-Minority-2/Backend-Database
+/packages/user-iso/** @AWS-Team-Minority-2/Backend-Database
