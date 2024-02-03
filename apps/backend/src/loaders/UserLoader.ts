@@ -1,13 +1,11 @@
+import { resgisterUser } from './../controllers/User';
 import { PostgresUserStore } from '../stores/PostgresUserStore';
-import { User } from '../controllers/User';
+import { User } from '@min-two/user-iso';
 
 export interface UserLoaderClass {
-  upsert: (user: User) => Promise<any[]>; // Include the parameter in the interface
-  fetchUsers: () => Promise<any[]>;
-}
-
-interface Reponse {
-  message: string;
+  resgister: (user: User) => Promise<{
+    message: string;
+  }>;
 }
 
 export class UserLoader implements UserLoaderClass {
@@ -17,23 +15,15 @@ export class UserLoader implements UserLoaderClass {
     this.store = store;
   }
 
-  upsert = async (user: User): Promise<any> => {
-    // Include the parameter in the method
+  resgister = async (
+    user: User
+  ): Promise<{
+    message: string;
+  }> => {
     try {
       return this.store.upsertNewUser(user);
     } catch (error) {
-      console.error('Error uploading user data', error);
-      return [];
-    }
-  };
-
-  fetchUsers = async (): Promise<any[]> => {
-    try {
-      const users = await this.store.getUsers();
-      return users;
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      return [];
+      throw new Error('Failed to register user');
     }
   };
 }

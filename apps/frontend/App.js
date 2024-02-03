@@ -11,7 +11,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 const Stack = createNativeStackNavigator();
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'http://localhost:6002/graphql',
   cache: new InMemoryCache(),
 });
 

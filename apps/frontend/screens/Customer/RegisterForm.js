@@ -4,6 +4,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import React, { useState } from 'react';
 import { useRegisterForm } from './hooks/RegisterHook';
@@ -20,6 +21,7 @@ const RegisterForm = () => {
     canFormBeSubmitted,
     emailError,
     register,
+    submitting,
   } = useRegisterForm();
 
   return (
@@ -136,10 +138,14 @@ const RegisterForm = () => {
               ? styles.registerBttn
               : styles.registerBttnDisabled
           }
-          disabled={!canFormBeSubmitted}
+          disabled={!canFormBeSubmitted || submitting}
           onPress={register}
         >
-          <Text style={styles.loginText}>Create Account</Text>
+          {!submitting ? (
+            <Text style={styles.loginText}>Create Account</Text>
+          ) : (
+            <ActivityIndicator size='small' color='#fff' />
+          )}
         </TouchableOpacity>
       </View>
     </View>

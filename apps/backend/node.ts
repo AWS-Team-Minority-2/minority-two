@@ -3,7 +3,7 @@ import { MutationResolver } from './src/resolvers/MutationResolver.js';
 
 // User Loader and Store
 import { UserLoader } from './src/loaders/UserLoader';
-import { PostgresUserStore } from './src/stores/PostgresUserStore.js';
+import { PostgresUserStore } from './src/stores/PostgresUserStore';
 import { mergeModulesSchemaWith, pool as pg } from '@min-two/postgres-node';
 
 import express, { Application } from 'express';
@@ -11,7 +11,7 @@ import express, { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { readFileSync } from 'fs';
 import _ from 'lodash';
-import { resgisterUser } from './src/controllers/User.js';
+import { GQLContext } from './src/GQLContext.js';
 
 const PATH = '/graphql';
 
@@ -27,7 +27,7 @@ export const getProjectServer = _.memoize(async () => {
   });
   const server = new ApolloServer({
     schema,
-    context: () => {
+    context: (): GQLContext => {
       const postgresUserStore = new PostgresUserStore(pg);
       const users = new UserLoader(postgresUserStore);
       return {

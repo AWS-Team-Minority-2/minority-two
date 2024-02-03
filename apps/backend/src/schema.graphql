@@ -3,7 +3,7 @@ type Query {
 }
 
 type Mutation {
-  addUser(flag: User): AddedUserResponse
+  RegisterUser(user: User): AddedUserResponse
 }
 
 type AddedUserResponse {
@@ -16,6 +16,13 @@ type UserOutput {
 }
 
 input User {
-  id: String!
-  name: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  email: String!
+  password: String!
+  address: String!
+  city: String!
+  state: String!
+  zipCode: Int!
 }

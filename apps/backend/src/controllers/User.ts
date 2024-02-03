@@ -3,17 +3,6 @@ import { sign } from 'react-native-pure-jwt';
 import type { Request, Response } from 'express';
 import { UserLoaderClass } from '../loaders/UserLoader';
 
-export type User = {
-  firstName: string;
-  lastName: string;
-  phoneNumber: number;
-  email: string;
-  password: string;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: number;
-};
 // Register User
 export const resgisterUser = async () => {
   console.log('hi');

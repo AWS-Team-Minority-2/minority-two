@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
+import { REGISTER_USER } from '../gql';
 // import { UPLOAD_USER_DATA } from '../gql/index';
 
 /* Hook that handles users forms **/
@@ -18,6 +19,7 @@ export function useRegisterForm() {
   const [passwordInit, setPasswordInit] = useState(true);
   const [validatorInit, setValidatorInit] = useState(true);
   const [emailInit, setEmailInit] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isPasswordSet, setIsPasswordSet] = useState(false);
 
@@ -85,10 +87,13 @@ export function useRegisterForm() {
     Object.values(formErrors).every((error) => error === '') &&
     Object.values(formData).every((v) => v !== '');
 
-  const submit = async () => {
-    console.log('data to  backend', formData);
-  };
   // const [uploadUserData, { loading, error }] = useMutation(UPLOAD_USER_DATA);
+
+  const submit = useCallback(async () => {
+    console.log('data to backend', formData);
+    setIsLoading(true);
+    // Add your logic to send data to the backend
+  }, [formData]); // Dependencies for useCallback
 
   return {
     handleFormChange,
@@ -98,5 +103,6 @@ export function useRegisterForm() {
     validatorFailed: formErrors.validator && !validatorInit ? true : false,
     canFormBeSubmitted,
     register: submit,
+    submitting: isLoading,
   };
 }
