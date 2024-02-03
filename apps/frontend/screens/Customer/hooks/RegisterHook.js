@@ -1,9 +1,12 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 import { REGISTER_USER } from '../gql';
+import { useNavigation } from '@react-navigation/native';
 
 /* Hook that handles users forms **/
 export function useRegisterForm() {
+  const navigation = useNavigation();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -32,7 +35,7 @@ export function useRegisterForm() {
     firstName: 'd',
     lastName: 'd',
     phoneNumber: 'd',
-    email: 'd',
+    email: 'ddd',
     password: 'd',
     address: 'd',
     city: 'd',
@@ -105,21 +108,27 @@ export function useRegisterForm() {
     Object.values(formErrors).every((error) => error === '') &&
     Object.values(formData).every((v) => v !== '' && v !== 0);
 
-  console.log(canFormBeSubmitted);
   const [registerUser, { loading, error }] = useMutation(REGISTER_USER);
 
   const submit = useCallback(async () => {
+    console.log(formData);
+
     try {
-      await registerUser({
+      const { data } = await registerUser({
         variables: {
           user: formData,
         },
       });
-    } catch (err) {
-      console.log('error', err);
-    }
-  }, [formData, registerUser, setFormData]); // Dependencies for useCallback
 
+      if (data) {
+        navigation.navigate('UserHome');
+      }
+      console.log(data, 'retured');
+    } catch (error) {
+      // Handle errors
+      throw new Error('Netwoek Failed for registration');
+    }
+  }, [formData, registerUser, testFormData]);
   return {
     handleFormChange,
     passwordError: !passwordInit ? formErrors.password : '',

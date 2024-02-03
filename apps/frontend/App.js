@@ -2,7 +2,9 @@ import {
   Homescreen,
   CustomerLoginScreen,
   CustomerRegisterScreen,
+  UserHomeScreen,
 } from './screens';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { registerRootComponent } from 'expo';
@@ -30,6 +32,8 @@ export default function App() {
             name='CustomerRegister'
             component={CustomerRegisterScreen}
           />
+          {/* update when user home page is created */}
+          <Stack.Screen name='UserHome' component={UserHomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>

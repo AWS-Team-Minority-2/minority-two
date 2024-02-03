@@ -24,11 +24,7 @@ export class PostgresUserStore {
         user.state,
         user.zipCode,
       ];
-      this.pool.query(registerUserQuery, values);
-
-      return {
-        message: 'User added successfully',
-      };
+      return await this.pool.query(registerUserQuery, values);
     } catch (error) {
       console.log(error);
       throw new Error('Error while adding user to the database.');

@@ -1,6 +1,7 @@
 import { resgisterUser } from './../controllers/User';
 import { PostgresUserStore } from '../stores/PostgresUserStore';
 import { User } from '@min-two/user-iso';
+import { QueryResult } from 'pg';
 
 export interface UserLoaderClass {
   resgister: (user: User) => Promise<{
@@ -15,13 +16,9 @@ export class UserLoader implements UserLoaderClass {
     this.store = store;
   }
 
-  resgister = async (
-    user: User
-  ): Promise<{
-    message: string;
-  }> => {
+  resgister = async (user: User): Promise<any> => {
     try {
-      return this.store.upsertNewUser(user);
+      return await this.store.upsertNewUser(user);
     } catch (error) {
       throw new Error('Failed to register user');
     }
