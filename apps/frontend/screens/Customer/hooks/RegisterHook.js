@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 export function useRegisterForm() {
   const navigation = useNavigation();
 
+  // Use this form to register the user
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -18,11 +19,10 @@ export function useRegisterForm() {
     state: '',
     zipCode: 0,
   });
+  // Init is required because we only want the form to error after bad input
   const [passwordInit, setPasswordInit] = useState(true);
   const [validatorInit, setValidatorInit] = useState(true);
   const [emailInit, setEmailInit] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-
   const [isPasswordSet, setIsPasswordSet] = useState(false);
 
   const isValidEmail = (email) => {
@@ -31,33 +31,28 @@ export function useRegisterForm() {
     return emailPattern.test(email);
   };
 
-  const [testFormData, setFosrmData] = useState({
-    firstName: 'd',
-    lastName: 'd',
-    phoneNumber: 'd',
-    email: 'ddd',
-    password: 'd',
-    address: 'd',
-    city: 'd',
-    state: 'd',
-    zipCode: 1234,
-  });
-
+  // Handle the error messages, most are not returned to the UI
   const [formErrors, setFormErrors] = useState({
     password: '',
     validator: '',
     email: '',
   });
 
+  // handle email chanages
   useEffect(() => {
+    // if input then set init to false
     setEmailInit(false);
+    // if we have email but not valid update the error to 'NV'
     if (formData.email && !isValidEmail(formData.email)) {
       setFormErrors((prevData) => ({ ...prevData, ['email']: 'NV' }));
     } else {
+      // else clear the error
       setFormErrors((prevData) => ({ ...prevData, ['email']: '' }));
     }
   }, [formData.email]);
 
+  // in the backend the zipCode must be a number, however input is from the user is a string.
+  // This breaks the backend, so we create this useEffect to update the zipCode field
   useEffect(() => {
     if (formData.zipCode) {
       const i = parseInt(formData.zipCode);
@@ -65,6 +60,7 @@ export function useRegisterForm() {
     }
   }, [formData.zipCode]);
 
+  // Handle password errors
   useEffect(() => {
     let message = '';
 
@@ -86,6 +82,7 @@ export function useRegisterForm() {
     setValidatorInit(true);
   }, [formData.password]);
 
+  // handle when input is entered into any field
   const handleFormChange = (name, val) => {
     if (name && name !== 'password' && name !== 'passwordValidator') {
       setFormData((prevData) => ({ ...prevData, [name]: val }));
@@ -104,12 +101,16 @@ export function useRegisterForm() {
       }
     }
   };
+
+  // if there are no errors and each form is field, then true else false
   const canFormBeSubmitted =
     Object.values(formErrors).every((error) => error === '') &&
     Object.values(formData).every((v) => v !== '' && v !== 0);
 
+  //  talk to the database with a mutation in graphql
   const [registerUser, { loading, error }] = useMutation(REGISTER_USER);
 
+  // try to send the data to the backend
   const submit = useCallback(async () => {
     console.log(formData);
 
@@ -123,12 +124,12 @@ export function useRegisterForm() {
       if (data) {
         navigation.navigate('UserHome');
       }
-      console.log(data, 'retured');
     } catch (error) {
       // Handle errors
-      throw new Error('Netwoek Failed for registration');
+      throw new Error('Network Failed for registration');
     }
-  }, [formData, registerUser, testFormData]);
+  }, [formData, registerUser]);
+
   return {
     handleFormChange,
     passwordError: !passwordInit ? formErrors.password : '',
