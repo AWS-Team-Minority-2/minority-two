@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
-
+import { LOGIN_USER } from '../gql';
 import { useNavigation } from '@react-navigation/native';
 
 /* Hook that handles users forms **/
@@ -18,14 +18,30 @@ export function useLoginForm() {
     setLoginFailed(false);
   };
 
+  const [loginUser, { loading, error }] = useMutation(LOGIN_USER);
+
   const submit = useCallback(async () => {
     const vaild = checkIfFormValid();
     if (vaild) {
-      console.log(formData, 'data');
+      setLoginFailed(false);
+      try {
+        const { data } = await loginUser({
+          variables: {
+            details: {
+              email: formData.email,
+              password: formData.password,
+            },
+          },
+        });
+        console.log(data, 'data');
+      } catch (error) {
+        // Handle errors
+        throw new Error('Network Failed for login');
+      }
     } else {
       setLoginFailed(true);
     }
-  }, []);
+  }, [formData, setFormData]);
 
   // check if form is vaild
   const checkIfFormValid = () => {

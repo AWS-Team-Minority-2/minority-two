@@ -13,7 +13,9 @@ const LoginForm = () => {
         <View style={styles.fieldParent}>
           <Text style={styles.fieldHeader}>Email Address</Text>
           <TextInput
-            style={styles.inputContainer}
+            style={
+              !loginFailed ? styles.inputContainer : styles.inputContainerError
+            }
             placeholder='customer@gmail.com'
             onChangeText={(newText) => handleFormChange('email', newText)}
           />
@@ -22,7 +24,9 @@ const LoginForm = () => {
         <View style={styles.fieldParent}>
           <Text style={styles.fieldHeader}>Password</Text>
           <TextInput
-            style={styles.inputContainer}
+            style={
+              !loginFailed ? styles.inputContainer : styles.inputContainerError
+            }
             secureTextEntry
             onChangeText={(newText) => handleFormChange('password', newText)}
           />
