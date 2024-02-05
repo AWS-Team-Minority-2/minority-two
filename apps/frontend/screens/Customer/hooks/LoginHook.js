@@ -33,7 +33,11 @@ export function useLoginForm() {
             },
           },
         });
-        console.log(data, 'data');
+        if (data.LoginUser.id) {
+          navigation.navigate('UserHome');
+        } else {
+          setLoginFailed(true);
+        }
       } catch (error) {
         // Handle errors
         throw new Error('Network Failed for login');
@@ -41,7 +45,7 @@ export function useLoginForm() {
     } else {
       setLoginFailed(true);
     }
-  }, [formData, setFormData]);
+  }, [formData, setFormData, loginFailed, setLoginFailed]);
 
   // check if form is vaild
   const checkIfFormValid = () => {
