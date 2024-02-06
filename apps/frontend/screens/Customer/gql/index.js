@@ -1,1 +1,1 @@
-export { REGISTER_USER } from './mutations/registerUser';
+export { REGISTER_USER, LOGIN_USER } from './mutations/users';

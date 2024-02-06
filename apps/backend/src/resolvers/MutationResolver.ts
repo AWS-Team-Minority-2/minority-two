@@ -1,5 +1,5 @@
 import { GQLContext } from '../GQLContext';
-import { User } from '@min-two/user-iso';
+import { User, UserDetails } from '@min-two/user-iso';
 
 export const MutationResolver = {
   async RegisterUser(_root: {}, args: { user: User }, context: GQLContext) {
@@ -10,6 +10,21 @@ export const MutationResolver = {
     } catch (error) {
       // Handle any potential errors here
       throw new Error('Failed to register user');
+    }
+  },
+
+  async LoginUser(
+    _root: {},
+    args: { details: UserDetails },
+    context: GQLContext
+  ) {
+    try {
+      // Assuming fetchRestaurant is an asynchronous function that returns a list of restaurants
+      const attempt = context.users.login(args.details);
+      return attempt;
+    } catch (error) {
+      // Handle any potential errors here
+      throw new Error('Failed to login');
     }
   },
 };
