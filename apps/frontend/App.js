@@ -3,6 +3,7 @@ import {
   CustomerLoginScreen,
   CustomerRegisterScreen,
   UserHomeScreen,
+  BusinessLoginScreen
 } from './screens';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -31,6 +32,11 @@ export default function App() {
           <Stack.Screen
             name='CustomerRegister'
             component={CustomerRegisterScreen}
+          />
+          {/* Add BusinessLoginScreen to the stack */}
+          <Stack.Screen
+            name='BusinessLogin'
+            component={BusinessLoginScreen}
           />
           {/* update when user home page is created */}
           <Stack.Screen name='UserHome' component={UserHomeScreen} />

@@ -3,9 +3,9 @@ import React from 'react';
 
 const UserHomeScreen = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>UserHomeScreen</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 

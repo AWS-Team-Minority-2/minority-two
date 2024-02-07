@@ -43,7 +43,9 @@ const Homescreen = () => {
               <ActivityIndicator />
             )}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.landingBtnsContainer}>
+          <TouchableOpacity style={styles.landingBtnsContainer}
+          onPress={() => navigation.navigate('BusinessLogin')}
+          >
             {fontsLoaded ? (
               <Text style={styles.bttnText}>Business Owner</Text>
             ) : (

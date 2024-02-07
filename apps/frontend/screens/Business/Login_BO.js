@@ -11,13 +11,11 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { LoginForm } from './LoginForm';
 
-import styles from './sass/Customer.scss';
+import styles from './sass/Business.scss';
 
-const CustomerLoginScreen = () => {
+const BusinessLoginScreen = () => {
   const navigation = useNavigation();
-
   return (
     <SafeAreaView style={styles.screenLayout}>
       <View style={styles.screenAdjustment}>
@@ -33,7 +31,31 @@ const CustomerLoginScreen = () => {
             Hello there, sign in to continue!
           </Text>
         </View>
-        <LoginForm />
+        <View style={styles.loginFieldsContainer}>
+          <View style={styles.fieldParent}>
+            <Text style={styles.fieldHeader}>Email Address</Text>
+            <TextInput
+              style={styles.inputContainer}
+              placeholder='Business@gmail.com'
+            />
+          </View>
+
+          <View style={styles.fieldParent}>
+            <Text style={styles.fieldHeader}>Owner ID</Text>
+            <TextInput style={styles.inputContainer} placeholder='345910' />
+          </View>
+
+          <View style={styles.fieldParent}>
+            <Text style={styles.fieldHeader}>Password</Text>
+            <TextInput style={styles.inputContainer} secureTextEntry />
+          </View>
+        </View>
+        <TouchableOpacity style={styles.forgotPassword}>
+          <Text styles={styles.forgotPasswordText}>Forgot Password?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.loginBttn}>
+          <Text style={styles.loginText}>Login</Text>
+        </TouchableOpacity>
         <View style={styles.subOptions}>
           <Text style={styles.subOptionsText}>Or Login With</Text>
         </View>
@@ -58,12 +80,12 @@ const CustomerLoginScreen = () => {
       </View>
       <View style={styles.businessAccountContainer}>
         <View style={styles.subOneText}>
-          <Text>Don’t have an account?</Text>
+          <Text>Want to set up a business?</Text>
         </View>
         <TouchableOpacity>
           <Text
             style={styles.subTwoText}
-            onPress={() => navigation.navigate('CustomerRegister')}
+            onPress={() => navigation.navigate('BusinessRegister')}
           >
             Register
           </Text>
@@ -73,4 +95,4 @@ const CustomerLoginScreen = () => {
   );
 };
 
-export { CustomerLoginScreen };
+export { BusinessLoginScreen };
