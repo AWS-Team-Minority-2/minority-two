@@ -41,11 +41,6 @@ const CustomerLoginScreen = () => {
             />
           </View>
 
-          {/* <View style={styles.fieldParent}>
-            <Text style={styles.fieldHeader}>Owner ID</Text>
-            <TextInput style={styles.inputContainer} placeholder='345910' />
-          </View> */}
-
           <View style={styles.fieldParent}>
             <Text style={styles.fieldHeader}>Password</Text>
             <TextInput style={styles.inputContainer} secureTextEntry />
