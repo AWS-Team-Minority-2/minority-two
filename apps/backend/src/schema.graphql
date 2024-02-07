@@ -4,6 +4,17 @@ type Query {
 
 type Mutation {
   RegisterUser(user: User): AddedUserResponse
+  LoginUser(details: UserDetails): LoginResponse
+}
+
+input UserDetails {
+  email: String!
+  password: String!
+}
+
+type LoginResponse {
+  id: String
+  userMetadata: UserMetaData
 }
 
 type AddedUserResponse {
@@ -11,8 +22,36 @@ type AddedUserResponse {
 }
 
 type UserOutput {
+  id: String
+  name: String
+}
+
+type Address {
+  street: String!
+  city: String!
+  state: String!
+  zipcode: Int!
+}
+
+type UserMetaData {
+  firstname: String!
+  lastname: String!
+  phonenumber: String!
+  email: String!
+  address: Address!
+}
+
+type UserResponse {
   id: String!
-  name: String!
+  firstname: String!
+  lastname: String!
+  phonenumber: String!
+  email: String!
+  password: String!
+  address: String!
+  city: String!
+  state: String!
+  zipcode: Int!
 }
 
 input User {

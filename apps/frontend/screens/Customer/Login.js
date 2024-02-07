@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { LoginForm } from './LoginForm';
 
 import styles from './sass/Customer.scss';
 
@@ -32,26 +33,7 @@ const CustomerLoginScreen = () => {
             Hello there, sign in to continue!
           </Text>
         </View>
-        <View style={styles.loginFieldsContainer}>
-          <View style={styles.fieldParent}>
-            <Text style={styles.fieldHeader}>Email Address</Text>
-            <TextInput
-              style={styles.inputContainer}
-              placeholder='customer@gmail.com'
-            />
-          </View>
-
-          <View style={styles.fieldParent}>
-            <Text style={styles.fieldHeader}>Password</Text>
-            <TextInput style={styles.inputContainer} secureTextEntry />
-          </View>
-        </View>
-        <TouchableOpacity style={styles.forgotPassword}>
-          <Text styles={styles.forgotPasswordText}>Forgot Password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBttn}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
+        <LoginForm />
         <View style={styles.subOptions}>
           <Text style={styles.subOptionsText}>Or Login With</Text>
         </View>

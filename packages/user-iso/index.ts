@@ -10,6 +10,11 @@ export type User = {
   zipCode: number;
 };
 
+export type UserDetails = {
+  email: string;
+  password: string;
+};
+
 export const registerUserQuery = `
   INSERT INTO users.user (
     firstName, 
@@ -23,3 +28,7 @@ export const registerUserQuery = `
     zipCode
   ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 `;
+
+export const fetchOneByEmailQuery = `SELECT *
+FROM users.user
+WHERE email = $1;`;
