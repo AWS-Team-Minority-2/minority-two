@@ -1,14 +1,14 @@
-import {
-  Homescreen,
-  CustomerLoginScreen,
-  CustomerRegisterScreen,
-  UserHomeScreen,
-} from './screens';
-import { View } from 'react-native';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { registerRootComponent } from 'expo';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import {
+  CustomerLoginScreen,
+  CustomerRegisterScreen,
+  ForgotPassword,
+  Homescreen,
+  UserHomeScreen,
+} from './screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +28,7 @@ export default function App() {
         >
           <Stack.Screen name='Home' component={Homescreen} />
           <Stack.Screen name='CustomerLogin' component={CustomerLoginScreen} />
+          <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
           <Stack.Screen
             name='CustomerRegister'
             component={CustomerRegisterScreen}
