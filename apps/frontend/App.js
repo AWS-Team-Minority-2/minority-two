@@ -3,11 +3,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { registerRootComponent } from 'expo';
 import {
+  BusinessLoginScreen,
   CustomerLoginScreen,
   CustomerRegisterScreen,
   ForgotPassword,
   Homescreen,
-  UserHomeScreen,
+  UserHomeScreen
 } from './screens';
 
 const Stack = createNativeStackNavigator();
@@ -32,6 +33,11 @@ export default function App() {
           <Stack.Screen
             name='CustomerRegister'
             component={CustomerRegisterScreen}
+          />
+          {/* Add BusinessLoginScreen to the stack */}
+          <Stack.Screen
+            name='BusinessLogin'
+            component={BusinessLoginScreen}
           />
           {/* update when user home page is created */}
           <Stack.Screen name='UserHome' component={UserHomeScreen} />
