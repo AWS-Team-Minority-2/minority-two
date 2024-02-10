@@ -35,7 +35,6 @@
     "esbuild": "^0.19.8",
     "graphql": "^16.0.0",
     "graphql-modules": "^2.1.2",
-    "node-sass": "^9.0.0",
     "ts-node": "^10.9.1"
   }
 }
