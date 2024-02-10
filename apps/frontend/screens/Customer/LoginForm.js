@@ -1,11 +1,12 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useLoginForm } from './hooks/LoginHook';
-
 import styles from './sass/Customer.scss';
 
 const LoginForm = () => {
   const { login, handleFormChange, loginFailed } = useLoginForm();
+  const navigation = useNavigation();
 
   return (
     <View>
@@ -37,7 +38,8 @@ const LoginForm = () => {
           </Text>
         )}
       </View>
-      <TouchableOpacity style={styles.forgotPassword}>
+      <TouchableOpacity style={styles.forgotPassword} 
+        onPress={() => navigation.navigate('ForgotPassword')}> 
         <Text styles={styles.forgotPasswordText}>Forgot Password?</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.loginBttn} onPress={login}>

@@ -1,17 +1,13 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  TextInput,
-  Path,
-  svg,
-  Image,
-  ScrollView,
-} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import { RegisterForm } from './RegisterForm';
 
 import styles from './sass/Customer.scss';
@@ -26,7 +22,7 @@ const CustomerRegisterScreen = () => {
           style={styles.leftIcon}
           onPress={() => navigation.navigate('CustomerLogin')}
         >
-          <Feather name='chevron-left' size={40} color='black' />
+          <Feather name='chevron-left' size={33} color='black' />
         </TouchableOpacity>
 
         <View style={styles.welcomeTextContainer}>
