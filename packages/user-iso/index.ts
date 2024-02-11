@@ -1,15 +1,3 @@
-export type User = {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
-  password: string;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: number;
-};
-
 export type UserDetails = {
   email: string;
   password: string;
@@ -32,3 +20,5 @@ export const registerUserQuery = `
 export const fetchOneByEmailQuery = `SELECT *
 FROM users.user
 WHERE email = $1;`;
+
+export * from './context/auth';
