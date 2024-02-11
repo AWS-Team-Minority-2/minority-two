@@ -21,7 +21,7 @@
     "noImplicitThis": true,
     // other
     "isolatedModules": true,
-    "allowJs": true,
+    // "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
     "sourceMap": true,
@@ -47,7 +47,7 @@
     "**/node_modules",
     "build",
     "**/build",
-    "dist",
+    "dist/**",
     "**/dist",
     "scripts",
     "jest",

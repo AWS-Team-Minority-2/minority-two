@@ -2,9 +2,11 @@ import { useEffect, useState, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../gql';
 import { useNavigation } from '@react-navigation/native';
+import { useAuthDispatch, doLogin } from '@min-two/user-iso';
 
 /* Hook that handles users forms **/
 export function useLoginForm() {
+  const dispatch = useAuthDispatch();
   const navigation = useNavigation();
   const [loginFailed, setLoginFailed] = useState(false);
 
@@ -34,12 +36,14 @@ export function useLoginForm() {
           },
         });
         if (data.LoginUser.id) {
+          doLogin(dispatch, data.LoginUser);
           navigation.navigate('UserHome');
         } else {
           setLoginFailed(true);
         }
       } catch (error) {
         // Handle errors
+        setLoginFailed(true);
         throw new Error('Network Failed for login');
       }
     } else {
