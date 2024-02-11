@@ -3,7 +3,8 @@
   "name": "@min-two/monorepo",
   "scripts": {
     "dev": "pnpm migrate && turbo dev",
-    "migrate": "cd ./apps/migrations && pnpm migrate"
+    "migrate": "cd ./apps/migrations && pnpm migrate",
+    "clean": "./nexa/scripts/cleaner.sh"
   },
   "pnpm": {
     "peerDependencyRules": {

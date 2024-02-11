@@ -6,6 +6,7 @@
   "type": "module",
   "types": "types.d.ts",
   "scripts": {
+    "build": "echo 'skipped because of js'",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "clean": "./take/scripts/cleaner.sh ",
     "lint": "eslint . --max-warnings 0",

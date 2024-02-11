@@ -1,0 +1,6 @@
+#!/bin/bash
+
+printf "\e[93;1mNexa is cleaning please wait...\e[0m\n"
+pnpm clean > /dev/null 2>&1
+printf "\e[1A\e[K\e[32;1m✨Cleanup successful, try running pnpm dev✨\e[0m\n"
+
