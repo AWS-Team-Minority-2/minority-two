@@ -1,36 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { AntDesign, MaterialIcons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
-import styles from './sass/UserHome.scss';
-import { useNavigation } from "@react-navigation/native";
+import styles from './UserHomePage/UserHome.scss';
 
-const NavBar = () => {
-
-  const navigation = useNavigation();
-  const [selectedButton, setSelectedButton] = useState('Home'); // Current button selected in Navbar
-
-
-  // Handles changing the current button clicked in the NavBar
-  const handleButtonPress = (buttonName) => {
-    setSelectedButton(buttonName);
-  };
-
-  // Handles changing the current address and leading the pop up screen to close
-  const handleAddressClick = (address) => {
-    setPickedAddress(address);
-    setLocation(false);
-  };
+const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
   return (
- 
     <View style={styles.navBar}>
       {/* Home Button */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => handleButtonPress('Home')}
+        onPress={() => [handleButtonPress('Home'), navigation.navigate('UserHome')]}
       >
         <AntDesign
           name='home'
-          size={20}
+          size={25}
           color='black'
           style={[
             styles.button,
@@ -54,7 +37,7 @@ const NavBar = () => {
       >
         <MaterialIcons
           name='favorite-outline'
-          size={21}
+          size={26}
           color='black'
           style={[
             styles.button,
@@ -78,7 +61,7 @@ const NavBar = () => {
       >
         <MaterialCommunityIcons
           name='store-search-outline'
-          size={22}
+          size={27}
           color='black'
           style={[
             styles.button,
@@ -102,7 +85,7 @@ const NavBar = () => {
       >
         <Feather
           name='user'
-          size={20}
+          size={25}
           color='black'
           style={[
             styles.button,
@@ -122,4 +105,4 @@ const NavBar = () => {
   );
 };
 
-export {NavBar};
+export default NavBar;
