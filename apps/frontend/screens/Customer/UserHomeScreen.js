@@ -3,14 +3,14 @@ import React, {useState, useRef} from 'react';
 import styles from './sass/UserHome.scss';
 import {SERVICE_PLACES, TOP_PLACES, RESTAURANTS_PLACES, SHOP_PLACES} from './data/info';
 import TopPlacesCarousel from './components/TopPlacesCarousel';
-
+import NavBar from './NavBar';
 import { Entypo, Ionicons, Feather, MaterialIcons, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { useNavigation } from "@react-navigation/native";
 
 
 const UserHomeScreen = () => {
 
-  
+  const navigation = useNavigation();
   const [location, setLocation] = useState(false); // For the pop screen to show up or not
   const [pickedAddress, setPickedAddress] = useState('Howard University'); // Current address displayed
   const [selectedButton, setSelectedButton] = useState('Home'); // Current button selected in Navbar
@@ -171,36 +171,10 @@ const UserHomeScreen = () => {
       </ScrollView>
 
       {/* Navigation Bar at the bottom (Home, Fav, Browse, Profile) */}
-      <View style={styles.navBar}>
-    
-          {/* Home Button */}
-          <TouchableOpacity style={styles.button}
-          onPress={() => handleButtonPress('Home')}>
-            <AntDesign name="home" size={25} color="black" style={[styles.button, selectedButton === 'Home' && styles.selectedButton]}/>
-            <Text style={[styles.buttonword, selectedButton === 'Home' && styles.selectedButton]}>Home</Text>
-          </TouchableOpacity>
-
-          {/* Favorites Button */}
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Favorites')}>
-            <MaterialIcons name="favorite-outline" size={26} color="black"style={[styles.button, selectedButton === 'Favorites' && styles.selectedButton]}/>
-            <Text style={[styles.buttonword, selectedButton === 'Favorites' && styles.selectedButton]}>Favorites</Text>
-          </TouchableOpacity>
-
-          {/* Browse Button */}
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Browse')}>
-            <MaterialCommunityIcons name="store-search-outline" size={27} color="black" style={[styles.button, selectedButton === 'Browse' && styles.selectedButton]}/>
-            <Text style={[styles.buttonword, selectedButton === 'Browse' && styles.selectedButton]}>Browse</Text>
-          </TouchableOpacity>
-
-          {/* Profile Button */}
-          <TouchableOpacity style={styles.button} onPress={() => handleButtonPress('Profile')}>
-            <Feather name="user" size={25} color="black" style={[styles.button, selectedButton === 'Profile' && styles.selectedButton]}/>
-            <Text style={[styles.buttonword, selectedButton === 'Profile' && styles.selectedButton]}>Profile</Text>
-          </TouchableOpacity>
-        </View>
+      
 
       </View>
-
+     
     
     </SafeAreaView>
    
