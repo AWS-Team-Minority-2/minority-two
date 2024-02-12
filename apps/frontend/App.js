@@ -43,7 +43,7 @@ export default function App() {
           {/* update when user home page is created */}
           <Stack.Screen name='UserHome' component={UserHomeScreen} />
         </Stack.Navigator>
-        <NavBar/>
+        <NavBar />
       </NavigationContainer>
     </ApolloProvider>
   );

@@ -127,8 +127,8 @@ const UserHomeScreen = () => {
         </View>
 
         {/* All Scroll Sliders */}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <>
+      <ScrollView showsVerticalScrollIndicator={false} >
+        <View style={styles.scroll}>
           {/* Featured Scroll Sliders */}
           <View style={styles.slider}>
             <TouchableOpacity style={styles.title}>
@@ -167,7 +167,7 @@ const UserHomeScreen = () => {
             </TouchableOpacity>
             <TopPlacesCarousel list={SHOP_PLACES}/>
           </View>
-        </>
+        </View>
       </ScrollView>
 
       {/* Navigation Bar at the bottom (Home, Fav, Browse, Profile) */}

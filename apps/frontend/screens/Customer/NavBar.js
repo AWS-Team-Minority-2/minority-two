@@ -2,8 +2,24 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { AntDesign, MaterialIcons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import styles from './sass/UserHome.scss';
+import { useNavigation } from "@react-navigation/native";
 
-const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
+const NavBar = () => {
+
+  const navigation = useNavigation();
+  const [selectedButton, setSelectedButton] = useState('Home'); // Current button selected in Navbar
+
+
+  // Handles changing the current button clicked in the NavBar
+  const handleButtonPress = (buttonName) => {
+    setSelectedButton(buttonName);
+  };
+
+  // Handles changing the current address and leading the pop up screen to close
+  const handleAddressClick = (address) => {
+    setPickedAddress(address);
+    setLocation(false);
+  };
   return (
  
     <View style={styles.navBar}>
@@ -14,7 +30,7 @@ const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
       >
         <AntDesign
           name='home'
-          size={25}
+          size={20}
           color='black'
           style={[
             styles.button,
@@ -38,7 +54,7 @@ const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
       >
         <MaterialIcons
           name='favorite-outline'
-          size={26}
+          size={21}
           color='black'
           style={[
             styles.button,
@@ -62,7 +78,7 @@ const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
       >
         <MaterialCommunityIcons
           name='store-search-outline'
-          size={27}
+          size={22}
           color='black'
           style={[
             styles.button,
@@ -86,7 +102,7 @@ const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
       >
         <Feather
           name='user'
-          size={25}
+          size={20}
           color='black'
           style={[
             styles.button,
