@@ -1,0 +1,240 @@
+.homeScreenLayout {
+  flex: 1;
+  display: flex;
+  background-color: #fcfcfc;
+}
+
+.homeAdjustment {
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 25px;
+  // padding-bottom: 38%;
+}
+
+.scroll {
+  margin-bottom: 100px;
+}
+
+.TopBar {
+  position: sticky; // Stick the TopBar to the top of the viewport
+  top: 0; // Stick it at the very top
+  background-color: 'white'; // Set a background color if needed
+  z-index: 100; // Ensure it stays on top of other content
+}
+
+.homeHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.location {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center children vertically */
+  // font-family: 'BebasNeue_400Regular';
+}
+
+.locationPopUp {
+  flex: 1;
+  display: flex;
+  background-color: 'rgba(0, 0, 0, 0.5)';
+  justify-content: flex-end;
+}
+
+.locationBox {
+  width: 100%;
+  padding-bottom: 7%;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.locationContent {
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 25px;
+  padding-bottom: 25px;
+  align-content: center;
+}
+
+.locationHeader {
+  font-size: 25px;
+  margin-left: 6px;
+  font-weight: 600;
+  // font-family: 'BebasNeue_400Regular';
+}
+
+.searchInput {
+  width: 100%;
+  height: 48.177px;
+  flex-shrink: 0;
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+  border: 1px solid #00000040;
+  border-radius: 0px;
+  padding-left: 10px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center children vertically */
+  justify-content: center; /* Center children horizontally */
+}
+
+.pastLocations {
+  font-size: 18px;
+  margin-left: 6px;
+  font-weight: 600;
+}
+
+.pastLocationContainer {
+  flex-direction: column;
+  align-content: center;
+  top: 20px;
+  margin-left: 6px;
+}
+
+.sectionLocation {
+  flex-direction: row;
+  align-content: center;
+}
+
+.pin {
+  margin-top: 5px;
+  margin-right: 7px;
+}
+
+.wholeLocation {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.pastLocation {
+  font-size: 16px;
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.address {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.pickedAddress {
+  color: #f2998d;
+}
+
+.locationDivider {
+  margin-bottom: 15px;
+  height: 1px; /* Set height to 1px to make it horizontally aligned */
+  width: 100%; /* Adjust the width of the divider as needed */
+  background-color: #00000020; /* Adjust the color of the divider as needed */
+}
+
+.notification {
+  margin-right: 10px;
+}
+
+.searchContainer {
+  width: 100%;
+  height: 48.177px;
+  flex-shrink: 0;
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+  border: 1px solid #00000040;
+  border-radius: 18px;
+  padding-left: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center children vertically */
+  justify-content: center; /* Center children horizontally */
+}
+
+.searchIcon {
+  margin-right: 10px;
+}
+
+.textInput {
+  flex: 1;
+  height: 100%; /* Ensure TextInput takes up full height of container */
+  // font-family: 'BebasNeue_400Regular';
+}
+
+.mapIcon {
+  margin-right: 10px;
+}
+
+.divider {
+  width: 1px;
+  margin-right: 10px;
+  height: 65%; /* Adjust the height of the divider as needed */
+  background-color: #00000040; /* Adjust the color of the divider as needed */
+}
+
+.slider {
+  margin-left: 2%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  flex-direction: column;
+}
+
+.title {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 2%;
+  margin-left: 1%;
+}
+
+.titleHeader {
+  font-size: 20px;
+  font-weight: bold;
+  // font-family: 'BebasNeue_400Regular';
+}
+
+.slide {
+  flex-direction: row;
+}
+
+.card {
+  width: 250;
+  height: 130;
+  // background-color: blue;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.cardMargin {
+  margin-right: 10px; /* Adjust the margin as needed */
+}
+
+.divide {
+  height: 1px; /* Set height to 1px to make it horizontally aligned */
+  width: 95%; /* Adjust the width of the divider as needed */
+  background-color: #00000020; /* Adjust the color of the divider as needed */
+  margin-left: 12px;
+}
+
+.navBar {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: '#fff';
+  margin: 10px 38px;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonword {
+  font-size: 12px;
+  padding-bottom: 25px;
+}
+
+.selectedButton {
+  color: #f2998d;
+}

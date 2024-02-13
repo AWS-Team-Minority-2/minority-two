@@ -9,13 +9,14 @@ import {
   PanResponder,
 } from 'react-native';
 import React, { useState, useRef, useEffect } from 'react';
-import styles from './sass/UserHome.scss';
+import styles from './UserHome.scss';
 import {
   SERVICE_PLACES,
   TOP_PLACES,
   RESTAURANTS_PLACES,
   SHOP_PLACES,
 } from './data/info';
+import NavBar from '../NavBar';
 import TopPlacesCarousel from './components/TopPlacesCarousel';
 import {
   Entypo,
@@ -250,8 +251,6 @@ const UserHomeScreen = () => {
             </View>
           </View>
         </ScrollView>
-
-        {/* Navigation Bar at the bottom (Home, Fav, Browse, Profile) */}
       </View>
     </SafeAreaView>
   );
