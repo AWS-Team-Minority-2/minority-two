@@ -8,12 +8,13 @@ import {
 import React from 'react';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 // styles
 import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
 import styles from './sass/Homescreen.scss';
 
 const Homescreen = () => {
+  const dispatch = useScreenDispatch();
   const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
     BebasNeue_400Regular,
@@ -21,6 +22,17 @@ const Homescreen = () => {
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
+
+  const handleCustomerChange = () => {
+    changeScreen(dispatch, 'Login');
+    navigation.navigate('CustomerLogin');
+  };
+
+  const handleBusinessChange = () => {
+    changeScreen(dispatch, 'Login');
+    navigation.navigate('BusinessLogin');
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -35,7 +47,7 @@ const Homescreen = () => {
         <View>
           <TouchableOpacity
             style={styles.landingBtnsContainer}
-            onPress={() => navigation.navigate('CustomerLogin')}
+            onPress={() => handleCustomerChange()}
           >
             {fontsLoaded ? (
               <Text style={styles.bttnText}>Customer</Text>
@@ -43,8 +55,9 @@ const Homescreen = () => {
               <ActivityIndicator />
             )}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.landingBtnsContainer}
-          onPress={() => navigation.navigate('BusinessLogin')}
+          <TouchableOpacity
+            style={styles.landingBtnsContainer}
+            onPress={() => handleBusinessChange()}
           >
             {fontsLoaded ? (
               <Text style={styles.bttnText}>Business Owner</Text>
