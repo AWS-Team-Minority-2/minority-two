@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@min-two/user-iso": "workspace:*",
+    "@min-two/screen-iso": "workspace:*",
     "@tsconfig/recommended": "^1.0.3",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",

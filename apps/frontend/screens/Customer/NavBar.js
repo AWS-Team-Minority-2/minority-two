@@ -1,19 +1,38 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { AntDesign, MaterialIcons, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
-import styles from './UserHomePage/UserHome.scss';
+import {
+  AntDesign,
+  MaterialIcons,
+  MaterialCommunityIcons,
+  Feather,
+} from '@expo/vector-icons';
+import styles from './sass/UserHome.scss';
+import { useNavigation } from '@react-navigation/native';
 
-const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
+const NavBar = () => {
+  const navigation = useNavigation();
+  const [selectedButton, setSelectedButton] = useState('Home'); // Current button selected in Navbar
+
+  // Handles changing the current button clicked in the NavBar
+  const handleButtonPress = (buttonName) => {
+    setSelectedButton(buttonName);
+  };
+
+  // Handles changing the current address and leading the pop up screen to close
+  const handleAddressClick = (address) => {
+    setPickedAddress(address);
+    setLocation(false);
+  };
   return (
     <View style={styles.navBar}>
       {/* Home Button */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => [handleButtonPress('Home'), navigation.navigate('UserHome')]}
+        onPress={() => handleButtonPress('Home')}
       >
         <AntDesign
           name='home'
-          size={25}
+          size={20}
           color='black'
           style={[
             styles.button,
@@ -37,7 +56,7 @@ const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
       >
         <MaterialIcons
           name='favorite-outline'
-          size={26}
+          size={21}
           color='black'
           style={[
             styles.button,
@@ -61,7 +80,7 @@ const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
       >
         <MaterialCommunityIcons
           name='store-search-outline'
-          size={27}
+          size={22}
           color='black'
           style={[
             styles.button,
@@ -81,11 +100,14 @@ const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
       {/* Profile Button */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => [handleButtonPress('Profile'), navigation.navigate('UserProfile')]}
+        onPress={() => [
+          handleButtonPress('Profile'),
+          navigation.navigate('UserProfile'),
+        ]}
       >
         <Feather
           name='user'
-          size={25}
+          size={20}
           color='black'
           style={[
             styles.button,
@@ -105,4 +127,4 @@ const NavBar = ({ handleButtonPress, selectedButton, navigation }) => {
   );
 };
 
-export default NavBar;
+export { NavBar };

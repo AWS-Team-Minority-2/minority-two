@@ -28,9 +28,15 @@ import {
 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthState, useAuthDispatch, doLogin } from '@min-two/user-iso';
+// import {
+//   useScreenDispatch,
+//   changeScreen,
+//   useScreenState,
+// } from '@min-two/screen-iso';
 
 const UserHomeScreen = () => {
   const { user: loggedUser } = useAuthState();
+
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -204,7 +210,7 @@ const UserHomeScreen = () => {
 
         {/* All Scroll Sliders */}
         <ScrollView showsVerticalScrollIndicator={false}>
-          <>
+          <View style={styles.scroll}>
             {/* Featured Scroll Sliders */}
             <View style={styles.slider}>
               <TouchableOpacity style={styles.title}>
@@ -243,15 +249,8 @@ const UserHomeScreen = () => {
               </TouchableOpacity>
               <TopPlacesCarousel list={SHOP_PLACES} />
             </View>
-          </>
+          </View>
         </ScrollView>
-
-        {/* Navigation Bar at the bottom (Home, Fav, Browse, Profile) */}
-        <NavBar
-          handleButtonPress={handleButtonPress}
-          selectedButton={selectedButton}
-          navigation={navigation}
-        />
       </View>
     </SafeAreaView>
   );
