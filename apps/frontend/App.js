@@ -31,7 +31,7 @@ export default function App() {
               headerShown: false,
             }}
           >
-            <Stack.Screen name='Home' component={Homescreen} />
+            {/* <Stack.Screen name='Home' component={Homescreen} />
             <Stack.Screen
               name='CustomerLogin'
               component={CustomerLoginScreen}
@@ -40,14 +40,14 @@ export default function App() {
             <Stack.Screen
               name='CustomerRegister'
               component={CustomerRegisterScreen}
-            />
+            /> */}
             {/* Add BusinessLoginScreen to the stack */}
-            <Stack.Screen
+            {/* <Stack.Screen
               name='BusinessLogin'
               component={BusinessLoginScreen}
-            />
+            /> */}
             {/* update when user home page is created */}
-            <Stack.Screen name='UserHome' component={UserHomeScreen} />
+            {/* <Stack.Screen name='UserHome' component={UserHomeScreen} /> */}
             <Stack.Screen name='UserProfile' component={UserProfile} />
           </Stack.Navigator>
           {/* {useRoute} */}
