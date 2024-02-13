@@ -6,21 +6,26 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import { RegisterForm } from './RegisterForm';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 
 import styles from './sass/Customer.scss';
 
 const CustomerRegisterScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useScreenDispatch();
 
   return (
     <SafeAreaView style={styles.screenLayout}>
       <ScrollView contentContainerStyle={styles.screenAdjustment}>
         <TouchableOpacity
           style={styles.leftIcon}
-          onPress={() => navigation.navigate('CustomerLogin')}
+          onPress={() => {
+            changeScreen(dispatch, 'Landing');
+            navigation.navigate('CustomerLogin');
+          }}
         >
           <Feather name='chevron-left' size={33} color='black' />
         </TouchableOpacity>

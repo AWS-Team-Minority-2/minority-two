@@ -2,10 +2,12 @@ import { useEffect, useState, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 import { REGISTER_USER } from '../gql';
 import { useNavigation } from '@react-navigation/native';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 
 /* Hook that handles users forms **/
 export function useRegisterForm() {
   const navigation = useNavigation();
+  const dispatch = useScreenDispatch();
 
   // Use this form to register the user
   const [formData, setFormData] = useState({
@@ -112,8 +114,6 @@ export function useRegisterForm() {
 
   // try to send the data to the backend
   const submit = useCallback(async () => {
-    console.log(formData);
-
     try {
       const { data } = await registerUser({
         variables: {
@@ -122,6 +122,7 @@ export function useRegisterForm() {
       });
 
       if (data) {
+        changeScreen(dispatch, 'UserHome');
         navigation.navigate('UserHome');
       }
     } catch (error) {

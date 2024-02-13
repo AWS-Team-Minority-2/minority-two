@@ -6,21 +6,26 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import { LoginForm } from './LoginForm';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 
 import styles from './sass/Customer.scss';
 
 const CustomerLoginScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useScreenDispatch();
 
   return (
     <SafeAreaView style={styles.screenLayout}>
       <View style={styles.screenAdjustment}>
         <TouchableOpacity
           style={styles.leftIcon}
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => {
+            changeScreen(dispatch, 'Landing');
+            navigation.navigate('Home');
+          }}
         >
           <Feather name='chevron-left' size={33} color='black' />
         </TouchableOpacity>
@@ -60,7 +65,10 @@ const CustomerLoginScreen = () => {
         <TouchableOpacity>
           <Text
             style={styles.subTwoText}
-            onPress={() => navigation.navigate('CustomerRegister')}
+            onPress={() => {
+              changeScreen(dispatch, 'Register');
+              navigation.navigate('CustomerRegister');
+            }}
           >
             Register
           </Text>

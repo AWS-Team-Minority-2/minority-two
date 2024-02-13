@@ -3,10 +3,12 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../gql';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthDispatch, doLogin } from '@min-two/user-iso';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 
 /* Hook that handles users forms **/
 export function useLoginForm() {
   const dispatch = useAuthDispatch();
+  const screenDispatch = useScreenDispatch();
   const navigation = useNavigation();
   const [loginFailed, setLoginFailed] = useState(false);
 
@@ -37,6 +39,7 @@ export function useLoginForm() {
         });
         if (data.LoginUser.id) {
           doLogin(dispatch, data.LoginUser);
+          changeScreen(screenDispatch, 'UserHome');
           navigation.navigate('UserHome');
         } else {
           setLoginFailed(true);

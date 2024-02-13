@@ -1,0 +1,36 @@
+{
+  "name": "@min-two/screen-iso",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --project ./tsconfig.json --outDir ./dist ",
+    "dev": "pnpm run build --watch",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "generate:component": "turbo gen react-component"
+  },
+  "devDependencies": {
+    "@turbo/gen": "^1.10.12",
+    "@types/eslint": "^8.44.7",
+    "@types/node": "^20.5.2",
+    "@types/pg": "^8.10.2",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "concurrently": "^8.2.2",
+    "copyfiles": "^2.4.1",
+    "esbuild-css-modules-plugin": "^3.1.0",
+    "esbuild-sass-plugin": "^2.16.0",
+    "eslint": "^8.53.0",
+    "react": "^18.2.0",
+    "sass": "^1.69.5",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "esbuild": "^0.19.8",
+    "ts-node": "^10.9.1"
+  }
+}
