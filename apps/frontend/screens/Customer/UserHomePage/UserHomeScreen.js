@@ -1,3 +1,4 @@
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,32 +9,13 @@ import {
   Modal,
   PanResponder,
 } from 'react-native';
-import React, { useState, useRef, useEffect } from 'react';
-import styles from './UserHome.scss';
-import {
-  SERVICE_PLACES,
-  TOP_PLACES,
-  RESTAURANTS_PLACES,
-  SHOP_PLACES,
-} from './data/info';
-import NavBar from '../NavBar';
 import TopPlacesCarousel from './components/TopPlacesCarousel';
-import {
-  Entypo,
-  Ionicons,
-  Feather,
-  MaterialIcons,
-  AntDesign,
-  MaterialCommunityIcons,
-} from '@expo/vector-icons';
+import { Entypo, Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthState, useAuthDispatch, doLogin } from '@min-two/user-iso';
 import { useStores } from './hooks/useStores';
-// import {
-//   useScreenDispatch,
-//   changeScreen,
-//   useScreenState,
-// } from '@min-two/screen-iso';
+
+import styles from './UserHome.scss';
 
 const UserHomeScreen = () => {
   const { user: loggedUser } = useAuthState();
