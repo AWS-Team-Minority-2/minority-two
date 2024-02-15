@@ -1,5 +1,18 @@
 type Query {
-  getUsers: [UserOutput]!
+  getMinorityBusiness: [BusinessOutput]
+}
+
+type BusinessOutput {
+  name: String!
+  cover_image: String!
+  address: String
+  city: String
+  state: String
+  zip_code: Int
+  long: String
+  lat: String
+  is_online: Boolean!
+  render_type: String!
 }
 
 type Mutation {

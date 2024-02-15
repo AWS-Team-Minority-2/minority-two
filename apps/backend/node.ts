@@ -12,6 +12,8 @@ import { ApolloServer } from 'apollo-server-express';
 import { readFileSync } from 'fs';
 import _ from 'lodash';
 import { GQLContext } from './src/GQLContext.js';
+import { BusinessLoader } from './src/loaders/BusinessLoader.js';
+import { PostgresBusinessStore } from './src/stores/PostgresBuesinessStore.js';
 
 const PATH = '/graphql';
 
@@ -29,9 +31,12 @@ export const getProjectServer = _.memoize(async () => {
     schema,
     context: (): GQLContext => {
       const postgresUserStore = new PostgresUserStore(pg);
+      const postgresBusinessStore = new PostgresBusinessStore(pg);
       const users = new UserLoader(postgresUserStore);
+      const business = new BusinessLoader(postgresBusinessStore);
       return {
         users,
+        business,
       };
     },
   });
