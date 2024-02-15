@@ -28,6 +28,7 @@ import {
 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthState, useAuthDispatch, doLogin } from '@min-two/user-iso';
+import { useStores } from './hooks/useStores';
 // import {
 //   useScreenDispatch,
 //   changeScreen,
@@ -36,6 +37,7 @@ import { useAuthState, useAuthDispatch, doLogin } from '@min-two/user-iso';
 
 const UserHomeScreen = () => {
   const { user: loggedUser } = useAuthState();
+  const { featured, shops, restaurants, services } = useStores();
 
   const navigation = useNavigation();
 
@@ -217,7 +219,7 @@ const UserHomeScreen = () => {
                 <Text style={styles.titleHeader}>Featured</Text>
                 <Ionicons name='arrow-forward-sharp' size={19} color='black' />
               </TouchableOpacity>
-              <TopPlacesCarousel list={TOP_PLACES} />
+              <TopPlacesCarousel list={featured} />
               <View style={styles.divide} />
             </View>
 
@@ -227,7 +229,7 @@ const UserHomeScreen = () => {
                 <Text style={styles.titleHeader}>Services Near You</Text>
                 <Ionicons name='arrow-forward-sharp' size={19} color='black' />
               </TouchableOpacity>
-              <TopPlacesCarousel list={SERVICE_PLACES} />
+              <TopPlacesCarousel list={services} />
               <View style={styles.divide} />
             </View>
 
@@ -237,7 +239,7 @@ const UserHomeScreen = () => {
                 <Text style={styles.titleHeader}>Restaurants Near You</Text>
                 <Ionicons name='arrow-forward-sharp' size={19} color='black' />
               </TouchableOpacity>
-              <TopPlacesCarousel list={RESTAURANTS_PLACES} />
+              <TopPlacesCarousel list={restaurants} />
               <View style={styles.divide} />
             </View>
 
@@ -247,7 +249,7 @@ const UserHomeScreen = () => {
                 <Text style={styles.titleHeader}>Shops Near You</Text>
                 <Ionicons name='arrow-forward-sharp' size={19} color='black' />
               </TouchableOpacity>
-              <TopPlacesCarousel list={SHOP_PLACES} />
+              <TopPlacesCarousel list={shops} />
             </View>
           </View>
         </ScrollView>

@@ -6,37 +6,43 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const CARD_WIDTH = 293;
 const CARD_HEIGHT = 200;
 
-const TopPlacesCarousel = ({list}) => {
+const TopPlacesCarousel = ({ list }) => {
   return (
     <FlatList
       data={list}
       horizontal
-    //   snapToInterval={CARD_WIDTH_SPACING}
-      decelerationRate="fast"
+      //   snapToInterval={CARD_WIDTH_SPACING}
+      decelerationRate='fast'
       showsHorizontalScrollIndicator={false}
-      keyExtractor={i => i.id}
-      renderItem={({item, index}) => {
+      keyExtractor={(i) => i.id}
+      renderItem={({ item, index }) => {
         return (
           <TouchableOpacity
             style={{
-                marginLeft: index === 0 ? 2 : -25, // Adjust the marginLeft for the first card
+              marginLeft: index === 0 ? 2 : -25, // Adjust the marginLeft for the first card
               marginRight: index === list.length - 1 ? -35 : 0, // Adjust the marginRight for the last card
-            }}>
+            }}
+          >
             <View style={[styles.card, styles.dark]}>
               <View style={styles.imageBox}>
-                <Image source={item.image} style={styles.image} />
+                <Image
+                  source={{ uri: item.cover_image }}
+                  style={styles.image}
+                />
               </View>
               <View style={styles.titleBox}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.location}>{item.location}</Text>
+                <Text style={styles.title}>{item.name}</Text>
+                <Text style={styles.location}>
+                  {item.is_online ? 'Online' : item.address}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -59,14 +65,14 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   imageBox: {
-    width: CARD_WIDTH -50,
-    height: CARD_HEIGHT -50,
+    width: CARD_WIDTH - 50,
+    height: CARD_HEIGHT - 50,
     borderRadius: 10,
     overflow: 'hidden',
   },
   image: {
-    width: CARD_WIDTH -50,
-    height: CARD_HEIGHT -50,
+    width: CARD_WIDTH - 50,
+    height: CARD_HEIGHT - 50,
     resizeMode: 'cover',
   },
   titleBox: {
@@ -84,24 +90,23 @@ const styles = StyleSheet.create({
     color: '#555',
   },
   light: {
-      shadowColor: '#000',
-      shadowRadius: 4,
-      shadowOpacity: 0.1,
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
+    shadowColor: '#000',
+    shadowRadius: 4,
+    shadowOpacity: 0.1,
+    shadowOffset: {
+      width: 0,
+      height: 2,
     },
-    dark: {
-      shadowColor: '#000',
-      shadowRadius: 4,
-      shadowOpacity: 0.3,
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
+  },
+  dark: {
+    shadowColor: '#000',
+    shadowRadius: 4,
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 0,
+      height: 2,
     },
-    
+  },
 });
 
 export default TopPlacesCarousel;
