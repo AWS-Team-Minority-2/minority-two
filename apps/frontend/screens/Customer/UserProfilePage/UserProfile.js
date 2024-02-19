@@ -13,15 +13,21 @@ import {
   View,
 } from "react-native";
 import styles from "./UserProfile.scss";
+import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
+import { useAuthState } from "@min-two/user-iso";
 import NavBar from "../NavBar";
 // import { Feather } from '@expo/vector-icons';
 
 const UserProfile = () => {
   const navigation = useNavigation();
+  const { user: loggedUser } = useAuthState();
+
   const handleButtonPress = (buttonName) => {
     setSelectedButton(buttonName);
   };
+  const dispatch = useScreenDispatch();
   const [selectedButton, setSelectedButton] = useState("Home"); // Current button selected in Navbar
+  console.log(loggedUser);
   return (
     <SafeAreaView style={styles.profileLayout}>
       <View style={styles.profileAdjustment}>
@@ -33,7 +39,10 @@ const UserProfile = () => {
             style={styles.profileUser}
           />
 
-          <Text style={styles.profileName}>Damid Bison</Text>
+          <Text style={styles.profileName}>
+            {loggedUser.userMetadata.firstname}
+            {loggedUser.userMetadata.lastname}
+          </Text>
         </View>
         <View style={styles.profileBottom}>
           <Text style={styles.profileBottomHeader}>Nexa Account</Text>
@@ -53,10 +62,16 @@ const UserProfile = () => {
             />
             <Text style={styles.profileText}>Security</Text>
           </TouchableOpacity>
-          <View style={styles.profileBox}>
+          <TouchableOpacity
+            style={styles.profileBox}
+            onPress={() => {
+              changeScreen(dispatch, "Landing");
+              navigation.navigate("Home");
+            }}
+          >
             <MaterialCommunityIcons name="logout" size={24} color="black" />
             <Text style={styles.profileText}>Log Out</Text>
-          </View>
+          </TouchableOpacity>
         </View>
         {/* <NavBar
           handleButtonPress={handleButtonPress}

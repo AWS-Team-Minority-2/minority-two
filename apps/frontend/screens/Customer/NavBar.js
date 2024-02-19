@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import {
   AntDesign,
   MaterialIcons,
   MaterialCommunityIcons,
   Feather,
-} from '@expo/vector-icons';
-import styles from './sass/UserHome.scss';
-import { useNavigation } from '@react-navigation/native';
+} from "@expo/vector-icons";
+import styles from "./sass/UserHome.scss";
+import { useNavigation } from "@react-navigation/native";
+import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
 
 const NavBar = () => {
   const navigation = useNavigation();
-  const [selectedButton, setSelectedButton] = useState('Home'); // Current button selected in Navbar
+  const [selectedButton, setSelectedButton] = useState("Home"); // Current button selected in Navbar
 
   // Handles changing the current button clicked in the NavBar
   const handleButtonPress = (buttonName) => {
@@ -28,21 +29,24 @@ const NavBar = () => {
       {/* Home Button */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => handleButtonPress('Home')}
+        onPress={() => [
+          handleButtonPress("Home"),
+          navigation.navigate("UserHome"),
+        ]}
       >
         <AntDesign
-          name='home'
+          name="home"
           size={20}
-          color='black'
+          color="black"
           style={[
             styles.button,
-            selectedButton === 'Home' && styles.selectedButton,
+            selectedButton === "Home" && styles.selectedButton,
           ]}
         />
         <Text
           style={[
             styles.buttonword,
-            selectedButton === 'Home' && styles.selectedButton,
+            selectedButton === "Home" && styles.selectedButton,
           ]}
         >
           Home
@@ -52,21 +56,21 @@ const NavBar = () => {
       {/* Favorites Button */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => handleButtonPress('Favorites')}
+        onPress={() => handleButtonPress("Favorites")}
       >
         <MaterialIcons
-          name='favorite-outline'
+          name="favorite-outline"
           size={21}
-          color='black'
+          color="black"
           style={[
             styles.button,
-            selectedButton === 'Favorites' && styles.selectedButton,
+            selectedButton === "Favorites" && styles.selectedButton,
           ]}
         />
         <Text
           style={[
             styles.buttonword,
-            selectedButton === 'Favorites' && styles.selectedButton,
+            selectedButton === "Favorites" && styles.selectedButton,
           ]}
         >
           Favorites
@@ -76,21 +80,21 @@ const NavBar = () => {
       {/* Browse Button */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => handleButtonPress('Browse')}
+        onPress={() => handleButtonPress("Browse")}
       >
         <MaterialCommunityIcons
-          name='store-search-outline'
+          name="store-search-outline"
           size={22}
-          color='black'
+          color="black"
           style={[
             styles.button,
-            selectedButton === 'Browse' && styles.selectedButton,
+            selectedButton === "Browse" && styles.selectedButton,
           ]}
         />
         <Text
           style={[
             styles.buttonword,
-            selectedButton === 'Browse' && styles.selectedButton,
+            selectedButton === "Browse" && styles.selectedButton,
           ]}
         >
           Browse
@@ -101,23 +105,23 @@ const NavBar = () => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => [
-          handleButtonPress('Profile'),
-          navigation.navigate('UserProfile'),
+          handleButtonPress("Profile"),
+          navigation.navigate("UserProfile"),
         ]}
       >
         <Feather
-          name='user'
+          name="user"
           size={20}
-          color='black'
+          color="black"
           style={[
             styles.button,
-            selectedButton === 'Profile' && styles.selectedButton,
+            selectedButton === "Profile" && styles.selectedButton,
           ]}
         />
         <Text
           style={[
             styles.buttonword,
-            selectedButton === 'Profile' && styles.selectedButton,
+            selectedButton === "Profile" && styles.selectedButton,
           ]}
         >
           Profile

@@ -1,48 +1,42 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, Component } from 'react';
 import {
   View,
   Text,
   SafeAreaView,
-  ScrollView,
   TouchableOpacity,
   TextInput,
   Modal,
   PanResponder,
+  Animated,
+  Dimensions,
 } from 'react-native';
-import TopPlacesCarousel from './components/TopPlacesCarousel';
+// import TopPlacesCarousel from "./components/TopPlacesCarousel";
 import { Entypo, Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { useAuthState, useAuthDispatch, doLogin } from '@min-two/user-iso';
+import MapView, { Callout, Marker } from 'react-native-maps';
 import { useStores } from './hooks/useStores';
 
-import styles from './UserHome.scss';
+import styles from './UserMap.scss';
+// import { TRUE } from "sass";
 
-const UserHomeScreen = () => {
-  const { user: loggedUser } = useAuthState();
+const UserMap = () => {
   const { featured, shops, restaurants, services } = useStores();
 
   const navigation = useNavigation();
-
-  useEffect(() => {
-    if (!loggedUser) {
-      navigation.navigate('Home');
-    }
-  }, [loggedUser]);
-
   const [location, setLocation] = useState(false); // For the pop screen to show up or not
   const [pickedAddress, setPickedAddress] = useState('Howard University'); // Current address displayed
-  const [selectedButton, setSelectedButton] = useState('Home'); // Current button selected in Navbar
 
-  // Handles changing the current button clicked in the NavBar
-  const handleButtonPress = (buttonName) => {
-    setSelectedButton(buttonName);
-  };
-
-  // Handles changing the current address and leading the pop up screen to close
   const handleAddressClick = (address) => {
     setPickedAddress(address);
     setLocation(false);
   };
+
+  const [mapLocation, setMapLocation] = useState({
+    latitude: 38.923141,
+    longitude: -77.021584,
+    latitudeDelta: 0.0093,
+    longitudeDelta: 0.0074,
+  });
 
   // Handles the ability for the User to swipes the pop up screen down
   const panResponder = useRef(
@@ -55,6 +49,9 @@ const UserHomeScreen = () => {
       },
     })
   ).current;
+
+  const CARD_WIDTH = 293;
+  const CARD_HEIGHT = 200;
 
   function renderModal() {
     // List of Locations
@@ -181,63 +178,37 @@ const UserHomeScreen = () => {
             />
             <TextInput style={styles.textInput} placeholder='Search Nexa' />
             <View style={styles.divider} />
-            <TouchableOpacity onPress={() => navigation.navigate('UserMap')}>
+            <TouchableOpacity onPress={() => navigation.navigate('UserHome')}>
               <Feather
-                name='map'
-                size={17}
+                name='list'
+                size={24}
                 color='black'
                 style={styles.mapIcon}
               />
             </TouchableOpacity>
           </View>
         </View>
-
-        {/* All Scroll Sliders */}
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.scroll}>
-            {/* Featured Scroll Sliders */}
-            <View style={styles.slider}>
-              <TouchableOpacity style={styles.title}>
-                <Text style={styles.titleHeader}>Featured</Text>
-                <Ionicons name='arrow-forward-sharp' size={19} color='black' />
-              </TouchableOpacity>
-              <TopPlacesCarousel list={featured} />
-              <View style={styles.divide} />
-            </View>
-
-            {/* Services Near You Scroll Sliders */}
-            <View style={styles.slider}>
-              <TouchableOpacity style={styles.title}>
-                <Text style={styles.titleHeader}>Services Near You</Text>
-                <Ionicons name='arrow-forward-sharp' size={19} color='black' />
-              </TouchableOpacity>
-              <TopPlacesCarousel list={services} />
-              <View style={styles.divide} />
-            </View>
-
-            {/* Restaurants Near You Scroll Sliders */}
-            <View style={styles.slider}>
-              <TouchableOpacity style={styles.title}>
-                <Text style={styles.titleHeader}>Restaurants Near You</Text>
-                <Ionicons name='arrow-forward-sharp' size={19} color='black' />
-              </TouchableOpacity>
-              <TopPlacesCarousel list={restaurants} />
-              <View style={styles.divide} />
-            </View>
-
-            {/* Shops Near You Scroll Sliders */}
-            <View style={styles.slider}>
-              <TouchableOpacity style={styles.title}>
-                <Text style={styles.titleHeader}>Shops Near You</Text>
-                <Ionicons name='arrow-forward-sharp' size={19} color='black' />
-              </TouchableOpacity>
-              <TopPlacesCarousel list={shops} />
-            </View>
-          </View>
-        </ScrollView>
+        <View>
+          <MapView
+            style={{ height: 800 }}
+            region={mapLocation}
+            ref={(map) => (this.map = map)}
+            rotateEnabled={true}
+            loadingEnabled={true}
+            loadingIndicatorColor='#F2998D'
+            // mapType="hybridFlyover" //Change Map type
+          >
+            <Marker
+              coordinate={{
+                latitude: mapLocation.latitude,
+                longitude: mapLocation.longitude,
+              }}
+            ></Marker>
+          </MapView>
+        </View>
       </View>
     </SafeAreaView>
   );
 };
 
-export { UserHomeScreen };
+export { UserMap };
