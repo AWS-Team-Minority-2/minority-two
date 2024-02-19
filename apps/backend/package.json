@@ -9,6 +9,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@geocoder-free/google": "0.2.9-alpha.0",
     "@graphql-tools/schema": "^10.0.0",
     "@min-two/postgres-node": "workspace:*",
     "apollo-server-express": "^3.12.0",

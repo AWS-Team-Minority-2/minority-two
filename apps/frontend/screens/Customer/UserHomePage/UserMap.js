@@ -1,4 +1,4 @@
-import React, { useState, useRef, Component } from "react";
+import React, { useState, useRef, Component } from 'react';
 import {
   View,
   Text,
@@ -9,21 +9,22 @@ import {
   PanResponder,
   Animated,
   Dimensions,
-} from "react-native";
+} from 'react-native';
 // import TopPlacesCarousel from "./components/TopPlacesCarousel";
-import { SHOP_PLACES } from "./data/info";
+import { Entypo, Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import MapView, { Callout, Marker } from 'react-native-maps';
+import { useStores } from './hooks/useStores';
 
-import { Entypo, Ionicons, Feather, MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import MapView, { Callout, Marker } from "react-native-maps";
-
-import styles from "./UserMap.scss";
+import styles from './UserMap.scss';
 // import { TRUE } from "sass";
 
 const UserMap = () => {
+  const { featured, shops, restaurants, services } = useStores();
+
   const navigation = useNavigation();
   const [location, setLocation] = useState(false); // For the pop screen to show up or not
-  const [pickedAddress, setPickedAddress] = useState("Howard University"); // Current address displayed
+  const [pickedAddress, setPickedAddress] = useState('Howard University'); // Current address displayed
 
   const handleAddressClick = (address) => {
     setPickedAddress(address);
@@ -55,15 +56,15 @@ const UserMap = () => {
   function renderModal() {
     // List of Locations
     const pastLocations = {
-      "Howard University": "2400 Sixth St NW, Washington DC 20001",
-      "Vie Towers": "1615 Belcrest Rd, Hyattsvill MD 20782",
-      "256 Highway St": "New York, NY 11245",
-      "154 Harvard Avenue": "Boston, MA 02134",
+      'Howard University': '2400 Sixth St NW, Washington DC 20001',
+      'Vie Towers': '1615 Belcrest Rd, Hyattsvill MD 20782',
+      '256 Highway St': 'New York, NY 11245',
+      '154 Harvard Avenue': 'Boston, MA 02134',
     };
 
     return (
       // Pop up screen for User to select location
-      <Modal visible={location} animationType="slide" transparent={true}>
+      <Modal visible={location} animationType='slide' transparent={true}>
         <View style={[styles.locationPopUp, { marginTop: 50 }]}>
           <View {...panResponder.panHandlers}>
             <View style={styles.locationBox}>
@@ -73,14 +74,14 @@ const UserMap = () => {
                 {/* Search box in pop up screen */}
                 <View style={styles.searchContainer}>
                   <Ionicons
-                    name="search-outline"
+                    name='search-outline'
                     size={17}
-                    color="black"
+                    color='black'
                     style={styles.searchIcon}
                   />
                   <TextInput
                     style={styles.textInput}
-                    placeholder="Search Nexa"
+                    placeholder='Search Nexa'
                   />
                 </View>
 
@@ -96,9 +97,9 @@ const UserMap = () => {
                       <View style={[styles.pastLocationContainer]}>
                         <View style={styles.sectionLocation}>
                           <Entypo
-                            name="location-pin"
+                            name='location-pin'
                             size={27}
-                            color="black"
+                            color='black'
                             style={[
                               styles.pin,
                               pickedAddress === address && styles.pickedAddress,
@@ -149,12 +150,12 @@ const UserMap = () => {
               style={styles.location}
               onPress={() => setLocation(true)}
             >
-              <Entypo name="location-pin" size={21} color="black" />
+              <Entypo name='location-pin' size={21} color='black' />
               <Text style={styles.address}>{pickedAddress}</Text>
               <MaterialIcons
-                name="keyboard-arrow-down"
+                name='keyboard-arrow-down'
                 size={22}
-                color="black"
+                color='black'
               />
             </TouchableOpacity>
 
@@ -163,25 +164,25 @@ const UserMap = () => {
 
             {/* Notification icon */}
             <TouchableOpacity style={styles.notification}>
-              <Ionicons name="notifications-outline" size={20} color="black" />
+              <Ionicons name='notifications-outline' size={20} color='black' />
             </TouchableOpacity>
           </View>
 
           {/* Search Box */}
           <View style={styles.searchContainer}>
             <Ionicons
-              name="search-outline"
+              name='search-outline'
               size={17}
-              color="black"
+              color='black'
               style={styles.searchIcon}
             />
-            <TextInput style={styles.textInput} placeholder="Search Nexa" />
+            <TextInput style={styles.textInput} placeholder='Search Nexa' />
             <View style={styles.divider} />
-            <TouchableOpacity onPress={() => navigation.navigate("UserHome")}>
+            <TouchableOpacity onPress={() => navigation.navigate('UserHome')}>
               <Feather
-                name="list"
+                name='list'
                 size={24}
-                color="black"
+                color='black'
                 style={styles.mapIcon}
               />
             </TouchableOpacity>
@@ -194,7 +195,7 @@ const UserMap = () => {
             ref={(map) => (this.map = map)}
             rotateEnabled={true}
             loadingEnabled={true}
-            loadingIndicatorColor="#F2998D"
+            loadingIndicatorColor='#F2998D'
             // mapType="hybridFlyover" //Change Map type
           >
             <Marker

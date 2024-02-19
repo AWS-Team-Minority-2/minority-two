@@ -1,3 +1,4 @@
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,48 +8,30 @@ import {
   TextInput,
   Modal,
   PanResponder,
-} from "react-native";
-import React, { useState, useRef, useEffect } from "react";
-import styles from "./UserHome.scss";
-import {
-  SERVICE_PLACES,
-  TOP_PLACES,
-  RESTAURANTS_PLACES,
-  SHOP_PLACES,
-} from "./data/info";
-import NavBar from "../NavBar";
-import TopPlacesCarousel from "./components/TopPlacesCarousel";
-import {
-  Entypo,
-  Ionicons,
-  Feather,
-  MaterialIcons,
-  AntDesign,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { useAuthState, useAuthDispatch, doLogin } from "@min-two/user-iso";
-import UserMap from "./UserMap";
-// import {
-//   useScreenDispatch,
-//   changeScreen,
-//   useScreenState,
-// } from '@min-two/screen-iso';
+} from 'react-native';
+import TopPlacesCarousel from './components/TopPlacesCarousel';
+import { Entypo, Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { useAuthState, useAuthDispatch, doLogin } from '@min-two/user-iso';
+import { useStores } from './hooks/useStores';
+
+import styles from './UserHome.scss';
 
 const UserHomeScreen = () => {
   const { user: loggedUser } = useAuthState();
+  const { featured, shops, restaurants, services } = useStores();
 
   const navigation = useNavigation();
 
   useEffect(() => {
     if (!loggedUser) {
-      navigation.navigate("Home");
+      navigation.navigate('Home');
     }
   }, [loggedUser]);
 
   const [location, setLocation] = useState(false); // For the pop screen to show up or not
-  const [pickedAddress, setPickedAddress] = useState("Howard University"); // Current address displayed
-  const [selectedButton, setSelectedButton] = useState("Home"); // Current button selected in Navbar
+  const [pickedAddress, setPickedAddress] = useState('Howard University'); // Current address displayed
+  const [selectedButton, setSelectedButton] = useState('Home'); // Current button selected in Navbar
 
   // Handles changing the current button clicked in the NavBar
   const handleButtonPress = (buttonName) => {
@@ -76,15 +59,15 @@ const UserHomeScreen = () => {
   function renderModal() {
     // List of Locations
     const pastLocations = {
-      "Howard University": "2400 Sixth St NW, Washington DC 20001",
-      "Vie Towers": "1615 Belcrest Rd, Hyattsvill MD 20782",
-      "256 Highway St": "New York, NY 11245",
-      "154 Harvard Avenue": "Boston, MA 02134",
+      'Howard University': '2400 Sixth St NW, Washington DC 20001',
+      'Vie Towers': '1615 Belcrest Rd, Hyattsvill MD 20782',
+      '256 Highway St': 'New York, NY 11245',
+      '154 Harvard Avenue': 'Boston, MA 02134',
     };
 
     return (
       // Pop up screen for User to select location
-      <Modal visible={location} animationType="slide" transparent={true}>
+      <Modal visible={location} animationType='slide' transparent={true}>
         <View style={[styles.locationPopUp, { marginTop: 50 }]}>
           <View {...panResponder.panHandlers}>
             <View style={styles.locationBox}>
@@ -94,14 +77,14 @@ const UserHomeScreen = () => {
                 {/* Search box in pop up screen */}
                 <View style={styles.searchContainer}>
                   <Ionicons
-                    name="search-outline"
+                    name='search-outline'
                     size={17}
-                    color="black"
+                    color='black'
                     style={styles.searchIcon}
                   />
                   <TextInput
                     style={styles.textInput}
-                    placeholder="Search Nexa"
+                    placeholder='Search Nexa'
                   />
                 </View>
 
@@ -117,9 +100,9 @@ const UserHomeScreen = () => {
                       <View style={[styles.pastLocationContainer]}>
                         <View style={styles.sectionLocation}>
                           <Entypo
-                            name="location-pin"
+                            name='location-pin'
                             size={27}
-                            color="black"
+                            color='black'
                             style={[
                               styles.pin,
                               pickedAddress === address && styles.pickedAddress,
@@ -170,12 +153,12 @@ const UserHomeScreen = () => {
               style={styles.location}
               onPress={() => setLocation(true)}
             >
-              <Entypo name="location-pin" size={21} color="black" />
+              <Entypo name='location-pin' size={21} color='black' />
               <Text style={styles.address}>{pickedAddress}</Text>
               <MaterialIcons
-                name="keyboard-arrow-down"
+                name='keyboard-arrow-down'
                 size={22}
-                color="black"
+                color='black'
               />
             </TouchableOpacity>
 
@@ -184,25 +167,25 @@ const UserHomeScreen = () => {
 
             {/* Notification icon */}
             <TouchableOpacity style={styles.notification}>
-              <Ionicons name="notifications-outline" size={20} color="black" />
+              <Ionicons name='notifications-outline' size={20} color='black' />
             </TouchableOpacity>
           </View>
 
           {/* Search Box */}
           <View style={styles.searchContainer}>
             <Ionicons
-              name="search-outline"
+              name='search-outline'
               size={17}
-              color="black"
+              color='black'
               style={styles.searchIcon}
             />
-            <TextInput style={styles.textInput} placeholder="Search Nexa" />
+            <TextInput style={styles.textInput} placeholder='Search Nexa' />
             <View style={styles.divider} />
-            <TouchableOpacity onPress={() => navigation.navigate("UserMap")}>
+            <TouchableOpacity onPress={() => navigation.navigate('UserMap')}>
               <Feather
-                name="map"
+                name='map'
                 size={17}
-                color="black"
+                color='black'
                 style={styles.mapIcon}
               />
             </TouchableOpacity>
@@ -216,9 +199,9 @@ const UserHomeScreen = () => {
             <View style={styles.slider}>
               <TouchableOpacity style={styles.title}>
                 <Text style={styles.titleHeader}>Featured</Text>
-                <Ionicons name="arrow-forward-sharp" size={19} color="black" />
+                <Ionicons name='arrow-forward-sharp' size={19} color='black' />
               </TouchableOpacity>
-              <TopPlacesCarousel list={TOP_PLACES} />
+              <TopPlacesCarousel list={featured} />
               <View style={styles.divide} />
             </View>
 
@@ -226,9 +209,9 @@ const UserHomeScreen = () => {
             <View style={styles.slider}>
               <TouchableOpacity style={styles.title}>
                 <Text style={styles.titleHeader}>Services Near You</Text>
-                <Ionicons name="arrow-forward-sharp" size={19} color="black" />
+                <Ionicons name='arrow-forward-sharp' size={19} color='black' />
               </TouchableOpacity>
-              <TopPlacesCarousel list={SERVICE_PLACES} />
+              <TopPlacesCarousel list={services} />
               <View style={styles.divide} />
             </View>
 
@@ -236,9 +219,9 @@ const UserHomeScreen = () => {
             <View style={styles.slider}>
               <TouchableOpacity style={styles.title}>
                 <Text style={styles.titleHeader}>Restaurants Near You</Text>
-                <Ionicons name="arrow-forward-sharp" size={19} color="black" />
+                <Ionicons name='arrow-forward-sharp' size={19} color='black' />
               </TouchableOpacity>
-              <TopPlacesCarousel list={RESTAURANTS_PLACES} />
+              <TopPlacesCarousel list={restaurants} />
               <View style={styles.divide} />
             </View>
 
@@ -246,9 +229,9 @@ const UserHomeScreen = () => {
             <View style={styles.slider}>
               <TouchableOpacity style={styles.title}>
                 <Text style={styles.titleHeader}>Shops Near You</Text>
-                <Ionicons name="arrow-forward-sharp" size={19} color="black" />
+                <Ionicons name='arrow-forward-sharp' size={19} color='black' />
               </TouchableOpacity>
-              <TopPlacesCarousel list={SHOP_PLACES} />
+              <TopPlacesCarousel list={shops} />
             </View>
           </View>
         </ScrollView>
