@@ -48,7 +48,10 @@ const AdminScreen = () => {
             />
           </View>
         </View>
-        <TouchableOpacity style={styles.loginBttn}>
+        <TouchableOpacity
+          style={styles.loginBttn}
+          onPress={() => navigation.navigate('AdminPortal')}
+        >
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
       </View>
