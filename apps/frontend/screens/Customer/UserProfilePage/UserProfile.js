@@ -21,12 +21,9 @@ import NavBar from "../NavBar";
 const UserProfile = () => {
   const navigation = useNavigation();
   const { user: loggedUser } = useAuthState();
-
-  const handleButtonPress = (buttonName) => {
-    setSelectedButton(buttonName);
-  };
+  
   const dispatch = useScreenDispatch();
-  const [selectedButton, setSelectedButton] = useState("Home"); // Current button selected in Navbar
+  
   console.log(loggedUser);
   return (
     <SafeAreaView style={styles.profileLayout}>
@@ -46,7 +43,11 @@ const UserProfile = () => {
         </View>
         <View style={styles.profileBottom}>
           <Text style={styles.profileBottomHeader}>Nexa Account</Text>
-          <TouchableOpacity style={styles.profileBox}>
+          <TouchableOpacity style={styles.profileBox}
+          onPress={() => {
+              changeScreen(dispatch, "AccountInfo");
+              navigation.navigate("AccountInfo");
+            }}>
             <MaterialCommunityIcons
               name="account-edit-outline"
               size={26}
@@ -73,11 +74,6 @@ const UserProfile = () => {
             <Text style={styles.profileText}>Log Out</Text>
           </TouchableOpacity>
         </View>
-        {/* <NavBar
-          handleButtonPress={handleButtonPress}
-          selectedButton={selectedButton}
-          navigation={navigation}
-        /> */}
       </View>
     </SafeAreaView>
   );

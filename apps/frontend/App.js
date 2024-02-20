@@ -17,6 +17,7 @@ import { AuthProvider } from '@min-two/user-iso';
 import { NavBar } from './screens/Customer/NavBar';
 import { ScreenProvider, useScreenState } from '@min-two/screen-iso';
 import { UserMap } from './screens/Customer/UserHomePage/UserMap';
+import { AccountInfo } from './screens/Customer/UserProfilePage/AccountInfo';
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
@@ -47,6 +48,7 @@ function NavigationController() {
         <Stack.Screen name='BusinessLogin' component={BusinessLoginScreen} />
         <Stack.Screen name='UserHome' component={UserHomeScreen} />
         <Stack.Screen name='UserProfile' component={UserProfile} />
+        <Stack.Screen name='AccountInfo' component={AccountInfo} />
         <Stack.Screen name='UserMap' component={UserMap} />
       </Stack.Navigator>
       {showNavBar && <NavBar />}

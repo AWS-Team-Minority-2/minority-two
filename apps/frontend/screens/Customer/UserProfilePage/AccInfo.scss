@@ -1,0 +1,84 @@
+.profileLayout {
+    flex: 1;
+    display: flex;
+    background-color: #fcfcfc;
+    justify-content: space-between;
+  }
+  
+  .profileAdjustment {
+    margin: 0 32px;
+    margin-top: 45px;
+    padding-bottom: 25px;
+  }
+  
+  .leftIcon {
+    margin: 0;
+    padding: 0;
+  }
+
+  .accInfoTextBox{
+    // padding-top: 25px;
+    // margin-left: 10px;
+    flex-direction: column;
+  }
+
+  .accInfoHeader {
+    color: #191919;
+    font-size: 30px;
+    font-family: 'BebasNeue_400Regular';
+    margin-top: 7%;
+  }
+
+  .accInfoText{
+    padding-top: 10px;
+    font-size: 15px;
+    width: 240px;
+  }
+
+  .accInfoBoxes{
+    display: flex;
+    flex-direction: column;
+    top: 15%;
+}
+
+   .border {
+        margin-bottom: 10%; /* Adjust as needed */
+        
+    }
+
+
+    .editBox{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+
+
+    .accBoxWords{
+        flex-direction: column;
+    }
+
+    .accBoxTitle{
+        margin-bottom: 7px;
+        // color:#F2998D;
+        font-family: 'BebasNeue_400Regular';
+        font-size: 19px;
+    }
+
+    .accInfo{
+        font-size: 14px;
+        color: #2e2e2e;
+    }
+
+    .divider {
+        height: 1px;
+        background-color: #e4e4e4; /* Color of the divided line */
+        margin: 10px 0; /* Adjust margin as needed */
+    }
+    
+  
+
+
+  
