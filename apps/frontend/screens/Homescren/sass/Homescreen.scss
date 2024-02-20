@@ -43,3 +43,16 @@
   font-family: 'BebasNeue_400Regular';
   font-size: 22px;
 }
+
+.adminLoginText {
+  color: #fbc0d6;
+}
+.bttns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.adminLoginTextContainer {
+  margin-top: 30%;
+}
