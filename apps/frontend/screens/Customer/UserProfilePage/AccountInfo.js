@@ -51,7 +51,7 @@ const AccountInfo = () => {
                 <Feather
                   name="edit-2"
                   size={20}
-                  color="#F2998D"
+                  color="black"
                   style={styles.accEditIcon}
                 />
               </TouchableOpacity>
@@ -75,7 +75,7 @@ const AccountInfo = () => {
                 <Feather
                   name="edit-2"
                   size={20}
-                  color="#F2998D"
+                  color="black"
                   style={styles.accEditIcon}
                 />
               </TouchableOpacity>
@@ -99,7 +99,7 @@ const AccountInfo = () => {
                 <Feather
                   name="edit-2"
                   size={20}
-                  color="#F2998D"
+                  color="black"
                   style={styles.accEditIcon}
                 />
               </TouchableOpacity>
