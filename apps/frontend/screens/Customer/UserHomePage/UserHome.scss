@@ -5,14 +5,17 @@
 }
 
 .homeAdjustment {
-  margin-left: 3%;
-  margin-right: 3%;
-  margin-top: 25px;
-  // padding-bottom: 38%;
+  margin-top: 20px;
 }
 
 .scroll {
-  margin-bottom: 100px;
+  margin-bottom: 105px;
+}
+
+.TopBarBorder{
+  width: 100%;
+  border-bottom-width: 0.5px;
+  border-bottom-color: #e4e4e4;
 }
 
 .TopBar {
@@ -20,7 +23,10 @@
   top: 0; // Stick it at the very top
   background-color: 'white'; // Set a background color if needed
   z-index: 100; // Ensure it stays on top of other content
+  margin-left: 3%;
+  margin-right: 3%;
 }
+
 
 .homeHeader {
   display: flex;
@@ -124,6 +130,12 @@
   color: #f2998d;
 }
 
+.showedAddress{
+  font-size: 13px;
+  font-weight: 600;
+  color: #f2998d;
+}
+
 .locationDivider {
   margin-bottom: 15px;
   height: 1px; /* Set height to 1px to make it horizontally aligned */
@@ -200,7 +212,6 @@
 .card {
   width: 250;
   height: 130;
-  // background-color: blue;
   margin-top: 10px;
   border-radius: 10px;
 }

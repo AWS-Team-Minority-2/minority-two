@@ -6,7 +6,7 @@ import {
   MaterialCommunityIcons,
   Feather,
 } from "@expo/vector-icons";
-import styles from "./sass/UserHome.scss";
+import styles from "./sass/NavBar.scss";
 import { useNavigation } from "@react-navigation/native";
 import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
 
@@ -25,108 +25,110 @@ const NavBar = () => {
     setLocation(false);
   };
   return (
-    <View style={styles.navBar}>
-      {/* Home Button */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => [
-          handleButtonPress("Home"),
-          navigation.navigate("UserHome"),
-        ]}
-      >
-        <AntDesign
-          name="home"
-          size={20}
-          color="black"
-          style={[
-            styles.button,
-            selectedButton === "Home" && styles.selectedButton,
-          ]}
-        />
-        <Text
-          style={[
-            styles.buttonword,
-            selectedButton === "Home" && styles.selectedButton,
+    <View style={styles.border}>
+      <View style={styles.navBar}>
+        {/* Home Button */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => [
+            handleButtonPress("Home"),
+            navigation.navigate("UserHome"),
           ]}
         >
-          Home
-        </Text>
-      </TouchableOpacity>
+          <AntDesign
+            name="home"
+            size={20}
+            color="black"
+            style={[
+              styles.button,
+              selectedButton === "Home" && styles.selectedButton,
+            ]}
+          />
+          <Text
+            style={[
+              styles.buttonword,
+              selectedButton === "Home" && styles.selectedButton,
+            ]}
+          >
+            Home
+          </Text>
+        </TouchableOpacity>
 
-      {/* Favorites Button */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => handleButtonPress("Favorites")}
-      >
-        <MaterialIcons
-          name="favorite-outline"
-          size={21}
-          color="black"
-          style={[
-            styles.button,
-            selectedButton === "Favorites" && styles.selectedButton,
-          ]}
-        />
-        <Text
-          style={[
-            styles.buttonword,
-            selectedButton === "Favorites" && styles.selectedButton,
-          ]}
+        {/* Favorites Button */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => handleButtonPress("Favorites")}
         >
-          Favorites
-        </Text>
-      </TouchableOpacity>
+          <MaterialIcons
+            name="favorite-outline"
+            size={21}
+            color="black"
+            style={[
+              styles.button,
+              selectedButton === "Favorites" && styles.selectedButton,
+            ]}
+          />
+          <Text
+            style={[
+              styles.buttonword,
+              selectedButton === "Favorites" && styles.selectedButton,
+            ]}
+          >
+            Favorites
+          </Text>
+        </TouchableOpacity>
 
-      {/* Browse Button */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => handleButtonPress("Browse")}
-      >
-        <MaterialCommunityIcons
-          name="store-search-outline"
-          size={22}
-          color="black"
-          style={[
-            styles.button,
-            selectedButton === "Browse" && styles.selectedButton,
-          ]}
-        />
-        <Text
-          style={[
-            styles.buttonword,
-            selectedButton === "Browse" && styles.selectedButton,
-          ]}
+        {/* Browse Button */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => handleButtonPress("Browse")}
         >
-          Browse
-        </Text>
-      </TouchableOpacity>
+          <MaterialCommunityIcons
+            name="store-search-outline"
+            size={22}
+            color="black"
+            style={[
+              styles.button,
+              selectedButton === "Browse" && styles.selectedButton,
+            ]}
+          />
+          <Text
+            style={[
+              styles.buttonword,
+              selectedButton === "Browse" && styles.selectedButton,
+            ]}
+          >
+            Browse
+          </Text>
+        </TouchableOpacity>
 
-      {/* Profile Button */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => [
-          handleButtonPress("Profile"),
-          navigation.navigate("UserProfile"),
-        ]}
-      >
-        <Feather
-          name="user"
-          size={20}
-          color="black"
-          style={[
-            styles.button,
-            selectedButton === "Profile" && styles.selectedButton,
-          ]}
-        />
-        <Text
-          style={[
-            styles.buttonword,
-            selectedButton === "Profile" && styles.selectedButton,
+        {/* Profile Button */}
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => [
+            handleButtonPress("Profile"),
+            navigation.navigate("UserProfile"),
           ]}
         >
-          Profile
-        </Text>
-      </TouchableOpacity>
+          <Feather
+            name="user"
+            size={20}
+            color="black"
+            style={[
+              styles.button,
+              selectedButton === "Profile" && styles.selectedButton,
+            ]}
+          />
+          <Text
+            style={[
+              styles.buttonword,
+              selectedButton === "Profile" && styles.selectedButton,
+            ]}
+          >
+            Profile
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
