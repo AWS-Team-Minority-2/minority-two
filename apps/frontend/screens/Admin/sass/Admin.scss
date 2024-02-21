@@ -11,9 +11,127 @@
   margin-right: 3%;
   margin-top: 20px;
   padding-bottom: 25px;
-  // border-bottom: 1px solid #348ccb; /* Added 'solid' as the border style */
-  // border-bottom-width: 1px;
-  // border-bottom-color: #b7b7b7;
+  
+}
+
+.adminScreenAdjustment {
+  margin: 0 5%;
+  margin-top: 23%;
+
+}
+
+.adminContent{
+  flex-direction: column;
+  height: 100%;
+}
+
+.cardHeaders{
+  flex-direction: row;
+  margin:10% 0;
+  justify-content: space-around;
+  height: 35%;
+
+}
+
+.cards{
+  background-color: #e0e0e0;
+  width: 30%;
+  height: 85%;
+  border-radius: 10px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3%;
+  flex-direction: column;
+}
+
+.cardName{
+  flex-direction: row;
+  align-items: center;
+}
+
+.cardTitle{
+  font-size: 15px;
+  margin-left: 5%;
+}
+
+.cardNumber{
+  font-size: 25px;
+  color: #f2998d;
+  font-family: 'BebasNeue_400Regular';
+}
+
+
+//scss for the content that shows below the cards
+.selectedCardContent{
+  flex-direction: column;
+}
+
+.selectedCardTitle{
+  font-size: 25px;
+  font-family: 'BebasNeue_400Regular';
+  color: #f2998d;
+  margin-bottom: 5%;
+}
+
+.businessLayout{
+  flex-direction: column;
+}
+
+.selectedBusinessCard{
+  background-color: #e0e0e0;
+  margin-bottom: 3%;
+  border-radius: 10px;
+  height: 60%;
+  padding: 0% 5%;
+  flex-direction: column;
+}
+
+.Business{
+  flex-direction: row;
+  margin-bottom: 1%;
+}
+
+.verifiedMark{
+  flex-direction: row;
+  align-items: center;
+}
+
+.selectedBusinessCardAddress{
+  color: #626262;
+}
+
+.selectedBusinessOptions{
+  flex-direction: row;
+  margin-top: auto;
+  padding-bottom: 3%;
+  margin-right: "auto"
+}
+
+.removeBusinessButton{
+  border-right-width: 1;
+  border-right-color: black ;
+  padding-right: 5; // Adjust as needed
+  margin-right: 5; // Adjust as needed
+}
+
+.removeBusinessText{
+  font-size: 13px;
+}
+
+.editBusinessText{
+  font-size: 13px;
+}
+
+.helloHeader{
+  font-size: 30px;
+  font-family: 'BebasNeue_400Regular';
+  color: #f2998d;
+}
+
+.adminSubtext{
+  font-size: 15px;
+  margin-top: 2%;
 }
 
 .welcomeText {
