@@ -14,6 +14,8 @@ import _ from 'lodash';
 import { GQLContext } from './src/GQLContext.js';
 import { BusinessLoader } from './src/loaders/BusinessLoader.js';
 import { PostgresBusinessStore } from './src/stores/PostgresBuesinessStore.js';
+import { PostgresAdminStore } from './src/stores/PostgresAdminStore.js';
+import { AdminLoader } from './src/loaders/AdminLoader.js';
 
 const PATH = '/graphql';
 
@@ -32,11 +34,14 @@ export const getProjectServer = _.memoize(async () => {
     context: (): GQLContext => {
       const postgresUserStore = new PostgresUserStore(pg);
       const postgresBusinessStore = new PostgresBusinessStore(pg);
+      const postgresAdminStore = new PostgresAdminStore(pg);
       const users = new UserLoader(postgresUserStore);
       const business = new BusinessLoader(postgresBusinessStore);
+      const admin = new AdminLoader(postgresAdminStore);
       return {
         users,
         business,
+        admin,
       };
     },
   });

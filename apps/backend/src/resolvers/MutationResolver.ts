@@ -4,11 +4,9 @@ import { User, UserDetails } from '@min-two/user-iso';
 export const MutationResolver = {
   async RegisterUser(_root: {}, args: { user: User }, context: GQLContext) {
     try {
-      // Assuming fetchRestaurant is an asynchronous function that returns a list of restaurants
       const upload = context.users.resgister(args.user);
       return upload;
     } catch (error) {
-      // Handle any potential errors here
       throw new Error('Failed to register user');
     }
   },
@@ -19,11 +17,23 @@ export const MutationResolver = {
     context: GQLContext
   ) {
     try {
-      // Assuming fetchRestaurant is an asynchronous function that returns a list of restaurants
       const attempt = context.users.login(args.details);
       return attempt;
     } catch (error) {
       // Handle any potential errors here
+      throw new Error('Failed to login');
+    }
+  },
+
+  async LoginAdmin(
+    _root: {},
+    args: { adminCode: string },
+    context: GQLContext
+  ) {
+    try {
+      const attempt = await context.admin.login(args.adminCode);
+      return attempt;
+    } catch (error) {
       throw new Error('Failed to login');
     }
   },

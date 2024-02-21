@@ -18,11 +18,16 @@ type BusinessOutput {
 type Mutation {
   RegisterUser(user: User): AddedUserResponse
   LoginUser(details: UserDetails): LoginResponse
+  LoginAdmin(adminCode: String!): AdminLoginResponse
 }
 
 input UserDetails {
   email: String!
   password: String!
+}
+
+type AdminLoginResponse {
+  name: String!
 }
 
 type LoginResponse {
