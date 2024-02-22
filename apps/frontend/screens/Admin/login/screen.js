@@ -13,10 +13,12 @@ import {
 import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 
 import styles from '../sass/Admin.scss';
+import { useAdmin } from '../hooks/useAdmin';
 
 const AdminScreen = () => {
   const navigation = useNavigation();
   const dispatch = useScreenDispatch();
+  const { handleFormChange, loginFailed, login } = useAdmin();
 
   return (
     <SafeAreaView style={styles.screenLayout}>
@@ -42,16 +44,22 @@ const AdminScreen = () => {
           <View style={styles.fieldParent}>
             <Text style={styles.fieldHeader}>Admin Code</Text>
             <TextInput
-              placeholder='00000'
-              onChangeText={(newText) => handleFormChange('email', newText)}
-              style={styles.inputContainer}
+              style={
+                !loginFailed
+                  ? styles.inputContainer
+                  : styles.inputContainerError
+              }
+              secureTextEntry
+              onChangeText={(newText) => handleFormChange(newText)}
             />
           </View>
+          {loginFailed && (
+            <Text style={styles.errorLoginText}>
+              Please check your login details and try again
+            </Text>
+          )}
         </View>
-        <TouchableOpacity
-          style={styles.loginBttn}
-          onPress={() => navigation.navigate('AdminPortal')}
-        >
+        <TouchableOpacity style={styles.loginBttn} onPress={() => login()}>
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
       </View>

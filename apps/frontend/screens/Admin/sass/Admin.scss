@@ -255,3 +255,21 @@
   position: relative;
   padding-bottom: 30px;
 }
+.errorLoginText {
+  font-size: 12px;
+  color: #b91414;
+  font-weight: 300;
+}
+
+.inputContainerError {
+  width: 330px;
+  height: 48.177px;
+  flex-shrink: 0;
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+
+  border: 2px solid #b91414;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-top: 10px;
+}

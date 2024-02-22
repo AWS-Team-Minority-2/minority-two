@@ -18,7 +18,7 @@ type BusinessOutput {
 type Mutation {
   RegisterUser(user: User): AddedUserResponse
   LoginUser(details: UserDetails): LoginResponse
-  LoginAdmin(adminCode: String!): AdminLoginResponse
+  LoginAdmin(adminCode: String): AdminLoginResponse
 }
 
 input UserDetails {
