@@ -147,49 +147,55 @@ const UserHomeScreen = () => {
   return (
     <SafeAreaView style={styles.homeScreenLayout}>
       <View style={styles.homeAdjustment}>
-        <View style={styles.TopBar}>
-          <View style={styles.homeHeader}>
-            {/* Location button w/ icons */}
-            <TouchableOpacity
-              style={styles.location}
-              onPress={() => setLocation(true)}
-            >
-              <Entypo name='location-pin' size={21} color='black' />
-              <Text style={styles.address}>{pickedAddress}</Text>
-              <MaterialIcons
-                name='keyboard-arrow-down'
-                size={22}
-                color='black'
-              />
-            </TouchableOpacity>
+        <View style={styles.TopBarBorder}>
+          <View style={styles.TopBar}>
+            <View style={styles.homeHeader}>
+              {/* Location button w/ icons */}
+              <TouchableOpacity
+                style={styles.location}
+                onPress={() => setLocation(true)}
+              >
+                <Entypo name='location-pin' size={21} color='#f2998d' />
+                <Text style={styles.showedAddress}>{pickedAddress}</Text>
+                <MaterialIcons
+                  name='keyboard-arrow-down'
+                  size={22}
+                  color='#f2998d'
+                />
+              </TouchableOpacity>
 
-            {/* Pop Up screen from location */}
-            {renderModal()}
+              {/* Pop Up screen from location */}
+              {renderModal()}
 
-            {/* Notification icon */}
-            <TouchableOpacity style={styles.notification}>
-              <Ionicons name='notifications-outline' size={20} color='black' />
-            </TouchableOpacity>
-          </View>
+              {/* Notification icon */}
+              <TouchableOpacity style={styles.notification}>
+                <Ionicons
+                  name='notifications-outline'
+                  size={20}
+                  color='black'
+                />
+              </TouchableOpacity>
+            </View>
 
-          {/* Search Box */}
-          <View style={styles.searchContainer}>
-            <Ionicons
-              name='search-outline'
-              size={17}
-              color='black'
-              style={styles.searchIcon}
-            />
-            <TextInput style={styles.textInput} placeholder='Search Nexa' />
-            <View style={styles.divider} />
-            <TouchableOpacity onPress={() => navigation.navigate('UserMap')}>
-              <Feather
-                name='map'
+            {/* Search Box */}
+            <View style={styles.searchContainer}>
+              <Ionicons
+                name='search-outline'
                 size={17}
                 color='black'
-                style={styles.mapIcon}
+                style={styles.searchIcon}
               />
-            </TouchableOpacity>
+              <TextInput style={styles.textInput} placeholder='Search Nexa' />
+              <View style={styles.divider} />
+              <TouchableOpacity onPress={() => navigation.navigate('UserMap')}>
+                <Feather
+                  name='map'
+                  size={17}
+                  color='black'
+                  style={styles.mapIcon}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
 

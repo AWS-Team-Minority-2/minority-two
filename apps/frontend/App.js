@@ -18,7 +18,7 @@ import {
   AdminPortalScreen,
   AdminScreen,
 } from './screens';
-import { AuthProvider } from '@min-two/user-iso';
+import { AuthProvider, useAuthState } from '@min-two/user-iso';
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
 import { NavBar } from './screens/Customer/NavBar';
 import {
@@ -30,6 +30,12 @@ import {
 import { UserMap } from './screens/Customer/UserHomePage/UserMap';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuthDispatch, doLogin } from '@min-two/user-iso';
+import { AccountInfo } from './screens/Customer/UserProfilePage/AccountInfo';
+import { AccountInfoName } from './screens/Customer/UserProfilePage/AccountInfoName';
+import { AccountInfoPhoneNumber } from './screens/Customer/UserProfilePage/AccountInfoPhoneNumber';
+import { AccountInfoEmail } from './screens/Customer/UserProfilePage/AccountInfoEmail';
+import { Security } from './screens/Customer/UserProfilePage/Security';
+import { ChangePassword } from './screens/Customer/UserProfilePage/ChangePassword';
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
@@ -80,11 +86,20 @@ function NavigationController() {
           component={CustomerRegisterScreen}
         />
         <Stack.Screen name='BusinessLogin' component={BusinessLoginScreen} />
-        <Stack.Screen name='UserHome' component={UserHomeScreen} />
-        <Stack.Screen name='UserProfile' component={UserProfile} />
         <Stack.Screen name='UserMap' component={UserMap} />
         <Stack.Screen name='Admin' component={AdminScreen} />
         <Stack.Screen name='AdminPortal' component={AdminPortalScreen} />
+        <Stack.Screen name='UserHome' component={UserHomeScreen} />
+        <Stack.Screen name='UserProfile' component={UserProfile} />
+        <Stack.Screen name='Security' component={Security} />
+        <Stack.Screen name='ChangePassword' component={ChangePassword} />
+        <Stack.Screen name='AccountInfo' component={AccountInfo} />
+        <Stack.Screen name='AccountInfoName' component={AccountInfoName} />
+        <Stack.Screen
+          name='AccountInfoPhoneNumber'
+          component={AccountInfoPhoneNumber}
+        />
+        <Stack.Screen name='AccountInfoEmail' component={AccountInfoEmail} />
       </Stack.Navigator>
       {showNavBar && <NavBar />}
     </>
