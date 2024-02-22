@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { NavigationContainer, useRoute } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useRoute,
+  useNavigation,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { registerRootComponent } from 'expo';
 import {
@@ -17,8 +21,15 @@ import {
 import { AuthProvider } from '@min-two/user-iso';
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
 import { NavBar } from './screens/Customer/NavBar';
-import { ScreenProvider, useScreenState } from '@min-two/screen-iso';
+import {
+  ScreenProvider,
+  useScreenState,
+  useScreenDispatch,
+  changeScreen,
+} from '@min-two/screen-iso';
 import { UserMap } from './screens/Customer/UserHomePage/UserMap';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuthDispatch, doLogin } from '@min-two/user-iso';
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
@@ -28,12 +39,34 @@ const client = new ApolloClient({
 });
 
 function NavigationController() {
+  const navigation = useNavigation();
   const { current: screen } = useScreenState();
+  const dispatch = useAuthDispatch();
+
   const noNavScreens = ['Landing', 'Register', 'Login'];
   const showNavBar = !noNavScreens.includes(screen);
+  const screenDispatch = useScreenDispatch();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const value = await AsyncStorage.getItem('user');
+        if (value !== null) {
+          // Item is present, navigate to user home or profile, adjust this according to your logic
+          doLogin(dispatch, JSON.parse(value));
+          changeScreen(screenDispatch, 'UserHome');
+          navigation.navigate('UserHome');
+        }
+      } catch (error) {
+        console.log('Error checking item: ', error);
+      }
+    };
+
+    checkUser();
+  }, []);
 
   return (
-    <NavigationContainer>
+    <>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
@@ -54,7 +87,7 @@ function NavigationController() {
         <Stack.Screen name='AdminPortal' component={AdminPortalScreen} />
       </Stack.Navigator>
       {showNavBar && <NavBar />}
-    </NavigationContainer>
+    </>
   );
 }
 
@@ -63,7 +96,9 @@ export default function App() {
     <ApolloProvider client={client}>
       <AuthProvider>
         <ScreenProvider>
-          <NavigationController />
+          <NavigationContainer>
+            <NavigationController />
+          </NavigationContainer>
         </ScreenProvider>
       </AuthProvider>
     </ApolloProvider>
