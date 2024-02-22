@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, Span } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from './card';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity, Image, ScrollView } from 'react-native';
@@ -9,6 +9,27 @@ import styles from '../sass/Admin.scss';
 import { useNavigation } from '@react-navigation/native';
 
 const AdminPortalScreen = () => {
+  const [adminName, setAdminName] = useState('');
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const value = await AsyncStorage.getItem('user');
+        if (value !== null) {
+          setAdminName(value);
+        } else {
+          navigation.navigate('Home');
+        }
+      } catch (error) {
+        console.log('Error checking item: ', error);
+      }
+    };
+
+    getUser();
+  }, []);
+
+  console.log(adminName, 'nammmm');
+
   const [selectedCard, setSelectedCard] = useState('Total Business');
   const navigation = useNavigation();
 
@@ -34,7 +55,7 @@ const AdminPortalScreen = () => {
   return (
     <SafeAreaView style={styles.adminScreenAdjustment}>
       <ScrollView style={styles.adminContent}>
-        <Text style={styles.helloHeader}>Hello Admin</Text>
+        <Text style={styles.helloHeader}>Hello {adminName}</Text>
         <Text style={styles.adminSubtext}>
           Manage all businesses within Nexa
         </Text>
