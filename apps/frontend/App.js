@@ -36,6 +36,9 @@ import { AccountInfoPhoneNumber } from './screens/Customer/UserProfilePage/Accou
 import { AccountInfoEmail } from './screens/Customer/UserProfilePage/AccountInfoEmail';
 import { Security } from './screens/Customer/UserProfilePage/Security';
 import { ChangePassword } from './screens/Customer/UserProfilePage/ChangePassword';
+import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
+import { useFonts } from 'expo-font';
+import { Text } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
@@ -58,10 +61,13 @@ function NavigationController() {
       try {
         const value = await AsyncStorage.getItem('user');
         if (value !== null) {
-          // Item is present, navigate to user home or profile, adjust this according to your logic
-          doLogin(dispatch, JSON.parse(value));
-          changeScreen(screenDispatch, 'UserHome');
-          navigation.navigate('UserHome');
+          try {
+            doLogin(dispatch, JSON.parse(value));
+            changeScreen(screenDispatch, 'UserHome');
+            navigation.navigate('UserHome');
+          } catch (e) {
+            navigation.navigate('AdminPortal');
+          }
         }
       } catch (error) {
         console.log('Error checking item: ', error);
@@ -107,6 +113,13 @@ function NavigationController() {
 }
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    BebasNeue_400Regular,
+  });
+  if (!fontsLoaded) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
     <ApolloProvider client={client}>
       <AuthProvider>

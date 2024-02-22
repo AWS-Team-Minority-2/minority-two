@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { LOGIN_ADMIN } from '../gql';
 import { useMutation } from '@apollo/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -30,14 +31,22 @@ export function useAdmin() {
 
   const [loginAdmin, { loading, error }] = useMutation(LOGIN_ADMIN);
 
+  const addUserToStorage = async (user) => {
+    try {
+      // Adding the item to AsyncStorage
+      await AsyncStorage.setItem('user', user);
+      // Setting the state to indicate that item is added
+    } catch (error) {
+      console.log('Error adding user: ', error);
+    }
+  };
+
   const submit = useCallback(async () => {
     const isVal = checkIfCodeVaild();
     if (!isVal) {
       setLoginFailed(true);
       return;
     } else {
-      // handle mutation to login the user
-      // right now we are not using global state
       try {
         const { data } = await loginAdmin({
           variables: {
@@ -45,6 +54,7 @@ export function useAdmin() {
           },
         });
         if (data) {
+          addUserToStorage(data.LoginAdmin.name);
           navigation.navigate('AdminPortal');
         } else {
           setLoginFailed(true);

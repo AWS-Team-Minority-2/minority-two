@@ -1,17 +1,36 @@
-import { View, Text, SafeAreaView, Span } from "react-native";
-import React, { useState } from "react";
-import { Card } from "./card";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { TouchableOpacity, Image, ScrollView } from "react-native";
+import { View, Text, SafeAreaView, Span } from 'react-native';
+import React, { useState } from 'react';
+import { Card } from './card';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { TouchableOpacity, Image, ScrollView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import styles from "../sass/Admin.scss";
+import styles from '../sass/Admin.scss';
+import { useNavigation } from '@react-navigation/native';
 
 const AdminPortalScreen = () => {
-  const [selectedCard, setSelectedCard] = useState("Total Business");
+  const [selectedCard, setSelectedCard] = useState('Total Business');
+  const navigation = useNavigation();
 
   const handleCardPress = (cardTitle) => {
     setSelectedCard(cardTitle);
   };
+
+  const removeUser = async () => {
+    try {
+      // Removing the item from AsyncStorage
+      await AsyncStorage.removeItem('user');
+      // Setting the state to indicate that item is removed
+    } catch (error) {
+      console.log('Error removing user: ', error);
+    }
+  };
+
+  const handleAdminLogout = async () => {
+    navigation.navigate('Home');
+    removeUser();
+  };
+
   return (
     <SafeAreaView style={styles.adminScreenAdjustment}>
       <ScrollView style={styles.adminContent}>
@@ -22,36 +41,36 @@ const AdminPortalScreen = () => {
         <View style={styles.cardHeaders}>
           <TouchableOpacity
             style={styles.cards}
-            onPress={() => handleCardPress("Total Business")}
+            onPress={() => handleCardPress('Total Business')}
           >
             <Text style={styles.cardNumber}>70</Text>
             <View style={styles.cardName}>
-              <Ionicons name="business-outline" size={21} color="black" />
+              <Ionicons name='business-outline' size={21} color='black' />
               <Text style={styles.cardTitle}>Total Business</Text>
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.cards}
-            onPress={() => handleCardPress("Pending Business")}
+            onPress={() => handleCardPress('Pending Business')}
           >
             <Text style={styles.cardNumber}>3</Text>
             <View style={styles.cardName}>
-              <MaterialIcons name="pending-actions" size={21} color="black" />
+              <MaterialIcons name='pending-actions' size={21} color='black' />
               <Text style={styles.cardTitle}>Pending Business</Text>
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.cards}
-            onPress={() => handleCardPress("Verified Business")}
+            onPress={() => handleCardPress('Verified Business')}
           >
             <Text style={styles.cardNumber}>1</Text>
             <View style={styles.cardName}>
               <Ionicons
-                name="shield-checkmark-outline"
+                name='shield-checkmark-outline'
                 size={21}
-                color="black"
+                color='black'
               />
               <Text style={styles.cardTitle}>Verified Business</Text>
             </View>
@@ -66,9 +85,9 @@ const AdminPortalScreen = () => {
                   <Text style={{ fontSize: 16, fontWeight: 600 }}>NuVegan</Text>
                   <View style={styles.verifiedMark}>
                     <Ionicons
-                      name="shield-checkmark-sharp"
+                      name='shield-checkmark-sharp'
                       size={15}
-                      color="#f2998d"
+                      color='#f2998d'
                       style={{ marginLeft: 5 }}
                     />
                     {/* <Text
@@ -97,6 +116,9 @@ const AdminPortalScreen = () => {
           </View>
         )}
       </ScrollView>
+      <TouchableOpacity style={styles.logOutButton} onPress={handleAdminLogout}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
