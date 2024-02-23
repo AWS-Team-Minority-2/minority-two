@@ -4,12 +4,15 @@ import { Card } from './card';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { TouchableOpacity, Image, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useStores } from '@min-two/business-web';
 
 import styles from '../sass/Admin.scss';
 import { useNavigation } from '@react-navigation/native';
 
 const AdminPortalScreen = () => {
   const [adminName, setAdminName] = useState('');
+  const { featured, shops, restaurants, services } = useStores();
+  console.log(featured, 'hhhh');
 
   useEffect(() => {
     const getUser = async () => {
@@ -27,8 +30,6 @@ const AdminPortalScreen = () => {
 
     getUser();
   }, []);
-
-  console.log(adminName, 'nammmm');
 
   const [selectedCard, setSelectedCard] = useState('Total Business');
   const navigation = useNavigation();

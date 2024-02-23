@@ -13,7 +13,7 @@ import TopPlacesCarousel from './components/TopPlacesCarousel';
 import { Entypo, Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthState, useAuthDispatch, doLogin } from '@min-two/user-iso';
-import { useStores } from './hooks/useStores';
+import { useStores } from '@min-two/business-web';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from './UserHome.scss';

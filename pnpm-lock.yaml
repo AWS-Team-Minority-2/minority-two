@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@react-native-async-storage/async-storage':
+        specifier: ^1.22.1
+        version: 1.22.1(react-native@0.71.8)
     devDependencies:
       '@min-two/screen-iso':
         specifier: workspace:*
@@ -209,6 +213,67 @@ importers:
       ts-node:
         specifier: ^10.9.1
         version: 10.9.2(@types/node@20.11.16)(typescript@5.3.3)
+
+  packages/business-web:
+    dependencies:
+      esbuild:
+        specifier: ^0.19.8
+        version: 0.19.12
+      graphql:
+        specifier: ^16.0.0
+        version: 16.8.1
+      graphql-modules:
+        specifier: ^2.1.2
+        version: 2.3.0(graphql@16.8.1)
+      ts-node:
+        specifier: ^10.9.1
+        version: 10.9.2(@types/node@20.11.16)(typescript@5.3.3)
+    devDependencies:
+      '@turbo/gen':
+        specifier: ^1.10.12
+        version: 1.12.2(@types/node@20.11.16)(typescript@5.3.3)
+      '@types/eslint':
+        specifier: ^8.44.7
+        version: 8.56.2
+      '@types/node':
+        specifier: ^20.5.2
+        version: 20.11.16
+      '@types/react':
+        specifier: ^18.2.0
+        version: 18.2.53
+      '@types/react-dom':
+        specifier: ^18.2.0
+        version: 18.2.18
+      esbuild-css-modules-plugin:
+        specifier: ^3.1.0
+        version: 3.1.0(esbuild@0.19.12)
+      esbuild-sass-plugin:
+        specifier: ^2.16.0
+        version: 2.16.1(esbuild@0.19.12)
+      eslint:
+        specifier: ^8.53.0
+        version: 8.56.0
+      graphql.macro:
+        specifier: ^1.4.2
+        version: 1.4.2(@babel/core@7.23.9)(graphql@16.8.1)
+      pg:
+        specifier: ^8.11.3
+        version: 8.11.3
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      sass:
+        specifier: ^1.69.5
+        version: 1.70.0
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+      typescript:
+        specifier: ^5.2.2
+        version: 5.3.3
+      watch:
+        specifier: ^1.0.2
+        version: 1.0.2
 
   packages/postgres-node:
     dependencies:
@@ -4182,6 +4247,15 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /@react-native-async-storage/async-storage@1.22.1(react-native@0.71.8):
+    resolution: {integrity: sha512-kLC0kREjUzXawcNFWrBXD8efBYbQq/F9pchDuUuXf6Wue9dCur9nEkjJYM1Ods81BVisPey1QVDT3qVoOYbqgQ==}
+    peerDependencies:
+      react-native: ^0.0.0-0 || >=0.60 <1.0
+    dependencies:
+      merge-options: 3.0.4
+      react-native: 0.71.8(@babel/core@7.23.9)(react@18.2.0)
+    dev: false
+
   /@react-native-community/blur@4.4.0(react-native@0.71.8)(react@18.2.0):
     resolution: {integrity: sha512-P+xdT2LIq1ewOsF3zx7C0nu4dj7nxl2NVTsMXEzRDjM3bWMdrrEbTRA7uwPV5ngn7/BXIommBPlT/JW4SAedrw==}
     peerDependencies:
@@ -4741,7 +4815,6 @@ packages:
 
   /@types/parse-json@4.0.2:
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
-    dev: false
 
   /@types/pg@8.11.0:
     resolution: {integrity: sha512-sDAlRiBNthGjNFfvt0k6mtotoVYVQ63pA8R4EMWka7crawSR60waVYR0HAgmPRs/e2YaeJTD/43OoZ3PFw80pw==}
@@ -5700,7 +5773,6 @@ packages:
       '@babel/types': 7.23.9
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /babel-plugin-macros@2.8.0:
     resolution: {integrity: sha512-SEP5kJpfGYqYKpBrj5XU3ahw5p5GOHJ0U5ssOSQ/WBVdwkD2Dzlce95exQTs3jOVWPPKLBN2rlEWkCK7dSmLvg==}
@@ -5708,7 +5780,6 @@ packages:
       '@babel/runtime': 7.23.9
       cosmiconfig: 6.0.0
       resolve: 1.22.8
-    dev: false
 
   /babel-plugin-module-resolver@4.1.0:
     resolution: {integrity: sha512-MlX10UDheRr3lb3P0WcaIdtCSRlxdQsB1sBqL7W0raF070bGl1HQQq5K3T2vf2XAYie+ww+5AKC/WrkjRO2knA==}
@@ -6575,7 +6646,6 @@ packages:
       parse-json: 5.2.0
       path-type: 4.0.0
       yaml: 1.10.2
-    dev: false
 
   /cosmiconfig@8.3.6(typescript@5.3.3):
     resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
@@ -8367,7 +8437,6 @@ packages:
       - '@babel/core'
       - graphql
       - supports-color
-    dev: false
 
   /graphql@15.8.0:
     resolution: {integrity: sha512-5gghUc24tP9HRznNpV2+FIoq3xKkj5dTQqf4v0CpdPbFVwFkWoxOM+o+2OC9ZSvjEMTjfmG9QT+gcvggTwW1zw==}
@@ -8854,6 +8923,11 @@ packages:
   /is-path-inside@3.0.3:
     resolution: {integrity: sha512-Fd4gABb+ycGAmKou8eMftCupSir5lRxqf4aD/vd0cD2qc4HL07OjCeuHMr8Ro4CoMaeCKDB0/ECBOVWjTwUvPQ==}
     engines: {node: '>=8'}
+
+  /is-plain-obj@2.1.0:
+    resolution: {integrity: sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==}
+    engines: {node: '>=8'}
+    dev: false
 
   /is-plain-object@2.0.4:
     resolution: {integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==}
@@ -9711,6 +9785,13 @@ packages:
 
   /merge-descriptors@1.0.1:
     resolution: {integrity: sha512-cCi6g3/Zr1iqQi6ySbseM1Xvooa98N0w31jzUYrXPX2xqObmFGHJ0tQ5u74H3mVh7wLouTseZyYIq39g8cNp1w==}
+    dev: false
+
+  /merge-options@3.0.4:
+    resolution: {integrity: sha512-2Sug1+knBjkaMsMgf1ctR1Ujx+Ayku4EdJN4Z+C2+JzoeF7A3OZ9KM2GY0CpQS51NR61LTurMJrRKPhSs3ZRTQ==}
+    engines: {node: '>=10'}
+    dependencies:
+      is-plain-obj: 2.1.0
     dev: false
 
   /merge-stream@2.0.0:

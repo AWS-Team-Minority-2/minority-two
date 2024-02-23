@@ -1,16 +1,33 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_STORES } from '../gql';
-import { useNavigation } from '@react-navigation/native';
+import { GET_STORES } from '../mutations/index';
 
 /* Hook that handles users forms **/
+
+// TODO: move to iso if necessary
+
+interface Store {
+  city: string;
+  cover_image: string;
+  is_online: boolean;
+  lat: string;
+  long: string;
+  name: string;
+  render_type: 'featured' | 'restaurant' | 'service' | 'shop';
+  state: string;
+  zip_code: number;
+}
+interface S {
+  getMinorityBusiness: Store[];
+}
+
 export function useStores() {
-  const { loading, error, data } = useQuery(GET_STORES);
+  const { loading, error, data } = useQuery<S>(GET_STORES);
 
   const filterFeaturedStores = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store) => store.render_type === 'featured'
+        (store: Store) => store.render_type === 'featured'
       );
     } else {
       return [];
@@ -20,7 +37,7 @@ export function useStores() {
   const filterShopStores = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store) => store.render_type === 'shop'
+        (store: Store) => store.render_type === 'shop'
       );
     } else {
       return [];
@@ -30,7 +47,7 @@ export function useStores() {
   const filterRestaurants = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store) => store.render_type === 'restaurant'
+        (store: Store) => store.render_type === 'restaurant'
       );
     } else {
       return [];
@@ -40,7 +57,7 @@ export function useStores() {
   const filterServices = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store) => store.render_type === 'service'
+        (store: Store) => store.render_type === 'service'
       );
     } else {
       return [];
@@ -52,5 +69,6 @@ export function useStores() {
     shops: filterShopStores(),
     restaurants: filterRestaurants(),
     services: filterServices(),
+    // allBusiness: data.getMinorityBusiness,
   };
 }

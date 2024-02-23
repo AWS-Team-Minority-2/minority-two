@@ -15,6 +15,7 @@
     }
   },
   "devDependencies": {
+    "@min-two/business-web": "workspace:*",
     "@min-two/screen-iso": "workspace:*",
     "@min-two/user-iso": "workspace:*",
     "@tsconfig/recommended": "^1.0.3",
@@ -30,7 +31,5 @@
     "turbo": "^1.12.2",
     "typescript": "^5.3.3"
   },
-  "dependencies": {
-   
-  }
+  "dependencies": {}
 }
