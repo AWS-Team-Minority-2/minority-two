@@ -14,7 +14,7 @@ import {
 import { Entypo, Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import MapView, { Callout, Marker } from 'react-native-maps';
-import { useStores } from './hooks/useStores';
+import { useStores } from '@min-two/business-web';
 
 import styles from './UserMap.scss';
 // import { TRUE } from "sass";
