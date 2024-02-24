@@ -13,6 +13,7 @@ export const GET_STORES = gql`
       zip_code
       lat
       long
+      is_pending
     }
   }
 `;

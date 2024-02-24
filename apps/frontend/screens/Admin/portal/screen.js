@@ -1,18 +1,23 @@
-import { View, Text, SafeAreaView, Span } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Card } from './card';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { TouchableOpacity, Image, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useStores } from '@min-two/business-web';
-
-import styles from '../sass/Admin.scss';
 import { useNavigation } from '@react-navigation/native';
+import DetailCard from './detailCard';
+import { Card } from './card';
+import styles from '../sass/Admin.scss';
+import { useStores } from '@min-two/business-web';
 
 const AdminPortalScreen = () => {
   const [adminName, setAdminName] = useState('');
-  const { featured, shops, restaurants, services } = useStores();
-  console.log(featured, 'hhhh');
+  const { allBusiness, pendingBusinesses, verifiedBusinesses } = useStores();
+  const navigation = useNavigation();
 
   useEffect(() => {
     const getUser = async () => {
@@ -31,18 +36,9 @@ const AdminPortalScreen = () => {
     getUser();
   }, []);
 
-  const [selectedCard, setSelectedCard] = useState('Total Business');
-  const navigation = useNavigation();
-
-  const handleCardPress = (cardTitle) => {
-    setSelectedCard(cardTitle);
-  };
-
   const removeUser = async () => {
     try {
-      // Removing the item from AsyncStorage
       await AsyncStorage.removeItem('user');
-      // Setting the state to indicate that item is removed
     } catch (error) {
       console.log('Error removing user: ', error);
     }
@@ -55,92 +51,60 @@ const AdminPortalScreen = () => {
 
   return (
     <SafeAreaView style={styles.adminScreenAdjustment}>
-      <ScrollView style={styles.adminContent}>
+      <View style={styles.adminContent}>
         <Text style={styles.helloHeader}>Hello {adminName}</Text>
-        <Text style={styles.adminSubtext}>
-          Manage all businesses within Nexa
-        </Text>
-        <View style={styles.cardHeaders}>
-          <TouchableOpacity
-            style={styles.cards}
-            onPress={() => handleCardPress('Total Business')}
-          >
-            <Text style={styles.cardNumber}>70</Text>
-            <View style={styles.cardName}>
-              <Ionicons name='business-outline' size={21} color='black' />
-              <Text style={styles.cardTitle}>Total Business</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.cards}
-            onPress={() => handleCardPress('Pending Business')}
-          >
-            <Text style={styles.cardNumber}>3</Text>
-            <View style={styles.cardName}>
-              <MaterialIcons name='pending-actions' size={21} color='black' />
-              <Text style={styles.cardTitle}>Pending Business</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.cards}
-            onPress={() => handleCardPress('Verified Business')}
-          >
-            <Text style={styles.cardNumber}>1</Text>
-            <View style={styles.cardName}>
-              <Ionicons
-                name='shield-checkmark-outline'
-                size={21}
-                color='black'
-              />
-              <Text style={styles.cardTitle}>Verified Business</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        {selectedCard && (
-          <View style={styles.selectedCardContent}>
-            <Text style={styles.selectedCardTitle}>{selectedCard}</Text>
-            <View style={styles.businessLayout}>
-              <View style={styles.selectedBusinessCard}>
-                <View style={styles.Business}>
-                  <Text style={{ fontSize: 16, fontWeight: 600 }}>NuVegan</Text>
-                  <View style={styles.verifiedMark}>
-                    <Ionicons
-                      name='shield-checkmark-sharp'
-                      size={15}
-                      color='#f2998d'
-                      style={{ marginLeft: 5 }}
-                    />
-                    {/* <Text
-                      style={{ color: "#f2998d", marginLeft: 1, fontSize: 13 }}
-                    >
-                      Verified
-                    </Text> */}
-                  </View>
+        <ScrollView style={styles.adminScroll}>
+          <View style={styles.scroll}>
+            <Text style={styles.adminSubtext}>
+              Manage all businesses within Nexa
+            </Text>
+            <View style={styles.cardHeadersParent}>
+              <View style={styles.detailedCard}>
+                <DetailCard
+                  len={allBusiness?.length || 0}
+                  iconName={'business-outline'}
+                  label={'Total'}
+                />
+              </View>
+              {pendingBusinesses.length != 0 && (
+                <View style={styles.detailedCard}>
+                  <DetailCard
+                    len={pendingBusinesses?.length || 0}
+                    label={'Pending'}
+                    iconName={'pending-actions'}
+                  />
                 </View>
-                <Text style={styles.selectedBusinessCardAddress}>
-                  2928 Georgia Ave Washington,D.C
-                </Text>
-
-                <View style={styles.selectedBusinessOptions}>
-                  <TouchableOpacity style={styles.removeBusinessButton}>
-                    <Text style={styles.removeBusinessText}>
-                      Remove Business
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Text style={styles.editBusinessText}>Edit Business</Text>
-                  </TouchableOpacity>
-                </View>
+              )}
+              <View style={styles.detailedCard}>
+                <DetailCard
+                  len={verifiedBusinesses?.length || 0}
+                  label={'Verified'}
+                  iconName={'shield-checkmark-outline'}
+                />
               </View>
             </View>
+
+            <View style={styles.manageContent}>
+              <Text style={styles.selectedCardTitle}>Manage Businesses</Text>
+              {allBusiness?.map((business) => (
+                <Card
+                  name={business.name}
+                  address={business.address ?? 'Online'}
+                  city={business.city}
+                  state={business.state}
+                />
+              ))}
+            </View>
+
+            {/* <TouchableOpacity
+            style={styles.logOutButton}
+            onPress={handleAdminLogout}
+          >
+            <Text>Logout</Text>
+          </TouchableOpacity> */}
           </View>
-        )}
-      </ScrollView>
-      <TouchableOpacity style={styles.logOutButton} onPress={handleAdminLogout}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

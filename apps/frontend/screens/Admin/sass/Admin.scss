@@ -16,30 +16,31 @@
 .adminScreenAdjustment {
   margin: 0 5%;
   margin-top: 23%;
+  display: flex;
 }
 
 .adminContent {
-  flex-direction: column;
-  height: 100%;
-}
-
-.cardHeaders {
-  flex-direction: row;
-  margin: 10% 0;
-  justify-content: space-around;
-  height: 35%;
+  // flex: 1;
+  // flex-direction: column;
+  // height: 100%;
 }
 
 .cards {
-  background-color: #e0e0e0;
-  width: 30%;
-  height: 85%;
+  // background-color: #e0e0e0;
+  // width: 30%;
+  // height: 85%;
   border-radius: 10px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 3%;
-  flex-direction: column;
+
+  // flex-direction: row;
+  // justify-content: center;
+  // text-align: center;
+
+  // justify-content: space-between;
+  // padding: 3%;
+  // width: 70%;
+  // height: 50%;
+  // margin: 3%;
+  // flex-direction: column;
 }
 
 .cardName {
@@ -49,7 +50,15 @@
 
 .cardTitle {
   font-size: 15px;
-  margin-left: 5%;
+  padding: 0 1%;
+  font-weight: bold;
+}
+
+.cardPending {
+  font-size: 15px;
+  padding: 0 1%;
+  color: #f2998d;
+  font-weight: bold;
 }
 
 .cardNumber {
@@ -59,8 +68,9 @@
 }
 
 //scss for the content that shows below the cards
-.selectedCardContent {
+.manageContent {
   flex-direction: column;
+  // flex: 1;
 }
 
 .selectedCardTitle {
@@ -70,16 +80,12 @@
   margin-bottom: 5%;
 }
 
-.businessLayout {
-  flex-direction: column;
-}
-
 .selectedBusinessCard {
-  background-color: #e0e0e0;
+  background-color: #ececec;
   margin-bottom: 3%;
   border-radius: 10px;
-  height: 60%;
-  padding: 0% 5%;
+  // height: 60%;
+  padding: 2% 5%;
   flex-direction: column;
 }
 
@@ -277,4 +283,35 @@
 .logOutButton {
   display: flex;
   align-items: center;
+}
+
+.cardHeadersParent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.detailedCard {
+  padding: 6% 0%;
+  display: flex;
+  flex-direction: row;
+}
+
+.detailedCardSingle {
+  padding: 0% 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.adminScroll {
+  height: 100%;
+}
+
+.scroll {
+  margin-bottom: 105px;
+}
+
+.iconDeatil {
+  margin-right: 2%;
 }

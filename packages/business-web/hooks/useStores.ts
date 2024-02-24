@@ -16,6 +16,7 @@ interface Store {
   render_type: 'featured' | 'restaurant' | 'service' | 'shop';
   state: string;
   zip_code: number;
+  is_pending: boolean;
 }
 interface S {
   getMinorityBusiness: Store[];
@@ -64,11 +65,41 @@ export function useStores() {
     }
   }, [data]);
 
+  const getPending = useCallback(() => {
+    if (data && data.getMinorityBusiness) {
+      return data.getMinorityBusiness.filter(
+        (store: Store) => store.is_pending
+      );
+    } else {
+      return [];
+    }
+  }, [data]);
+
+  const filterVerifiedBusinesses = useCallback(() => {
+    if (data && data.getMinorityBusiness) {
+      return data.getMinorityBusiness.filter((store: Store) => store);
+    } else {
+      return [];
+    }
+  }, [data]);
+
+  // const filterVerifiedBusinesses = useCallback(() => {
+  //   if (data && data.getMinorityBusiness) {
+  //     return data.getMinorityBusiness.filter(
+  //       (store: Store) => !store.is_pending
+  //     );
+  //   } else {
+  //     return [];
+  //   }
+  // }, [data]);
+
   return {
     featured: filterFeaturedStores(),
     shops: filterShopStores(),
     restaurants: filterRestaurants(),
     services: filterServices(),
-    // allBusiness: data.getMinorityBusiness,
+    allBusiness: data?.getMinorityBusiness,
+    pendingBusinesses: getPending(),
+    verifiedBusinesses: filterVerifiedBusinesses(),
   };
 }

@@ -13,6 +13,7 @@ type BusinessOutput {
   lat: String
   is_online: Boolean!
   render_type: String!
+  is_pending: Boolean!
 }
 
 type Mutation {
