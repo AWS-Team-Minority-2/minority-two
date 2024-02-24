@@ -104,6 +104,11 @@ const AdminPortalScreen = () => {
             >
               <Text>Logout</Text>
             </TouchableOpacity>
+            <View style={styles.notice}>
+              <Text style={styles.noticeText}>
+                Admin activity is recored to ensure system integrity
+              </Text>
+            </View>
           </View>
         </ScrollView>
       </View>

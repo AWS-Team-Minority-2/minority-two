@@ -46,7 +46,7 @@ const AdminScreen = () => {
             <TextInput
               style={
                 !loginFailed
-                  ? styles.inputContainer
+                  ? styles.inputContainerLogin
                   : styles.inputContainerError
               }
               secureTextEntry
