@@ -19,6 +19,45 @@ interface Store {
   is_pending: boolean;
 }
 
+type TableName = 'store';
+
+interface MigrationActions {
+  tableName: TableName;
+  action: string;
+}
+
+function getNextMigrationFileName(actions: MigrationActions) {
+  return `admin_${actions.action}_${actions.tableName}.sql`;
+}
+
+function createMigration(actions: MigrationActions) {
+  const migrationName = getNextMigrationFileName(actions);
+  const migrationContent = `-- Migration for ${actions.action} action on table ${actions.tableName}\n\n`;
+
+  // // Create the migration file in the SQL directory
+  // const migrationPath = `./sql/${migrationName}`;
+  // fs.writeFileSync(migrationPath, migrationContent);
+
+  // // Execute the migration using your migration runner (assuming it's a shell command)
+  // const migrationCommand = `your_migration_runner_command --file ${migrationPath}`;
+  // exec(migrationCommand, (error, stdout, stderr) => {
+  //   if (error) {
+  //     console.error(`Error executing migration: ${error.message}`);
+  //     return;
+  //   }
+  //   if (stderr) {
+  //     console.error(`Migration stderr: ${stderr}`);
+  //     return;
+  //   }
+  //   console.log(`Migration stdout: ${stdout}`);
+  // });
+}
+
 export function adminActions() {
-  return {};
+  const suspendBusiness = () => {
+    console.log('Hello');
+  };
+  return {
+    suspend: suspendBusiness,
+  };
 }

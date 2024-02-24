@@ -19,6 +19,7 @@ const Card = ({
   zipCode,
   renderType,
   verified,
+  id,
 }) => {
   const navigation = useNavigation();
 
@@ -77,6 +78,7 @@ const Card = ({
               zipCode,
               renderType,
               verified,
+              id,
             })
           }
         >

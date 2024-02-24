@@ -95,6 +95,7 @@ const AdminPortalScreen = () => {
                   zipCode={business.zip_code}
                   renderType={business.render_type}
                   verified={!business.is_pending}
+                  id={business.sid}
                 />
               ))}
             </View>

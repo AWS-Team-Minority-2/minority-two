@@ -17,6 +17,7 @@ interface Store {
   state: string;
   zip_code: number;
   is_pending: boolean;
+  sid: string;
 }
 interface S {
   getMinorityBusiness: Store[];

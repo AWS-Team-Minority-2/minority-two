@@ -14,6 +14,7 @@ export const GET_STORES = gql`
       lat
       long
       is_pending
+      sid
     }
   }
 `;

@@ -7,13 +7,22 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
+import { adminActions } from '@min-two/business-web';
 
 import styles from '../sass/Admin.scss';
 
 const EditBusiness = ({ route, navigation }) => {
-  const { name, address, city, state, zipCode, renderType, verified } =
+  const { name, address, city, state, zipCode, renderType, verified, id } =
     route.params;
   const [showSuspendedModal, setShowSuspendedModal] = useState(false);
+
+  const { suspend } = adminActions();
+
+  const getHashedId = (id) => {
+    const hiddenPart = id.slice(0, -4).replace(/./g, '*');
+    const visiblePart = id.slice(-4);
+    return hiddenPart.replace(/-/g, '-') + '-' + visiblePart;
+  };
 
   function suspendModal() {
     // List of Locations
@@ -46,7 +55,7 @@ const EditBusiness = ({ route, navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.suspendConfirmBttn}
-                // onPress={handleLogout}
+                onPress={() => suspend()}
               >
                 <Text style={styles.suspendConfirmBttnText}>Suspend</Text>
               </TouchableOpacity>
@@ -78,6 +87,22 @@ const EditBusiness = ({ route, navigation }) => {
 
           <View style={styles.accInfoBoxes}>
             <View style={styles.border}>
+              <View style={styles.border}>
+                <View
+                  style={styles.editBox}
+                  onPress={() => {
+                    changeScreen(dispatch, 'AccountInfoPhoneNumber');
+                    navigation.navigate('AccountInfoPhoneNumber');
+                  }}
+                >
+                  <View style={styles.accBoxWords}>
+                    <Text style={styles.accBoxTitle}>Store ID</Text>
+                    <Text style={styles.accInfo}>{getHashedId(id)}</Text>
+                  </View>
+                </View>
+
+                <View style={styles.divider}></View>
+              </View>
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
