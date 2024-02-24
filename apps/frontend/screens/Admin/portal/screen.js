@@ -92,16 +92,18 @@ const AdminPortalScreen = () => {
                   address={business.address ?? 'Online'}
                   city={business.city}
                   state={business.state}
+                  zipCode={business.zip_code}
+                  renderType={business.render_type}
+                  verified={!business.is_pending}
                 />
               ))}
             </View>
-
-            {/* <TouchableOpacity
-            style={styles.logOutButton}
-            onPress={handleAdminLogout}
-          >
-            <Text>Logout</Text>
-          </TouchableOpacity> */}
+            <TouchableOpacity
+              style={styles.logOutButton}
+              onPress={handleAdminLogout}
+            >
+              <Text>Logout</Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>

@@ -77,7 +77,9 @@ export function useStores() {
 
   const filterVerifiedBusinesses = useCallback(() => {
     if (data && data.getMinorityBusiness) {
-      return data.getMinorityBusiness.filter((store: Store) => store);
+      return data.getMinorityBusiness.filter(
+        (store: Store) => store.is_pending != true
+      );
     } else {
       return [];
     }

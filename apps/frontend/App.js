@@ -39,6 +39,7 @@ import { ChangePassword } from './screens/Customer/UserProfilePage/ChangePasswor
 import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
 import { useFonts } from 'expo-font';
 import { Text } from 'react-native';
+import { EditBusiness } from './screens/Admin/updates/editBusiness';
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
@@ -106,6 +107,7 @@ function NavigationController() {
           component={AccountInfoPhoneNumber}
         />
         <Stack.Screen name='AccountInfoEmail' component={AccountInfoEmail} />
+        <Stack.Screen name='AdminBusinessEdit' component={EditBusiness} />
       </Stack.Navigator>
       {showNavBar && <NavBar />}
     </>
