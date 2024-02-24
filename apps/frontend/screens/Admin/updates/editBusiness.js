@@ -1,5 +1,11 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  Modal,
+} from 'react-native';
+import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 
 import styles from '../sass/Admin.scss';
@@ -7,6 +13,49 @@ import styles from '../sass/Admin.scss';
 const EditBusiness = ({ route, navigation }) => {
   const { name, address, city, state, zipCode, renderType, verified } =
     route.params;
+  const [showSuspendedModal, setShowSuspendedModal] = useState(false);
+
+  function suspendModal() {
+    // List of Locations
+
+    return (
+      // Pop up screen for User to select location
+      <Modal
+        visible={showSuspendedModal}
+        animationType='slide'
+        transparent={true}
+        onRequestClose={() => setShowSuspendedModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>
+              Are you sure you want to unverify {name}
+            </Text>
+            <View style={styles.modalTextSecondaryContainer}>
+              <Text style={styles.modalTextSecondary}>
+                This will temporarily remove the business from the app.
+              </Text>
+            </View>
+
+            <View style={styles.modalButtons}>
+              <TouchableOpacity
+                style={styles.cancelBttn}
+                onPress={() => setShowSuspendedModal(false)}
+              >
+                <Text style={styles.cancelBttnText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.suspendConfirmBttn}
+                // onPress={handleLogout}
+              >
+                <Text style={styles.suspendConfirmBttnText}>Suspend</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.editLayout}>
@@ -107,7 +156,9 @@ const EditBusiness = ({ route, navigation }) => {
         {verified ? (
           <TouchableOpacity
             style={styles.disapproveButton}
-            // onPress={() => login()}
+            onPress={() => {
+              setShowSuspendedModal(true);
+            }}
           >
             <Text style={styles.bttnTxt}>Suspened Business</Text>
           </TouchableOpacity>
@@ -126,6 +177,7 @@ const EditBusiness = ({ route, navigation }) => {
           <Text style={styles.deleteBusinessText}>Delete Business</Text>
         </TouchableOpacity>
       </View>
+      {suspendModal()}
     </SafeAreaView>
   );
 };
