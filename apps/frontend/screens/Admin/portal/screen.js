@@ -96,6 +96,7 @@ const AdminPortalScreen = () => {
                   renderType={business.render_type}
                   verified={!business.is_pending}
                   id={business.sid}
+                  adminName={adminName}
                 />
               ))}
             </View>

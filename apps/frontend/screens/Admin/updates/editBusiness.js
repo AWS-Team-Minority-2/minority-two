@@ -12,8 +12,17 @@ import { adminActions } from '@min-two/business-web';
 import styles from '../sass/Admin.scss';
 
 const EditBusiness = ({ route, navigation }) => {
-  const { name, address, city, state, zipCode, renderType, verified, id } =
-    route.params;
+  const {
+    name,
+    address,
+    city,
+    state,
+    zipCode,
+    renderType,
+    verified,
+    id,
+    adminName,
+  } = route.params;
   const [showSuspendedModal, setShowSuspendedModal] = useState(false);
 
   const { suspend } = adminActions();
@@ -38,11 +47,11 @@ const EditBusiness = ({ route, navigation }) => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalText}>
-              Are you sure you want to unverify {name}
+              Are you sure you want to suspend {name}
             </Text>
             <View style={styles.modalTextSecondaryContainer}>
               <Text style={styles.modalTextSecondary}>
-                This will temporarily remove the business from the app.
+                This will unverify business in the app.
               </Text>
             </View>
 
@@ -55,9 +64,9 @@ const EditBusiness = ({ route, navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.suspendConfirmBttn}
-                onPress={() => suspend()}
+                onPress={() => suspend({ id, adminName })}
               >
-                <Text style={styles.suspendConfirmBttnText}>Suspend</Text>
+                <Text style={styles.suspendConfirmBttnText}>SUSPEND</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -185,7 +194,7 @@ const EditBusiness = ({ route, navigation }) => {
               setShowSuspendedModal(true);
             }}
           >
-            <Text style={styles.bttnTxt}>Suspened Business</Text>
+            <Text style={styles.bttnTxt}>Suspend Business</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity

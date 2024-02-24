@@ -20,6 +20,7 @@ const Card = ({
   renderType,
   verified,
   id,
+  adminName,
 }) => {
   const navigation = useNavigation();
 
@@ -79,6 +80,7 @@ const Card = ({
               renderType,
               verified,
               id,
+              adminName,
             })
           }
         >

@@ -31,5 +31,8 @@
     "turbo": "^1.12.2",
     "typescript": "^5.3.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.22.2",
+    "expo-file-system": "~15.2.2"
+  }
 }
