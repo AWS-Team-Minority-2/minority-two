@@ -64,7 +64,10 @@ const EditBusiness = ({ route, navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.suspendConfirmBttn}
-                onPress={() => suspend({ id, adminName })}
+                onPress={() => {
+                  setShowSuspendedModal(false);
+                  suspend({ id, adminName });
+                }}
               >
                 <Text style={styles.suspendConfirmBttnText}>SUSPEND</Text>
               </TouchableOpacity>
