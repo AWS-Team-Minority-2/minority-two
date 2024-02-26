@@ -115,8 +115,7 @@ const EditBusiness = ({ route, navigation }) => {
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
-                  changeScreen(dispatch, 'AccountInfoName');
-                  navigation.navigate('AccountInfoName');
+                  alert('Featured is not enabled yet');
                 }}
               >
                 <View style={styles.accBoxWords}>
@@ -137,8 +136,7 @@ const EditBusiness = ({ route, navigation }) => {
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
-                  changeScreen(dispatch, 'AccountInfoPhoneNumber');
-                  navigation.navigate('AccountInfoPhoneNumber');
+                  alert('Featured is not enabled yet');
                 }}
               >
                 <View style={styles.accBoxWords}>
@@ -167,8 +165,7 @@ const EditBusiness = ({ route, navigation }) => {
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
-                  changeScreen(dispatch, 'AccountInfoPhoneNumber');
-                  navigation.navigate('AccountInfoPhoneNumber');
+                  alert('Featured is not enabled yet');
                 }}
               >
                 <View style={styles.accBoxWords}>
