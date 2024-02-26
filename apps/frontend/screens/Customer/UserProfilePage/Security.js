@@ -58,6 +58,32 @@ const Security = () => {
               <View style={styles.divider}></View>
             
             </View>
+
+            <View style={styles.border}>
+              <TouchableOpacity
+                style={styles.editBox}
+                onPress={() => {
+                  changeScreen(dispatch, "ChangePassword");
+                  navigation.navigate("ChangePassword");
+                }}
+              >
+                <View style={styles.accBoxWords}>
+                  <Text style={styles.accBoxTitle}>Delete Account</Text>
+                  <Text style={styles.accInfo}>
+                    {/* {loggedUser.password} */}
+                    **********
+                  </Text>
+                </View>
+                <Feather
+                  name="edit-2"
+                  size={20}
+                  color="black"
+                  style={styles.accEditIcon}
+                />
+              </TouchableOpacity>
+              <View style={styles.divider}></View>
+            </View>
+
           </View>
         </View>
       </View>

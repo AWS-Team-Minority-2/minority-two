@@ -11,6 +11,7 @@ import {
   Homescreen,
   UserHomeScreen,
   UserProfile,
+  BusinessProfile,
 } from "./screens";
 import { AuthProvider } from "@min-two/user-iso";
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
@@ -53,6 +54,7 @@ function NavigationController() {
         <Stack.Screen name="BusinessLogin" component={BusinessLoginScreen} />
         <Stack.Screen name="UserHome" component={UserHomeScreen} />
         <Stack.Screen name="UserProfile" component={UserProfile} />
+        <Stack.Screen name="BusinessProfile" component={BusinessProfile} />
         <Stack.Screen name="Security" component={Security} />
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
         <Stack.Screen name="AccountInfo" component={AccountInfo} />
