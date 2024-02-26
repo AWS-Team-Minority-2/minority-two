@@ -15,13 +15,12 @@ export interface Store {
   is_pending: boolean;
 }
 
-export type TableName = 'stores.store';
+type SuspendCall = {
+  id: string;
+  adminName: string;
+};
 
-export type StoreId = string;
-
-export type Suspend = { id: StoreId; adminName: string };
-
-const sendSuspendRequest = async (data: Suspend) => {
+const sendSuspendRequest = async (data: SuspendCall) => {
   try {
     const response = await fetch(
       'http://localhost:6002/admin/actions/suspend',
@@ -41,8 +40,28 @@ const sendSuspendRequest = async (data: Suspend) => {
   }
 };
 
+const sendUnsuspendRequest = async (data: SuspendCall) => {
+  try {
+    const response = await fetch(
+      'http://localhost:6002/admin/actions/unsuspend',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    if (!response.ok) {
+      alert('Error suspending business.');
+    }
+  } catch (error) {
+    throw new error();
+  }
+};
+
 export function adminActions() {
-  const suspendBusiness = async (props: Suspend) => {
+  const suspendBusiness = async (props: SuspendCall) => {
     const { id, adminName } = props;
     try {
       await sendSuspendRequest({
@@ -50,11 +69,24 @@ export function adminActions() {
         adminName,
       });
     } catch (e) {
-      console.log('error froma dminn');
+      console.log('error from admin actions');
+    }
+  };
+
+  const unsuspendBusiness = async (props: SuspendCall) => {
+    const { id, adminName } = props;
+    try {
+      await sendUnsuspendRequest({
+        id,
+        adminName,
+      });
+    } catch (e) {
+      console.log('error from admin actions');
     }
   };
 
   return {
     suspend: suspendBusiness,
+    unsuspend: unsuspendBusiness,
   };
 }

@@ -25,7 +25,7 @@ const EditBusiness = ({ route, navigation }) => {
   } = route.params;
   const [showSuspendedModal, setShowSuspendedModal] = useState(false);
 
-  const { suspend } = adminActions();
+  const { suspend, unsuspend } = adminActions();
 
   const getHashedId = (id) => {
     const hiddenPart = id.slice(0, -4).replace(/./g, '*');
@@ -199,7 +199,7 @@ const EditBusiness = ({ route, navigation }) => {
         ) : (
           <TouchableOpacity
             style={styles.approveButton}
-            // onPress={() => login()}
+            onPress={() => unsuspend({ id, adminName })}
           >
             <Text style={styles.bttnTxt}>Approve Business</Text>
           </TouchableOpacity>

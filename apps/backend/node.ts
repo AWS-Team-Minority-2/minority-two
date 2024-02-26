@@ -17,7 +17,10 @@ import { PostgresBusinessStore } from './src/stores/PostgresBuesinessStore.js';
 import { PostgresAdminStore } from './src/stores/PostgresAdminStore.js';
 import { AdminLoader } from './src/loaders/AdminLoader.js';
 import bodyParser from 'body-parser';
-import { handleSuspendBusiness } from './src/controllers';
+import {
+  handleSuspendBusiness,
+  handleUnsuspendBusiness,
+} from './src/controllers';
 
 const PATH = '/graphql';
 
@@ -77,6 +80,7 @@ node.post('/admin/actions/suspend', async (req, res) => {
     await handleSuspendBusiness({
       id: req.body.id,
       adminName: req.body.adminName,
+      action: 'suspend',
     });
   } catch (e) {
     return res.status(400).send({ error: 'Error suspending user' });
@@ -85,11 +89,25 @@ node.post('/admin/actions/suspend', async (req, res) => {
   res.status(200).send({ message: 'Business Suspended' });
   return;
 });
-// node.post('/api/register', async (req, res) => {
-//   // console.log(req.body);
-//   // resgisterUser(req, res);
-//   resgisterUser();
-// }),
+
+node.post('/admin/actions/unsuspend', async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+  try {
+    await handleUnsuspendBusiness({
+      id: req.body.id,
+      adminName: req.body.adminName,
+      action: 'unsuspend',
+    });
+  } catch (e) {
+    return res.status(400).send({ error: 'Error suspending user' });
+  }
+
+  res.status(200).send({ message: 'Business Suspended' });
+  return;
+});
+
 createMinBusinessServer(node).then(() => {
   const PORT = 6002;
   node.listen(PORT);

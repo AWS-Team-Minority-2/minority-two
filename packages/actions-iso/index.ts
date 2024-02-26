@@ -1,6 +1,12 @@
 import { pool } from '@min-two/postgres-node';
 
-export type SuspendAction = { id: string; adminName: string };
+export type SuspendActionType = 'suspend' | 'unsuspend';
+
+export type SuspendAction = {
+  id: string;
+  adminName: string;
+  action: SuspendActionType;
+};
 
 export const runMigration = async (migration: string) => {
   try {
