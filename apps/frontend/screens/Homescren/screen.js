@@ -44,27 +44,34 @@ const Homescreen = () => {
           source={require('./assets/nexa.png')}
           style={styles.logoContainer}
         />
-        <View>
-          <TouchableOpacity
-            style={styles.landingBtnsContainer}
-            onPress={() => handleCustomerChange()}
-          >
-            {fontsLoaded ? (
-              <Text style={styles.bttnText}>Customer</Text>
-            ) : (
-              <ActivityIndicator />
-            )}
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.landingBtnsContainer}
-            onPress={() => handleBusinessChange()}
-          >
-            {fontsLoaded ? (
-              <Text style={styles.bttnText}>Business Owner</Text>
-            ) : (
-              <ActivityIndicator />
-            )}
-          </TouchableOpacity>
+        <View style={styles.bttns}>
+          <View>
+            <TouchableOpacity
+              style={styles.landingBtnsContainer}
+              onPress={() => handleCustomerChange()}
+            >
+              {fontsLoaded ? (
+                <Text style={styles.bttnText}>Customer</Text>
+              ) : (
+                <ActivityIndicator />
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.landingBtnsContainer}
+              onPress={() => handleBusinessChange()}
+            >
+              {fontsLoaded ? (
+                <Text style={styles.bttnText}>Business Owner</Text>
+              ) : (
+                <ActivityIndicator />
+              )}
+            </TouchableOpacity>
+          </View>
+          <View style={styles.adminLoginTextContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('Admin')}>
+              <Text style={styles.adminLoginText}>Admin Login</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </>

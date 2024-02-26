@@ -1,10 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import styles from "./AccInfo.scss";
-import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
-import { useAuthState } from "@min-two/user-iso";
-import { Feather } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import styles from './AccInfo.scss';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import { useAuthState } from '@min-two/user-iso';
+import { Feather } from '@expo/vector-icons';
 
 const AccountInfo = () => {
   const navigation = useNavigation();
@@ -12,18 +12,18 @@ const AccountInfo = () => {
 
   const dispatch = useScreenDispatch();
 
-  console.log(loggedUser);
+  // console.log(loggedUser);
   return (
     <SafeAreaView style={styles.profileLayout}>
       <View style={styles.profileAdjustment}>
         <TouchableOpacity
           style={styles.leftIcon}
           onPress={() => {
-            changeScreen(dispatch, "Profile");
-            navigation.navigate("UserProfile");
+            changeScreen(dispatch, 'Profile');
+            navigation.navigate('UserProfile');
           }}
         >
-          <Feather name="chevron-left" size={33} color="black" />
+          <Feather name='chevron-left' size={33} color='black' />
         </TouchableOpacity>
 
         <View style={styles.accInfoTextBox}>
@@ -37,8 +37,8 @@ const AccountInfo = () => {
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
-                  changeScreen(dispatch, "AccountInfoName");
-                  navigation.navigate("AccountInfoName");
+                  changeScreen(dispatch, 'AccountInfoName');
+                  navigation.navigate('AccountInfoName');
                 }}
               >
                 <View style={styles.accBoxWords}>
@@ -49,9 +49,9 @@ const AccountInfo = () => {
                   </Text>
                 </View>
                 <Feather
-                  name="edit-2"
+                  name='edit-2'
                   size={20}
-                  color="black"
+                  color='black'
                   style={styles.accEditIcon}
                 />
               </TouchableOpacity>
@@ -62,8 +62,8 @@ const AccountInfo = () => {
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
-                  changeScreen(dispatch, "AccountInfoPhoneNumber");
-                  navigation.navigate("AccountInfoPhoneNumber");
+                  changeScreen(dispatch, 'AccountInfoPhoneNumber');
+                  navigation.navigate('AccountInfoPhoneNumber');
                 }}
               >
                 <View style={styles.accBoxWords}>
@@ -73,9 +73,9 @@ const AccountInfo = () => {
                   </Text>
                 </View>
                 <Feather
-                  name="edit-2"
+                  name='edit-2'
                   size={20}
-                  color="black"
+                  color='black'
                   style={styles.accEditIcon}
                 />
               </TouchableOpacity>
@@ -86,8 +86,8 @@ const AccountInfo = () => {
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
-                  changeScreen(dispatch, "AccountInfoEmail");
-                  navigation.navigate("AccountInfoEmail");
+                  changeScreen(dispatch, 'AccountInfoEmail');
+                  navigation.navigate('AccountInfoEmail');
                 }}
               >
                 <View style={styles.accBoxWords}>
@@ -97,9 +97,9 @@ const AccountInfo = () => {
                   </Text>
                 </View>
                 <Feather
-                  name="edit-2"
+                  name='edit-2'
                   size={20}
-                  color="black"
+                  color='black'
                   style={styles.accEditIcon}
                 />
               </TouchableOpacity>

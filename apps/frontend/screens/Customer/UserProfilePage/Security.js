@@ -1,10 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import styles from "./AccInfo.scss";
-import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
-import { useAuthState } from "@min-two/user-iso";
-import { Feather } from "@expo/vector-icons";
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import styles from './AccInfo.scss';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import { useAuthState } from '@min-two/user-iso';
+import { Feather } from '@expo/vector-icons';
 
 const Security = () => {
   const navigation = useNavigation();
@@ -12,18 +12,18 @@ const Security = () => {
 
   const dispatch = useScreenDispatch();
 
-  console.log(loggedUser);
+  // console.log(loggedUser);
   return (
     <SafeAreaView style={styles.profileLayout}>
       <View style={styles.profileAdjustment}>
         <TouchableOpacity
           style={styles.leftIcon}
           onPress={() => {
-            changeScreen(dispatch, "Profile");
-            navigation.navigate("UserProfile");
+            changeScreen(dispatch, 'Profile');
+            navigation.navigate('UserProfile');
           }}
         >
-          <Feather name="chevron-left" size={33} color="black" />
+          <Feather name='chevron-left' size={33} color='black' />
         </TouchableOpacity>
 
         <View style={styles.accInfoTextBox}>
@@ -37,8 +37,8 @@ const Security = () => {
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
-                  changeScreen(dispatch, "ChangePassword");
-                  navigation.navigate("ChangePassword");
+                  changeScreen(dispatch, 'ChangePassword');
+                  navigation.navigate('ChangePassword');
                 }}
               >
                 <View style={styles.accBoxWords}>
@@ -49,14 +49,13 @@ const Security = () => {
                   </Text>
                 </View>
                 <Feather
-                  name="edit-2"
+                  name='edit-2'
                   size={20}
-                  color="black"
+                  color='black'
                   style={styles.accEditIcon}
                 />
               </TouchableOpacity>
               <View style={styles.divider}></View>
-            
             </View>
 
             <View style={styles.border}>

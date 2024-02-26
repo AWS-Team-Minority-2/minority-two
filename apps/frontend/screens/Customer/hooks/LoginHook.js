@@ -4,6 +4,7 @@ import { LOGIN_USER } from '../gql';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthDispatch, doLogin } from '@min-two/user-iso';
 import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /* Hook that handles users forms **/
 export function useLoginForm() {
@@ -24,6 +25,16 @@ export function useLoginForm() {
 
   const [loginUser, { loading, error }] = useMutation(LOGIN_USER);
 
+  const addUserToStorage = async (user) => {
+    try {
+      // Adding the item to AsyncStorage
+      await AsyncStorage.setItem('user', user);
+      // Setting the state to indicate that item is added
+    } catch (error) {
+      console.log('Error adding user: ', error);
+    }
+  };
+
   const submit = useCallback(async () => {
     const vaild = checkIfFormValid();
     if (vaild) {
@@ -39,7 +50,9 @@ export function useLoginForm() {
         });
         if (data.LoginUser.id) {
           doLogin(dispatch, data.LoginUser);
+          addUserToStorage(JSON.stringify(data.LoginUser));
           changeScreen(screenDispatch, 'UserHome');
+
           navigation.navigate('UserHome');
         } else {
           setLoginFailed(true);

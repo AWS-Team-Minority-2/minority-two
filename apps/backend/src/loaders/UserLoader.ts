@@ -1,4 +1,3 @@
-import { resgisterUser } from './../controllers/User';
 import { PostgresUserStore } from '../stores/PostgresUserStore';
 import { User, UserDetails } from '@min-two/user-iso';
 import { QueryResult } from 'pg';

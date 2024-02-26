@@ -14,6 +14,13 @@ import _ from 'lodash';
 import { GQLContext } from './src/GQLContext.js';
 import { BusinessLoader } from './src/loaders/BusinessLoader.js';
 import { PostgresBusinessStore } from './src/stores/PostgresBuesinessStore.js';
+import { PostgresAdminStore } from './src/stores/PostgresAdminStore.js';
+import { AdminLoader } from './src/loaders/AdminLoader.js';
+import bodyParser from 'body-parser';
+import {
+  handleSuspendBusiness,
+  handleUnsuspendBusiness,
+} from './src/controllers';
 
 const PATH = '/graphql';
 
@@ -32,11 +39,14 @@ export const getProjectServer = _.memoize(async () => {
     context: (): GQLContext => {
       const postgresUserStore = new PostgresUserStore(pg);
       const postgresBusinessStore = new PostgresBusinessStore(pg);
+      const postgresAdminStore = new PostgresAdminStore(pg);
       const users = new UserLoader(postgresUserStore);
       const business = new BusinessLoader(postgresBusinessStore);
+      const admin = new AdminLoader(postgresAdminStore);
       return {
         users,
         business,
+        admin,
       };
     },
   });
@@ -55,16 +65,49 @@ export async function createMinBusinessServer(app: any) {
 }
 
 const node = express();
+node.use(bodyParser.json({ limit: '30mb' }));
+node.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 node.get('/', async (req, res) => {
   return res.status(200).send({ message: 'Port opended, see /graphql' });
 });
 
-// node.post('/api/register', async (req, res) => {
-//   // console.log(req.body);
-//   // resgisterUser(req, res);
-//   resgisterUser();
-// }),
+node.post('/admin/actions/suspend', async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+  try {
+    await handleSuspendBusiness({
+      id: req.body.id,
+      adminName: req.body.adminName,
+      action: 'suspend',
+    });
+  } catch (e) {
+    return res.status(400).send({ error: 'Error suspending user' });
+  }
+
+  res.status(200).send({ message: 'Business Suspended' });
+  return;
+});
+
+node.post('/admin/actions/unsuspend', async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+  try {
+    await handleUnsuspendBusiness({
+      id: req.body.id,
+      adminName: req.body.adminName,
+      action: 'unsuspend',
+    });
+  } catch (e) {
+    return res.status(400).send({ error: 'Error suspending user' });
+  }
+
+  res.status(200).send({ message: 'Business unsuspend' });
+  return;
+});
+
 createMinBusinessServer(node).then(() => {
   const PORT = 6002;
   node.listen(PORT);

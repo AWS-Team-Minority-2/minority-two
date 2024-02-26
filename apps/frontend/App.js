@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { NavigationContainer, useRoute } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  useRoute,
+  useNavigation,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { registerRootComponent } from "expo";
 import {
@@ -12,18 +16,31 @@ import {
   UserHomeScreen,
   UserProfile,
   BusinessProfile,
+  AdminPortalScreen,
+  AdminScreen,
 } from "./screens";
-import { AuthProvider } from "@min-two/user-iso";
+import { AuthProvider, useAuthState } from "@min-two/user-iso";
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
 import { NavBar } from "./screens/Customer/NavBar";
-import { ScreenProvider, useScreenState } from "@min-two/screen-iso";
+import {
+  ScreenProvider,
+  useScreenState,
+  useScreenDispatch,
+  changeScreen,
+} from "@min-two/screen-iso";
 import { UserMap } from "./screens/Customer/UserHomePage/UserMap";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuthDispatch, doLogin } from "@min-two/user-iso";
 import { AccountInfo } from "./screens/Customer/UserProfilePage/AccountInfo";
 import { AccountInfoName } from "./screens/Customer/UserProfilePage/AccountInfoName";
 import { AccountInfoPhoneNumber } from "./screens/Customer/UserProfilePage/AccountInfoPhoneNumber";
 import { AccountInfoEmail } from "./screens/Customer/UserProfilePage/AccountInfoEmail";
 import { Security } from "./screens/Customer/UserProfilePage/Security";
-import { ChangePassword } from "./screens/Customer/UserProfilePage/ChangePassword"; 
+import { ChangePassword } from "./screens/Customer/UserProfilePage/ChangePassword";
+import { BebasNeue_400Regular } from "@expo-google-fonts/bebas-neue";
+import { useFonts } from "expo-font";
+import { Text } from "react-native";
+import { EditBusiness } from "./screens/Admin/updates/editBusiness";
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
@@ -33,12 +50,37 @@ const client = new ApolloClient({
 });
 
 function NavigationController() {
+  const navigation = useNavigation();
   const { current: screen } = useScreenState();
+  const dispatch = useAuthDispatch();
+
   const noNavScreens = ["Landing", "Register", "Login"];
   const showNavBar = !noNavScreens.includes(screen);
+  const screenDispatch = useScreenDispatch();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const value = await AsyncStorage.getItem("user");
+        if (value !== null) {
+          try {
+            doLogin(dispatch, JSON.parse(value));
+            changeScreen(screenDispatch, "UserHome");
+            navigation.navigate("UserHome");
+          } catch (e) {
+            navigation.navigate("AdminPortal");
+          }
+        }
+      } catch (error) {
+        console.log("Error checking item: ", error);
+      }
+    };
+
+    checkUser();
+  }, []);
 
   return (
-    <NavigationContainer>
+    <>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
@@ -52,31 +94,44 @@ function NavigationController() {
           component={CustomerRegisterScreen}
         />
         <Stack.Screen name="BusinessLogin" component={BusinessLoginScreen} />
+        <Stack.Screen name="UserMap" component={UserMap} />
+        <Stack.Screen name="Admin" component={AdminScreen} />
+        <Stack.Screen name="AdminPortal" component={AdminPortalScreen} />
         <Stack.Screen name="UserHome" component={UserHomeScreen} />
         <Stack.Screen name="UserProfile" component={UserProfile} />
-        <Stack.Screen name="BusinessProfile" component={BusinessProfile} />
         <Stack.Screen name="Security" component={Security} />
         <Stack.Screen name="ChangePassword" component={ChangePassword} />
         <Stack.Screen name="AccountInfo" component={AccountInfo} />
         <Stack.Screen name="AccountInfoName" component={AccountInfoName} />
+        <Stack.Screen name="BusinessProfile" component={BusinessProfile} />
+
         <Stack.Screen
           name="AccountInfoPhoneNumber"
           component={AccountInfoPhoneNumber}
         />
         <Stack.Screen name="AccountInfoEmail" component={AccountInfoEmail} />
-        <Stack.Screen name="UserMap" component={UserMap} />
+        <Stack.Screen name="AdminBusinessEdit" component={EditBusiness} />
       </Stack.Navigator>
       {showNavBar && <NavBar />}
-    </NavigationContainer>
+    </>
   );
 }
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    BebasNeue_400Regular,
+  });
+  if (!fontsLoaded) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
     <ApolloProvider client={client}>
       <AuthProvider>
         <ScreenProvider>
-          <NavigationController />
+          <NavigationContainer>
+            <NavigationController />
+          </NavigationContainer>
         </ScreenProvider>
       </AuthProvider>
     </ApolloProvider>
