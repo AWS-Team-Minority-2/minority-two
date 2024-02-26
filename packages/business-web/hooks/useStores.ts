@@ -29,7 +29,8 @@ export function useStores() {
   const filterFeaturedStores = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) => store.render_type === 'featured'
+        (store: Store) =>
+          store.render_type === 'featured' && store.is_pending != true
       );
     } else {
       return [];
@@ -39,7 +40,8 @@ export function useStores() {
   const filterShopStores = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) => store.render_type === 'shop'
+        (store: Store) =>
+          store.render_type === 'shop' && store.is_pending != true
       );
     } else {
       return [];
@@ -49,7 +51,8 @@ export function useStores() {
   const filterRestaurants = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) => store.render_type === 'restaurant'
+        (store: Store) =>
+          store.render_type === 'restaurant' && store.is_pending != true
       );
     } else {
       return [];
@@ -59,7 +62,8 @@ export function useStores() {
   const filterServices = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) => store.render_type === 'service'
+        (store: Store) =>
+          store.render_type === 'service' && store.is_pending != true
       );
     } else {
       return [];

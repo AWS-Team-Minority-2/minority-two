@@ -17,7 +17,7 @@ import { PostgresBusinessStore } from './src/stores/PostgresBuesinessStore.js';
 import { PostgresAdminStore } from './src/stores/PostgresAdminStore.js';
 import { AdminLoader } from './src/loaders/AdminLoader.js';
 import bodyParser from 'body-parser';
-import { handleSuspendUser } from './src/controllers';
+import { handleSuspendBusiness } from './src/controllers';
 
 const PATH = '/graphql';
 
@@ -74,7 +74,7 @@ node.post('/admin/actions/suspend', async (req, res) => {
     return res.status(400).send({ error: 'No data provided' });
   }
   try {
-    await handleSuspendUser({
+    await handleSuspendBusiness({
       id: req.body.id,
       adminName: req.body.adminName,
     });

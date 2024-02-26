@@ -1,7 +1,11 @@
 import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { pool } from '@min-two/postgres-node';
+import {
+  SuspendAction,
+  runMigration,
+  updateMigrationTable,
+} from '@min-two/actions-iso';
 
 const ensureSqlExists = () => {
   if (fs.existsSync('../migrations/sql')) {
@@ -10,8 +14,6 @@ const ensureSqlExists = () => {
     return false;
   }
 };
-
-export type Suspend = { id: string; adminName: string };
 
 function getMigrationFileName() {
   const timestamp = Date.now(); // Get current timestamp
@@ -37,6 +39,7 @@ function getMigrationDeatils(id: string, adminName: string) {
   };
 }
 
+// Not moved the iso because of direcory dependencies
 function uploadMigration(contents: string, name: string) {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
@@ -47,47 +50,21 @@ function uploadMigration(contents: string, name: string) {
   fs.writeFile(where, contents, (err) => {
     if (err) {
       console.error('Error with admin action', err);
+      throw new Error('Error writing file');
     }
   });
   return where;
 }
 
-const updateMigrationTable = async (name: string) => {
-  try {
-    const client = await pool.connect();
-    const query = 'INSERT INTO public.migration (name) VALUES ($1)';
-    const values = [name];
-    await client.query(query, values);
-    client.release();
-  } catch (error) {
-    // Handle the error appropriately, you can log it or throw a custom error
-    throw new Error('Error updating migration table');
-  }
-};
-
 async function deleteFile(filePath: string) {
   try {
     await fs.promises.unlink(filePath);
-    console.log(`File ${filePath} deleted successfully.`);
   } catch (err) {
     console.error(`Error deleting file ${filePath}:`, err);
   }
 }
 
-const runMigration = async (migration: string) => {
-  try {
-    const client = await pool.connect();
-
-    await client.query(migration);
-    client.release();
-  } catch (error) {
-    // Handle the error appropriately, you can log it or throw a custom error
-    console.log(error);
-    throw new Error('Error updating migration table');
-  }
-};
-
-export const handleSuspendUser = async (suspendDetails: Suspend) => {
+export const handleSuspendBusiness = async (suspendDetails: SuspendAction) => {
   const hasSqlDirectory = ensureSqlExists();
   if (hasSqlDirectory) {
     const deatils = getMigrationDeatils(
@@ -103,7 +80,6 @@ export const handleSuspendUser = async (suspendDetails: Suspend) => {
       deleteFile(where);
       throw new Error('Error with migration process');
     }
-    console.log(where);
   } else {
     throw new Error('Sql directory does not exist');
   }
