@@ -2,9 +2,9 @@ import {
   FontAwesome5,
   FontAwesome,
   MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -13,11 +13,14 @@ import {
   View,
   Modal,
   Button,
-} from "react-native";
-import styles from "./UserProfile.scss";
-import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
-import { useAuthState } from "@min-two/user-iso";
-import NavBar from "../NavBar";
+} from 'react-native';
+import styles from './UserProfile.scss';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import { useAuthState } from '@min-two/user-iso';
+import { useAuthDispatch, doLogout } from '@min-two/user-iso';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import NavBar from '../NavBar';
 // import { Feather } from '@expo/vector-icons';
 
 const UserProfile = () => {
@@ -25,14 +28,25 @@ const UserProfile = () => {
   const { user: loggedUser } = useAuthState();
 
   const dispatch = useScreenDispatch();
+  const authDispatch = useAuthDispatch();
 
   const [showModal, setShowModal] = useState(false);
 
-  const handleLogout = () => {
-    // Perform logout action here
-    // For example: clear user session, reset state, etc.
-    changeScreen(dispatch, "Landing");
-    navigation.navigate("Home");
+  const removeUser = async () => {
+    try {
+      // Removing the item from AsyncStorage
+      await AsyncStorage.removeItem('user');
+      // Setting the state to indicate that item is removed
+    } catch (error) {
+      console.log('Error removing user: ', error);
+    }
+  };
+
+  const handleLogout = async () => {
+    navigation.navigate('Home');
+    changeScreen(dispatch, 'Landing');
+    doLogout(authDispatch);
+    removeUser();
   };
 
   function renderModal() {
@@ -42,7 +56,7 @@ const UserProfile = () => {
       // Pop up screen for User to select location
       <Modal
         visible={showModal}
-        animationType="slide"
+        animationType='slide'
         transparent={true}
         onRequestClose={() => setShowModal(false)}
       >
@@ -76,9 +90,9 @@ const UserProfile = () => {
       <View style={styles.profileAdjustment}>
         <View style={styles.profileHeader}>
           <FontAwesome
-            name="user-circle-o"
+            name='user-circle-o'
             size={65}
-            color="black"
+            color='black'
             style={styles.profileUser}
           />
 
@@ -92,28 +106,28 @@ const UserProfile = () => {
           <TouchableOpacity
             style={styles.profileBox}
             onPress={() => {
-              changeScreen(dispatch, "AccountInfo");
-              navigation.navigate("AccountInfo");
+              changeScreen(dispatch, 'AccountInfo');
+              navigation.navigate('AccountInfo');
             }}
           >
             <MaterialCommunityIcons
-              name="account-edit-outline"
+              name='account-edit-outline'
               size={26}
-              color="black"
+              color='black'
             />
             <Text style={styles.profileText}>Account Info</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.profileBox}
             onPress={() => {
-              changeScreen(dispatch, "Security");
-              navigation.navigate("Security");
+              changeScreen(dispatch, 'Security');
+              navigation.navigate('Security');
             }}
           >
             <MaterialCommunityIcons
-              name="lock-open-outline"
+              name='lock-open-outline'
               size={25}
-              color="black"
+              color='black'
             />
             <Text style={styles.profileText}>Security</Text>
           </TouchableOpacity>
@@ -121,7 +135,7 @@ const UserProfile = () => {
             style={styles.profileBox}
             onPress={() => setShowModal(true)}
           >
-            <MaterialCommunityIcons name="logout" size={24} color="black" />
+            <MaterialCommunityIcons name='logout' size={24} color='black' />
             <Text style={styles.profileText}>Log Out</Text>
           </TouchableOpacity>
           {renderModal()}
