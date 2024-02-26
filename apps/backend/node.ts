@@ -104,7 +104,7 @@ node.post('/admin/actions/unsuspend', async (req, res) => {
     return res.status(400).send({ error: 'Error suspending user' });
   }
 
-  res.status(200).send({ message: 'Business Unspended' });
+  res.status(200).send({ message: 'Business unsuspend' });
   return;
 });
 
