@@ -16,6 +16,8 @@ import { BusinessLoader } from './src/loaders/BusinessLoader.js';
 import { PostgresBusinessStore } from './src/stores/PostgresBuesinessStore.js';
 import { PostgresAdminStore } from './src/stores/PostgresAdminStore.js';
 import { AdminLoader } from './src/loaders/AdminLoader.js';
+import bodyParser from 'body-parser';
+import { handleSuspendUser } from './src/controllers';
 
 const PATH = '/graphql';
 
@@ -60,11 +62,29 @@ export async function createMinBusinessServer(app: any) {
 }
 
 const node = express();
+node.use(bodyParser.json({ limit: '30mb' }));
+node.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 node.get('/', async (req, res) => {
   return res.status(200).send({ message: 'Port opended, see /graphql' });
 });
 
+node.post('/admin/actions/suspend', async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+  try {
+    await handleSuspendUser({
+      id: req.body.id,
+      adminName: req.body.adminName,
+    });
+  } catch (e) {
+    return res.status(400).send({ error: 'Error suspending user' });
+  }
+
+  res.status(200).send({ message: 'Business Suspended' });
+  return;
+});
 // node.post('/api/register', async (req, res) => {
 //   // console.log(req.body);
 //   // resgisterUser(req, res);
