@@ -20,6 +20,7 @@ import bodyParser from 'body-parser';
 import {
   handleSuspendBusiness,
   handleUnsuspendBusiness,
+  updateCustomerFirstName,
 } from './src/controllers';
 
 const PATH = '/graphql';
@@ -106,6 +107,25 @@ node.post('/admin/actions/unsuspend', async (req, res) => {
 
   res.status(200).send({ message: 'Business unsuspend' });
   return;
+});
+
+node.post('/update/customer/names', async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+
+  if (req.body.firstName) {
+    await updateCustomerFirstName({
+      name: req.body.firstName,
+      id: req.body.id,
+    });
+  }
+
+  // controller for updating fisrtName
+
+  // controller for updating lastName
+
+  // console.log(req.body.id);
 });
 
 createMinBusinessServer(node).then(() => {

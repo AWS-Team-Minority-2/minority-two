@@ -6,7 +6,9 @@ import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 import { useAuthState } from '@min-two/user-iso';
 import { Feather } from '@expo/vector-icons';
 
-const AccountInfo = () => {
+const AccountInfo = ({ route }) => {
+  const { id } = route.params;
+
   const navigation = useNavigation();
   const { user: loggedUser } = useAuthState();
 
@@ -20,7 +22,9 @@ const AccountInfo = () => {
           style={styles.leftIcon}
           onPress={() => {
             changeScreen(dispatch, 'Profile');
-            navigation.navigate('UserProfile');
+            navigation.navigate('UserProfile', {
+              id,
+            });
           }}
         >
           <Feather name='chevron-left' size={33} color='black' />
@@ -38,13 +42,15 @@ const AccountInfo = () => {
                 style={styles.editBox}
                 onPress={() => {
                   changeScreen(dispatch, 'AccountInfoName');
-                  navigation.navigate('AccountInfoName');
+                  navigation.navigate('AccountInfoName', {
+                    id,
+                  });
                 }}
               >
                 <View style={styles.accBoxWords}>
                   <Text style={styles.accBoxTitle}>Name</Text>
                   <Text style={styles.accInfo}>
-                    {loggedUser.userMetadata.firstname}
+                    {loggedUser.userMetadata.firstname}{' '}
                     {loggedUser.userMetadata.lastname}
                   </Text>
                 </View>

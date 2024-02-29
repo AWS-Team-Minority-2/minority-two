@@ -15,9 +15,9 @@ importers:
         specifier: ~15.2.2
         version: 15.2.2(expo@48.0.21)
     devDependencies:
-      '@min-two/actions-iso':
+      '@min-two/actions-web':
         specifier: workspace:*
-        version: link:packages/actions-iso
+        version: link:packages/actions-web
       '@min-two/business-web':
         specifier: workspace:*
         version: link:packages/business-web
@@ -190,6 +190,9 @@ importers:
       react-native-screens:
         specifier: ~3.22.0
         version: 3.22.1(react-native@0.71.8)(react@18.2.0)
+      react-native-toast-message:
+        specifier: ^2.2.0
+        version: 2.2.0(react-native@0.71.8)(react@18.2.0)
       sass:
         specifier: ^1.70.0
         version: 1.70.0
@@ -262,6 +265,64 @@ importers:
       copyfiles:
         specifier: ^2.4.1
         version: 2.4.1
+      esbuild-css-modules-plugin:
+        specifier: ^3.1.0
+        version: 3.1.0(esbuild@0.19.12)
+      esbuild-sass-plugin:
+        specifier: ^2.16.0
+        version: 2.16.1(esbuild@0.19.12)
+      eslint:
+        specifier: ^8.53.0
+        version: 8.56.0
+      pg:
+        specifier: ^8.11.3
+        version: 8.11.3
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      sass:
+        specifier: ^1.69.5
+        version: 1.70.0
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+      typescript:
+        specifier: ^5.2.2
+        version: 5.3.3
+      watch:
+        specifier: ^1.0.2
+        version: 1.0.2
+
+  packages/actions-web:
+    dependencies:
+      esbuild:
+        specifier: ^0.19.8
+        version: 0.19.12
+      react-native-toast-message:
+        specifier: ^2.2.0
+        version: 2.2.0(react-native@0.71.8)(react@18.2.0)
+      ts-node:
+        specifier: ^10.9.1
+        version: 10.9.2(@types/node@20.11.16)(typescript@5.3.3)
+    devDependencies:
+      '@turbo/gen':
+        specifier: ^1.10.12
+        version: 1.12.2(@types/node@20.11.16)(typescript@5.3.3)
+      '@types/eslint':
+        specifier: ^8.44.7
+        version: 8.56.2
+      '@types/node':
+        specifier: ^20.5.2
+        version: 20.11.16
+      '@types/pg':
+        specifier: ^8.10.2
+        version: 8.11.0
+      '@types/react':
+        specifier: ^18.2.0
+        version: 18.2.53
+      '@types/react-dom':
+        specifier: ^18.2.0
+        version: 18.2.18
       esbuild-css-modules-plugin:
         specifier: ^3.1.0
         version: 3.1.0(esbuild@0.19.12)
@@ -12138,6 +12199,16 @@ packages:
       react-freeze: 1.0.3(react@18.2.0)
       react-native: 0.71.8(@babel/core@7.23.9)(react@18.2.0)
       warn-once: 0.1.1
+    dev: false
+
+  /react-native-toast-message@2.2.0(react-native@0.71.8)(react@18.2.0):
+    resolution: {integrity: sha512-AFti8VzUk6JvyGAlLm9/BknTNDXrrhqnUk7ak/pM7uCTxDPveAu2ekszU0on6vnUPFnG04H/QfYE2IlETqeaWw==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      react: 18.2.0
+      react-native: 0.71.8(@babel/core@7.23.9)(react@18.2.0)
     dev: false
 
   /react-native@0.71.8(@babel/core@7.23.9)(react@18.2.0):

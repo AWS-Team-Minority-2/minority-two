@@ -15,7 +15,7 @@
     }
   },
   "devDependencies": {
-    "@min-two/actions-iso": "workspace:*",
+    "@min-two/actions-web": "workspace:*",
     "@min-two/business-web": "workspace:*",
     "@min-two/screen-iso": "workspace:*",
     "@min-two/user-iso": "workspace:*",
