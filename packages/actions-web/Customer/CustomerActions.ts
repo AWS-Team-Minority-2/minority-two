@@ -1,6 +1,6 @@
 //  change name locally
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,7 +9,6 @@ type NameChangeEvent = 'first' | 'last';
 type NameData = {
   firstName?: string;
   lastName?: string;
-  id: string;
 };
 
 type NameChange = 'first' | 'last' | 'both';
@@ -19,14 +18,19 @@ export const useCustomerActions = ({ id }) => {
   const [newNameData, setNameData] = useState<NameData>({
     firstName: null,
     lastName: null,
-    id,
   });
 
   const handleNameFormChange = (change: NameChangeEvent, name: string) => {
     if (change === 'first') {
       setNameData((prevData) => ({ ...prevData, firstName: name }));
+      if (name === '') {
+        setNameData((prevData) => ({ ...prevData, firstName: null }));
+      }
     } else if (change === 'last') {
       setNameData((prevData) => ({ ...prevData, lastName: name }));
+      if (name === '') {
+        setNameData((prevData) => ({ ...prevData, lastName: null }));
+      }
     }
   };
 
@@ -50,16 +54,27 @@ export const useCustomerActions = ({ id }) => {
     });
   };
 
-  const canFormBeSubmitted = Object.keys(newNameData)
-    .filter((key) => key !== 'id')
-    .some((key) => newNameData[key] !== null);
+  const [nameChangeEvent, setNameChangeEvent] = useState<NameChange>(null);
+  const canFormBeSubmitted = Object.keys(newNameData).some(
+    (key) => newNameData[key] !== null
+  );
 
-  const changeUserName = async () => {
+  useEffect(() => {
+    if (newNameData.firstName !== null && newNameData.lastName !== null) {
+      setNameChangeEvent('both');
+    } else if (newNameData.firstName !== null) {
+      setNameChangeEvent('first');
+    } else if (newNameData.lastName !== null) {
+      setNameChangeEvent('last');
+    } else {
+      setNameChangeEvent(null);
+    }
+  }, [newNameData]);
+
+  const changeUserName = async (event: NameChange) => {
     // // @ts-ignore
     // navigation.navigate('UserHome');
-
     // showToast();
-
     try {
       const response = await fetch(
         'http://localhost:6002/update/customer/names',
@@ -68,13 +83,17 @@ export const useCustomerActions = ({ id }) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(newNameData),
+          body: JSON.stringify({
+            data: newNameData,
+            id,
+            event,
+          }),
         }
       );
       if (!response.ok) {
         // @ts-ignore
         navigation.navigate('AccountInfo', {
-          id: newNameData.id,
+          id,
         });
         badNameChange();
       }
@@ -87,6 +106,8 @@ export const useCustomerActions = ({ id }) => {
     handleName: handleNameFormChange,
     changeName: changeUserName,
     canUpdate: canFormBeSubmitted,
+    nameChangeType: nameChangeEvent,
+    data: newNameData,
   };
 };
 

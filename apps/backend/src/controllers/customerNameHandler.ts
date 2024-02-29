@@ -6,5 +6,5 @@ type NameUpdate = {
 };
 
 export const updateCustomerFirstName = async (details: NameUpdate) => {
-  console.log(details.id, 'controller');
+  console.log(details.id, 'from controleler');
 };

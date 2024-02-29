@@ -1,2 +1,2 @@
-export * from './suspendBusiness';
-export * from './updateCustomerName';
+export * from './suspensionHandler';
+export * from './customerNameHandler';

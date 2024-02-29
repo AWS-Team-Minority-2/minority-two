@@ -114,14 +114,14 @@ node.post('/update/customer/names', async (req, res) => {
     return res.status(400).send({ error: 'No data provided' });
   }
 
-  if (req.body.firstName) {
+  // controller for updating fisrtName
+
+  if (req.body.data.firstName) {
     await updateCustomerFirstName({
-      name: req.body.firstName,
+      name: req.body.data.firstName,
       id: req.body.id,
     });
   }
-
-  // controller for updating fisrtName
 
   // controller for updating lastName
 
