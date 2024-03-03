@@ -123,8 +123,9 @@ const UserProfile = ({ route }) => {
           <TouchableOpacity
             style={styles.profileBox}
             onPress={() => {
-              changeScreen(dispatch, 'Security');
-              navigation.navigate('Security');
+              navigation.navigate('Security', {
+                id,
+              });
             }}
           >
             <MaterialCommunityIcons

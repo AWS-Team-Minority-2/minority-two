@@ -68,8 +68,9 @@ const AccountInfo = ({ route }) => {
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
-                  changeScreen(dispatch, 'AccountInfoPhoneNumber');
-                  navigation.navigate('AccountInfoPhoneNumber');
+                  navigation.navigate('AccountInfoPhoneNumber', {
+                    id,
+                  });
                 }}
               >
                 <View style={styles.accBoxWords}>
@@ -92,8 +93,9 @@ const AccountInfo = ({ route }) => {
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
-                  changeScreen(dispatch, 'AccountInfoEmail');
-                  navigation.navigate('AccountInfoEmail');
+                  navigation.navigate('AccountInfoEmail', {
+                    id,
+                  });
                 }}
               >
                 <View style={styles.accBoxWords}>
