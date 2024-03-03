@@ -6,11 +6,9 @@ import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 import { useAuthState } from '@min-two/user-iso';
 import { Feather } from '@expo/vector-icons';
 
-const Security = () => {
-  const navigation = useNavigation();
-  const { user: loggedUser } = useAuthState();
-
+const Security = ({ route, navigation }) => {
   const dispatch = useScreenDispatch();
+  const { id } = route.params;
 
   // console.log(loggedUser);
   return (
@@ -19,8 +17,9 @@ const Security = () => {
         <TouchableOpacity
           style={styles.leftIcon}
           onPress={() => {
-            changeScreen(dispatch, 'Profile');
-            navigation.navigate('UserProfile');
+            navigation.navigate('UserProfile', {
+              id,
+            });
           }}
         >
           <Feather name='chevron-left' size={33} color='black' />

@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -e ts -w ./src -x pnpm run watch:serve",
+    "dev": "nodemon -e ts -w . -x pnpm run watch:serve",
     "watch:serve": "node --loader ts-node/esm node.ts"
   },
   "license": "ISC",
