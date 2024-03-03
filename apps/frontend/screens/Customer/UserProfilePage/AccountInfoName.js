@@ -12,9 +12,20 @@ import styles from './AccInfo.scss';
 import { useAuthState } from '@min-two/user-iso';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { useCustomerActions } from '@min-two/actions-web';
+import Toast from 'react-native-toast-message';
 
 const AccountInfoName = ({ route, navigation }) => {
   const { id } = route.params;
+
+  const goodNameChange = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'Your name has been updated',
+      position: 'bottom',
+      bottomOffset: 120,
+    });
+  };
 
   const [showModal, setShowModal] = useState(false);
   const { handleName, changeName, canUpdate, nameChangeType, data } =
@@ -28,7 +39,7 @@ const AccountInfoName = ({ route, navigation }) => {
         );
       case 'last':
         return (
-          'You are requesting your first name be changed to ' + data.lastName
+          'You are requesting your last name be changed to ' + data.lastName
         );
       case 'both':
         return (
@@ -42,11 +53,11 @@ const AccountInfoName = ({ route, navigation }) => {
     }
   }
 
-  function updateNameModal(event) {
-    const confMessage = handleMessage(event);
+  function updateNameModal() {
+    const confMessage = handleMessage(nameChangeType);
     return (
       <Modal
-        visible={showModal && event != null}
+        visible={showModal && nameChangeType != null}
         animationType='slide'
         transparent={true}
         onRequestClose={() => setShowModal(false)}
@@ -71,7 +82,10 @@ const AccountInfoName = ({ route, navigation }) => {
                 style={styles.suspendConfirmBttn}
                 onPress={() => {
                   setShowModal(false);
-                  changeName(event);
+                  changeName(nameChangeType);
+
+                  // navigation.navigate('UserHome');
+                  // goodNameChange();
                 }}
               >
                 <Text style={styles.suspendConfirmBttnText}>Change</Text>
@@ -149,7 +163,7 @@ const AccountInfoName = ({ route, navigation }) => {
           <Text style={styles.updateBttnText}>Update</Text>
         </TouchableOpacity>
       </View>
-      {updateNameModal(nameChangeType)}
+      {updateNameModal()}
     </SafeAreaView>
   );
 };

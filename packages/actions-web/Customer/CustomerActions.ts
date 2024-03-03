@@ -1,8 +1,10 @@
 //  change name locally
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
+import { useAuthDispatch, doLogin } from '@min-two/user-iso';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type NameChangeEvent = 'first' | 'last';
 
@@ -14,11 +16,39 @@ type NameData = {
 type NameChange = 'first' | 'last' | 'both';
 // name change hook
 export const useCustomerActions = ({ id }) => {
+  const [initialUser, setInitialUser] = useState(true);
+  const dispatch = useAuthDispatch();
+
   const navigation = useNavigation();
   const [newNameData, setNameData] = useState<NameData>({
     firstName: null,
     lastName: null,
   });
+  const [user, setUser] = useState({});
+
+  const addUserToStorage = async (user) => {
+    try {
+      // Adding the item to AsyncStorage
+      await AsyncStorage.setItem('user', user);
+      // Setting the state to indicate that item is added
+    } catch (error) {
+      console.log('Error adding user: ', error);
+    }
+  };
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const value = await AsyncStorage.getItem('user');
+        setUser(JSON.parse(value));
+      } catch (error) {
+        throw new Error('Error getting user');
+      }
+    };
+    getUser();
+  }, []);
+
+  //  @ts-ignore
 
   const handleNameFormChange = (change: NameChangeEvent, name: string) => {
     if (change === 'first') {
@@ -71,10 +101,53 @@ export const useCustomerActions = ({ id }) => {
     }
   }, [newNameData]);
 
+  const updateAuthandStorage = () => {
+    if (nameChangeEvent == 'first') {
+      setUser((prevData) => ({
+        ...prevData,
+        userMetadata: {
+          // @ts-ignore
+          ...prevData.userMetadata,
+          firstname: newNameData.firstName,
+        },
+      }));
+    } else if (nameChangeEvent == 'last') {
+      setUser((prevData) => ({
+        ...prevData,
+        userMetadata: {
+          // @ts-ignore
+          ...prevData.userMetadata,
+          lastname: newNameData.lastName,
+        },
+      }));
+    } else {
+      setUser((prevData) => ({
+        ...prevData,
+        userMetadata: {
+          // @ts-ignore
+          ...prevData.userMetadata,
+          firstname: newNameData.firstName,
+          lastname: newNameData.lastName,
+        },
+      }));
+    }
+    setInitialUser(false);
+  };
+
+  useEffect(() => {
+    if (initialUser) {
+    } else {
+      addUserToStorage(JSON.stringify(user));
+      // @ts-ignore
+      doLogin(dispatch, user);
+    }
+  }, [user, initialUser]);
+
+  // useEffect(() => {
+  //   setNameChangeEvent(nameChangeEvent);
+  // }, [nameChangeEvent]);
+
   const changeUserName = async (event: NameChange) => {
-    // // @ts-ignore
-    // navigation.navigate('UserHome');
-    // showToast();
     try {
       const response = await fetch(
         'http://localhost:6002/update/customer/names',
@@ -90,12 +163,18 @@ export const useCustomerActions = ({ id }) => {
           }),
         }
       );
+
       if (!response.ok) {
         // @ts-ignore
         navigation.navigate('AccountInfo', {
           id,
         });
         badNameChange();
+      } else {
+        updateAuthandStorage();
+        goodNameChange();
+        // @ts-ignore
+        navigation.navigate('UserHome');
       }
     } catch (error) {
       throw new error();
@@ -110,7 +189,3 @@ export const useCustomerActions = ({ id }) => {
     data: newNameData,
   };
 };
-
-// change phone number locally
-
-//  chanage email locally

@@ -21,6 +21,7 @@ import {
   handleSuspendBusiness,
   handleUnsuspendBusiness,
   updateCustomerFirstName,
+  updateCustomerLastName,
 } from './src/controllers';
 
 const PATH = '/graphql';
@@ -114,8 +115,6 @@ node.post('/update/customer/names', async (req, res) => {
     return res.status(400).send({ error: 'No data provided' });
   }
 
-  // controller for updating fisrtName
-
   if (req.body.data.firstName) {
     await updateCustomerFirstName({
       name: req.body.data.firstName,
@@ -123,9 +122,14 @@ node.post('/update/customer/names', async (req, res) => {
     });
   }
 
-  // controller for updating lastName
+  if (req.body.data.lastName) {
+    await updateCustomerLastName({
+      name: req.body.data.lastName,
+      id: req.body.id,
+    });
+  }
 
-  // console.log(req.body.id);
+  return res.status(200).send({ message: 'Updated' });
 });
 
 createMinBusinessServer(node).then(() => {
