@@ -74,7 +74,17 @@ export const useCustomerActions = ({ id }) => {
     });
   };
 
-  const badNameChange = () => {
+  const goodNumberChange = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'Your number has been updated',
+      position: 'bottom',
+      bottomOffset: 120,
+    });
+  };
+
+  const badChange = () => {
     Toast.show({
       type: 'error',
       text1: 'Oh No!',
@@ -134,6 +144,19 @@ export const useCustomerActions = ({ id }) => {
     setInitialUser(false);
   };
 
+  const updateAuthandStorageNumber = () => {
+    setUser((prevData) => ({
+      ...prevData,
+      userMetadata: {
+        // @ts-ignore
+        ...prevData.userMetadata,
+        phonenumber: newPhoneNumber,
+      },
+    }));
+
+    setInitialUser(false);
+  };
+
   useEffect(() => {
     if (initialUser) {
     } else {
@@ -169,7 +192,7 @@ export const useCustomerActions = ({ id }) => {
         navigation.navigate('AccountInfo', {
           id,
         });
-        badNameChange();
+        badChange();
       } else {
         updateAuthandStorage();
         goodNameChange();
@@ -203,18 +226,18 @@ export const useCustomerActions = ({ id }) => {
         }
       );
 
-      // if (!response.ok) {
-      //   // @ts-ignore
-      //   navigation.navigate('AccountInfo', {
-      //     id,
-      //   });
-      //   badNameChange();
-      // } else {
-      //   updateAuthandStorage();
-      //   goodNameChange();
-      //   // @ts-ignore
-      //   navigation.navigate('UserHome');
-      // }
+      if (!response.ok) {
+        // @ts-ignore
+        navigation.navigate('AccountInfo', {
+          id,
+        });
+        badChange();
+      } else {
+        updateAuthandStorageNumber();
+        goodNumberChange();
+        // @ts-ignore
+        navigation.navigate('UserHome');
+      }
     } catch (error) {
       throw new error();
     }
