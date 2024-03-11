@@ -181,11 +181,37 @@ export const useCustomerActions = ({ id }) => {
     }
   };
 
+  const [newPhoneNumber, setNewPhoneNumber] = useState<string>('');
+
+  const handlePhoneNumberChange = (number) => {
+    setNewPhoneNumber(number);
+  };
+
+  useEffect(() => {
+    console.log(newPhoneNumber, 'number from hook');
+    console.log(isValidPhoneNumberFormat);
+  }, [newPhoneNumber]);
+
+  const requestPhoneNumberChange = () => {
+    console.log('hi');
+  };
+
+  const isValidPhoneNumberFormat = /^\d{3}-\d{3}-\d{4}$/.test(newPhoneNumber);
+
+  const checkIfVailablePhoneNumber = () => {
+    return isValidPhoneNumberFormat;
+  };
+
   return {
     handleName: handleNameFormChange,
     changeName: changeUserName,
     canUpdate: canFormBeSubmitted,
     nameChangeType: nameChangeEvent,
+    // FIXME: update export name
     data: newNameData,
+    handlePhoneNumberChange,
+    changePhoneNumber: requestPhoneNumberChange,
+    numberData: newPhoneNumber,
+    isNumberValid: checkIfVailablePhoneNumber,
   };
 };

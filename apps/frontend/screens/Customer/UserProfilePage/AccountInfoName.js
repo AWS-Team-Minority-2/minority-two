@@ -35,7 +35,7 @@ const AccountInfoName = ({ route, navigation }) => {
     switch (event) {
       case 'first':
         return (
-          'You are requesting your first name be changed to ' + data.firstName
+          'You are requesting your first name be changed to ' + data.firstNamex
         );
       case 'last':
         return (
@@ -65,7 +65,7 @@ const AccountInfoName = ({ route, navigation }) => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalText}>
-              Are you sure you want to chnage your name?
+              Are you sure you want to change your name?
             </Text>
             <View style={styles.modalTextSecondaryContainer}>
               <Text style={styles.modalTextSecondary}>{confMessage}</Text>
