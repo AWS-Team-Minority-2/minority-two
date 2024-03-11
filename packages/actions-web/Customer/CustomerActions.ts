@@ -187,13 +187,37 @@ export const useCustomerActions = ({ id }) => {
     setNewPhoneNumber(number);
   };
 
-  useEffect(() => {
-    console.log(newPhoneNumber, 'number from hook');
-    console.log(isValidPhoneNumberFormat);
-  }, [newPhoneNumber]);
+  const requestPhoneNumberChange = async () => {
+    try {
+      const response = await fetch(
+        'http://localhost:6002/update/customer/number',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            data: newPhoneNumber,
+            id,
+          }),
+        }
+      );
 
-  const requestPhoneNumberChange = () => {
-    console.log('hi');
+      // if (!response.ok) {
+      //   // @ts-ignore
+      //   navigation.navigate('AccountInfo', {
+      //     id,
+      //   });
+      //   badNameChange();
+      // } else {
+      //   updateAuthandStorage();
+      //   goodNameChange();
+      //   // @ts-ignore
+      //   navigation.navigate('UserHome');
+      // }
+    } catch (error) {
+      throw new error();
+    }
   };
 
   const isValidPhoneNumberFormat = /^\d{3}-\d{3}-\d{4}$/.test(newPhoneNumber);
