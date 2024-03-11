@@ -74,7 +74,17 @@ export const useCustomerActions = ({ id }) => {
     });
   };
 
-  const badNameChange = () => {
+  const goodNumberChange = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'Your number has been updated',
+      position: 'bottom',
+      bottomOffset: 120,
+    });
+  };
+
+  const badChange = () => {
     Toast.show({
       type: 'error',
       text1: 'Oh No!',
@@ -134,6 +144,19 @@ export const useCustomerActions = ({ id }) => {
     setInitialUser(false);
   };
 
+  const updateAuthandStorageNumber = () => {
+    setUser((prevData) => ({
+      ...prevData,
+      userMetadata: {
+        // @ts-ignore
+        ...prevData.userMetadata,
+        phonenumber: newPhoneNumber,
+      },
+    }));
+
+    setInitialUser(false);
+  };
+
   useEffect(() => {
     if (initialUser) {
     } else {
@@ -169,7 +192,7 @@ export const useCustomerActions = ({ id }) => {
         navigation.navigate('AccountInfo', {
           id,
         });
-        badNameChange();
+        badChange();
       } else {
         updateAuthandStorage();
         goodNameChange();
@@ -181,11 +204,61 @@ export const useCustomerActions = ({ id }) => {
     }
   };
 
+  const [newPhoneNumber, setNewPhoneNumber] = useState<string>('');
+
+  const handlePhoneNumberChange = (number) => {
+    setNewPhoneNumber(number);
+  };
+
+  const requestPhoneNumberChange = async () => {
+    try {
+      const response = await fetch(
+        'http://localhost:6002/update/customer/number',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            data: newPhoneNumber,
+            id,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        // @ts-ignore
+        navigation.navigate('AccountInfo', {
+          id,
+        });
+        badChange();
+      } else {
+        updateAuthandStorageNumber();
+        goodNumberChange();
+        // @ts-ignore
+        navigation.navigate('UserHome');
+      }
+    } catch (error) {
+      throw new error();
+    }
+  };
+
+  const isValidPhoneNumberFormat = /^\d{3}-\d{3}-\d{4}$/.test(newPhoneNumber);
+
+  const checkIfVailablePhoneNumber = () => {
+    return isValidPhoneNumberFormat;
+  };
+
   return {
     handleName: handleNameFormChange,
     changeName: changeUserName,
     canUpdate: canFormBeSubmitted,
     nameChangeType: nameChangeEvent,
-    data: newNameData,
+    // FIXME: update export name
+    nameData: newNameData,
+    handlePhoneNumberChange,
+    changePhoneNumber: requestPhoneNumberChange,
+    numberData: newPhoneNumber,
+    isNumberValid: checkIfVailablePhoneNumber,
   };
 };

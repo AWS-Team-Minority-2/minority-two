@@ -1,5 +1,4 @@
 import { pool } from '@min-two/postgres-node';
-import { QueryResult } from 'pg';
 
 type NameUpdate = {
   id: string;
