@@ -28,25 +28,26 @@ const AccountInfoName = ({ route, navigation }) => {
   };
 
   const [showModal, setShowModal] = useState(false);
-  const { handleName, changeName, canUpdate, nameChangeType, data } =
+  const { handleName, changeName, canUpdate, nameChangeType, nameData } =
     useCustomerActions({ id });
 
   function handleMessage(event) {
     switch (event) {
       case 'first':
         return (
-          'You are requesting your first name be changed to ' + data.firstNamex
+          'You are requesting your first name be changed to ' +
+          nameData.firstName
         );
       case 'last':
         return (
-          'You are requesting your last name be changed to ' + data.lastName
+          'You are requesting your last name be changed to ' + nameData.lastName
         );
       case 'both':
         return (
           'You are requesting to change both your first and last name to ' +
-          data.firstName +
+          nameData.firstName +
           ' ' +
-          data.lastName
+          nameData.lastName
         );
       default:
         return 'Invalid event type.';

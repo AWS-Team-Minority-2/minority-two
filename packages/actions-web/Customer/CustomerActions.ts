@@ -255,7 +255,7 @@ export const useCustomerActions = ({ id }) => {
     canUpdate: canFormBeSubmitted,
     nameChangeType: nameChangeEvent,
     // FIXME: update export name
-    data: newNameData,
+    nameData: newNameData,
     handlePhoneNumberChange,
     changePhoneNumber: requestPhoneNumberChange,
     numberData: newPhoneNumber,
