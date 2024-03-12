@@ -148,6 +148,9 @@ importers:
       '@react-native-community/blur':
         specifier: ^4.4.0
         version: 4.4.0(react-native@0.71.8)(react@18.2.0)
+      '@react-native-picker/picker':
+        specifier: ^2.6.1
+        version: 2.6.1(react-native@0.71.8)(react@18.2.0)
       '@react-navigation/native':
         specifier: ^6.1.9
         version: 6.1.9(react-native@0.71.8)(react@18.2.0)
@@ -4535,6 +4538,16 @@ packages:
       - encoding
       - supports-color
       - utf-8-validate
+    dev: false
+
+  /@react-native-picker/picker@2.6.1(react-native@0.71.8)(react@18.2.0):
+    resolution: {integrity: sha512-oJftvmLOj6Y6/bF4kPcK6L83yNBALGmqNYugf94BzP0FQGpHBwimVN2ygqkQ2Sn2ZU3pGUZMs0jV6+Gku2GyYg==}
+    peerDependencies:
+      react: '>=16'
+      react-native: '>=0.57'
+    dependencies:
+      react: 18.2.0
+      react-native: 0.71.8(@babel/core@7.23.9)(react@18.2.0)
     dev: false
 
   /@react-native/assets@1.0.0:

@@ -7,12 +7,14 @@ import {
   TouchableOpacity,
   Linking,
   PanResponder,
+  ScrollView,
 } from "react-native";
 import styles from "./sass/BusinessProfile.scss";
 import MapView, { Callout, Marker } from "react-native-maps";
+import { Picker } from "@react-native-picker/picker";
 import {
   Entypo,
-  Feather,
+  Ionicons,
   MaterialIcons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
@@ -30,16 +32,22 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
     longitudeDelta: 0.00694,
   });
 
+  //Handles dropdown to show business hours
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to control dropdown visibility
-
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-
   const businessHours = {
     "Monday-Saturday": "11am-9pm",
-    "Sunday": "11am-7pm",
+    Sunday: "11am-7pm",
   };
+
+  //handles dropdown for user to rate business
+  const [rate, setRate] = useState(false);
+  const toggleRating = () => {
+    setRate(!rate);
+  };
+  const [selectedRating, setSelectedRating] = useState(0);
 
   return (
     <Modal
@@ -64,7 +72,7 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
           >
             <MaterialCommunityIcons name="close" size={27} color="black" />
           </TouchableOpacity>
-          <View style={styles.businessMapInfo}>
+          <ScrollView style={styles.businessMapInfo}>
             <Text style={styles.businessMapName}>NuVegan Cafe</Text>
             <Text style={styles.businessMapSubInfo}>Vegan</Text>
 
@@ -126,6 +134,57 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
 
             <View style={styles.businessMapBox}>
               <TouchableOpacity
+                onPress={toggleRating}
+                style={styles.businessMapContent}
+              >
+                <Ionicons name="star-sharp" size={22} color="black" />
+                <Text style={styles.businessMapText}>Rate NuVegan Cafe</Text>
+                {rate ? (
+                  <Entypo
+                    name="minus"
+                    size={20}
+                    color="black"
+                    style={styles.businessMapSubBttt}
+                  />
+                ) : (
+                  <Entypo
+                    name="plus"
+                    size={20}
+                    color="black"
+                    style={styles.businessMapSubBttt}
+                  />
+                )}
+              </TouchableOpacity>
+              {rate && (
+                <View style={styles.dropdownContent}>
+                  {/* <Picker
+                    selectedValue={selectedRating}
+                    onValueChange={(itemValue, itemIndex) =>
+                      setSelectedRating(itemValue)
+                    }
+                  >
+                    <Picker.Item label="Select Rating" value={0} />
+                    <Picker.Item label="⭐" value={1} />
+                    <Picker.Item label="⭐⭐" value={2} />
+                    <Picker.Item label="⭐⭐⭐" value={3} />
+                    <Picker.Item label="⭐⭐⭐⭐" value={4} />
+                    <Picker.Item label="⭐⭐⭐⭐⭐" value={5} />
+                  </Picker> */}
+                </View>
+              )}
+              <View style={styles.businessMapDivider}></View>
+            </View>
+
+            <View style={styles.businessMapBox}>
+              <TouchableOpacity style={styles.businessMapContent}>
+                <MaterialIcons name="message" size={22} color="black" />
+                <Text style={styles.businessMapText}>Contact NuVegan Cafe</Text>
+              </TouchableOpacity>
+              <View style={styles.businessMapDivider}></View>
+            </View>
+
+            <View style={styles.businessMapBox}>
+              <TouchableOpacity
                 // onPress={promptCall}
                 style={styles.businessMapContent}
               >
@@ -134,7 +193,7 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
               </TouchableOpacity>
               <View style={styles.businessMapDivider}></View>
             </View>
-          </View>
+          </ScrollView>
         </View>
       </View>
     </Modal>

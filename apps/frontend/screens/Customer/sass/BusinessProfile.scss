@@ -8,14 +8,43 @@
     // margin-bottom: 105px;
 }
 
+.businessTopView{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4%;
+}
+
+.featureScrollView {
+    // margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .featureOval {
+    background-color: #e4e4e4;
+    border-radius: 15px; /* Adjust to make oval shape */
+    padding: 8px 25px;
+    margin-right: 10px;
+  }
+  
+  .featureName {
+    color: black;
+    font-weight: bold;
+  }
+  
+  .businessScroll {
+    // flex: 1;
+  }
+  
+
 .businessScroll{
-    height: 100%;
+    // bottom: 50%;
 }
 
 .leftIcon{
    margin-left: 6%;
+   margin-right: 2%;
    margin-top: 5px;
-   padding-bottom: 15px;
 }
 
 // .businessBanner{
@@ -65,10 +94,22 @@
     color: rgb(103, 103, 103);
 }
 
+.businessTabView{
+   margin-bottom: 25%;
+}
+
 .businessTab{
-    top: 8%;
+    top: 3%;
     margin-left: 6%;
     flex-direction: column;
+    
+}
+
+//In FeaturedRow.js - Handles Feature Tab Names
+.tabName{
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4%;
 }
 
 .businessItem{
@@ -85,6 +126,14 @@
     margin-bottom: 5px;
 }
 
+.businessItemDivider{
+    height: 1px;
+    background-color: #e4e4e4; /* Color of the divided line */
+    margin-top: 5px;
+    margin-bottom: 30px;
+    
+}
+
 //Business map pop up
 
 .businessPopUp{
@@ -99,11 +148,11 @@
     border-radius: 10px;
     // padding: 20px;
     // align-items: center;
-    height: 85%;
+    height: 90%;
 }
 
 .businessMap{
-    height: 40%;
+    height: 30%;
     border-radius: 10px;
 }
 
@@ -187,3 +236,87 @@
     background-color: #e4e4e4; /* Color of the divided line */
     margin: 10px 0; /* Adjust margin as needed */
 }
+
+//Selected Items js file
+
+.modalContainer {
+    flex: 1;
+    justify-content: center;
+    padding: 0 10px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  }
+  
+  .modalCloseButton {
+//    flex-direction: row-reverse;
+   margin-bottom: 3%;
+  }
+  
+  .modalCloseButtonText {
+    font-size: 14px;
+    color: black;
+  }
+  
+  .popUpContent {
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    height: 55%;
+  }
+  
+  .itemImage {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  .itemNameandPrice{
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .itemName {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  .itemPrice{
+    flex-direction: row-reverse;
+  }
+
+  .itemFavorite{
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .itemFavoriteWords{
+    color: #F2998D;
+    margin-left: 1%;
+  }
+  
+  .itemDescription {
+    font-size: 13px;
+    // margin-bottom: 10px;
+  }
+
+  .addButton{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2998d;
+    border-radius: 10px;
+    margin-top: 7%;
+  }
+
+  .addButtonText{
+    font-family: 'BebasNeue_400Regular';
+    font-size: 18px;
+    color: #fff;
+  }
+  
