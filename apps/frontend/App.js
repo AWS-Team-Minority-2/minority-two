@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+
+import React, { useEffect, useState } from 'react';
+import Toast from 'react-native-toast-message';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import {
   NavigationContainer,
   useRoute,
@@ -57,28 +59,30 @@ function NavigationController() {
   const noNavScreens = ["Landing", "Register", "Login"];
   const showNavBar = !noNavScreens.includes(screen);
   const screenDispatch = useScreenDispatch();
+  const [user, setUser] = useState({});
 
-  useEffect(() => {
+   useEffect(() => {
     const checkUser = async () => {
       try {
-        const value = await AsyncStorage.getItem("user");
+        const value = await AsyncStorage.getItem('user');
         if (value !== null) {
           try {
             doLogin(dispatch, JSON.parse(value));
-            changeScreen(screenDispatch, "UserHome");
-            navigation.navigate("UserHome");
+            setUser(JSON.parse(value));
+            changeScreen(screenDispatch, 'UserHome');
+            navigation.navigate('UserHome');
           } catch (e) {
-            navigation.navigate("AdminPortal");
+            navigation.navigate('AdminPortal');
           }
         }
       } catch (error) {
-        console.log("Error checking item: ", error);
+        console.log('Error checking item: ', error);
       }
     };
 
     checkUser();
   }, []);
-
+  
   return (
     <>
       <Stack.Navigator
@@ -112,7 +116,8 @@ function NavigationController() {
         <Stack.Screen name="AccountInfoEmail" component={AccountInfoEmail} />
         <Stack.Screen name="AdminBusinessEdit" component={EditBusiness} />
       </Stack.Navigator>
-      {showNavBar && <NavBar />}
+      {/* Pass in User Id to navbar to handle customer actions */}
+      {showNavBar && <NavBar id={user.id} />}
     </>
   );
 }
@@ -126,15 +131,18 @@ export default function App() {
   }
 
   return (
-    <ApolloProvider client={client}>
-      <AuthProvider>
-        <ScreenProvider>
-          <NavigationContainer>
-            <NavigationController />
-          </NavigationContainer>
-        </ScreenProvider>
-      </AuthProvider>
-    </ApolloProvider>
+    <>
+      <ApolloProvider client={client}>
+        <AuthProvider>
+          <ScreenProvider>
+            <NavigationContainer>
+              <NavigationController />
+            </NavigationContainer>
+          </ScreenProvider>
+        </AuthProvider>
+      </ApolloProvider>
+      <Toast />
+    </>
   );
 }
 

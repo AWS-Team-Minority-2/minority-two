@@ -23,7 +23,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import NavBar from '../NavBar';
 // import { Feather } from '@expo/vector-icons';
 
-const UserProfile = () => {
+const UserProfile = ({ route }) => {
+  const { id } = route.params;
+
   const navigation = useNavigation();
   const { user: loggedUser } = useAuthState();
 
@@ -95,9 +97,8 @@ const UserProfile = () => {
             color='black'
             style={styles.profileUser}
           />
-
           <Text style={styles.profileName}>
-            {loggedUser.userMetadata.firstname}
+            {loggedUser.userMetadata.firstname}{' '}
             {loggedUser.userMetadata.lastname}
           </Text>
         </View>
@@ -107,7 +108,9 @@ const UserProfile = () => {
             style={styles.profileBox}
             onPress={() => {
               changeScreen(dispatch, 'AccountInfo');
-              navigation.navigate('AccountInfo');
+              navigation.navigate('AccountInfo', {
+                id,
+              });
             }}
           >
             <MaterialCommunityIcons
@@ -120,8 +123,9 @@ const UserProfile = () => {
           <TouchableOpacity
             style={styles.profileBox}
             onPress={() => {
-              changeScreen(dispatch, 'Security');
-              navigation.navigate('Security');
+              navigation.navigate('Security', {
+                id,
+              });
             }}
           >
             <MaterialCommunityIcons
