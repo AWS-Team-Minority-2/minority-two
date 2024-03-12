@@ -249,16 +249,65 @@ export const useCustomerActions = ({ id }) => {
     return isValidPhoneNumberFormat;
   };
 
+  const [newEmailData, setNewEmailData] = useState('');
+
+  const handleEmailChange = (email) => {
+    setNewEmailData(email);
+  };
+
+  const isValidEmail = () => {
+    // Simple email validation regex pattern
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(newEmailData);
+  };
+
+  const requestEmailChange = async () => {
+    console.log(newEmailData);
+    // try {
+    //   const response = await fetch(
+    //     'http://localhost:6002/update/customer/number',
+    //     {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify({
+    //         data: newPhoneNumber,
+    //         id,
+    //       }),
+    //     }
+    //   );
+
+    //   if (!response.ok) {
+    //     // @ts-ignore
+    //     navigation.navigate('AccountInfo', {
+    //       id,
+    //     });
+    //     badChange();
+    //   } else {
+    //     updateAuthandStorageNumber();
+    //     goodNumberChange();
+    //     // @ts-ignore
+    //     navigation.navigate('UserHome');
+    //   }
+    // } catch (error) {
+    //   throw new error();
+    // }
+  };
+
   return {
     handleName: handleNameFormChange,
     changeName: changeUserName,
     canUpdate: canFormBeSubmitted,
     nameChangeType: nameChangeEvent,
-    // FIXME: update export name
     nameData: newNameData,
     handlePhoneNumberChange,
     changePhoneNumber: requestPhoneNumberChange,
     numberData: newPhoneNumber,
     isNumberValid: checkIfVailablePhoneNumber,
+    emailData: newEmailData,
+    handleEmailChange,
+    isEmailVaild: isValidEmail,
+    changeEmail: requestEmailChange,
   };
 };
