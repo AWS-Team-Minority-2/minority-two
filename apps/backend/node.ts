@@ -23,6 +23,7 @@ import {
   updateCustomerFirstName,
   updateCustomerLastName,
   updateCustomerPhoneNumber,
+  updateCustomerEmail,
 } from './src/controllers';
 
 const PATH = '/graphql';
@@ -141,6 +142,19 @@ node.post('/update/customer/number', async (req, res) => {
   await updateCustomerPhoneNumber({
     id: req.body.id,
     number: req.body.data,
+  });
+
+  return res.status(200).send({ message: 'Updated' });
+});
+
+node.post('/update/customer/email', async (req, res) => {
+  if (!req.body.id || !req.body.data) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+
+  await updateCustomerEmail({
+    id: req.body.id,
+    email: req.body.data,
   });
 
   return res.status(200).send({ message: 'Updated' });

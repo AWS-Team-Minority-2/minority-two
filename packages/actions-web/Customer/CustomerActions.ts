@@ -84,6 +84,16 @@ export const useCustomerActions = ({ id }) => {
     });
   };
 
+  const goodEmailChange = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'Your email has been updated',
+      position: 'bottom',
+      bottomOffset: 120,
+    });
+  };
+
   const badChange = () => {
     Toast.show({
       type: 'error',
@@ -151,6 +161,19 @@ export const useCustomerActions = ({ id }) => {
         // @ts-ignore
         ...prevData.userMetadata,
         phonenumber: newPhoneNumber,
+      },
+    }));
+
+    setInitialUser(false);
+  };
+
+  const updateAuthandStorageEmail = () => {
+    setUser((prevData) => ({
+      ...prevData,
+      userMetadata: {
+        // @ts-ignore
+        ...prevData.userMetadata,
+        email: newEmailData,
       },
     }));
 
@@ -262,37 +285,35 @@ export const useCustomerActions = ({ id }) => {
   };
 
   const requestEmailChange = async () => {
-    console.log(newEmailData);
-    // try {
-    //   const response = await fetch(
-    //     'http://localhost:6002/update/customer/number',
-    //     {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({
-    //         data: newPhoneNumber,
-    //         id,
-    //       }),
-    //     }
-    //   );
-
-    //   if (!response.ok) {
-    //     // @ts-ignore
-    //     navigation.navigate('AccountInfo', {
-    //       id,
-    //     });
-    //     badChange();
-    //   } else {
-    //     updateAuthandStorageNumber();
-    //     goodNumberChange();
-    //     // @ts-ignore
-    //     navigation.navigate('UserHome');
-    //   }
-    // } catch (error) {
-    //   throw new error();
-    // }
+    try {
+      const response = await fetch(
+        'http://localhost:6002/update/customer/email',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            data: newEmailData,
+            id,
+          }),
+        }
+      );
+      if (!response.ok) {
+        // @ts-ignore
+        navigation.navigate('AccountInfo', {
+          id,
+        });
+        badChange();
+      } else {
+        updateAuthandStorageEmail();
+        goodEmailChange();
+        // @ts-ignore
+        navigation.navigate('UserHome');
+      }
+    } catch (error) {
+      throw new error();
+    }
   };
 
   return {
