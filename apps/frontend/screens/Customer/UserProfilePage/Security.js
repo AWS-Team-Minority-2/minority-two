@@ -1,16 +1,16 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Text,
   TouchableOpacity,
   View,
   Modal,
-} from "react-native";
-import styles from "./AccInfo.scss";
-import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
-import { useAuthState } from "@min-two/user-iso";
-import { Feather, MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+} from 'react-native';
+import styles from './AccInfo.scss';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import { useAuthState } from '@min-two/user-iso';
+import { Feather, MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
 const Security = ({ route, navigation }) => {
   const dispatch = useScreenDispatch();
@@ -18,10 +18,10 @@ const Security = ({ route, navigation }) => {
 
   const [showModal, setShowModal] = useState(false);
   const handleLogout = async () => {
-    navigation.navigate("Home");
-    changeScreen(dispatch, "Landing");
-    doLogout(authDispatch);
-    removeUser();
+    navigation.navigate('Home');
+    changeScreen(dispatch, 'Landing');
+    // doLogout(authDispatch);
+    // removeUser();
   };
 
   function renderModal() {
@@ -31,7 +31,7 @@ const Security = ({ route, navigation }) => {
       // Pop up screen for User to select location
       <Modal
         visible={showModal}
-        animationType="slide"
+        animationType='slide'
         transparent={true}
         onRequestClose={() => setShowModal(false)}
       >
@@ -51,7 +51,9 @@ const Security = ({ route, navigation }) => {
                 style={styles.logoutConfirmBttn}
                 onPress={handleLogout}
               >
-                <Text style={styles.logoutConfirmBttnText}>Delete Account</Text>
+                <Text style={styles.suspendConfirmBttnText}>
+                  Delete Account
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -72,7 +74,7 @@ const Security = ({ route, navigation }) => {
             });
           }}
         >
-          <Feather name="chevron-left" size={33} color="black" />
+          <Feather name='chevron-left' size={33} color='black' />
         </TouchableOpacity>
 
         <View style={styles.accInfoTextBox}>
@@ -86,8 +88,9 @@ const Security = ({ route, navigation }) => {
               <TouchableOpacity
                 style={styles.editBox}
                 onPress={() => {
-                  changeScreen(dispatch, "ChangePassword");
-                  navigation.navigate("ChangePassword");
+                  navigation.navigate('ChangePassword', {
+                    id,
+                  });
                 }}
               >
                 <View style={styles.accBoxWords}>
@@ -98,9 +101,9 @@ const Security = ({ route, navigation }) => {
                   </Text>
                 </View>
                 <Feather
-                  name="edit-2"
+                  name='edit-2'
                   size={20}
-                  color="black"
+                  color='black'
                   style={styles.accEditIcon}
                 />
               </TouchableOpacity>
@@ -116,9 +119,9 @@ const Security = ({ route, navigation }) => {
                   <Text style={styles.accBoxTitle}>Delete Account</Text>
                 </View>
                 <AntDesign
-                  name="delete"
+                  name='delete'
                   size={20}
-                  color="black"
+                  color='black'
                   style={styles.accEditIcon}
                 />
                 {/* <Feather
