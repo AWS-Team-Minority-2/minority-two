@@ -229,3 +229,14 @@
   color: #b91414;
   font-weight: 300;
 }
+
+.logoutConfirmBttn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2998d;
+  border-radius: 10px;
+  width: 45%;
+  height: 80%;
+  color: white;
+}
