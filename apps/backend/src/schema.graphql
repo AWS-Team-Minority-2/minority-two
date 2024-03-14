@@ -1,5 +1,5 @@
 type Query {
-  getMinorityBusiness: [BusinessOutput]
+  getMinorityBusiness(zip_code: String!): [BusinessOutput]
 }
 
 type BusinessOutput {

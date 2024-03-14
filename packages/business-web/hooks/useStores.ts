@@ -23,8 +23,11 @@ interface S {
   getMinorityBusiness: Store[];
 }
 
-export function useStores() {
-  const { loading, error, data } = useQuery<S>(GET_STORES);
+// intercept the user zipcome here and pass to backend
+export function useStores(zipCode: string) {
+  const { loading, error, data } = useQuery<S>(GET_STORES, {
+    variables: { zipCode },
+  });
 
   const filterFeaturedStores = useCallback(() => {
     if (data && data.getMinorityBusiness) {
