@@ -1,9 +1,14 @@
 import { GQLContext } from '../GQLContext';
 
 export const QueryResolver = {
-  async getMinorityBusiness(_root: {}, args: {}, context: GQLContext) {
+  async getMinorityBusiness(
+    _root: {},
+    args: { zip_code: string },
+    context: GQLContext
+  ) {
     try {
-      const business = await context.business.getStores();
+      // // Filter Business within zip code
+      const business = context.business.getStoresInRange(args.zip_code);
       return business;
     } catch (error) {
       console.error('Error fetching stores:', error);

@@ -20,7 +20,6 @@ import styles from './UserHome.scss';
 
 const UserHomeScreen = () => {
   const { user: loggedUser } = useAuthState();
-  const { featured, shops, restaurants, services } = useStores();
 
   const navigation = useNavigation();
 
@@ -33,6 +32,7 @@ const UserHomeScreen = () => {
   const [location, setLocation] = useState(false); // For the pop screen to show up or not
   const [pickedAddress, setPickedAddress] = useState('Howard University'); // Current address displayed
   const [selectedButton, setSelectedButton] = useState('Home'); // Current button selected in Navbar
+  const [currentZip, setCurrentZip] = useState('');
 
   // Handles changing the current button clicked in the NavBar
   const handleButtonPress = (buttonName) => {
@@ -44,6 +44,26 @@ const UserHomeScreen = () => {
     setPickedAddress(address);
     setLocation(false);
   };
+
+  const pastLocations = {
+    'Howard University': '2400 Sixth St NW, Washington DC 20001',
+    'Vie Towers': '1615 Belcrest Rd, Hyattsvill MD 20782',
+    '256 Highway St': 'New York, NY 11245',
+    '154 Harvard Avenue': 'Boston, MA 02134',
+  };
+
+  useEffect(() => {
+    if (pickedAddress && pastLocations[pickedAddress]) {
+      const address = pastLocations[pickedAddress];
+      const zipRegex = /\b\d{5}(?:-\d{4})?\b/;
+      const match = address.match(zipRegex);
+      if (match) {
+        setCurrentZip(match[0]);
+      } else {
+        console.error('Could not find zip code for the picked address.');
+      }
+    }
+  }, [pickedAddress]);
 
   // Handles the ability for the User to swipes the pop up screen down
   const panResponder = useRef(
@@ -57,14 +77,10 @@ const UserHomeScreen = () => {
     })
   ).current;
 
+  const { featured, shops, restaurants, services } = useStores(currentZip);
+
   function renderModal() {
     // List of Locations
-    const pastLocations = {
-      'Howard University': '2400 Sixth St NW, Washington DC 20001',
-      'Vie Towers': '1615 Belcrest Rd, Hyattsvill MD 20782',
-      '256 Highway St': 'New York, NY 11245',
-      '154 Harvard Avenue': 'Boston, MA 02134',
-    };
 
     return (
       // Pop up screen for User to select location
