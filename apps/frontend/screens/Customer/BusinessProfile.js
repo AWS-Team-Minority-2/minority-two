@@ -85,7 +85,7 @@ const BusinessProfile = () => {
             source={{
               uri: "https://d1ralsognjng37.cloudfront.net/8ec59378-146f-4eba-ad06-80dcc9574cde.webp",
             }}
-            style={{ width: "100%", height: 155 }}
+            style={{ width: "100%", height: 165 }}
           />
           <View style={styles.businessHeader}>
             <View style={styles.businessLogo}>

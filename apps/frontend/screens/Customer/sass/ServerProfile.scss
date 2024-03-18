@@ -1,0 +1,155 @@
+.serverProfileLayout{
+    flex: 1;
+    display: flex;
+    background-color: #fcfcfc;
+}
+
+.serverProfileAdjustment{
+    // margin-top: 0%;
+}
+
+.serviceTopView{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    // margin-bottom: 4%;
+}
+
+.topView{
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.leftIcon{
+    margin-left: 3%;
+    // margin-right: 2%;
+    margin-top: 2%;
+    // margin-bottom: 5px;
+    width: 30;
+    height:30;
+    background-color: white;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .banner {
+    position: absolute;
+    width: 100%;
+    top: 0; /* Adjust as needed */
+    left: 0;
+    right: 0;
+    background-color: #f2998d; /* Choose your desired background color */
+    padding: 10px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: row-reverse;
+  }
+
+  .rating{
+    position: absolute; /* Position over the image */
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
+    padding: 10px; /* Add some padding around the text */
+    border-radius: 10px; /* Optional: rounded corners */
+    overflow: hidden;
+  }
+  
+
+ .Favorite{
+    margin-right: 3%;
+    margin-top: 2%;
+    width: 30;
+    height:30;
+    background-color: white;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .serverTopView{
+    margin-top: 5%;
+    margin-left: 3%;
+ }
+
+ .serverName{
+    color: #191919;
+    font-size: 21px;
+    font-weight: 500;
+ }
+
+ .serverAddress{
+    color: #959595;
+    font-size: 14px;
+    font-weight: 400;
+ }
+
+ .reviewContent{
+    margin-top: 8%;
+ }
+
+ .serverScrollView{
+    display: flex;
+    flex-direction: row;
+ }
+
+ .allReviews{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+ }
+
+ .allReviewsText{
+    font-size: 12px;
+    color: #f2998d;
+ }
+
+
+
+ .reviewBox{
+    background-color: white;
+    border: 0.5px rgb(198, 198, 198) solid;
+    width: 300px; /* Adjust width as needed */
+    height: 120px; /* Adjust height as needed */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent line breaks */
+    margin-right: 10px; /* Adjust spacing between review boxes */
+    padding: 10px;
+    border-radius: 10px;
+ }
+
+ .reviewUser{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+ }
+
+ .dateContainer {
+    flex: 1;
+    align-items: flex-end;
+  }
+
+ .reviewDate{
+    color: rgb(140, 140, 140);
+    margin-left: auto;
+    font-size: 12px;
+ }
+
+ .reviewName{
+    margin-left: 2%;
+    font-size: 13px;
+ }
+
+ .starContainer{
+    flex-direction: row;
+    margin-top: 2%;
+ }
+
+ .reviewComment{
+    margin-top: 4%;
+    font-weight: 500;
+ }
+

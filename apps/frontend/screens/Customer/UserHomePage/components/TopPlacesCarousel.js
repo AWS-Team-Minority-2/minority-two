@@ -36,8 +36,10 @@ const TopPlacesCarousel = ({ list }) => {
               marginRight: index === list.length - 1 ? -35 : 0, // Adjust the marginRight for the last card
             }}
             onPress={() => {
-              changeScreen(dispatch, "BusinessProfile");
-              navigation.navigate("BusinessProfile");
+              // ServiceProfile
+              // BusinessProfile
+              changeScreen(dispatch, "ServiceProfile");
+              navigation.navigate("ServiceProfile");
             }}
           >
             <View style={[styles.card, styles.dark]}>
