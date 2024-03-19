@@ -38,8 +38,8 @@ const TopPlacesCarousel = ({ list }) => {
             onPress={() => {
               // ServiceProfile
               // BusinessProfile
-              changeScreen(dispatch, "BusinessProfile");
-              navigation.navigate("BusinessProfile");
+              changeScreen(dispatch, "ServiceProfile");
+              navigation.navigate("ServiceProfile");
             }}
           >
             <View style={[styles.card, styles.dark]}>

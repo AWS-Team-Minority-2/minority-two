@@ -22,6 +22,7 @@ const SelectedItem = ({ isVisible, item, onClose }) => {
             <TouchableOpacity style={styles.modalCloseButton} onPress={onClose}>
               <Text style={styles.modalCloseButtonText}>Close</Text>
             </TouchableOpacity>
+            {/* Change image for no images based on service, business, and stores */}
             <Image source={{ uri: item.image }} style={styles.itemImage} />
             <View style={styles.itemNameandPrice}>
               <Text style={styles.itemName}>{item.name}</Text>
@@ -40,7 +41,7 @@ const SelectedItem = ({ isVisible, item, onClose }) => {
             </TouchableOpacity>
             <Text style={styles.itemDescription}>{item.description}</Text>
             <TouchableOpacity style={styles.addButton}>
-                <Text style={styles.addButtonText}>Add to Cart</Text>
+              <Text style={styles.addButtonText}>Add to Cart</Text>
             </TouchableOpacity>
           </View>
         )}
