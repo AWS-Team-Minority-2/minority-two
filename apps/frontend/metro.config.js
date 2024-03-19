@@ -25,11 +25,11 @@ config.cacheStores = [
   }),
 ];
 
-config.transformer = {
-  ...config.transformer,
-  babelTransformerPath: require.resolve('react-native-sass-transformer'),
-};
+// config.transformer = {
+//   ...config.transformer,
+//   babelTransformerPath: require.resolve('react-native-sass-transformer'),
+// };
 
-config.resolver.sourceExts = [...config.resolver.sourceExts, 'scss', 'sass'];
+// config.resolver.sourceExts = [...config.resolver.sourceExts, 'scss', 'sass'];
 
 module.exports = config;

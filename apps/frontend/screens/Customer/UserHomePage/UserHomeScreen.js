@@ -18,16 +18,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from './UserHome.scss';
 
+console.log(styles);
 const UserHomeScreen = () => {
   const { user: loggedUser } = useAuthState();
 
   const navigation = useNavigation();
 
-  useEffect(() => {
-    if (!loggedUser) {
-      navigation.navigate('Home');
-    }
-  }, [loggedUser]);
+  // useEffect(() => {
+  //   if (!loggedUser) {
+  //     navigation.navigate('Home');
+  //   }
+  // }, [loggedUser]);
 
   const [location, setLocation] = useState(false); // For the pop screen to show up or not
   const [pickedAddress, setPickedAddress] = useState('Howard University'); // Current address displayed

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Toast from 'react-native-toast-message';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
@@ -6,9 +5,9 @@ import {
   NavigationContainer,
   useRoute,
   useNavigation,
-} from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { registerRootComponent } from "expo";
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { registerRootComponent } from 'expo';
 import {
   BusinessLoginScreen,
   CustomerLoginScreen,
@@ -20,34 +19,34 @@ import {
   BusinessProfile,
   AdminPortalScreen,
   AdminScreen,
-} from "./screens";
-import { AuthProvider, useAuthState } from "@min-two/user-iso";
+} from './screens';
+import { AuthProvider, useAuthState } from '@min-two/user-iso';
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
-import { NavBar } from "./screens/Customer/NavBar";
+import { NavBar } from './screens/Customer/NavBar';
 import {
   ScreenProvider,
   useScreenState,
   useScreenDispatch,
   changeScreen,
-} from "@min-two/screen-iso";
-import { UserMap } from "./screens/Customer/UserHomePage/UserMap";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useAuthDispatch, doLogin } from "@min-two/user-iso";
-import { AccountInfo } from "./screens/Customer/UserProfilePage/AccountInfo";
-import { AccountInfoName } from "./screens/Customer/UserProfilePage/AccountInfoName";
-import { AccountInfoPhoneNumber } from "./screens/Customer/UserProfilePage/AccountInfoPhoneNumber";
-import { AccountInfoEmail } from "./screens/Customer/UserProfilePage/AccountInfoEmail";
-import { Security } from "./screens/Customer/UserProfilePage/Security";
-import { ChangePassword } from "./screens/Customer/UserProfilePage/ChangePassword";
-import { BebasNeue_400Regular } from "@expo-google-fonts/bebas-neue";
-import { useFonts } from "expo-font";
-import { Text } from "react-native";
-import { EditBusiness } from "./screens/Admin/updates/editBusiness";
+} from '@min-two/screen-iso';
+import { UserMap } from './screens/Customer/UserHomePage/UserMap';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuthDispatch, doLogin } from '@min-two/user-iso';
+import { AccountInfo } from './screens/Customer/UserProfilePage/AccountInfo';
+import { AccountInfoName } from './screens/Customer/UserProfilePage/AccountInfoName';
+import { AccountInfoPhoneNumber } from './screens/Customer/UserProfilePage/AccountInfoPhoneNumber';
+import { AccountInfoEmail } from './screens/Customer/UserProfilePage/AccountInfoEmail';
+import { Security } from './screens/Customer/UserProfilePage/Security';
+import { ChangePassword } from './screens/Customer/UserProfilePage/ChangePassword';
+import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
+import { useFonts } from 'expo-font';
+import { Text } from 'react-native';
+import { EditBusiness } from './screens/Admin/updates/editBusiness';
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
 const client = new ApolloClient({
-  uri: "http://localhost:6002/graphql",
+  uri: 'http://localhost:6002/graphql',
   cache: new InMemoryCache(),
 });
 
@@ -56,12 +55,12 @@ function NavigationController() {
   const { current: screen } = useScreenState();
   const dispatch = useAuthDispatch();
 
-  const noNavScreens = ["Landing", "Register", "Login"];
+  const noNavScreens = ['Landing', 'Register', 'Login'];
   const showNavBar = !noNavScreens.includes(screen);
   const screenDispatch = useScreenDispatch();
   const [user, setUser] = useState({});
 
-   useEffect(() => {
+  useEffect(() => {
     const checkUser = async () => {
       try {
         const value = await AsyncStorage.getItem('user');
@@ -82,7 +81,7 @@ function NavigationController() {
 
     checkUser();
   }, []);
-  
+
   return (
     <>
       <Stack.Navigator
@@ -90,34 +89,35 @@ function NavigationController() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="Home" component={Homescreen} />
-        <Stack.Screen name="CustomerLogin" component={CustomerLoginScreen} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name='Home' component={Homescreen} />
+        <Stack.Screen name='UserHome' component={UserHomeScreen} />
+        {/* <Stack.Screen name='CustomerLogin' component={CustomerLoginScreen} />
+        <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
         <Stack.Screen
-          name="CustomerRegister"
+          name='CustomerRegister'
           component={CustomerRegisterScreen}
         />
-        <Stack.Screen name="BusinessLogin" component={BusinessLoginScreen} />
-        <Stack.Screen name="UserMap" component={UserMap} />
-        <Stack.Screen name="Admin" component={AdminScreen} />
-        <Stack.Screen name="AdminPortal" component={AdminPortalScreen} />
-        <Stack.Screen name="UserHome" component={UserHomeScreen} />
-        <Stack.Screen name="UserProfile" component={UserProfile} />
-        <Stack.Screen name="Security" component={Security} />
-        <Stack.Screen name="ChangePassword" component={ChangePassword} />
-        <Stack.Screen name="AccountInfo" component={AccountInfo} />
-        <Stack.Screen name="AccountInfoName" component={AccountInfoName} />
-        <Stack.Screen name="BusinessProfile" component={BusinessProfile} />
+        <Stack.Screen name='BusinessLogin' component={BusinessLoginScreen} />
+        <Stack.Screen name='UserMap' component={UserMap} />
+        <Stack.Screen name='Admin' component={AdminScreen} />
+        <Stack.Screen name='AdminPortal' component={AdminPortalScreen} />
+        // <Stack.Screen name='UserHome' component={UserHomeScreen} />
+        <Stack.Screen name='UserProfile' component={UserProfile} />
+        <Stack.Screen name='Security' component={Security} />
+        <Stack.Screen name='ChangePassword' component={ChangePassword} />
+        <Stack.Screen name='AccountInfo' component={AccountInfo} />
+        <Stack.Screen name='AccountInfoName' component={AccountInfoName} />
+        <Stack.Screen name='BusinessProfile' component={BusinessProfile} />
 
         <Stack.Screen
-          name="AccountInfoPhoneNumber"
+          name='AccountInfoPhoneNumber'
           component={AccountInfoPhoneNumber}
         />
-        <Stack.Screen name="AccountInfoEmail" component={AccountInfoEmail} />
-        <Stack.Screen name="AdminBusinessEdit" component={EditBusiness} />
+        <Stack.Screen name='AccountInfoEmail' component={AccountInfoEmail} />
+        <Stack.Screen name='AdminBusinessEdit' component={EditBusiness} /> */}
       </Stack.Navigator>
       {/* Pass in User Id to navbar to handle customer actions */}
-      {showNavBar && <NavBar id={user.id} />}
+      {<NavBar id={user.id} />}
     </>
   );
 }
