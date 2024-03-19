@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useState, useRef } from "react";
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useRef } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -9,17 +9,17 @@ import {
   Image,
   PanResponder,
   findNodeHandle,
-} from "react-native";
-import styles from "./sass/BusinessProfile";
-import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
-import BusinessProfilePopUp from "./BusinessProfilePopUp";
+} from 'react-native';
+import styles from './sass/BusinessProfile';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import BusinessProfilePopUp from './BusinessProfilePopUp';
 // import { useAuthState } from "@min-two/user-iso";
-import { Feather, Ionicons } from "@expo/vector-icons";
-import { desserts, features } from "./data/menu";
-import { FeaturedCard } from "./FeaturedCard";
-import FeaturedRow from "./FeaturedRow";
+import { Feather, Ionicons } from '@expo/vector-icons';
+import { desserts, features } from './data/menu';
+import { FeaturedCard } from './FeaturedCard';
+import { FeaturedRow } from './FeaturedRow';
 
-const BusinessProfile = () => {
+const BusinessProfile = ({ profileImage, ratingCount, distance, route }) => {
   const navigation = useNavigation();
   const sectionRefs = useRef([]);
   const scrollRef = useRef(null);
@@ -31,6 +31,8 @@ const BusinessProfile = () => {
   const togglePopUp = () => {
     setIsPopUpVisible(!isPopUpVisible);
   };
+
+  const { name, coverImage, rating } = route.params;
 
   const scrollToFeature = (index) => {
     if (sectionRefs.current[index]) {
@@ -50,11 +52,11 @@ const BusinessProfile = () => {
           <TouchableOpacity
             style={styles.leftIcon}
             onPress={() => {
-              changeScreen(dispatch, "Home");
-              navigation.navigate("UserHome");
+              changeScreen(dispatch, 'Home');
+              navigation.navigate('UserHome');
             }}
           >
-            <Feather name="chevron-left" size={33} color="black" />
+            <Feather name='chevron-left' size={33} color='black' />
           </TouchableOpacity>
 
           <ScrollView
@@ -82,28 +84,29 @@ const BusinessProfile = () => {
           ref={scrollRef}
         >
           <Image
-            source={{
-              uri: "https://d1ralsognjng37.cloudfront.net/8ec59378-146f-4eba-ad06-80dcc9574cde.webp",
-            }}
-            style={{ width: "100%", height: 165 }}
+            source={{ url: coverImage }}
+            style={{ width: '100%', height: 165 }}
           />
           <View style={styles.businessHeader}>
             <View style={styles.businessLogo}>
               <Image
                 source={{
-                  uri: "https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_300,q_100,fl_lossy,dpr_2.0,c_fit,f_auto,h_300/mk14instqbi8fwbokgm0",
+                  uri: 'https://s3-media0.fl.yelpcdn.com/bphoto/kBBMZma5-wA_E6LmMxBrLA/348s.jpg',
                 }}
                 style={styles.image}
               />
             </View>
-            <Text style={styles.businessName}>NuVegan Cafe</Text>
+            <Text style={styles.businessName}>{name}</Text>
 
             <TouchableOpacity style={styles.businessInfo} onPress={togglePopUp}>
               <View style={styles.businessDetails}>
-                <Ionicons name="star-sharp" size={15} color="black" />
-                <Text> 4.3(15) • </Text>
-                <Text style={styles.businessDistance}>0.6 mi</Text>
-                <Feather name="chevron-right" size={16} color="grey" />
+                <Ionicons name='star-sharp' size={15} color='black' />
+                <Text>
+                  {rating}({ratingCount}) •{' '}
+                </Text>
+                {/* FIXME: Create a function that gets the current distance */}
+                <Text style={styles.businessDistance}>{distance} mi</Text>
+                <Feather name='chevron-right' size={16} color='grey' />
               </View>
             </TouchableOpacity>
             <BusinessProfilePopUp
@@ -119,7 +122,7 @@ const BusinessProfile = () => {
                 key={index}
                 ref={(ref) => (sectionRefs.current[index] = ref)}
               >
-                <FeaturedRow featuredName={item} />
+                {/* <FeaturedRow featuredName={item} /> */}
               </View>
             ))}
           </View>
