@@ -29,7 +29,6 @@ const TopPlacesCarousel = ({ list, route }) => {
       showsHorizontalScrollIndicator={false}
       keyExtractor={(i) => i.id}
       renderItem={({ item, index }) => {
-        console.log(item, 'item');
         return (
           <TouchableOpacity
             style={{
@@ -37,14 +36,21 @@ const TopPlacesCarousel = ({ list, route }) => {
               marginRight: index === list.length - 1 ? -35 : 0, // Adjust the marginRight for the last card
             }}
             onPress={() => {
-              navigation.navigate('BusinessProfile', {
-                name: item.name,
-                coverImage: item.cover_image,
-                rating: item.rating,
-                ratingCount: item.rating_count,
-                distance: item.distance,
-                profileImage: item.profile_image,
-              });
+              navigation.navigate(
+                item.render_type === 'featured' ||
+                  item.render_type === 'restaurant' ||
+                  item.render_type === 'shop'
+                  ? 'BusinessProfile'
+                  : 'ServiceProfile',
+                {
+                  name: item.name,
+                  coverImage: item.cover_image,
+                  rating: item.rating,
+                  ratingCount: item.rating_count,
+                  distance: item.distance,
+                  profileImage: item.profile_image,
+                }
+              );
             }}
           >
             <View style={[styles.card, styles.dark]}>
