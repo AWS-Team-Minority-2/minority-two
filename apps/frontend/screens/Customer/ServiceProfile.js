@@ -66,7 +66,7 @@ const ServiceProfile = () => {
   };
 
   const [isFavorite, setIsFavorite] = useState(false);
-  const fadeAnim = useRef(new Animated.Value(1)).current;
+  // const fadeAnim = useRef(new Animated.Value(1)).current;
   const [showBanner, setShowBanner] = useState(false);
 
   const toggleFavorite = () => {
