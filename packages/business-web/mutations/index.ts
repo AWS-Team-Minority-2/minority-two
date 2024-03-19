@@ -5,16 +5,21 @@ export const GET_STORES = gql`
     getMinorityBusiness(zip_code: $zipCode) {
       address
       city
-      cover_image
       is_online
+      cover_image
       is_pending
       lat
       long
       name
-      render_type
+      profile_image
+      rating
+      rating_count
       sid
       state
       zip_code
+      distance
+      is_featured
+      type
     }
   }
 `;

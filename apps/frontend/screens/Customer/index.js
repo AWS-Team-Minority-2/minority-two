@@ -5,3 +5,5 @@ export { CustomerRegisterScreen } from "./Register";
 export { UserHomeScreen } from "./UserHomePage/UserHomeScreen";
 export { UserProfile } from "./UserProfilePage/UserProfile";
 export { BusinessProfile } from "./BusinessProfile";
+export { ServiceProfile } from "./ServiceProfile";
+export { ServerProfile } from "./ServerProfile";

@@ -1,7 +1,6 @@
-
-import React, { useEffect, useState } from 'react';
-import Toast from 'react-native-toast-message';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import React, { useEffect, useState } from "react";
+import Toast from "react-native-toast-message";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import {
   NavigationContainer,
   useRoute,
@@ -24,6 +23,8 @@ import {
 import { AuthProvider, useAuthState } from "@min-two/user-iso";
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
 import { NavBar } from "./screens/Customer/NavBar";
+import { ServiceProfile } from "./screens/Customer/ServiceProfile";
+import { ServerProfile } from "./screens/Customer/ServerProfile";
 import {
   ScreenProvider,
   useScreenState,
@@ -61,28 +62,28 @@ function NavigationController() {
   const screenDispatch = useScreenDispatch();
   const [user, setUser] = useState({});
 
-   useEffect(() => {
+  useEffect(() => {
     const checkUser = async () => {
       try {
-        const value = await AsyncStorage.getItem('user');
+        const value = await AsyncStorage.getItem("user");
         if (value !== null) {
           try {
             doLogin(dispatch, JSON.parse(value));
             setUser(JSON.parse(value));
-            changeScreen(screenDispatch, 'UserHome');
-            navigation.navigate('UserHome');
+            changeScreen(screenDispatch, "UserHome");
+            navigation.navigate("UserHome");
           } catch (e) {
-            navigation.navigate('AdminPortal');
+            navigation.navigate("AdminPortal");
           }
         }
       } catch (error) {
-        console.log('Error checking item: ', error);
+        console.log("Error checking item: ", error);
       }
     };
 
     checkUser();
   }, []);
-  
+
   return (
     <>
       <Stack.Navigator
@@ -114,7 +115,9 @@ function NavigationController() {
           component={AccountInfoPhoneNumber}
         />
         <Stack.Screen name="AccountInfoEmail" component={AccountInfoEmail} />
-        <Stack.Screen name="AdminBusinessEdit" component={EditBusiness} />
+
+        <Stack.Screen name="ServiceProfile" component={ServiceProfile} />
+        <Stack.Screen name="ServerProfile" component={ServerProfile} />
       </Stack.Navigator>
       {/* Pass in User Id to navbar to handle customer actions */}
       {showNavBar && <NavBar id={user.id} />}

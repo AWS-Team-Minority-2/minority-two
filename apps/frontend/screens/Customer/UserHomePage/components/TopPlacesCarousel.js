@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   FlatList,
   Text,
@@ -7,16 +7,16 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
-} from "react-native";
-import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
-import { useNavigation } from "@react-navigation/native";
+} from 'react-native';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import { useNavigation } from '@react-navigation/native';
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 
 const CARD_WIDTH = 293;
 const CARD_HEIGHT = 200;
 
-const TopPlacesCarousel = ({ list }) => {
+const TopPlacesCarousel = ({ list, route }) => {
   const dispatch = useScreenDispatch();
   const navigation = useNavigation();
 
@@ -25,7 +25,7 @@ const TopPlacesCarousel = ({ list }) => {
       data={list}
       horizontal
       //   snapToInterval={CARD_WIDTH_SPACING}
-      decelerationRate="fast"
+      decelerationRate='fast'
       showsHorizontalScrollIndicator={false}
       keyExtractor={(i) => i.id}
       renderItem={({ item, index }) => {
@@ -36,8 +36,19 @@ const TopPlacesCarousel = ({ list }) => {
               marginRight: index === list.length - 1 ? -35 : 0, // Adjust the marginRight for the last card
             }}
             onPress={() => {
-              changeScreen(dispatch, "BusinessProfile");
-              navigation.navigate("BusinessProfile");
+              navigation.navigate(
+                item.type === 'restaurant' || item.type === 'shop'
+                  ? 'BusinessProfile'
+                  : 'ServiceProfile',
+                {
+                  name: item.name,
+                  coverImage: item.cover_image,
+                  rating: item.rating,
+                  ratingCount: item.rating_count,
+                  distance: item.distance,
+                  profileImage: item.profile_image,
+                }
+              );
             }}
           >
             <View style={[styles.card, styles.dark]}>
@@ -50,7 +61,7 @@ const TopPlacesCarousel = ({ list }) => {
               <View style={styles.titleBox}>
                 <Text style={styles.title}>{item.name}</Text>
                 <Text style={styles.location}>
-                  {item.is_online ? "Online" : item.address}
+                  {item.is_online ? 'Online' : item.address}
                 </Text>
               </View>
             </View>
@@ -68,7 +79,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   favorite: {
-    position: "absolute",
+    position: 'absolute',
     top: 18,
     right: 1,
     zIndex: 1,
@@ -77,29 +88,29 @@ const styles = StyleSheet.create({
     width: CARD_WIDTH - 50,
     height: CARD_HEIGHT - 50,
     borderRadius: 10,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   image: {
     width: CARD_WIDTH - 50,
     height: CARD_HEIGHT - 50,
-    resizeMode: "cover",
+    resizeMode: 'cover',
   },
   titleBox: {
-    position: "absolute",
+    position: 'absolute',
     top: CARD_HEIGHT - 45,
     left: 7,
   },
   title: {
     fontSize: 15,
-    fontWeight: "bold",
-    color: "#000",
+    fontWeight: 'bold',
+    color: '#000',
   },
   location: {
     fontSize: 13,
-    color: "#555",
+    color: '#555',
   },
   light: {
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowRadius: 4,
     shadowOpacity: 0.1,
     shadowOffset: {
@@ -108,7 +119,7 @@ const styles = StyleSheet.create({
     },
   },
   dark: {
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowRadius: 4,
     shadowOpacity: 0.3,
     shadowOffset: {
