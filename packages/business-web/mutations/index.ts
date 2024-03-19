@@ -14,11 +14,12 @@ export const GET_STORES = gql`
       profile_image
       rating
       rating_count
-      render_type
       sid
       state
       zip_code
       distance
+      is_featured
+      type
     }
   }
 `;

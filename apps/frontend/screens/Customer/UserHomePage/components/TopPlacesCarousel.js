@@ -37,9 +37,7 @@ const TopPlacesCarousel = ({ list, route }) => {
             }}
             onPress={() => {
               navigation.navigate(
-                item.render_type === 'featured' ||
-                  item.render_type === 'restaurant' ||
-                  item.render_type === 'shop'
+                item.type === 'restaurant' || item.type === 'shop'
                   ? 'BusinessProfile'
                   : 'ServiceProfile',
                 {

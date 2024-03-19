@@ -13,7 +13,8 @@ interface Store {
   lat: string;
   long: string;
   name: string;
-  render_type: 'featured' | 'restaurant' | 'service' | 'shop';
+  type: 'restaurant' | 'service' | 'shop';
+  is_featured: boolean;
   state: string;
   zip_code: number;
   is_pending: boolean;
@@ -37,7 +38,7 @@ export function useStores(zipCode: string) {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
         (store: Store) =>
-          store.render_type === 'featured' && store.is_pending != true
+          store.is_featured !== false && store.is_pending != true
       );
     } else {
       return [];
@@ -47,8 +48,7 @@ export function useStores(zipCode: string) {
   const filterShopStores = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) =>
-          store.render_type === 'shop' && store.is_pending != true
+        (store: Store) => store.type === 'shop' && store.is_pending != true
       );
     } else {
       return [];
@@ -59,7 +59,7 @@ export function useStores(zipCode: string) {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
         (store: Store) =>
-          store.render_type === 'restaurant' && store.is_pending != true
+          store.type === 'restaurant' && store.is_pending != true
       );
     } else {
       return [];
@@ -69,8 +69,7 @@ export function useStores(zipCode: string) {
   const filterServices = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) =>
-          store.render_type === 'service' && store.is_pending != true
+        (store: Store) => store.type === 'service' && store.is_pending != true
       );
     } else {
       return [];
