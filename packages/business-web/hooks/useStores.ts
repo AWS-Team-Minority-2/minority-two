@@ -18,6 +18,10 @@ interface Store {
   zip_code: number;
   is_pending: boolean;
   sid: string;
+  profile_image: string;
+  rating: string;
+  rating_count: number;
+  distance: string;
 }
 interface S {
   getMinorityBusiness: Store[];

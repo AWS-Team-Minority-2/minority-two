@@ -43,7 +43,7 @@ export class BusinessLoader {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const d = R * c; // Distance in km
     const miles = d * 0.621371; // Convert distance to miles
-    return this.isWithinRadius(miles);
+    return { inRange: this.isWithinRadius(miles), distance: miles };
   };
 
   getStoresInRange = async (zipCode: string): Promise<any> => {
@@ -56,7 +56,7 @@ export class BusinessLoader {
       for (const business of stores) {
         if (logLat[0] && logLat[1] && business.is_online === false) {
           // Calculate distance
-          const inRange: boolean = this.calculateDistance({
+          const { inRange, distance }: any = this.calculateDistance({
             lat1: logLat[0],
             lon1: logLat[1],
             lat2: business.lat,
@@ -64,6 +64,7 @@ export class BusinessLoader {
           });
 
           if (inRange) {
+            business.distance = distance.toFixed(2);
             inRangeStores.push(business);
           }
         }

@@ -15,6 +15,10 @@ type BusinessOutput {
   render_type: String!
   is_pending: Boolean!
   sid: String!
+  profile_image: String
+  rating_count: Int!
+  rating: String!
+  distance: String
 }
 
 type Mutation {

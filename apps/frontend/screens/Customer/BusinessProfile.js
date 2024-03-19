@@ -19,7 +19,7 @@ import { desserts, features } from './data/menu';
 import { FeaturedCard } from './FeaturedCard';
 import { FeaturedRow } from './FeaturedRow';
 
-const BusinessProfile = ({ profileImage, ratingCount, distance, route }) => {
+const BusinessProfile = ({ route }) => {
   const navigation = useNavigation();
   const sectionRefs = useRef([]);
   const scrollRef = useRef(null);
@@ -32,7 +32,8 @@ const BusinessProfile = ({ profileImage, ratingCount, distance, route }) => {
     setIsPopUpVisible(!isPopUpVisible);
   };
 
-  const { name, coverImage, rating } = route.params;
+  const { name, coverImage, rating, ratingCount, distance, profileImage } =
+    route.params;
 
   const scrollToFeature = (index) => {
     if (sectionRefs.current[index]) {
@@ -91,7 +92,7 @@ const BusinessProfile = ({ profileImage, ratingCount, distance, route }) => {
             <View style={styles.businessLogo}>
               <Image
                 source={{
-                  uri: 'https://s3-media0.fl.yelpcdn.com/bphoto/kBBMZma5-wA_E6LmMxBrLA/348s.jpg',
+                  uri: profileImage,
                 }}
                 style={styles.image}
               />
@@ -102,10 +103,16 @@ const BusinessProfile = ({ profileImage, ratingCount, distance, route }) => {
               <View style={styles.businessDetails}>
                 <Ionicons name='star-sharp' size={15} color='black' />
                 <Text>
-                  {rating}({ratingCount}) •{' '}
+                  {rating}({ratingCount})
                 </Text>
                 {/* FIXME: Create a function that gets the current distance */}
-                <Text style={styles.businessDistance}>{distance} mi</Text>
+                {distance && (
+                  <>
+                    <Text> •</Text>
+                    <Text style={styles.businessDistance}>{distance} mi</Text>
+                  </>
+                )}
+
                 <Feather name='chevron-right' size={16} color='grey' />
               </View>
             </TouchableOpacity>
