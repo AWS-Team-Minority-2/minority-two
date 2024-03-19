@@ -105,10 +105,9 @@ const BusinessProfile = ({ route }) => {
                 <Text>
                   {rating}({ratingCount})
                 </Text>
-                {/* FIXME: Create a function that gets the current distance */}
                 {distance && (
                   <>
-                    <Text> •</Text>
+                    <Text> • </Text>
                     <Text style={styles.businessDistance}>{distance} mi</Text>
                   </>
                 )}
