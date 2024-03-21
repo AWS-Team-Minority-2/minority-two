@@ -184,13 +184,24 @@ const UserHomeScreen = () => {
               {renderModal()}
 
               {/* Notification icon */}
-              <TouchableOpacity style={styles.notification}>
-                <Ionicons
-                  name='notifications-outline'
-                  size={20}
-                  color='black'
-                />
-              </TouchableOpacity>
+              <View style={styles.iconBttns}>
+                <TouchableOpacity style={styles.notification}>
+                  <Ionicons
+                    name='notifications-outline'
+                    size={20}
+                    color='black'
+                  />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.notification}
+                  onPress={() => {
+                    navigation.navigate('Checkout');
+                  }}
+                >
+                  <Ionicons name='cart-outline' size={20} color='black' />
+                </TouchableOpacity>
+              </View>
             </View>
 
             {/* Search Box */}
