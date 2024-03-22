@@ -1,0 +1,65 @@
+.safeAreaViewBase {
+  flex: 1;
+  background-color: #fff;
+}
+
+.safeAreaViewContainer {
+  //   flex: 1;
+  //   background-color: #f9f9f9;
+}
+.headerContainer {
+  padding: 1.25rem; // 1.25rem equals 5px in Tailwind's default spacing scale
+  background-color: #fff;
+  //   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+.finalLookText {
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}
+
+.resturantName {
+  text-align: center;
+  color: gray;
+}
+
+.backBttn {
+  border-radius: 9999px; // large enough to make a circle (rounded-full)
+  //   background-color: #f3f4f6; // bg-gray-100
+  position: absolute; // absolute
+  top: 0.2rem; // 3 * 0.25rem = top-3
+  right: 1.25rem; // 5 * 0.25rem = right-5
+}
+
+.noCartImage {
+  width: 300px;
+  height: 300px;
+}
+
+.emptyCartContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 200;
+}
+
+.shopNexaBttn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  flex-shrink: 0;
+  bottom: 20px;
+  color: white;
+  background-color: #ebebeb;
+  //   margin: 35px 20px;
+  border-radius: 10px;
+  //   margin-left: 10px;
+}
+
+.shopNexaText {
+  font-weight: bold;
+  font-size: 12px;
+}
