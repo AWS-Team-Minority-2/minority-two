@@ -12,9 +12,14 @@ type BusinessOutput {
   long: String
   lat: String
   is_online: Boolean!
-  render_type: String!
+  type: String!
+  is_featured: Boolean!
   is_pending: Boolean!
   sid: String!
+  profile_image: String
+  rating_count: Int!
+  rating: String!
+  distance: String
 }
 
 type Mutation {

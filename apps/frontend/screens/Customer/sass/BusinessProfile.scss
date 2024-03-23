@@ -1,18 +1,18 @@
-.businessProfileLayout{
-    flex: 1;
-    display: flex;
-    background-color: #fcfcfc;
+.businessProfileLayout {
+  flex: 1;
+  display: flex;
+  background-color: #fcfcfc;
 }
 
-.businessProfileAdjustment{
-    // margin-bottom: 105px;
+.businessProfileAdjustment {
+  // margin-bottom: 105px;
 }
 
-.businessTopView{
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 4%;
+.businessTopView {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4%;
 }
 
 .topView{
@@ -59,35 +59,34 @@
  }
 
 .featureScrollView {
-    // margin-left: 10px;
-    margin-right: 10px;
-  }
-  
-  .featureOval {
-    background-color: #e4e4e4;
-    border-radius: 15px; /* Adjust to make oval shape */
-    padding: 8px 25px;
-    margin-right: 10px;
-  }
-  
-  .featureName {
-    color: black;
-    font-weight: bold;
-  }
-  
-  .businessScroll {
-    // flex: 1;
-  }
-  
-
-.businessScroll{
-    // bottom: 50%;
+  // margin-left: 10px;
+  margin-right: 10px;
 }
 
-.leftIcon{
-   margin-left: 6%;
-   margin-right: 2%;
-   margin-top: 5px;
+.featureOval {
+  background-color: #e4e4e4;
+  border-radius: 15px; /* Adjust to make oval shape */
+  padding: 8px 25px;
+  margin-right: 10px;
+}
+
+.featureName {
+  color: black;
+  font-weight: bold;
+}
+
+.businessScroll {
+  // flex: 1;
+}
+
+.businessScroll {
+  // bottom: 50%;
+}
+
+.leftIcon {
+  margin-left: 6%;
+  margin-right: 2%;
+  margin-top: 5px;
 }
 
 // .businessBanner{
@@ -95,50 +94,50 @@
 //     height: 40%;
 // }
 
-.businessHeader{
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.businessHeader {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.businessLogo{
-    width: 118; // Adjust the width and height as needed
-    height: 118;
-    overflow: hidden; // Clip the image to the container
-    border-width: 2px; // Example border width
-    border-color: rgb(228, 228, 228); // Example border color
-    border-radius: 75px;
-    margin-top: -40px;
+.businessLogo {
+  width: 118; // Adjust the width and height as needed
+  height: 118;
+  overflow: hidden; // Clip the image to the container
+  border-width: 2px; // Example border width
+  border-color: rgb(228, 228, 228); // Example border color
+  border-radius: 75px;
+  margin-top: -40px;
 }
 
-.image{
-    width: 100%;
-    height: 100%;
+.image {
+  width: 100%;
+  height: 100%;
 }
 
-.businessInfo{
-    flex-direction: column;
+.businessInfo {
+  flex-direction: column;
 }
 
-.businessName{
-    color: #191919;
-    font-size: 25px;
-    font-weight: 500;
-    // font-family: 'BebasNeue_400Regular';
-    margin-top: 3%;
-    margin-bottom: 1%;
+.businessName {
+  color: #191919;
+  font-size: 25px;
+  font-weight: 500;
+  // font-family: 'BebasNeue_400Regular';
+  margin-top: 3%;
+  margin-bottom: 1%;
 }
 
-.businessDetails{
-    flex-direction: row;
+.businessDetails {
+  flex-direction: row;
 }
 
-.businessDistance{
-    color: rgb(103, 103, 103);
+.businessDistance {
+  color: rgb(103, 103, 103);
 }
 
-.businessTabView{
-   margin-bottom: 25%;
+.businessTabView {
+  margin-bottom: 25%;
 }
 
 .businessTab{
@@ -146,95 +145,95 @@
     margin-left: 4%;
     flex-direction: column;
     
+
 }
 
 //In FeaturedRow.js - Handles Feature Tab Names
-.tabName{
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 4%;
+.tabName {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4%;
 }
 
-.businessItem{
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 5px;
+.businessItem {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
-.businessPrices{
-    margin-bottom: 5px;
+.businessPrices {
+  margin-bottom: 5px;
 }
 
-.businessDesc{
-    margin-bottom: 5px;
+.businessDesc {
+  margin-bottom: 5px;
 }
 
-.businessItemDivider{
-    height: 1px;
-    background-color: #e4e4e4; /* Color of the divided line */
-    margin-top: 5px;
-    margin-bottom: 30px;
-    
+.businessItemDivider {
+  height: 1px;
+  background-color: #e4e4e4; /* Color of the divided line */
+  margin-top: 5px;
+  margin-bottom: 30px;
 }
 
 //Business map pop up
 
-.businessPopUp{
-    flex: 1;
-    display: flex;
-    background-color: 'rgba(0, 0, 0, 0.5)';
-    justify-content: flex-end;
+.businessPopUp {
+  flex: 1;
+  display: flex;
+  background-color: 'rgba(0, 0, 0, 0.5)';
+  justify-content: flex-end;
 }
 
-.businessPopupLayout{
-    background-color: white;
-    border-radius: 10px;
-    // padding: 20px;
-    // align-items: center;
-    height: 90%;
+.businessPopupLayout {
+  background-color: white;
+  border-radius: 10px;
+  // padding: 20px;
+  // align-items: center;
+  height: 90%;
 }
 
-.businessMap{
-    height: 30%;
-    border-radius: 10px;
+.businessMap {
+  height: 30%;
+  border-radius: 10px;
 }
 
-.businessPopUpBack{
-    position: absolute;
-    top: 20;
-    left: 15;
-    z-index: 1; // Ensure the chevron icon is above the map
+.businessPopUpBack {
+  position: absolute;
+  top: 20;
+  left: 15;
+  z-index: 1; // Ensure the chevron icon is above the map
 }
 
-.businessMapInfo{
-    display: flex;
-    flex-direction: column;
-    top: 3%;
-    margin-left: 17px;
+.businessMapInfo {
+  display: flex;
+  flex-direction: column;
+  top: 3%;
+  margin-left: 17px;
 }
 
-.businessMapName{
-    margin-bottom: 1%;
-    // font-family: 'BebasNeue_400Regular';
-    color: #191919;
-    font-size: 22px;
-    font-weight: 500;
+.businessMapName {
+  margin-bottom: 1%;
+  // font-family: 'BebasNeue_400Regular';
+  color: #191919;
+  font-size: 22px;
+  font-weight: 500;
 }
 
-.businessMapSubInfo{
-    font-size: 14px;
-    margin-bottom: 7%;
-    color:#F2998D;
+.businessMapSubInfo {
+  font-size: 14px;
+  margin-bottom: 7%;
+  color: #f2998d;
 }
 
-.businessMapBox{
-    margin-bottom: 5%;
+.businessMapBox {
+  margin-bottom: 5%;
 }
 
-.businessMapContent{
-    flex-direction: row;
-    align-items: center;
-    margin-right: 15px;
+.businessMapContent {
+  flex-direction: row;
+  align-items: center;
+  margin-right: 15px;
 }
 
 // .businessMapAddress{
@@ -242,124 +241,123 @@
 //     margin-left: 4%;
 // }
 
-.businessMapText{
-    font-size: 14px;
-    margin-left: 4%;
+.businessMapText {
+  font-size: 14px;
+  margin-left: 4%;
 }
 
-
-.businessMapSubBttt{
-    margin-left: auto;
-   
+.businessMapSubBttt {
+  margin-left: auto;
 }
 
-.dropdownContent{
-    margin-left: 10%;
-    margin-right: 5%;
-    margin-top: 8%;
+.dropdownContent {
+  margin-left: 10%;
+  margin-right: 5%;
+  margin-top: 8%;
 }
 
-.dropdownHours{
-    flex-direction: row;
-    margin-bottom: 5%;
+.dropdownHours {
+  flex-direction: row;
+  margin-bottom: 5%;
 }
 
-.dropdownDays{
-    font-weight: 700;
+.dropdownDays {
+  font-weight: 700;
 }
 
-.dropdownTimes{
-    margin-left: auto;
-
+.dropdownTimes {
+  margin-left: auto;
 }
 
-
-.businessMapDivider{
-    height: 1px;
-    background-color: #e4e4e4; /* Color of the divided line */
-    margin: 10px 0; /* Adjust margin as needed */
+.businessMapDivider {
+  height: 1px;
+  background-color: #e4e4e4; /* Color of the divided line */
+  margin: 10px 0; /* Adjust margin as needed */
 }
 
 //Selected Items js file
 
 .modalContainer {
-    flex: 1;
-    justify-content: center;
-    padding: 0 10px;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  }
-  
-  .modalCloseButton {
-//    flex-direction: row-reverse;
-   margin-bottom: 3%;
-  }
-  
-  .modalCloseButtonText {
-    font-size: 14px;
-    color: black;
-  }
-  
-  .popUpContent {
-    background-color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-    height: 55%;
-  }
-  
-  .itemImage {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
+  flex: 1;
+  justify-content: center;
+  padding: 0 10px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
 
-  .itemNameandPrice{
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  .itemName {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    margin-right: 5px;
-  }
+.modalCloseButton {
+  //    flex-direction: row-reverse;
+  margin-bottom: 3%;
+}
 
-  .itemPrice{
-    flex-direction: row-reverse;
-  }
+.modalCloseButtonText {
+  font-size: 14px;
+  color: black;
+}
 
-  .itemFavorite{
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 12px;
-  }
+.popUpContent {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  height: 55%;
+}
 
-  .itemFavoriteWords{
-    color: #F2998D;
-    margin-left: 1%;
-  }
-  
-  .itemDescription {
-    font-size: 13px;
-    // margin-bottom: 10px;
-  }
+.itemImage {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
 
-  .addButton{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 10%;
-    align-items: center;
-    justify-content: center;
-    background-color: #f2998d;
-    border-radius: 10px;
-    margin-top: 7%;
-  }
+.itemNameandPrice {
+  flex-direction: row;
+  align-items: center;
+}
 
-  .addButtonText{
-    font-family: 'BebasNeue_400Regular';
-    font-size: 18px;
-    color: #fff;
-  }
-  
+.itemName {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.itemPrice {
+  flex-direction: row-reverse;
+}
+
+.itemFavorite {
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.itemFavoriteWords {
+  color: #f2998d;
+  margin-left: 1%;
+}
+
+.itemDescription {
+  font-size: 13px;
+  // margin-bottom: 10px;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2998d;
+  border-radius: 10px;
+  margin-top: 7%;
+}
+
+.addButtonText {
+  font-family: 'BebasNeue_400Regular';
+  font-size: 18px;
+  color: #fff;
+}
+
+.cart-icon {
+  padding-top: 100px;
+}

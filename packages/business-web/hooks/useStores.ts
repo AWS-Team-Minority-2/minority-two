@@ -1,26 +1,14 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_STORES } from '../mutations/index';
+import { BusinessBase } from '@min-two/business-iso';
 
 /* Hook that handles users forms **/
 
 // TODO: move to iso if necessary
 
-interface Store {
-  city: string;
-  cover_image: string;
-  is_online: boolean;
-  lat: string;
-  long: string;
-  name: string;
-  render_type: 'featured' | 'restaurant' | 'service' | 'shop';
-  state: string;
-  zip_code: number;
-  is_pending: boolean;
-  sid: string;
-}
 interface S {
-  getMinorityBusiness: Store[];
+  getMinorityBusiness: BusinessBase[];
 }
 
 // intercept the user zipcome here and pass to backend
@@ -32,8 +20,8 @@ export function useStores(zipCode: string) {
   const filterFeaturedStores = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) =>
-          store.render_type === 'featured' && store.is_pending != true
+        (store: BusinessBase) =>
+          store.is_featured !== false && store.is_pending != true
       );
     } else {
       return [];
@@ -43,8 +31,8 @@ export function useStores(zipCode: string) {
   const filterShopStores = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) =>
-          store.render_type === 'shop' && store.is_pending != true
+        (store: BusinessBase) =>
+          store.type === 'shop' && store.is_pending != true
       );
     } else {
       return [];
@@ -54,8 +42,8 @@ export function useStores(zipCode: string) {
   const filterRestaurants = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) =>
-          store.render_type === 'restaurant' && store.is_pending != true
+        (store: BusinessBase) =>
+          store.type === 'restaurant' && store.is_pending != true
       );
     } else {
       return [];
@@ -65,8 +53,8 @@ export function useStores(zipCode: string) {
   const filterServices = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) =>
-          store.render_type === 'service' && store.is_pending != true
+        (store: BusinessBase) =>
+          store.type === 'service' && store.is_pending != true
       );
     } else {
       return [];
@@ -76,7 +64,7 @@ export function useStores(zipCode: string) {
   const getPending = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) => store.is_pending
+        (store: BusinessBase) => store.is_pending
       );
     } else {
       return [];
@@ -86,7 +74,7 @@ export function useStores(zipCode: string) {
   const filterVerifiedBusinesses = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: Store) => store.is_pending != true
+        (store: BusinessBase) => store.is_pending != true
       );
     } else {
       return [];
