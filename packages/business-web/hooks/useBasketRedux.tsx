@@ -3,6 +3,10 @@ import { Dish } from '@min-two/business-iso';
 
 interface BasketState {
   items: Dish[];
+  store: {
+    storeId: string;
+    storeName: string;
+  };
 }
 
 interface Action {
@@ -21,6 +25,8 @@ function basketReducer(state: BasketState, action: Action): BasketState {
       return {
         ...state,
         items: [...state.items, action.payload],
+        // Assuming action.payload contains information about the store
+        store: action.payload.store,
       };
     case 'REMOVE_FROM_BASKET':
       const index = state.items.findIndex(
@@ -75,13 +81,20 @@ function useBasketDispatch(): React.Dispatch<Action> {
 
 const initialState: BasketState = {
   items: [],
+  store: {
+    storeName: null,
+    storeId: null,
+  },
 };
 
 function addToBasket(dispatch: React.Dispatch<Action>, dish: Dish) {
   dispatch({ type: 'ADD_TO_BASKET', payload: dish });
 }
 
-function removeFromBasket(dispatch: React.Dispatch<Action>, id: string) {
+function removeFromBasket(state, dispatch: React.Dispatch<Action>, id: string) {
+  // const items = selectBasketItems(state);
+  // console.log(items);
+
   dispatch({ type: 'REMOVE_FROM_BASKET', payload: { id } });
 }
 
@@ -94,6 +107,10 @@ function selectBasketItems(state: BasketState) {
   return state.items;
 }
 
+function getStoreName(state: BasketState): string {
+  return state.store.storeName;
+}
+
 export {
   BasketProvider,
   useBasketState,
@@ -101,4 +118,5 @@ export {
   addToBasket,
   removeFromBasket,
   selectBasketItems,
+  getStoreName,
 };

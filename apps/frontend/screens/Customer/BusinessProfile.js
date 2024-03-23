@@ -10,7 +10,7 @@ import {
   PanResponder,
   findNodeHandle,
 } from 'react-native';
-import styles from './sass/BusinessProfile';
+import styles from './sass/BusinessProfile.scss';
 import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 import BusinessProfilePopUp from './BusinessProfilePopUp';
 // import { useAuthState } from "@min-two/user-iso";
@@ -18,6 +18,8 @@ import { Feather, Ionicons } from '@expo/vector-icons';
 import { desserts, features } from './data/menu';
 import { FeaturedCard } from './FeaturedCard';
 import { FeaturedRow } from './FeaturedRow';
+import { Dishrow } from './Dishrow';
+import { useBasketState, useBasketDispatch } from '@min-two/business-web';
 
 const BusinessProfile = ({ route }) => {
   const navigation = useNavigation();
@@ -32,8 +34,21 @@ const BusinessProfile = ({ route }) => {
     setIsPopUpVisible(!isPopUpVisible);
   };
 
-  const { name, coverImage, rating, ratingCount, distance, profileImage } =
-    route.params;
+  const {
+    name,
+    coverImage,
+    rating,
+    ratingCount,
+    distance,
+    profileImage,
+    sections,
+    id,
+  } = route.params;
+
+  // No need to defualt here cant get to featured row without sections
+
+  const sectionsObj = sections.sections;
+  console.log(id, 'store-id');
 
   const scrollToFeature = (index) => {
     if (sectionRefs.current[index]) {
@@ -122,13 +137,16 @@ const BusinessProfile = ({ route }) => {
           </View>
 
           <View style={styles.businessTabView}>
-            {features.map((item, index) => (
+            {sectionsObj.map((item, sectionIndex) => (
               <View
                 style={styles.businessTab}
-                key={index}
-                ref={(ref) => (sectionRefs.current[index] = ref)}
+                key={sectionIndex}
+                ref={(ref) => (sectionRefs.current[sectionIndex] = ref)}
               >
-                {/* <FeaturedRow featuredName={item} /> */}
+                <Text style={styles.featuredName}>{item.name}</Text>
+                {item.dishes.map((dish, dishIndex) => (
+                  <Dishrow key={dishIndex} dish={dish} />
+                ))}
               </View>
             ))}
           </View>

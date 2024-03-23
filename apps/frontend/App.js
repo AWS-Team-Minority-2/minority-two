@@ -20,9 +20,11 @@ import {
   AdminPortalScreen,
   AdminScreen,
   BasketScreen,
+  OpenCarts,
 } from './screens';
 import { AuthProvider, useAuthState } from '@min-two/user-iso';
 import { BasketProvider, RestaurantProvider } from '@min-two/business-web';
+OpenCarts;
 
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
 import { NavBar } from './screens/Customer/NavBar';
@@ -95,7 +97,9 @@ function NavigationController() {
         }}
       >
         <Stack.Screen name='Home' component={Homescreen} />
+
         <Stack.Screen name='Checkout' component={BasketScreen} />
+        <Stack.Screen name='Carts' component={OpenCarts} />
         <Stack.Screen name='CustomerLogin' component={CustomerLoginScreen} />
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
         <Stack.Screen

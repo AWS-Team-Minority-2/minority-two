@@ -1,14 +1,19 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { Restaurant } from '@min-two/business-iso';
+import { Dish, Restaurant } from '@min-two/business-iso';
 
 interface RestaurantState {
   restaurant: Restaurant | null;
+  items: Dish[] | null;
 }
 
 interface Action {
   type: string;
   payload?: any;
 }
+
+//  set resturant
+
+//  Set resturants baksets and update savedBaskets, we may need another provider
 
 const RestaurantStateContext = createContext<RestaurantState | undefined>(
   undefined
@@ -60,26 +65,7 @@ function useRestaurantDispatch(): React.Dispatch<Action> {
   return context;
 }
 
-const initialState: RestaurantState = {
-  restaurant: {
-    city: 'New York',
-    cover_image: 'example_cover_image_url',
-    is_online: true,
-    lat: '40.7128',
-    long: '-74.0060',
-    name: 'Delicious Delights',
-    type: 'restaurant',
-    is_featured: true,
-    state: 'NY',
-    zip_code: 10001,
-    is_pending: false,
-    sid: 'restaurant123',
-    profile_image: 'example_profile_image_url',
-    rating: '4.5',
-    rating_count: 200,
-    distance: '0.5 miles',
-  },
-};
+const initialState: RestaurantState = null;
 
 function setRestaurant(
   dispatch: React.Dispatch<Action>,

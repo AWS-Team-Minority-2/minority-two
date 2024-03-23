@@ -47,6 +47,8 @@ const TopPlacesCarousel = ({ list, route }) => {
                   ratingCount: item.rating_count,
                   distance: item.distance,
                   profileImage: item.profile_image,
+                  sections: item.section,
+                  id: item.sid,
                 }
               );
             }}
