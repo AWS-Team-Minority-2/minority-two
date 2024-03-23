@@ -124,7 +124,7 @@ const ServerProfile = () => {
               showsHorizontalScrollIndicator={false}
               style={styles.serverScrollView}
             >
-              {Reviews.map((review, index) => (
+              {Reviews.slice(0, 3).map((review, index) => (
                 <View
                   key={index}
                   style={[styles.reviewBox, index === 0 && { marginLeft: 10 }]}
@@ -139,7 +139,11 @@ const ServerProfile = () => {
                   <View style={styles.starContainer}>
                     {renderStars(review.rating)}
                   </View>
-                  <Text style={styles.reviewComment}>{review.comment}</Text>
+                  <Text style={styles.reviewComment}>
+                    {review.comment.length > 100
+                      ? `${review.comment.slice(0, 100)}...`
+                      : review.comment}
+                  </Text>
                 </View>
               ))}
               <TouchableOpacity
@@ -150,12 +154,6 @@ const ServerProfile = () => {
                 }}
               >
                 <Text style={styles.allReviewsText}>All Reviews</Text>
-                {/* <Ionicons
-                  name="arrow-forward-sharp"
-                  size={17}
-                  color="#f2998d"
-                  style={styles.allReviewsArrow}
-                /> */}
               </TouchableOpacity>
             </ScrollView>
           </View>

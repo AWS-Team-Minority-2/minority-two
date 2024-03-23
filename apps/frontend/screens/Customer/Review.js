@@ -67,7 +67,7 @@ const Review = () => {
     <SafeAreaView style={styles.reviewLayout}>
       <ScrollView
         style={styles.reviewAdjustment}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       >
         <TouchableOpacity
           style={styles.leftIcon}
@@ -92,23 +92,25 @@ const Review = () => {
               </View>
             </View>
 
-            {Reviews.map((comments, index) => (
-              <View key={index} style={styles.commentSection}>
-                <View style={styles.commentTop}>
-                  <FontAwesome name="user-circle-o" size={23} color="black" />
-                  <View style={styles.commentUserRating}>
-                    <Text>{comments.name}</Text>
-                    <View style={styles.starContainer}>
-                      {commentStars(comments.rating)}
+            <View style={styles.commentSectionMover}>
+              {Reviews.map((comments, index) => (
+                <View key={index} style={styles.commentSection}>
+                  <View style={styles.commentTop}>
+                    <FontAwesome name="user-circle-o" size={23} color="black" />
+                    <View style={styles.commentUserRating}>
+                      <Text>{comments.name}</Text>
+                      <View style={styles.starContainer}>
+                        {commentStars(comments.rating)}
+                      </View>
                     </View>
+                    <Text style={styles.commentDate}>{comments.date}</Text>
                   </View>
-                  <Text style={styles.commentDate}>{comments.date}</Text>
-                </View>
 
-                <Text style={styles.commentText}>{comments.comment}</Text>
-                <View style={styles.commentDivider}></View>
-              </View>
-            ))}
+                  <Text style={styles.commentText}>{comments.comment}</Text>
+                  <View style={styles.commentDivider}></View>
+                </View>
+              ))}
+            </View>
           </View>
         ))}
       </ScrollView>
