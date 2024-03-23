@@ -1,5 +1,6 @@
+
 import { useNavigation } from '@react-navigation/native';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -9,15 +10,17 @@ import {
   Image,
   PanResponder,
   findNodeHandle,
-} from 'react-native';
-import styles from './sass/BusinessProfile';
-import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
-import BusinessProfilePopUp from './BusinessProfilePopUp';
+  ImageBackground,
+} from "react-native";
+import styles from "./sass/BusinessProfile";
+import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
+import BusinessProfilePopUp from "./BusinessProfilePopUp";
 // import { useAuthState } from "@min-two/user-iso";
-import { Feather, Ionicons } from '@expo/vector-icons';
-import { desserts, features } from './data/menu';
-import { FeaturedCard } from './FeaturedCard';
-import { FeaturedRow } from './FeaturedRow';
+import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { desserts, features } from "./data/menu";
+import { FeaturedCard } from "./FeaturedCard";
+import {FeaturedRow} from "./FeaturedRow";
+
 
 const BusinessProfile = ({ route }) => {
   const navigation = useNavigation();
@@ -32,6 +35,8 @@ const BusinessProfile = ({ route }) => {
     setIsPopUpVisible(!isPopUpVisible);
   };
 
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
   const { name, coverImage, rating, ratingCount, distance, profileImage } =
     route.params;
 
@@ -46,37 +51,58 @@ const BusinessProfile = ({ route }) => {
     }
   };
 
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
+
+  useEffect(() => {
+    if (isFavorite) {
+      setShowBanner(true);
+      const timer = setTimeout(() => {
+        setShowBanner(false);
+      }, 2000); // Hide banner after 4 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [isFavorite]);
+
+  const [showFeatureScroll, setShowFeatureScroll] = useState(false);
+
+  const handleScroll = (event) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    // Adjust the threshold value as needed
+    if (offsetY > 10) {
+      setShowFeatureScroll(true);
+      console.log("true");
+    } else {
+      setShowFeatureScroll(false);
+      console.log("false");
+    }
+  };
+
   return (
     <SafeAreaView style={styles.businessProfileLayout}>
       <View style={styles.businessProfileAdjustment}>
         <View style={styles.businessTopView}>
-          <TouchableOpacity
-            style={styles.leftIcon}
-            onPress={() => {
-              changeScreen(dispatch, 'Home');
-              navigation.navigate('UserHome');
-            }}
-          >
-            <Feather name='chevron-left' size={33} color='black' />
-          </TouchableOpacity>
+          {showFeatureScroll && (
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              onScroll={handleScroll}
+              style={styles.featureScrollView}
+            >
+              {features.map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => scrollToFeature(index)}
+                >
+                  <View style={styles.featureOval}>
+                    <Text style={styles.featureName}>{item}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          )}
 
-          <ScrollView
-            ref={scrollRef}
-            horizontal={true} // Set horizontal scroll
-            showsHorizontalScrollIndicator={false}
-            style={styles.featureScrollView}
-          >
-            {features.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => scrollToFeature(index)}
-              >
-                <View style={styles.featureOval}>
-                  <Text style={styles.featureName}>{item}</Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
         </View>
 
         <ScrollView
@@ -84,10 +110,49 @@ const BusinessProfile = ({ route }) => {
           style={styles.businessScroll}
           ref={scrollRef}
         >
-          <Image
-            source={{ url: coverImage }}
-            style={{ width: '100%', height: 165 }}
-          />
+          <ImageBackground
+            source={{
+             url: coverImage
+            }}
+            style={{ width: "100%", height: 185, ...styles.topView }}
+          >
+            <TouchableOpacity
+              style={styles.leftIcon}
+              onPress={() => {
+                changeScreen(dispatch, "Home");
+                navigation.navigate("UserHome");
+              }}
+            >
+              <Feather name="chevron-left" size={25} color="black" />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.Favorite} onPress={toggleFavorite}>
+              <MaterialIcons
+                name={isFavorite ? "favorite" : "favorite-outline"}
+                size={20}
+                color={isFavorite ? "#f2998d" : "black"}
+              />
+            </TouchableOpacity>
+            {showBanner && (
+              <View style={styles.banner}>
+                <Text style={{ color: "white", marginLeft: 5 }}>
+                  Added to favorites
+                </Text>
+                <MaterialIcons
+                  name="favorite-outline"
+                  size={20}
+                  color="white"
+                />
+              </View>
+            )}
+          </ImageBackground>
+          {/* <Image
+            source={{
+              uri: "https://d1ralsognjng37.cloudfront.net/8ec59378-146f-4eba-ad06-80dcc9574cde.webp",
+            }}
+            style={{ width: "100%", height: 165 }}
+          /> */}
+
           <View style={styles.businessHeader}>
             <View style={styles.businessLogo}>
               <Image

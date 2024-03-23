@@ -15,3 +15,5 @@ export { UserProfile } from './Customer/UserProfilePage/UserProfile';
 export { ServiceProfile } from './Customer/ServiceProfile';
 export { ServerProfile } from './Customer/ServerProfile';
 export * from './Customer/Checkout/screen';
+export { Review } from "./Customer/Review";
+
