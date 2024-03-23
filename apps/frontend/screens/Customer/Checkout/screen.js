@@ -30,6 +30,8 @@ const BasketScreen = () => {
   const total = selectBasketTotal(basketState);
   const items = selectBasketItems(basketState);
 
+  console.log(items);
+
   const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([]);
 
   useEffect(() => {
@@ -40,7 +42,6 @@ const BasketScreen = () => {
     setGroupedItemsInBasket(groupedItems);
   }, [items]);
 
-  console.log(items);
   return (
     <SafeAreaView style={styles.safeAreaViewBase}>
       {items.length != 0 ? (

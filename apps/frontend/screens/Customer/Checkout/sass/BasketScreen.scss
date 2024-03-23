@@ -175,3 +175,95 @@
 .placeOrderParent {
   padding-top: 10px;
 }
+
+.openCartsTitle {
+  font-size: 30px;
+  padding-top: 15px;
+  font-family: 'BebasNeue_400Regular';
+}
+
+.screenContainer {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.cartsContainer {
+  padding-top: 10px;
+}
+
+.touchableOpacityParent {
+  background-color: #fff; // bg-white
+  border: 1px solid #cdcdce; // border + border-gray-200
+  padding: 1rem; // p-4 (1rem = 4 * 0.25rem)
+  border-radius: 12px;
+  margin-right: 14px;
+  height: 250px;
+}
+
+.cartRowParent {
+  display: flex;
+  flex-direction: row;
+}
+
+.nameContainer {
+  flex: 1; // flex-1
+  padding-right: 0.5rem; // pr-2 (0.5rem = 2 * 0.25rem)
+}
+
+.storeName {
+  font-size: 14px; // text-lg (1.125rem equals 1.125rem in Tailwind's default font-size scale)
+  margin-bottom: 0.25rem; // mb-1 (0.25rem = 1 * 0.25rem)
+  font-weight: bold;
+  font-size: 16px;
+  padding-left: 10px;
+}
+
+.cartImage {
+  height: 3rem; // h-20 (5rem = 20 * 0.25rem)
+  width: 3rem; // w-20 (5rem = 20 * 0.25rem)
+  background-color: #d1d5db; // bg-gray-300
+  padding: 1rem; // p-4 (1rem = 4 * 0.25rem)
+  border-width: 1px; // borderWidth: 1
+  border-radius: 999px;
+  border-color: #f3f3f4; // borderColor: '#F3F3F4'
+  // padding-right: 10px;
+}
+
+.itemsListed {
+  display: flex;
+  flex-wrap: wrap; // Add this line
+  flex-direction: row;
+  max-width: 80%; // Adjust max-width as needed
+}
+
+.groupedItems {
+  color: #646464;
+  margin-right: 5px; // Adjust as needed for spacing between items
+  margin-bottom: 5px; // Add margin-bottom to create space between lines
+}
+
+.itemParent {
+  margin-left: 10px;
+}
+
+.itemsImagesContainer {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+}
+
+.itemImageXs {
+  height: 3rem; // h-20 (5rem = 20 * 0.25rem)
+  width: 3rem; // w-20 (5rem = 20 * 0.25rem)
+  background-color: #d1d5db; // bg-gray-300
+  padding: 1rem; // p-4 (1rem = 4 * 0.25rem)
+  // padding-right: 10px;
+  border-width: 1px; // borderWidth: 1
+  border-radius: 999px;
+  border-color: #f3f3f4; // borderColor: '#F3F3F4'
+  // padding-right: 10px;
+}
+
+.scrollViewParent {
+  height: 100%;
+}

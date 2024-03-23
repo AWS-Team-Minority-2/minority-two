@@ -196,7 +196,7 @@ const UserHomeScreen = () => {
                 <TouchableOpacity
                   style={styles.notification}
                   onPress={() => {
-                    navigation.navigate('Checkout');
+                    navigation.navigate('Carts');
                   }}
                 >
                   <Ionicons name='cart-outline' size={20} color='black' />
