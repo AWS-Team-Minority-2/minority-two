@@ -25,6 +25,7 @@ import { AuthProvider, useAuthState } from "@min-two/user-iso";
 import { NavBar } from "./screens/Customer/NavBar";
 import { ServiceProfile } from "./screens/Customer/ServiceProfile";
 import { ServerProfile } from "./screens/Customer/ServerProfile";
+import { Review } from "./screens/Customer/Review";
 import {
   ScreenProvider,
   useScreenState,
@@ -118,6 +119,7 @@ function NavigationController() {
 
         <Stack.Screen name="ServiceProfile" component={ServiceProfile} />
         <Stack.Screen name="ServerProfile" component={ServerProfile} />
+        <Stack.Screen name="Review" component={Review} />
       </Stack.Navigator>
       {/* Pass in User Id to navbar to handle customer actions */}
       {showNavBar && <NavBar id={user.id} />}

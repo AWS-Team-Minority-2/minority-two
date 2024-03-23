@@ -13,4 +13,5 @@ export {
 export { Homescreen } from "./Homescren";
 export { UserProfile } from "./Customer/UserProfilePage/UserProfile";
 export { ServiceProfile } from "./Customer/ServiceProfile";
-export {ServerProfile} from "./Customer/ServerProfile";
+export { ServerProfile } from "./Customer/ServerProfile";
+export { Review } from "./Customer/Review";

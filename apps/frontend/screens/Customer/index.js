@@ -7,3 +7,4 @@ export { UserProfile } from "./UserProfilePage/UserProfile";
 export { BusinessProfile } from "./BusinessProfile";
 export { ServiceProfile } from "./ServiceProfile";
 export { ServerProfile } from "./ServerProfile";
+export { Review } from "./Review";

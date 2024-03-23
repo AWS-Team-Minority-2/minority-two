@@ -33,6 +33,17 @@ const ServerProfile = () => {
       image:
         "https://d2zdpiztbgorvt.cloudfront.net/us/images/152418/inspiration_154837168471.jpeg?size=1170x1170",
       rating: "5.0(191)",
+      about:
+        "DC born and a barber for the past 15 years! The Howard community has always been home",
+      moreInfo: "No walk-ins of Fridays and Saturdays",
+      number: "(272) 345-7854",
+      Monday: "Closed",
+      Tuesday: "11:00 AM - 5:30 PM",
+      Wednesday: "11:00 AM - 5:30 PM",
+      Thursday: "11:00 AM - 5:30 PM",
+      Friday: "11:00 AM - 3:00 PM",
+      Saturday: "11:00 AM - 3:00 PM",
+      Sunday: "Closed",
     },
   ];
 
@@ -48,30 +59,11 @@ const ServerProfile = () => {
 
   const scrollRef = useRef(null);
 
-  // const Reviews = [
-  //   {
-  //     id: "1",
-  //     name: "Jourdan",
-  //     date: "October 23, 2024",
-  //     comment: "Great Barber, really nice guy",
-  //     rating: 5,
-  //   },
-  //   {
-  //     id: "2",
-  //     name: "Dee",
-  //     date: "September 23, 2024",
-  //     comment: "Nice clean shapeup, no waiting time and was truly professional",
-  //     rating: 5,
-  //   },
-  //   {
-  //     id: "3",
-  //     name: "Yony",
-  //     date: "January 13, 2024",
-  //     comment:
-  //       "Great barber been going to him these past 2 years and never fail to come back",
-  //     rating: 5,
-  //   },
-  // ];
+  const [selectedOption, setSelectedOption] = useState("Service");
+
+  const handleToggle = (option) => {
+    setSelectedOption(option);
+  };
 
   const renderStars = (rating) => {
     const stars = [];
@@ -150,28 +142,126 @@ const ServerProfile = () => {
                   <Text style={styles.reviewComment}>{review.comment}</Text>
                 </View>
               ))}
-              <TouchableOpacity style={styles.allReviews}>
+              <TouchableOpacity
+                style={styles.allReviews}
+                onPress={() => {
+                  changeScreen(dispatch, "Review");
+                  navigation.navigate("Review");
+                }}
+              >
                 <Text style={styles.allReviewsText}>All Reviews</Text>
-                <Ionicons
+                {/* <Ionicons
                   name="arrow-forward-sharp"
                   size={17}
                   color="#f2998d"
                   style={styles.allReviewsArrow}
-                />
+                /> */}
               </TouchableOpacity>
             </ScrollView>
           </View>
-          <View style={styles.businessTabView}>
-            {features.map((item, index) => (
-              <View
-                style={styles.businessTab}
-                key={index}
-                ref={(ref) => (sectionRefs.current[index] = ref)}
+
+          <View style={styles.topContainer}>
+            <TouchableOpacity
+              style={styles.topButton}
+              onPress={() => handleToggle("Service")}
+            >
+              <Text
+                style={[
+                  styles.topButtonText,
+                  selectedOption === "Service" && styles.selectedButtonText,
+                ]}
               >
-                <FeaturedRow featuredName={item} />
-              </View>
-            ))}
+                Services
+              </Text>
+              {selectedOption === "Service" && (
+                <View style={[styles.underline, styles.selectedUnderline]} />
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.topButton}
+              onPress={() => handleToggle("Details")}
+            >
+              <Text
+                style={[
+                  styles.topButtonText,
+                  selectedOption === "Details" && styles.selectedButtonText,
+                ]}
+              >
+                Details
+              </Text>
+              {selectedOption === "Details" && (
+                <View style={[styles.underline, styles.selectedUnderline]} />
+              )}
+            </TouchableOpacity>
           </View>
+
+          {selectedOption === "Service" && (
+            <View style={styles.businessTabView}>
+              {features.map((item, index) => (
+                <View
+                  style={styles.businessTab}
+                  key={index}
+                  ref={(ref) => (sectionRefs.current[index] = ref)}
+                >
+                  <FeaturedRow featuredName={item} />
+                </View>
+              ))}
+            </View>
+          )}
+          {selectedOption === "Details" && (
+            <View>
+              {serverInfo.map((server) => (
+                <View style={styles.detailView}>
+                  <Text style={styles.detailHeader}>About:</Text>
+                  <Text>{server.about}</Text>
+                  <View style={styles.detailDivider}></View>
+
+                  <Text style={styles.detailHeader}>More Info:</Text>
+                  <Text>{server.moreInfo}</Text>
+                  <View style={styles.detailDivider}></View>
+
+                  <Text style={styles.detailHeader}>Number:</Text>
+                  <Text>{server.number}</Text>
+                  <View style={styles.detailDivider}></View>
+
+                  <View style={styles.detailHourBox}>
+                    <Text style={styles.detailDays}>Monday:</Text>
+                    <Text style={styles.detailHours}>{server.Monday}</Text>
+                  </View>
+
+                  <View style={styles.detailHourBox}>
+                    <Text style={styles.detailDays}>Tuesday:</Text>
+                    <Text style={styles.detailHours}>{server.Tuesday}</Text>
+                  </View>
+
+                  <View style={styles.detailHourBox}>
+                    <Text style={styles.detailDays}>Wednesday:</Text>
+                    <Text style={styles.detailHours}>{server.Wednesday}</Text>
+                  </View>
+
+                  <View style={styles.detailHourBox}>
+                    <Text style={styles.detailDays}>Thursday:</Text>
+                    <Text style={styles.detailHours}>{server.Thursday}</Text>
+                  </View>
+
+                  <View style={styles.detailHourBox}>
+                    <Text style={styles.detailDays}>Friday:</Text>
+                    <Text style={styles.detailHours}>{server.Friday}</Text>
+                  </View>
+
+                  <View style={styles.detailHourBox}>
+                    <Text style={styles.detailDays}>Saturday:</Text>
+                    <Text style={styles.detailHours}>{server.Saturday}</Text>
+                  </View>
+
+                  <View style={styles.detailHourBox}>
+                    <Text style={styles.detailDays}>Sunday:</Text>
+                    <Text style={styles.detailHours}>{server.Sunday}</Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
         </ScrollView>
       </View>
     </SafeAreaView>
