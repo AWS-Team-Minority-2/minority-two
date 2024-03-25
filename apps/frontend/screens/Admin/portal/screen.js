@@ -17,6 +17,8 @@ import { useStores } from '@min-two/business-web';
 const AdminPortalScreen = () => {
   const [adminName, setAdminName] = useState('');
   const { allBusiness, pendingBusinesses, verifiedBusinesses } = useStores();
+
+  console.log(verifiedBusinesses, 'bbb');
   const navigation = useNavigation();
 
   useEffect(() => {
