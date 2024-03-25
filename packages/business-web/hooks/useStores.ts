@@ -97,9 +97,6 @@ export function useStores(zipCode: string) {
   //   }
   // }, [data]);
 
-  console.log(filterVerifiedBusinesses());
-
-  console.log(filterShopStores());
   return {
     featured: filterFeaturedStores(),
     shops: filterShopStores(),
