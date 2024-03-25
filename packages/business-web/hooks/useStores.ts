@@ -32,7 +32,9 @@ export function useStores(zipCode: string) {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
         (store: BusinessBase) =>
-          store.type === 'shop' && store.is_pending != true
+          store.type === 'shop' &&
+          store.is_pending != true &&
+          !store.is_featured
       );
     } else {
       return [];
@@ -43,7 +45,9 @@ export function useStores(zipCode: string) {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
         (store: BusinessBase) =>
-          store.type === 'restaurant' && store.is_pending != true
+          store.type === 'restaurant' &&
+          store.is_pending != true &&
+          !store.is_featured
       );
     } else {
       return [];
@@ -54,7 +58,9 @@ export function useStores(zipCode: string) {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
         (store: BusinessBase) =>
-          store.type === 'service' && store.is_pending != true
+          store.type === 'service' &&
+          store.is_pending != true &&
+          !store.is_featured
       );
     } else {
       return [];
@@ -64,7 +70,7 @@ export function useStores(zipCode: string) {
   const getPending = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: BusinessBase) => store.is_pending
+        (store: BusinessBase) => store.is_pending && !store.is_featured
       );
     } else {
       return [];
@@ -74,7 +80,7 @@ export function useStores(zipCode: string) {
   const filterVerifiedBusinesses = useCallback(() => {
     if (data && data.getMinorityBusiness) {
       return data.getMinorityBusiness.filter(
-        (store: BusinessBase) => store.is_pending != true
+        (store: BusinessBase) => !store.is_pending
       );
     } else {
       return [];
