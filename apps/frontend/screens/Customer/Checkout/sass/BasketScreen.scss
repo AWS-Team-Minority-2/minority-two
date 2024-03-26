@@ -253,8 +253,8 @@
 }
 
 .itemImageXs {
-  height: 3rem; // h-20 (5rem = 20 * 0.25rem)
-  width: 3rem; // w-20 (5rem = 20 * 0.25rem)
+  height: 2rem; // h-20 (5rem = 20 * 0.25rem)
+  width: 2rem; // w-20 (5rem = 20 * 0.25rem)
   background-color: #d1d5db; // bg-gray-300
   padding: 1rem; // p-4 (1rem = 4 * 0.25rem)
   // padding-right: 10px;
@@ -266,4 +266,26 @@
 
 .scrollViewParent {
   height: 100%;
+}
+.cartBttn {
+  width: 100%;
+  background-color: #dcdcdc;
+  border-radius: 30px;
+  margin-top: 20px;
+  padding: 8px 0;
+  align-items: center;
+}
+
+.storeBttn {
+  width: 100%;
+  // background-color: #dcdcdc;
+  border-radius: 30px;
+  margin-top: 20px;
+  // padding: 5px 0;
+  align-items: center;
+}
+
+.bttnText {
+  font-weight: bold;
+  font-size: 12px;
 }

@@ -30,8 +30,6 @@ const BasketScreen = () => {
   const total = selectBasketTotal(basketState);
   const items = selectBasketItems(basketState);
 
-  console.log(items);
-
   const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([]);
 
   useEffect(() => {

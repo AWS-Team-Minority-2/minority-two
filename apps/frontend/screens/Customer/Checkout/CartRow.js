@@ -3,9 +3,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import styles from './sass/BasketScreen.scss';
 
-const CartRow = ({ imageUrl }) => {
-  const items = ['Vegan Chickn Drummies', 'Vegan Barbecue Roast w. Rice'];
-
+const CartRow = ({ imageUrl, name, items }) => {
   return (
     <View style={styles.touchableOpacityParent}>
       <View style={styles.cartRowParent}>
@@ -20,7 +18,7 @@ const CartRow = ({ imageUrl }) => {
         <View style={styles.nameContainer}>
           <Text style={styles.storeName}>NuVegan</Text>
           <View style={styles.itemParent}>
-            <View style={styles.itemsListed}>
+            {/* <View style={styles.itemsListed}>
               {items.map((item, index) => (
                 <React.Fragment key={index}>
                   <Text style={styles.groupedItems}>{item}</Text>
@@ -29,7 +27,7 @@ const CartRow = ({ imageUrl }) => {
                   )}
                 </React.Fragment>
               ))}
-            </View>
+            </View> */}
           </View>
         </View>
         <TouchableOpacity>
@@ -63,6 +61,12 @@ const CartRow = ({ imageUrl }) => {
           style={styles.itemImageXs}
         />
       </View>
+      <TouchableOpacity style={styles.cartBttn}>
+        <Text style={styles.bttnText}>Open Cart</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.storeBttn}>
+        <Text style={styles.bttnText}>View Store</Text>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -23,7 +23,9 @@ import {
   OpenCarts,
 } from './screens';
 import { AuthProvider, useAuthState } from '@min-two/user-iso';
-import { BasketProvider, RestaurantProvider } from '@min-two/business-web';
+// The diffrence between a basket and a cart is that the basket are items from one store.
+// A Cart is a collection of baskets from diffrent stores.
+import { BasketProvider, CartsProvider } from '@min-two/business-web';
 OpenCarts;
 
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
@@ -146,13 +148,13 @@ export default function App() {
       <ApolloProvider client={client}>
         <AuthProvider>
           <ScreenProvider>
-            <RestaurantProvider>
+            <CartsProvider>
               <BasketProvider>
                 <NavigationContainer>
                   <NavigationController />
                 </NavigationContainer>
               </BasketProvider>
-            </RestaurantProvider>
+            </CartsProvider>
           </ScreenProvider>
         </AuthProvider>
       </ApolloProvider>
