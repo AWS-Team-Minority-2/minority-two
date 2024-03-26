@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -6,22 +6,22 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import {
   useRestaurantState,
   selectBasketItems,
   useBasketState,
   selectBasketTotal,
-} from '@min-two/business-web';
-import Currency from 'react-currency-formatter';
-import { Feather } from '@expo/vector-icons';
+} from "@min-two/business-web";
+import Currency from "react-currency-formatter";
+import { Feather } from "@expo/vector-icons";
 
-import styles from '../Checkout/sass/BasketScreen.scss';
+import styles from "../Checkout/sass/BasketScreen.scss";
 
 const BasketScreen = () => {
   const noCarts =
-    'https://cdn.dribbble.com/users/295908/screenshots/2834564/media/805c806c3abfd012b6833e2cb290f47c.png?resize=800x600&vertical=center';
+    "https://cdn.dribbble.com/users/295908/screenshots/2834564/media/805c806c3abfd012b6833e2cb290f47c.png?resize=800x600&vertical=center";
   const navigation = useNavigation();
   const restaurant = useRestaurantState().restaurant;
 
@@ -50,7 +50,7 @@ const BasketScreen = () => {
           </View>
 
           <TouchableOpacity onPress={navigation.goBack} style={styles.backBttn}>
-            <Feather name='x' size={24} color='black' />
+            <Feather name="x" size={24} color="black" />
           </TouchableOpacity>
         </View>
       ) : (
