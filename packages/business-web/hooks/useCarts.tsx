@@ -50,7 +50,7 @@ function CartsProvider({ children }: { children: React.ReactNode }) {
 function useCartsState(): CartsState {
   const context = useContext(CartsStateContext);
   if (context === undefined) {
-    throw new Error('useRestaurantState must be used in RestaurantProvider');
+    throw new Error('Carts must be used in Provider');
   }
   return context;
 }
@@ -58,7 +58,7 @@ function useCartsState(): CartsState {
 function useCartsDispatch(): React.Dispatch<Action> {
   const context = useContext(CartsDispatchContext);
   if (context === undefined) {
-    throw new Error('useRestaurantDispatch must be used in RestaurantProvider');
+    throw new Error('Carts must be used in Provider');
   }
   return context;
 }

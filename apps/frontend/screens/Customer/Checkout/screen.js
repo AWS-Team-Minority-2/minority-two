@@ -42,22 +42,18 @@ const BasketScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeAreaViewBase}>
-      {items.length != 0 ? (
-        <>
-          <View style={styles.safeAreaViewContainer}>
-            <View>
-              <Text style={styles.finalLookText}>Final Look </Text>
-              <Text style={styles.resturantName}>{restaurant.name}</Text>
-            </View>
-
-            <TouchableOpacity
-              onPress={navigation.goBack}
-              style={styles.backBttn}
-            >
-              <Feather name='x' size={24} color='black' />
-            </TouchableOpacity>
+      <>
+        <View style={styles.safeAreaViewContainer}>
+          <View>
+            <Text style={styles.finalLookText}>Final Look </Text>
+            <Text style={styles.resturantName}>{restaurant.name}</Text>
           </View>
-          {/* <View style={styles.userImageParent}>
+
+          <TouchableOpacity onPress={navigation.goBack} style={styles.backBttn}>
+            <Feather name='x' size={24} color='black' />
+          </TouchableOpacity>
+        </View>
+        {/* <View style={styles.userImageParent}>
             <Image
               source={{
                 uri: 'https://ucarecdn.com/abb0ca9f-fc36-4aac-940a-37d9110595f8/-/resize/601x326/',
@@ -70,72 +66,60 @@ const BasketScreen = () => {
             </TouchableOpacity>
           </View> */}
 
-          <ScrollView style={styles.scrollViewParent}>
-            {Object.entries(groupedItemsInBasket).map(([key, items]) => (
-              <View key={key} style={styles.itemsContainer}>
-                <Text style={styles.changeBttn}>{items.length} x </Text>
-                <Image
-                  source={{ uri: items[0]?.imageUrl }}
-                  style={styles.itemPhoto}
+        <ScrollView style={styles.scrollViewParent}>
+          {Object.entries(groupedItemsInBasket).map(([key, items]) => (
+            <View key={key} style={styles.itemsContainer}>
+              <Text style={styles.changeBttn}>{items.length} x </Text>
+              <Image
+                source={{ uri: items[0]?.imageUrl }}
+                style={styles.itemPhoto}
+              />
+              <Text style={styles.itemName}>{items[0]?.name}</Text>
+
+              <Text style={styles.priceText}>
+                <Currency quantity={items[0]?.price} currency='USD' />
+              </Text>
+              <TouchableOpacity>
+                <MaterialCommunityIcons
+                  name='cart-remove'
+                  size={14}
+                  color='#757575'
                 />
-                <Text style={styles.itemName}>{items[0]?.name}</Text>
-
-                <Text style={styles.priceText}>
-                  <Currency quantity={items[0]?.price} currency='USD' />
-                </Text>
-                <TouchableOpacity>
-                  <MaterialCommunityIcons
-                    name='cart-remove'
-                    size={14}
-                    color='#757575'
-                  />
-                </TouchableOpacity>
-              </View>
-            ))}
-          </ScrollView>
-          <View style={styles.priceContainer}>
-            <View style={styles.priceContainerChild}>
-              <Text style={styles.priceColor}>Subtotal</Text>
-              <Text style={styles.priceColor}>
-                <Currency quantity={total} currency='USD' />
-              </Text>
-            </View>
-
-            <View style={styles.priceContainerChild}>
-              <Text style={styles.priceColor}>Taxes</Text>
-              <Text style={styles.priceColor}>
-                <Currency quantity={total * 0.2} currency='USD' />
-              </Text>
-            </View>
-
-            <View style={styles.priceContainerChild}>
-              <Text>Order Total</Text>
-              <Text style={styles.finalPriceText}>
-                <Currency quantity={total + total * 0.2} currency='USD' />
-              </Text>
-            </View>
-            <View style={styles.placeOrderParent}>
-              <TouchableOpacity
-                // onPress={() => navigation.navigate('PreparingOrderScreen')}
-                style={styles.placeOrderBttn}
-              >
-                <Text style={styles.placeOrderBttn}>Place Order</Text>
               </TouchableOpacity>
             </View>
+          ))}
+        </ScrollView>
+        <View style={styles.priceContainer}>
+          <View style={styles.priceContainerChild}>
+            <Text style={styles.priceColor}>Subtotal</Text>
+            <Text style={styles.priceColor}>
+              <Currency quantity={total} currency='USD' />
+            </Text>
           </View>
-        </>
-      ) : (
-        <View style={styles.emptyCartContainer}>
-          <Image source={{ uri: noCarts }} style={styles.noCartImage} />
 
-          <TouchableOpacity
-            style={styles.shopNexaBttn}
-            onPress={navigation.goBack}
-          >
-            <Text style={styles.shopNexaText}>Shop Nexa</Text>
-          </TouchableOpacity>
+          <View style={styles.priceContainerChild}>
+            <Text style={styles.priceColor}>Taxes</Text>
+            <Text style={styles.priceColor}>
+              <Currency quantity={total * 0.2} currency='USD' />
+            </Text>
+          </View>
+
+          <View style={styles.priceContainerChild}>
+            <Text>Order Total</Text>
+            <Text style={styles.finalPriceText}>
+              <Currency quantity={total + total * 0.2} currency='USD' />
+            </Text>
+          </View>
+          <View style={styles.placeOrderParent}>
+            <TouchableOpacity
+              // onPress={() => navigation.navigate('PreparingOrderScreen')}
+              style={styles.placeOrderBttn}
+            >
+              <Text style={styles.placeOrderBttn}>Place Order</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      )}
+      </>
     </SafeAreaView>
   );
 };
