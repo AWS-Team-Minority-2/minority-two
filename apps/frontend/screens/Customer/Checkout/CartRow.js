@@ -2,8 +2,11 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import styles from './sass/BasketScreen.scss';
+import { useNavigation } from '@react-navigation/native';
 
-const CartRow = ({ imageUrl, name, items }) => {
+const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.touchableOpacityParent}>
       <View style={styles.cartRowParent}>
@@ -46,7 +49,23 @@ const CartRow = ({ imageUrl, name, items }) => {
         <Text style={styles.bttnText}>Open Cart</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.storeBttn}>
-        <Text style={styles.bttnText}>View Store</Text>
+        <Text
+          style={styles.bttnText}
+          onPress={() => {
+            navigation.navigate('BusinessProfile', {
+              name: restaurantMetadata.name,
+              coverImage: restaurantMetadata.coverImage,
+              rating: restaurantMetadata.rating,
+              ratingCount: restaurantMetadata.ratingCount,
+              distance: restaurantMetadata.distance,
+              profileImage: restaurantMetadata.profileImage,
+              sections: restaurantMetadata.sections,
+              id: restaurantMetadata.id,
+            });
+          }}
+        >
+          View Store
+        </Text>
       </TouchableOpacity>
     </View>
   );

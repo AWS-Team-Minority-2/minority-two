@@ -65,6 +65,7 @@ const BusinessProfile = ({ route }) => {
     id,
   };
 
+  //  if store is the same then do nothing ?
   useEffect(() => {
     setResturant(basketDisptach, store);
   }, []);
@@ -89,7 +90,7 @@ const BusinessProfile = ({ route }) => {
           <TouchableOpacity
             style={styles.leftIcon}
             onPress={() => {
-              removeCurrent(basketDisptach);
+              // removeCurrent(basketDisptach);
               changeScreen(dispatch, 'Home');
               navigation.navigate('UserHome');
             }}

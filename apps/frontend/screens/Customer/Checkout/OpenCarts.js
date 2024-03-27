@@ -47,6 +47,7 @@ const OpenCarts = () => {
                     name={c.restaurant.name}
                     imageUrl={c.restaurant.profileImage}
                     items={c.items}
+                    restaurantMetadata={c.restaurant}
                   />
                 ))}
               </View>
