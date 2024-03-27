@@ -9,25 +9,31 @@ const CartRow = ({ imageUrl, name, items }) => {
       <View style={styles.cartRowParent}>
         <Image
           source={{
-            uri:
-              imageUrl ||
-              'https://d1ralsognjng37.cloudfront.net/8ec59378-146f-4eba-ad06-80dcc9574cde.webp',
+            uri: imageUrl,
           }}
           style={styles.cartImage}
         />
         <View style={styles.nameContainer}>
-          <Text style={styles.storeName}>NuVegan</Text>
+          <Text style={styles.storeName}>{name}</Text>
           <View style={styles.itemParent}>
-            {/* <View style={styles.itemsListed}>
+            <View style={styles.itemsListed}>
               {items.map((item, index) => (
                 <React.Fragment key={index}>
-                  <Text style={styles.groupedItems}>{item}</Text>
-                  {index !== items.length - 1 && (
-                    <Text style={styles.dot}> • </Text>
-                  )}
+                  {index < 2 ? (
+                    <>
+                      <Text style={styles.groupedItems}>{item.name}</Text>
+                    </>
+                  ) : null}
                 </React.Fragment>
               ))}
-            </View> */}
+              {items.length > 2 && (
+                <Text style={styles.groupedItems}>
+                  {items.length === 2
+                    ? '+1 other'
+                    : `and ${items.length - 1} others`}
+                </Text>
+              )}
+            </View>
           </View>
         </View>
         <TouchableOpacity>
@@ -35,32 +41,7 @@ const CartRow = ({ imageUrl, name, items }) => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.itemsImagesContainer}>
-        <Image
-          source={{
-            uri:
-              imageUrl ||
-              'https://d1ralsognjng37.cloudfront.net/8ec59378-146f-4eba-ad06-80dcc9574cde.webp',
-          }}
-          style={styles.itemImageXs}
-        />
-        <Image
-          source={{
-            uri:
-              imageUrl ||
-              'https://d1ralsognjng37.cloudfront.net/8ec59378-146f-4eba-ad06-80dcc9574cde.webp',
-          }}
-          style={styles.itemImageXs}
-        />
-        <Image
-          source={{
-            uri:
-              imageUrl ||
-              'https://d1ralsognjng37.cloudfront.net/8ec59378-146f-4eba-ad06-80dcc9574cde.webp',
-          }}
-          style={styles.itemImageXs}
-        />
-      </View>
+      <View style={styles.itemsImagesContainer}></View>
       <TouchableOpacity style={styles.cartBttn}>
         <Text style={styles.bttnText}>Open Cart</Text>
       </TouchableOpacity>

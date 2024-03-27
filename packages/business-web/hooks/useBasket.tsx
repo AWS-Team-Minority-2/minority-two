@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { Dish } from '@min-two/business-iso';
+import { Dish, RestaurantProvider } from '@min-two/business-iso';
+import { Cart } from './locals';
 
-interface BasketState {
-  items: Dish[];
-}
+// update resturant name
+//  reove resturant -- if items in basket pushes to cart and empty in here
+
+type BasketState = Cart;
 
 interface Action {
   type: string;
@@ -21,6 +23,21 @@ function basketReducer(state: BasketState, action: Action): BasketState {
       return {
         ...state,
         items: [...state.items, action.payload],
+        // Assuming action.payload contains information about the store
+        // store: action.payload.store,
+      };
+    case 'SET_STORE':
+      return {
+        ...state,
+        restaurant: action.payload,
+        // Assuming action.payload contains information about the store
+        // store: action.payload.store,
+      };
+
+    case 'REMOVE_CURRENT':
+      return {
+        items: [],
+        restaurant: null,
         // Assuming action.payload contains information about the store
         // store: action.payload.store,
       };
@@ -77,10 +94,7 @@ function useBasketDispatch(): React.Dispatch<Action> {
 
 const initialState: BasketState = {
   items: [],
-  // store: {
-  //   storeName: null,
-  //   storeId: null,
-  // },
+  restaurant: null,
 };
 
 function addToBasket(dispatch: React.Dispatch<Action>, dish: Dish) {
@@ -92,6 +106,17 @@ function removeFromBasket(state, dispatch: React.Dispatch<Action>, id: string) {
   // console.log(items);
 
   dispatch({ type: 'REMOVE_FROM_BASKET', payload: { id } });
+}
+
+function setResturant(
+  dispatch: React.Dispatch<Action>,
+  store: RestaurantProvider
+) {
+  dispatch({ type: 'SET_STORE', payload: { store } });
+}
+
+function removeCurrent(dispatch: React.Dispatch<Action>) {
+  dispatch({ type: 'REMOVE_CURRENT' });
 }
 
 export const selectBasketTotal = (state) => {
@@ -114,5 +139,6 @@ export {
   addToBasket,
   removeFromBasket,
   selectBasketItems,
-  // getStoreName,
+  setResturant,
+  removeCurrent,
 };

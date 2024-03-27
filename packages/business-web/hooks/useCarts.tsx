@@ -1,22 +1,12 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { Dish, Restaurant } from '@min-two/business-iso';
+import { Cart } from './locals';
 
-type Cart = {
-  restaurant: Restaurant;
-  items: Dish[];
-};
-interface CartsState {
-  carts: Cart[] | null;
-}
+type CartsState = Cart[];
 
 interface Action {
   type: string;
   payload?: any;
 }
-
-//  set resturant
-
-//  Set resturants baksets and update savedBaskets, we may need another provider
 
 const CartsStateContext = createContext<CartsState | undefined>(undefined);
 const CartsDispatchContext = createContext<React.Dispatch<Action> | undefined>(
@@ -26,10 +16,24 @@ const CartsDispatchContext = createContext<React.Dispatch<Action> | undefined>(
 function cartsReducer(state: CartsState, action: Action): CartsState {
   switch (action.type) {
     case 'SET_CARTS':
-      return {
-        ...state,
-        carts: [...state.carts, action.payload],
-      };
+      const { restaurant, items } = action.payload;
+      const existingCartIndex = state.findIndex(
+        (cart) => cart.restaurant.id === restaurant.id
+      );
+
+      if (existingCartIndex !== -1) {
+        // If the restaurant already exists in the cart list, update its items
+        const updatedState = [...state];
+        updatedState[existingCartIndex] = {
+          ...state[existingCartIndex],
+          items,
+        };
+        return updatedState;
+      } else {
+        // Otherwise, add a new entry to the cart list
+        return [...state, action.payload];
+      }
+
     default:
       return state;
   }
@@ -63,13 +67,10 @@ function useCartsDispatch(): React.Dispatch<Action> {
   return context;
 }
 
-const initialState: CartsState = null;
+const initialState: CartsState = [];
 
-function setCart(
-  dispatch: React.Dispatch<Action>,
-  restaurant: Restaurant | null
-) {
-  dispatch({ type: 'SET_CARTS', payload: restaurant });
+function setCart(dispatch: React.Dispatch<Action>, cart: Cart) {
+  dispatch({ type: 'SET_CARTS', payload: cart });
 }
 
 export { CartsProvider, useCartsState, useCartsDispatch, setCart };

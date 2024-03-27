@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -19,7 +19,12 @@ import { desserts, features } from './data/menu';
 import { FeaturedCard } from './FeaturedCard';
 import { FeaturedRow } from './FeaturedRow';
 import { Dishrow } from './Dishrow';
-import { useBasketState, useBasketDispatch } from '@min-two/business-web';
+import {
+  useBasketState,
+  useBasketDispatch,
+  setResturant,
+  removeCurrent,
+} from '@min-two/business-web';
 
 const BusinessProfile = ({ route }) => {
   const navigation = useNavigation();
@@ -29,6 +34,8 @@ const BusinessProfile = ({ route }) => {
   const dispatch = useScreenDispatch();
 
   const [isPopUpVisible, setIsPopUpVisible] = useState(false); // State to manage the visibility of the pop-up screen
+  const basketDisptach = useBasketDispatch();
+  const statee = useBasketState();
 
   const togglePopUp = () => {
     setIsPopUpVisible(!isPopUpVisible);
@@ -47,8 +54,22 @@ const BusinessProfile = ({ route }) => {
 
   // No need to defualt here cant get to featured row without sections
 
+  const store = {
+    name,
+    coverImage,
+    rating,
+    ratingCount,
+    distance,
+    profileImage,
+    sections,
+    id,
+  };
+
+  useEffect(() => {
+    setResturant(basketDisptach, store);
+  }, []);
+
   const sectionsObj = sections.sections;
-  console.log(id, 'store-id');
 
   const scrollToFeature = (index) => {
     if (sectionRefs.current[index]) {
@@ -68,6 +89,7 @@ const BusinessProfile = ({ route }) => {
           <TouchableOpacity
             style={styles.leftIcon}
             onPress={() => {
+              removeCurrent(basketDisptach);
               changeScreen(dispatch, 'Home');
               navigation.navigate('UserHome');
             }}
@@ -145,7 +167,7 @@ const BusinessProfile = ({ route }) => {
               >
                 <Text style={styles.featuredName}>{item.name}</Text>
                 {item.dishes.map((dish, dishIndex) => (
-                  <Dishrow key={dishIndex} dish={dish} />
+                  <Dishrow key={dishIndex} dish={dish} store={store} />
                 ))}
               </View>
             ))}

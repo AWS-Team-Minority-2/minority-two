@@ -4,18 +4,24 @@ import styles from './sass/BusinessProfile';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import Currency from 'react-currency-formatter';
 import {
-  useRestaurantState,
   addToBasket,
-  selectBasketItems,
   useBasketState,
-  selectBasketTotal,
-  removeFromBasket,
   useBasketDispatch,
+  useCartsDispatch,
+  setCart,
 } from '@min-two/business-web';
 import Toast from 'react-native-toast-message';
 
-const SelectedItem = ({ isVisible, item, onClose, setShowItemPopup }) => {
+const SelectedItem = ({
+  isVisible,
+  item,
+  onClose,
+  setShowItemPopup,
+  store,
+}) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const cartDisptach = useCartsDispatch();
+  const items = useBasketState().items;
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -70,6 +76,10 @@ const SelectedItem = ({ isVisible, item, onClose, setShowItemPopup }) => {
               style={styles.addButton}
               onPress={() => {
                 addToBasket(dispatch, item);
+                setCart(cartDisptach, {
+                  restaurant: store,
+                  items: [...items, item],
+                });
                 setShowItemPopup(false);
                 goodCartChange();
               }}

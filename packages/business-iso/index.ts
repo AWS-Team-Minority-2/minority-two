@@ -48,3 +48,14 @@ export interface Restaurant extends BusinessBase {
   type: 'restaurant'; // Override type to be 'restaurant'
   section: RestaurantSection; // Add dishes property
 }
+// Use for state management only
+export interface RestaurantProvider {
+  name: string;
+  coverImage: string;
+  rating: number;
+  ratingCount: number;
+  distance: number;
+  profileImage: string;
+  sections?: any;
+  id: string;
+}
