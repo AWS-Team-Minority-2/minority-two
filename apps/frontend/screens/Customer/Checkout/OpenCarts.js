@@ -25,8 +25,6 @@ const OpenCarts = () => {
     'https://cdn.dribbble.com/users/295908/screenshots/2834564/media/805c806c3abfd012b6833e2cb290f47c.png?resize=800x600&vertical=center';
   const carts = useCartsState();
 
-  console.log(carts, 'fff');
-
   return (
     <SafeAreaView style={styles.safeAreaViewBase}>
       <View style={styles.screenContainer}>

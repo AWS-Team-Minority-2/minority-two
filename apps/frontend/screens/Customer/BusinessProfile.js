@@ -90,9 +90,7 @@ const BusinessProfile = ({ route }) => {
           <TouchableOpacity
             style={styles.leftIcon}
             onPress={() => {
-              // removeCurrent(basketDisptach);
-              changeScreen(dispatch, 'Home');
-              navigation.navigate('UserHome');
+              navigation.goBack();
             }}
           >
             <Feather name='chevron-left' size={33} color='black' />

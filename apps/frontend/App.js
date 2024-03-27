@@ -26,7 +26,6 @@ import { AuthProvider, useAuthState } from '@min-two/user-iso';
 // The diffrence between a basket and a cart is that the basket are items from one store.
 // A Cart is a collection of baskets from diffrent stores.
 import { BasketProvider, CartsProvider } from '@min-two/business-web';
-OpenCarts;
 
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
 import { NavBar } from './screens/Customer/NavBar';

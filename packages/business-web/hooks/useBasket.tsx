@@ -23,23 +23,16 @@ function basketReducer(state: BasketState, action: Action): BasketState {
       return {
         ...state,
         items: [...state.items, action.payload],
-        // Assuming action.payload contains information about the store
-        // store: action.payload.store,
       };
     case 'SET_STORE':
       return {
         ...state,
         restaurant: action.payload,
-        // Assuming action.payload contains information about the store
-        // store: action.payload.store,
       };
-
     case 'REMOVE_CURRENT':
       return {
         items: [],
         restaurant: null,
-        // Assuming action.payload contains information about the store
-        // store: action.payload.store,
       };
     case 'REMOVE_FROM_BASKET':
       const index = state.items.findIndex(
@@ -59,6 +52,12 @@ function basketReducer(state: BasketState, action: Action): BasketState {
       }
     case 'GET_ITEMS':
       return state; // Simply return the current state which includes all items
+    case 'SET_BASKET_FUNCTION':
+      return {
+        ...state,
+        items: action.payload.items, // Corrected to access action.payload.items
+        restaurant: action.payload.store, // Corrected to access action.payload.items
+      };
     default:
       return state;
   }
@@ -115,13 +114,27 @@ function setResturant(
   dispatch({ type: 'SET_STORE', payload: { store } });
 }
 
+function setBasketFromCart(
+  dispatch: React.Dispatch<Action>,
+  items: Dish[],
+  store: RestaurantProvider
+) {
+  dispatch({
+    type: 'SET_BASKET_FUNCTION',
+    payload: {
+      items: items,
+      store: store,
+    },
+  });
+}
+
 function removeCurrent(dispatch: React.Dispatch<Action>) {
   dispatch({ type: 'REMOVE_CURRENT' });
 }
 
 export const selectBasketTotal = (state) => {
   if (!state || !state.items) return 0; // Check if state or state.items is undefined
-  return state.items.reduce((total, item) => total + item.price, 0);
+  return state.items.reduce((total, item) => total + parseInt(item.price), 0);
 };
 
 function selectBasketItems(state: BasketState) {
@@ -141,4 +154,5 @@ export {
   selectBasketItems,
   setResturant,
   removeCurrent,
+  setBasketFromCart,
 };

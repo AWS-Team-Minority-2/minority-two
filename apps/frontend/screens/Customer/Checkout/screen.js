@@ -9,14 +9,15 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {
-  useRestaurantState,
-  selectBasketItems,
   useBasketState,
+  selectBasketItems,
   selectBasketTotal,
 } from '@min-two/business-web';
 import Currency from 'react-currency-formatter';
 import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { removeCurrent, useBasketDispatch } from '@min-two/business-web';
+// removeCurrent(basketDisptach);
 
 import styles from '../Checkout/sass/BasketScreen.scss';
 
@@ -24,11 +25,15 @@ const BasketScreen = () => {
   const noCarts =
     'https://cdn.dribbble.com/users/295908/screenshots/2834564/media/805c806c3abfd012b6833e2cb290f47c.png?resize=800x600&vertical=center';
   const navigation = useNavigation();
-  const restaurant = useRestaurantState().restaurant;
+  const state = useBasketState();
+  const dispatch = useBasketDispatch();
 
-  const basketState = useBasketState();
-  const total = selectBasketTotal(basketState);
-  const items = selectBasketItems(basketState);
+  // const basketState = useBasketState();
+  const total = selectBasketTotal(state);
+  const items = selectBasketItems(state);
+  const store = state.restaurant;
+
+  // console.log(total);
 
   const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([]);
 
@@ -38,6 +43,9 @@ const BasketScreen = () => {
       return results;
     }, {});
     setGroupedItemsInBasket(groupedItems);
+    return () => {
+      removeCurrent(dispatch);
+    };
   }, [items]);
 
   return (
@@ -46,25 +54,13 @@ const BasketScreen = () => {
         <View style={styles.safeAreaViewContainer}>
           <View>
             <Text style={styles.finalLookText}>Final Look </Text>
-            <Text style={styles.resturantName}>{restaurant.name}</Text>
+            <Text style={styles.resturantName}>{store.name}</Text>
           </View>
 
           <TouchableOpacity onPress={navigation.goBack} style={styles.backBttn}>
             <Feather name='x' size={24} color='black' />
           </TouchableOpacity>
         </View>
-        {/* <View style={styles.userImageParent}>
-            <Image
-              source={{
-                uri: 'https://ucarecdn.com/abb0ca9f-fc36-4aac-940a-37d9110595f8/-/resize/601x326/',
-              }}
-              style={styles.userImage}
-            />
-            <Text style={styles.deliveryHeader}>Delivey in 20-25 mins</Text>
-            <TouchableOpacity>
-              <Text style={styles.changeBttn}>Change</Text>
-            </TouchableOpacity>
-          </View> */}
 
         <ScrollView style={styles.scrollViewParent}>
           {Object.entries(groupedItemsInBasket).map(([key, items]) => (
@@ -112,7 +108,7 @@ const BasketScreen = () => {
           </View>
           <View style={styles.placeOrderParent}>
             <TouchableOpacity
-              // onPress={() => navigation.navigate('PreparingOrderScreen')}
+              onPress={() => navigation.navigate('PreparingOrderScreen')}
               style={styles.placeOrderBttn}
             >
               <Text style={styles.placeOrderBttn}>Place Order</Text>

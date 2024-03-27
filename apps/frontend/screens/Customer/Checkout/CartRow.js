@@ -3,9 +3,11 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import styles from './sass/BasketScreen.scss';
 import { useNavigation } from '@react-navigation/native';
+import { setBasketFromCart, useBasketDispatch } from '@min-two/business-web';
 
 const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
   const navigation = useNavigation();
+  const disptach = useBasketDispatch();
 
   return (
     <View style={styles.touchableOpacityParent}>
@@ -45,27 +47,31 @@ const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
       </View>
 
       <View style={styles.itemsImagesContainer}></View>
-      <TouchableOpacity style={styles.cartBttn}>
+      <TouchableOpacity
+        style={styles.cartBttn}
+        onPress={() => {
+          setBasketFromCart(disptach, items, restaurantMetadata);
+          navigation.navigate('Checkout');
+        }}
+      >
         <Text style={styles.bttnText}>Open Cart</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.storeBttn}>
-        <Text
-          style={styles.bttnText}
-          onPress={() => {
-            navigation.navigate('BusinessProfile', {
-              name: restaurantMetadata.name,
-              coverImage: restaurantMetadata.coverImage,
-              rating: restaurantMetadata.rating,
-              ratingCount: restaurantMetadata.ratingCount,
-              distance: restaurantMetadata.distance,
-              profileImage: restaurantMetadata.profileImage,
-              sections: restaurantMetadata.sections,
-              id: restaurantMetadata.id,
-            });
-          }}
-        >
-          View Store
-        </Text>
+      <TouchableOpacity
+        style={styles.storeBttn}
+        onPress={() => {
+          navigation.navigate('BusinessProfile', {
+            name: restaurantMetadata.name,
+            coverImage: restaurantMetadata.coverImage,
+            rating: restaurantMetadata.rating,
+            ratingCount: restaurantMetadata.ratingCount,
+            distance: restaurantMetadata.distance,
+            profileImage: restaurantMetadata.profileImage,
+            sections: restaurantMetadata.sections,
+            id: restaurantMetadata.id,
+          });
+        }}
+      >
+        <Text style={styles.bttnText}>View Store</Text>
       </TouchableOpacity>
     </View>
   );

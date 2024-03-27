@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Modal, Image } from 'react-native';
 import styles from './sass/BusinessProfile';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
@@ -9,6 +9,7 @@ import {
   useBasketDispatch,
   useCartsDispatch,
   setCart,
+  useCartsState,
 } from '@min-two/business-web';
 import Toast from 'react-native-toast-message';
 
@@ -19,9 +20,39 @@ const SelectedItem = ({
   setShowItemPopup,
   store,
 }) => {
+  const [groupedItems, setGroupedItems] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const cartDisptach = useCartsDispatch();
-  const items = useBasketState().items;
+  const items = useCartsState();
+  const existingCartIndex = items.findIndex(
+    (cart) => cart.restaurant.id === store.id
+  );
+
+  useEffect(() => {
+    if (existingCartIndex !== -1) {
+      // If the restaurant already exists in the cart list, update state variables accordingly
+      const cart = items[existingCartIndex].items;
+      console.log(cart);
+      // console.log(cart, 'jjjj');
+      setGroupedItems(cart);
+    } else {
+      // If the restaurant doesn't exist in the cart list, reset state variables
+      setGroupedItems([]);
+    }
+  }, [existingCartIndex, items]);
+
+  // console.log(groupedItems, 'hhh');
+  // const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([]);
+
+  // useEffect(() => {
+  //   const groupedItems = items.reduce((results, item) => {
+  //     (results[item.id] = results[item.id] || []).push(item);
+  //     return results;
+  //   }, {});
+  //   setGroupedItemsInBasket(groupedItems);
+  // }, [items]);
+
+  // console.log(groupedItemsInBasket, 'uiii');
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -75,11 +106,14 @@ const SelectedItem = ({
             <TouchableOpacity
               style={styles.addButton}
               onPress={() => {
-                addToBasket(dispatch, item);
+                // addToBasket(dispatch, item);
+                // dont add to basket here, just add to cart
+                // reroute AddtoBakset from Open Carts workflow
                 setCart(cartDisptach, {
                   restaurant: store,
-                  items: [...items, item],
+                  items: [...groupedItems, item],
                 });
+                // update cart in global state
                 setShowItemPopup(false);
                 goodCartChange();
               }}
