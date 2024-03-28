@@ -33,6 +33,8 @@ function cartsReducer(state: CartsState, action: Action): CartsState {
         // Otherwise, add a new entry to the cart list
         return [...state, action.payload];
       }
+    case 'SET_CARTS_MOUNT':
+      return action.payload;
 
     default:
       return state;
@@ -73,4 +75,14 @@ function setCart(dispatch: React.Dispatch<Action>, cart: Cart) {
   dispatch({ type: 'SET_CARTS', payload: cart });
 }
 
-export { CartsProvider, useCartsState, useCartsDispatch, setCart };
+function setCartOnMount(dispatch: React.Dispatch<Action>, carts) {
+  dispatch({ type: 'SET_CARTS_MOUNT', payload: carts });
+}
+
+export {
+  CartsProvider,
+  useCartsState,
+  useCartsDispatch,
+  setCart,
+  setCartOnMount,
+};

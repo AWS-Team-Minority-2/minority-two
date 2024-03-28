@@ -4,7 +4,7 @@ import styles from './sass/BusinessProfile';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import Currency from 'react-currency-formatter';
 import {
-  addToBasket,
+  addCartStateGlobal,
   useBasketState,
   useBasketDispatch,
   useCartsDispatch,
@@ -27,12 +27,12 @@ const SelectedItem = ({
   const existingCartIndex = items.findIndex(
     (cart) => cart.restaurant.id === store.id
   );
+  const [unReducedItems, setunreducedItems] = useState([]);
 
   useEffect(() => {
     if (existingCartIndex !== -1) {
       // If the restaurant already exists in the cart list, update state variables accordingly
       const cart = items[existingCartIndex].items;
-      console.log(cart);
       // console.log(cart, 'jjjj');
       setGroupedItems(cart);
     } else {
@@ -40,6 +40,12 @@ const SelectedItem = ({
       setGroupedItems([]);
     }
   }, [existingCartIndex, items]);
+
+  useEffect(() => {
+    setunreducedItems(items);
+    // Call addCartStateGlobal here to ensure it's using the updated unReducedItems
+    addCartStateGlobal({ carts: items });
+  }, [items]);
 
   // console.log(groupedItems, 'hhh');
   // const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([]);
@@ -105,15 +111,13 @@ const SelectedItem = ({
             <Text style={styles.itemDescription}>{item.description}</Text>
             <TouchableOpacity
               style={styles.addButton}
-              onPress={() => {
-                // addToBasket(dispatch, item);
-                // dont add to basket here, just add to cart
-                // reroute AddtoBakset from Open Carts workflow
+              onPress={async () => {
                 setCart(cartDisptach, {
                   restaurant: store,
                   items: [...groupedItems, item],
                 });
-                // update cart in global state
+
+                // await addCartStateGlobal({ carts: unReducedItems });
                 setShowItemPopup(false);
                 goodCartChange();
               }}

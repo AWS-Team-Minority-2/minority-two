@@ -25,7 +25,11 @@ import {
 import { AuthProvider, useAuthState } from '@min-two/user-iso';
 // The diffrence between a basket and a cart is that the basket are items from one store.
 // A Cart is a collection of baskets from diffrent stores.
-import { BasketProvider, CartsProvider } from '@min-two/business-web';
+import {
+  BasketProvider,
+  CartsProvider,
+  useCartsDispatch,
+} from '@min-two/business-web';
 
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
 import { NavBar } from './screens/Customer/NavBar';
@@ -50,6 +54,7 @@ import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
 import { useFonts } from 'expo-font';
 import { Text } from 'react-native';
 import { EditBusiness } from './screens/Admin/updates/editBusiness';
+import { setCartOnMount } from '@min-two/business-web';
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
@@ -67,6 +72,7 @@ function NavigationController() {
   const showNavBar = !noNavScreens.includes(screen);
   const screenDispatch = useScreenDispatch();
   const [user, setUser] = useState({});
+  const cartDispatch = useCartsDispatch();
 
   useEffect(() => {
     const checkUser = async () => {
@@ -88,6 +94,21 @@ function NavigationController() {
     };
 
     checkUser();
+  }, []);
+
+  useEffect(() => {
+    const checkCarts = async () => {
+      try {
+        const value = await AsyncStorage.getItem('carts');
+        if (value !== null) {
+          setCartOnMount(cartDispatch, JSON.parse(value));
+        }
+      } catch (error) {
+        console.log('Error checking item: ', error);
+      }
+    };
+
+    checkCarts();
   }, []);
 
   return (

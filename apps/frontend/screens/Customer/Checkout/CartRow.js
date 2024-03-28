@@ -3,7 +3,11 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import styles from './sass/BasketScreen.scss';
 import { useNavigation } from '@react-navigation/native';
-import { setBasketFromCart, useBasketDispatch } from '@min-two/business-web';
+import {
+  setBasketFromCart,
+  useBasketDispatch,
+  useCartsState,
+} from '@min-two/business-web';
 
 const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
   const navigation = useNavigation();
