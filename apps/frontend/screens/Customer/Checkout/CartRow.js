@@ -66,9 +66,9 @@ const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
               ))}
               {items.length > 2 && (
                 <Text style={styles.groupedItems}>
-                  {items.length === 2
-                    ? '+1 other'
-                    : `and ${items.length - 1} others`}
+                  {items.length === 3
+                    ? 'and 1 other'
+                    : `and ${items.length - 2} others`}
                 </Text>
               )}
             </View>
