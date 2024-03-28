@@ -6,12 +6,41 @@ import { useNavigation } from '@react-navigation/native';
 import {
   setBasketFromCart,
   useBasketDispatch,
+  useCartsDispatch,
+  removeCart,
   useCartsState,
 } from '@min-two/business-web';
 
 const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
   const navigation = useNavigation();
   const disptach = useBasketDispatch();
+  const cartDispatch = useCartsDispatch();
+
+  // const cartItems = useCartsState();
+  // const existingCartIndex = items.findIndex(
+  //   (cart) => cart.restaurant.id === store.id
+  // );
+  // const [unReducedItems, setunreducedItems] = useState([]);
+
+  // useEffect(() => {
+  //   if (existingCartIndex !== -1) {
+  //     // If the restaurant already exists in the cart list, update state variables accordingly
+  //     const cart = cartItems[existingCartIndex].items;
+  //     // console.log(cart, 'jjjj');
+  //     setGroupedItems(cart);
+  //   } else {
+  //     // If the restaurant doesn't exist in the cart list, reset state variables
+  //     setGroupedItems([]);
+  //   }
+  // }, [existingCartIndex, items]);
+
+  // useEffect(() => {
+  //   setunreducedItems(items);
+  //   // Call addCartStateGlobal here to ensure it's using the updated unReducedItems
+  //   addCartStateGlobal({ carts: items });
+  // }, [items]);
+
+  // console.log(unReducedItems, 'items');
 
   return (
     <View style={styles.touchableOpacityParent}>
@@ -45,7 +74,14 @@ const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
             </View>
           </View>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            removeCart(cartDispatch, {
+              restaurant: restaurantMetadata,
+              items: items,
+            });
+          }}
+        >
           <Feather name='trash' size={15} color='black' />
         </TouchableOpacity>
       </View>

@@ -33,6 +33,22 @@ function cartsReducer(state: CartsState, action: Action): CartsState {
         // Otherwise, add a new entry to the cart list
         return [...state, action.payload];
       }
+
+    case 'REMOVE_CARTS':
+      const cartToRemoveIndex = state.findIndex(
+        (cart) => cart.restaurant.id === action.payload.restaurant.id
+      );
+
+      if (cartToRemoveIndex !== -1) {
+        const updatedState = [...state];
+        updatedState.splice(cartToRemoveIndex, 1);
+        return updatedState;
+      } else {
+        return state;
+      }
+
+    // console.log(cartToRemoveIndex);
+
     case 'SET_CARTS_MOUNT':
       return action.payload;
 
@@ -75,6 +91,10 @@ function setCart(dispatch: React.Dispatch<Action>, cart: Cart) {
   dispatch({ type: 'SET_CARTS', payload: cart });
 }
 
+function removeCart(dispatch: React.Dispatch<Action>, cart: Cart) {
+  dispatch({ type: 'REMOVE_CARTS', payload: cart });
+}
+
 function setCartOnMount(dispatch: React.Dispatch<Action>, carts) {
   dispatch({ type: 'SET_CARTS_MOUNT', payload: carts });
 }
@@ -85,4 +105,5 @@ export {
   useCartsDispatch,
   setCart,
   setCartOnMount,
+  removeCart,
 };

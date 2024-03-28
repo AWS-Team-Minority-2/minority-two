@@ -202,6 +202,9 @@ const UserHomeScreen = () => {
                 >
                   <Ionicons name='cart-outline' size={20} color='black' />
                   <View style={styles.cartLengthBttn}>
+                    {activeCarts > 0 && (
+                      <Text style={styles.cartLengthText}>{activeCarts}</Text>
+                    )}
                     <Text style={styles.cartLengthText}>{activeCarts}</Text>
                   </View>
                 </TouchableOpacity>
