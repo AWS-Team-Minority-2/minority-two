@@ -37,7 +37,11 @@ const TopPlacesCarousel = ({ list, route }) => {
             }}
             onPress={() => {
               navigation.navigate(
-                item.type === "restaurant" ? "BusinessProfile" : "StoreProfile",
+                item.type === "restaurant"
+                  ? "BusinessProfile"
+                  : item.type === "service"
+                  ? "ServiceProfile" // Navigate to ServiceProfile if type is "service"
+                  : "StoreProfile",
                 {
                   name: item.name,
                   coverImage: item.cover_image,

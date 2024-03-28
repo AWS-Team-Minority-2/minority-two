@@ -116,7 +116,7 @@ const StoreProfile = () => {
           {storeInfo.map((store) => (
             <View style={styles.storeTopView}>
               <Text style={styles.storeName}>{store.name}</Text>
-              <Text style={styles.businessType}>Store</Text>
+              <Text style={styles.businessType}>Shop</Text>
               <TouchableOpacity style={styles.storeInfo} onPress={togglePopUp}>
                 <Ionicons name="star-sharp" size={15} color="black" />
                 <Text>{store.rating}• </Text>

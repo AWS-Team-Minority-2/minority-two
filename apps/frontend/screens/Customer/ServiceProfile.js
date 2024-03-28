@@ -138,6 +138,7 @@ const ServiceProfile = () => {
               />
             </View>
             <Text style={styles.serviceName}>Best Cuts BarberShop</Text>
+            <Text style={styles.businessType}>Service</Text>
 
             <TouchableOpacity style={styles.serviceInfo} onPress={togglePopUp}>
               <View style={styles.serviceDetails}>

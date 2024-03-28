@@ -2,24 +2,23 @@ import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { FeaturedCard } from "./FeaturedCard";
 import { FeaturedCardStore } from "./FeaturedCardStore";
-import { items } from "./data/menu";
 import { service } from "./data/service";
-import { shop } from "./data/store";
-import styles from "./sass/BusinessProfile";
+import styles from "./sass/ServerProfile";
+import { FeaturedCardService } from "./FeaturedCardService";
 
 //Handles each feature tab of all the rows
-const FeaturedRow = ({ featuredName }) => {
+const FeaturedRowService = ({ featuredName }) => {
   return (
     <View>
       <Text style={styles.tabName}>{featuredName}</Text>
 
-      {items
+      {service
         .filter((filteredItem) => filteredItem.feature === featuredName)
         .map((filteredItem, index) => (
-          <FeaturedCard item={filteredItem} />
+          <FeaturedCardService item={filteredItem} />
         ))}
     </View>
   );
 };
 
-export { FeaturedRow };
+export { FeaturedRowService };

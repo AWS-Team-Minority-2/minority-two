@@ -246,3 +246,55 @@
    margin-top: 5%;
    margin-left: 3%;
 }
+
+.tabName{
+   font-size: 22px;
+   font-weight: 700;
+   margin-bottom: 3%;
+ }
+
+ .serviceItemBox{
+   flex-direction: row;
+   align-items: center;
+ }
+
+ .serviceItemContent{
+   flex-direction: column;
+   flex: 1;
+ }
+ 
+ 
+ .serviceItem{
+     font-size: 15px;
+     font-weight: 600;
+     margin-bottom: 5px;
+ }
+ 
+ .servicePrices {
+   margin-bottom: 5px;
+ }
+ 
+ .serviceDesc {
+   margin-bottom: 5px;
+ }
+ 
+ .serviceDivider {
+   height: 1px;
+   background-color: #e4e4e4; /* Color of the divided line */
+   margin-top: 5px;
+   margin-bottom: 30px;
+ }
+
+ .bookButton{
+   background-color: #f2998d; /* Bootstrap primary button color */
+    padding: 10px 20px; /* Vertical padding 10px, Horizontal padding 20px */
+    border-radius: 5px; /* Rounded corners */
+    align-items: center; /* Center the text vertically */
+    justify-content: center; /* Center the text horizontally */   
+    margin-right: 5%; 
+ }
+
+ .bookText{
+   color: white;
+   font-weight: 500;
+ }
