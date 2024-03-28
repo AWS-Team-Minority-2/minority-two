@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import styles from './sass/BasketScreen.scss';
@@ -15,32 +15,11 @@ const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
   const navigation = useNavigation();
   const disptach = useBasketDispatch();
   const cartDispatch = useCartsDispatch();
-
-  // const cartItems = useCartsState();
-  // const existingCartIndex = items.findIndex(
-  //   (cart) => cart.restaurant.id === store.id
-  // );
-  // const [unReducedItems, setunreducedItems] = useState([]);
+  const cartState = useCartsState();
 
   // useEffect(() => {
-  //   if (existingCartIndex !== -1) {
-  //     // If the restaurant already exists in the cart list, update state variables accordingly
-  //     const cart = cartItems[existingCartIndex].items;
-  //     // console.log(cart, 'jjjj');
-  //     setGroupedItems(cart);
-  //   } else {
-  //     // If the restaurant doesn't exist in the cart list, reset state variables
-  //     setGroupedItems([]);
-  //   }
-  // }, [existingCartIndex, items]);
-
-  // useEffect(() => {
-  //   setunreducedItems(items);
-  //   // Call addCartStateGlobal here to ensure it's using the updated unReducedItems
-  //   addCartStateGlobal({ carts: items });
-  // }, [items]);
-
-  // console.log(unReducedItems, 'items');
+  //   console.log(cartState, 'from cart row');
+  // }, [cartState]);
 
   return (
     <View style={styles.touchableOpacityParent}>

@@ -6,7 +6,7 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
 import styles from './sass/BasketScreen.scss';
@@ -17,6 +17,7 @@ import {
   selectBasketItems,
   useBasketState,
   selectBasketTotal,
+  addCartStateGlobal,
 } from '@min-two/business-web';
 
 const OpenCarts = () => {
@@ -24,6 +25,15 @@ const OpenCarts = () => {
   const noCarts =
     'https://cdn.dribbble.com/users/295908/screenshots/2834564/media/805c806c3abfd012b6833e2cb290f47c.png?resize=800x600&vertical=center';
   const carts = useCartsState() || [];
+  const [initialRender, setInitialRender] = useState(false);
+
+  useEffect(() => {
+    if (!initialRender) {
+      setInitialRender(!initialRender);
+    } else {
+      addCartStateGlobal({ carts: carts });
+    }
+  }, [carts]);
 
   return (
     <SafeAreaView style={styles.safeAreaViewBase}>

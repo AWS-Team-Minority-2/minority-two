@@ -31,34 +31,17 @@ const SelectedItem = ({
 
   useEffect(() => {
     if (existingCartIndex !== -1) {
-      // If the restaurant already exists in the cart list, update state variables accordingly
       const cart = items[existingCartIndex].items;
-      // console.log(cart, 'jjjj');
       setGroupedItems(cart);
     } else {
-      // If the restaurant doesn't exist in the cart list, reset state variables
       setGroupedItems([]);
     }
   }, [existingCartIndex, items]);
 
   useEffect(() => {
     setunreducedItems(items);
-    // Call addCartStateGlobal here to ensure it's using the updated unReducedItems
     addCartStateGlobal({ carts: items });
   }, [items]);
-
-  // console.log(groupedItems, 'hhh');
-  // const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([]);
-
-  // useEffect(() => {
-  //   const groupedItems = items.reduce((results, item) => {
-  //     (results[item.id] = results[item.id] || []).push(item);
-  //     return results;
-  //   }, {});
-  //   setGroupedItemsInBasket(groupedItems);
-  // }, [items]);
-
-  // console.log(groupedItemsInBasket, 'uiii');
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -116,8 +99,6 @@ const SelectedItem = ({
                   restaurant: store,
                   items: [...groupedItems, item],
                 });
-
-                // await addCartStateGlobal({ carts: unReducedItems });
                 setShowItemPopup(false);
                 goodCartChange();
               }}
