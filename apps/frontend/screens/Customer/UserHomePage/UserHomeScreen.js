@@ -15,13 +15,14 @@ import { useNavigation } from '@react-navigation/native';
 import { useAuthState, useAuthDispatch, doLogin } from '@min-two/user-iso';
 import { useStores } from '@min-two/business-web';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useBasketState } from '@min-two/business-web';
+import { useCartsState } from '@min-two/business-web';
 import styles from './UserHome.scss';
 
 const UserHomeScreen = () => {
   const { user: loggedUser } = useAuthState();
 
   const navigation = useNavigation();
+  const activeCarts = useCartsState().length;
 
   useEffect(() => {
     if (!loggedUser) {
@@ -200,6 +201,9 @@ const UserHomeScreen = () => {
                   }}
                 >
                   <Ionicons name='cart-outline' size={20} color='black' />
+                  <View style={styles.cartLengthBttn}>
+                    <Text style={styles.cartLengthText}>{activeCarts}</Text>
+                  </View>
                 </TouchableOpacity>
               </View>
             </View>

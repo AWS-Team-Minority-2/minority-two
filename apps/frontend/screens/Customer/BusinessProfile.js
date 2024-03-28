@@ -23,7 +23,6 @@ import {
   useBasketState,
   useBasketDispatch,
   setResturant,
-  removeCurrent,
 } from '@min-two/business-web';
 
 const BusinessProfile = ({ route }) => {
@@ -31,11 +30,8 @@ const BusinessProfile = ({ route }) => {
   const sectionRefs = useRef([]);
   const scrollRef = useRef(null);
 
-  const dispatch = useScreenDispatch();
-
   const [isPopUpVisible, setIsPopUpVisible] = useState(false); // State to manage the visibility of the pop-up screen
   const basketDisptach = useBasketDispatch();
-  const statee = useBasketState();
 
   const togglePopUp = () => {
     setIsPopUpVisible(!isPopUpVisible);
@@ -83,97 +79,112 @@ const BusinessProfile = ({ route }) => {
     }
   };
 
+  //  get cart info here
+
   return (
-    <SafeAreaView style={styles.businessProfileLayout}>
-      <View style={styles.businessProfileAdjustment}>
-        <View style={styles.businessTopView}>
-          <TouchableOpacity
-            style={styles.leftIcon}
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            <Feather name='chevron-left' size={33} color='black' />
-          </TouchableOpacity>
+    <>
+      <SafeAreaView style={styles.businessProfileLayout}>
+        <View style={styles.businessProfileAdjustment}>
+          <View style={styles.businessTopView}>
+            <TouchableOpacity
+              style={styles.leftIcon}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Feather name='chevron-left' size={33} color='black' />
+            </TouchableOpacity>
+
+            <ScrollView
+              ref={scrollRef}
+              horizontal={true} // Set horizontal scroll
+              showsHorizontalScrollIndicator={false}
+              style={styles.featureScrollView}
+            >
+              {features.map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => scrollToFeature(index)}
+                >
+                  <View style={styles.featureOval}>
+                    <Text style={styles.featureName}>{item}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
 
           <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.businessScroll}
             ref={scrollRef}
-            horizontal={true} // Set horizontal scroll
-            showsHorizontalScrollIndicator={false}
-            style={styles.featureScrollView}
           >
-            {features.map((item, index) => (
+            <Image
+              source={{ url: coverImage }}
+              style={{ width: '100%', height: 165 }}
+            />
+            <View style={styles.businessHeader}>
+              <View style={styles.businessLogo}>
+                <Image
+                  source={{
+                    uri: profileImage,
+                  }}
+                  style={styles.image}
+                />
+              </View>
+              <Text style={styles.businessName}>{name}</Text>
+
               <TouchableOpacity
-                key={index}
-                onPress={() => scrollToFeature(index)}
+                style={styles.businessInfo}
+                onPress={togglePopUp}
               >
-                <View style={styles.featureOval}>
-                  <Text style={styles.featureName}>{item}</Text>
+                <View style={styles.businessDetails}>
+                  <Ionicons name='star-sharp' size={15} color='black' />
+                  <Text>
+                    {rating}({ratingCount})
+                  </Text>
+                  {distance && (
+                    <>
+                      <Text> • </Text>
+                      <Text style={styles.businessDistance}>{distance} mi</Text>
+                    </>
+                  )}
+
+                  <Feather name='chevron-right' size={16} color='grey' />
                 </View>
               </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={styles.businessScroll}
-          ref={scrollRef}
-        >
-          <Image
-            source={{ url: coverImage }}
-            style={{ width: '100%', height: 165 }}
-          />
-          <View style={styles.businessHeader}>
-            <View style={styles.businessLogo}>
-              <Image
-                source={{
-                  uri: profileImage,
-                }}
-                style={styles.image}
+              <BusinessProfilePopUp
+                isVisible={isPopUpVisible}
+                onClose={togglePopUp}
               />
             </View>
-            <Text style={styles.businessName}>{name}</Text>
 
-            <TouchableOpacity style={styles.businessInfo} onPress={togglePopUp}>
-              <View style={styles.businessDetails}>
-                <Ionicons name='star-sharp' size={15} color='black' />
-                <Text>
-                  {rating}({ratingCount})
-                </Text>
-                {distance && (
-                  <>
-                    <Text> • </Text>
-                    <Text style={styles.businessDistance}>{distance} mi</Text>
-                  </>
-                )}
-
-                <Feather name='chevron-right' size={16} color='grey' />
-              </View>
-            </TouchableOpacity>
-            <BusinessProfilePopUp
-              isVisible={isPopUpVisible}
-              onClose={togglePopUp}
-            />
+            <View style={styles.businessTabView}>
+              {sectionsObj.map((item, sectionIndex) => (
+                <View
+                  style={styles.businessTab}
+                  key={sectionIndex}
+                  ref={(ref) => (sectionRefs.current[sectionIndex] = ref)}
+                >
+                  <Text style={styles.featuredName}>{item.name}</Text>
+                  {item.dishes.map((dish, dishIndex) => (
+                    <Dishrow key={dishIndex} dish={dish} store={store} />
+                  ))}
+                </View>
+              ))}
+            </View>
+          </ScrollView>
+        </View>
+        <View style={styles.activeCartBttn}>
+          <Ionicons name='cart-outline' size={20} color='white' />
+          <View>
+            <Text style={styles.viewCartText}>{name} Cart</Text>
+            {/* <Text>View Cart</Text> */}
           </View>
-
-          <View style={styles.businessTabView}>
-            {sectionsObj.map((item, sectionIndex) => (
-              <View
-                style={styles.businessTab}
-                key={sectionIndex}
-                ref={(ref) => (sectionRefs.current[sectionIndex] = ref)}
-              >
-                <Text style={styles.featuredName}>{item.name}</Text>
-                {item.dishes.map((dish, dishIndex) => (
-                  <Dishrow key={dishIndex} dish={dish} store={store} />
-                ))}
-              </View>
-            ))}
-          </View>
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+          <Text>{''}</Text>
+        </View>
+      </SafeAreaView>
+    </>
   );
 };
 
