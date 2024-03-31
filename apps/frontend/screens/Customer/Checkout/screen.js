@@ -22,7 +22,10 @@ import { removeCurrent, useBasketDispatch } from '@min-two/business-web';
 import styles from '../Checkout/sass/BasketScreen.scss';
 import { changeScreen, useScreenDispatch } from '@min-two/screen-iso';
 
-const BasketScreen = () => {
+const BasketScreen = ({ route }) => {
+  const props = route.params;
+
+  console.log(props);
   const noCarts =
     'https://cdn.dribbble.com/users/295908/screenshots/2834564/media/805c806c3abfd012b6833e2cb290f47c.png?resize=800x600&vertical=center';
   const navigation = useNavigation();
@@ -114,6 +117,8 @@ const BasketScreen = () => {
                 changeScreen(screenDispatch, 'Landing');
                 navigation.navigate('Complete', {
                   total: total,
+                  restaurant: props.restaurantMetadata,
+                  items: props.items,
                 });
               }}
               style={styles.placeOrderBttn}

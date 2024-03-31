@@ -13,16 +13,30 @@ import TopPlacesCarousel from './components/TopPlacesCarousel';
 import { Entypo, Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthState, useAuthDispatch, doLogin } from '@min-two/user-iso';
-import { useStores } from '@min-two/business-web';
+import { addCartStateGlobal, useStores } from '@min-two/business-web';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCartsState } from '@min-two/business-web';
 import styles from './UserHome.scss';
 
-const UserHomeScreen = () => {
+const UserHomeScreen = ({ route }) => {
   const { user: loggedUser } = useAuthState();
 
   const navigation = useNavigation();
-  const activeCarts = useCartsState().length;
+  const carts = useCartsState();
+  const [initalRender, setInitalRender] = useState(false);
+
+  const params = route.params;
+
+  const activeCarts = carts.length;
+
+  useEffect(() => {
+    if (params) {
+      addCartStateGlobal({ carts: carts });
+    }
+  }, [activeCarts, params]);
+
+  // Ned to add to global state
+  // Can maybe be passed in from Processing
 
   useEffect(() => {
     if (!loggedUser) {

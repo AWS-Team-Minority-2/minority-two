@@ -70,7 +70,10 @@ const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
         style={styles.cartBttn}
         onPress={() => {
           setBasketFromCart(disptach, items, restaurantMetadata);
-          navigation.navigate('Checkout');
+          navigation.navigate('Checkout', {
+            restaurantMetadata,
+            items,
+          });
         }}
       >
         <Text style={styles.bttnText}>Open Cart</Text>

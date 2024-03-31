@@ -5,18 +5,26 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import motto from '../../../assets/motto.png';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import Currency from 'react-currency-formatter';
 
 import styles from './sass/BasketScreen.scss';
+import {
+  useCartsDispatch,
+  removeCart,
+  addCartStateGlobal,
+  useCartsState,
+} from '@min-two/business-web';
 
 // Hide Navbar Flag
 
 const ProcessedScreen = ({ navigation, route }) => {
   const params = route.params;
+  const cartDispatch = useCartsDispatch();
+  const carts = useCartsState();
 
   return (
     <SafeAreaView style={styles.safeAreaViewBase}>
@@ -44,7 +52,18 @@ const ProcessedScreen = ({ navigation, route }) => {
 
         <TouchableOpacity
           style={styles.completeOrderBttn}
-          onPress={() => navigation.navigate('UserHome')}
+          onPress={() => {
+            removeCart(cartDispatch, {
+              restaurant: params.restaurant,
+              items: params.items,
+            });
+            navigation.navigate('UserHome', {
+              restaurant: params.restaurant,
+              items: params.items,
+            });
+            // addCartStateGlobal({ carts: carts });
+          }}
+          //   delete basket from state and cart from state
         >
           <Text style={styles.completeText}>Complete</Text>
         </TouchableOpacity>
