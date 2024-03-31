@@ -156,6 +156,7 @@ const BusinessProfile = ({ route }) => {
               <BusinessProfilePopUp
                 isVisible={isPopUpVisible}
                 onClose={togglePopUp}
+                name={name}
               />
             </View>
 
@@ -175,14 +176,14 @@ const BusinessProfile = ({ route }) => {
             </View>
           </ScrollView>
         </View>
-        <View style={styles.activeCartBttn}>
+        {/* <View style={styles.activeCartBttn}>
           <Ionicons name='cart-outline' size={20} color='white' />
           <View>
-            <Text style={styles.viewCartText}>{name} Cart</Text>
-            {/* <Text>View Cart</Text> */}
-          </View>
+            <Text style={styles.viewCartText}>{name} Cart</Text> */}
+        {/* <Text>View Cart</Text> */}
+        {/* </View>
           <Text>{''}</Text>
-        </View>
+        </View> */}
       </SafeAreaView>
     </>
   );

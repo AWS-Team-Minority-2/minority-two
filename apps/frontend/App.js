@@ -21,6 +21,7 @@ import {
   AdminScreen,
   BasketScreen,
   OpenCarts,
+  ProcessedScreen,
 } from './screens';
 import { AuthProvider, useAuthState } from '@min-two/user-iso';
 // The diffrence between a basket and a cart is that the basket are items from one store.
@@ -119,9 +120,10 @@ function NavigationController() {
         }}
       >
         <Stack.Screen name='Home' component={Homescreen} />
-
         <Stack.Screen name='Checkout' component={BasketScreen} />
         <Stack.Screen name='Carts' component={OpenCarts} />
+        <Stack.Screen name='Complete' component={ProcessedScreen} />
+
         <Stack.Screen name='CustomerLogin' component={CustomerLoginScreen} />
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
         <Stack.Screen
@@ -139,13 +141,11 @@ function NavigationController() {
         <Stack.Screen name='AccountInfo' component={AccountInfo} />
         <Stack.Screen name='AccountInfoName' component={AccountInfoName} />
         <Stack.Screen name='BusinessProfile' component={BusinessProfile} />
-
         <Stack.Screen
           name='AccountInfoPhoneNumber'
           component={AccountInfoPhoneNumber}
         />
         <Stack.Screen name='AccountInfoEmail' component={AccountInfoEmail} />
-
         <Stack.Screen name='ServiceProfile' component={ServiceProfile} />
         <Stack.Screen name='ServerProfile' component={ServerProfile} />
       </Stack.Navigator>

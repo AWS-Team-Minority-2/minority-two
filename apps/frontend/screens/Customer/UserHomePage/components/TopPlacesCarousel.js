@@ -37,7 +37,7 @@ const TopPlacesCarousel = ({ list, route }) => {
             }}
             onPress={() => {
               navigation.navigate(
-                item.type === 'restaurant' || item.type === 'shop'
+                item.type === 'restaurant'
                   ? 'BusinessProfile'
                   : 'ServiceProfile',
                 {

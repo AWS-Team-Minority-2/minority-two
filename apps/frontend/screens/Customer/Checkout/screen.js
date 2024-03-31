@@ -20,6 +20,7 @@ import { removeCurrent, useBasketDispatch } from '@min-two/business-web';
 // removeCurrent(basketDisptach);
 
 import styles from '../Checkout/sass/BasketScreen.scss';
+import { changeScreen, useScreenDispatch } from '@min-two/screen-iso';
 
 const BasketScreen = () => {
   const noCarts =
@@ -27,6 +28,7 @@ const BasketScreen = () => {
   const navigation = useNavigation();
   const state = useBasketState();
   const dispatch = useBasketDispatch();
+  const screenDispatch = useScreenDispatch();
 
   // const basketState = useBasketState();
   const total = selectBasketTotal(state);
@@ -108,7 +110,12 @@ const BasketScreen = () => {
           </View>
           <View style={styles.placeOrderParent}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('PreparingOrderScreen')}
+              onPress={() => {
+                changeScreen(screenDispatch, 'Landing');
+                navigation.navigate('Complete', {
+                  total: total,
+                });
+              }}
               style={styles.placeOrderBttn}
             >
               <Text style={styles.placeOrderBttn}>Place Order</Text>

@@ -18,3 +18,4 @@ export { ServiceProfile } from './Customer/ServiceProfile';
 export { ServerProfile } from './Customer/ServerProfile';
 export * from './Customer/Checkout/screen';
 export * from './Customer/Checkout/OpenCarts';
+export * from './Customer/Checkout/processed';
