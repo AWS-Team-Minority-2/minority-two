@@ -54,6 +54,8 @@ const BusinessProfile = ({ route }) => {
 
   // No need to defualt here cant get to featured row without sections
 
+  const [hasActiveCart, setHasActiveCart] = useState(hasCartsActive);
+
   const store = {
     name,
     coverImage,
@@ -86,10 +88,10 @@ const BusinessProfile = ({ route }) => {
   };
 
   useEffect(() => {
-    if (hasCartsActive == true) {
+    if (hasActiveCart == true) {
       setUngroupeItems(getItemsByStoreId(cartState, id));
     }
-  }, [hasCartsActive, cartState]);
+  }, [hasActiveCart, cartState]);
 
   //  get cart info here
 
@@ -177,14 +179,19 @@ const BusinessProfile = ({ route }) => {
               >
                 <Text style={styles.featuredName}>{item.name}</Text>
                 {item.dishes.map((dish, dishIndex) => (
-                  <Dishrow key={dishIndex} dish={dish} store={store} />
+                  <Dishrow
+                    key={dishIndex}
+                    dish={dish}
+                    store={store}
+                    activeOverride={setHasActiveCart}
+                  />
                 ))}
               </View>
             ))}
           </View>
         </ScrollView>
       </View>
-      {hasCartsActive && (
+      {hasActiveCart && (
         <TouchableOpacity
           style={styles.activeCartBttn}
           onPress={() => {

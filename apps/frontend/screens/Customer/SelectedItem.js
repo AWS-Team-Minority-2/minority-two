@@ -19,6 +19,7 @@ const SelectedItem = ({
   onClose,
   setShowItemPopup,
   store,
+  activeOverride,
 }) => {
   const [groupedItems, setGroupedItems] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -101,6 +102,7 @@ const SelectedItem = ({
                 });
                 setShowItemPopup(false);
                 goodCartChange();
+                activeOverride(true);
               }}
             >
               <Text style={styles.addButtonText}>Add to Cart</Text>

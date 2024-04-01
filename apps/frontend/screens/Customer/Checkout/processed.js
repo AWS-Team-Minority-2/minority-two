@@ -15,9 +15,9 @@ import styles from './sass/BasketScreen.scss';
 import {
   useCartsDispatch,
   removeCart,
-  addCartStateGlobal,
   useCartsState,
 } from '@min-two/business-web';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 
 // Hide Navbar Flag
 
@@ -25,6 +25,7 @@ const ProcessedScreen = ({ navigation, route }) => {
   const params = route.params;
   const cartDispatch = useCartsDispatch();
   const carts = useCartsState();
+  const dispatch = useScreenDispatch();
 
   return (
     <SafeAreaView style={styles.safeAreaViewBase}>
@@ -61,9 +62,8 @@ const ProcessedScreen = ({ navigation, route }) => {
               restaurant: params.restaurant,
               items: params.items,
             });
-            // addCartStateGlobal({ carts: carts });
+            changeScreen(dispatch, 'UserHome');
           }}
-          //   delete basket from state and cart from state
         >
           <Text style={styles.completeText}>Complete</Text>
         </TouchableOpacity>

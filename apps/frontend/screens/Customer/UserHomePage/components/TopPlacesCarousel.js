@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   Text,
@@ -22,7 +22,12 @@ const TopPlacesCarousel = ({ list, route }) => {
   const navigation = useNavigation();
 
   const cartState = useCartsState();
-  const ids = getActiveStoreIds(cartState);
+  const [storeIds, setStoreIds] = useState([]);
+
+  useEffect(() => {
+    setStoreIds(getActiveStoreIds(cartState));
+    console.log(storeIds, 'list');
+  }, [cartState]);
 
   return (
     <FlatList
@@ -54,7 +59,7 @@ const TopPlacesCarousel = ({ list, route }) => {
                   sections: item.section,
                   id: item.sid,
                   // boolean
-                  hasCartsActive: ids.includes(item.sid),
+                  hasCartsActive: storeIds.includes(item.sid),
                   // pass in active state here
                 }
               );

@@ -14,7 +14,7 @@ import {
 import styles from './sass/Dishrow.scss';
 import SelectedItem from './SelectedItem';
 
-const Dishrow = ({ dish, store }) => {
+const Dishrow = ({ dish, store, activeOverride }) => {
   const [isPressed, setIsPressed] = useState(false);
   const basketState = useBasketState();
 
@@ -56,6 +56,7 @@ const Dishrow = ({ dish, store }) => {
         onClose={handleCloseModal}
         setShowItemPopup={setShowItemPopup}
         store={store}
+        activeOverride={activeOverride}
       />
     </>
   );
