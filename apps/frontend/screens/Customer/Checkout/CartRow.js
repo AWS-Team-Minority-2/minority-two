@@ -9,6 +9,7 @@ import {
   useCartsDispatch,
   removeCart,
   useCartsState,
+  removeFromBasket,
 } from '@min-two/business-web';
 
 const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {

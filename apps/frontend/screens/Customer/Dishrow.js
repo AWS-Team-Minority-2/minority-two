@@ -35,7 +35,7 @@ const Dishrow = ({ dish, store }) => {
         <View style={styles.dishRowParent}>
           <View style={styles.nameContainer}>
             <Text style={styles.dishName}>{dish.name}</Text>
-            {/* <Text className='text-gray-400'>{short_des}</Text> */}
+            <Text style={styles.price}>{dish.description}</Text>
             <Text style={styles.price}>
               <Currency quantity={dish.price} currency='USD' />
             </Text>

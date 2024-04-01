@@ -134,7 +134,7 @@ function removeCurrent(dispatch: React.Dispatch<Action>) {
 
 export const selectBasketTotal = (state) => {
   if (!state || !state.items) return 0; // Check if state or state.items is undefined
-  return state.items.reduce((total, item) => total + parseInt(item.price), 0);
+  return state.items.reduce((total, item) => total + parseFloat(item.price), 0);
 };
 
 function selectBasketItems(state: BasketState) {

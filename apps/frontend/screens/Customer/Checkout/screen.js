@@ -8,15 +8,18 @@ import {
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import {
-  useBasketState,
-  selectBasketItems,
-  selectBasketTotal,
-} from '@min-two/business-web';
+
 import Currency from 'react-currency-formatter';
 import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { removeCurrent, useBasketDispatch } from '@min-two/business-web';
+import {
+  removeCurrent,
+  useBasketDispatch,
+  useBasketState,
+  selectBasketItems,
+  selectBasketTotal,
+  removeFromBasket,
+} from '@min-two/business-web';
 // removeCurrent(basketDisptach);
 
 import styles from '../Checkout/sass/BasketScreen.scss';
@@ -25,7 +28,6 @@ import { changeScreen, useScreenDispatch } from '@min-two/screen-iso';
 const BasketScreen = ({ route }) => {
   const props = route.params;
 
-  console.log(props);
   const noCarts =
     'https://cdn.dribbble.com/users/295908/screenshots/2834564/media/805c806c3abfd012b6833e2cb290f47c.png?resize=800x600&vertical=center';
   const navigation = useNavigation();
@@ -49,8 +51,17 @@ const BasketScreen = ({ route }) => {
     }, {});
     setGroupedItemsInBasket(groupedItems);
     return () => {
-      removeCurrent(dispatch);
+      // removeCurrent(dispatch);
     };
+  }, [items]);
+
+  useEffect(() => {
+    if (total == 0) {
+      navigation.navigate('UserHome', {
+        restaurant: props.restaurantMetadata,
+        items: props.items,
+      });
+    }
   }, [items]);
 
   return (
@@ -80,12 +91,12 @@ const BasketScreen = ({ route }) => {
               <Text style={styles.priceText}>
                 <Currency quantity={items[0]?.price} currency='USD' />
               </Text>
-              <TouchableOpacity>
-                <MaterialCommunityIcons
-                  name='cart-remove'
-                  size={14}
-                  color='#757575'
-                />
+              <TouchableOpacity
+                onPress={() => {
+                  removeFromBasket(state, dispatch, items[0]?.id);
+                }}
+              >
+                <Feather name='x' size={15} color='black' />
               </TouchableOpacity>
             </View>
           ))}
@@ -116,7 +127,7 @@ const BasketScreen = ({ route }) => {
               onPress={() => {
                 changeScreen(screenDispatch, 'Landing');
                 navigation.navigate('Complete', {
-                  total: total,
+                  total: total + total * 0.2,
                   restaurant: props.restaurantMetadata,
                   items: props.items,
                 });
