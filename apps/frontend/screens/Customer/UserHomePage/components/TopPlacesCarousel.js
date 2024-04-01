@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 import { useNavigation } from '@react-navigation/native';
+import { getActiveStoreIds, useCartsState } from '@min-two/business-web';
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,6 +20,9 @@ const CARD_HEIGHT = 200;
 const TopPlacesCarousel = ({ list, route }) => {
   const dispatch = useScreenDispatch();
   const navigation = useNavigation();
+
+  const cartState = useCartsState();
+  const ids = getActiveStoreIds(cartState);
 
   return (
     <FlatList
@@ -49,6 +53,9 @@ const TopPlacesCarousel = ({ list, route }) => {
                   profileImage: item.profile_image,
                   sections: item.section,
                   id: item.sid,
+                  // boolean
+                  hasCartsActive: ids.includes(item.sid),
+                  // pass in active state here
                 }
               );
             }}

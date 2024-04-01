@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { Cart } from './locals';
+import { Dish } from '@min-two/business-iso';
 
 type CartsState = Cart[];
 
@@ -99,6 +100,18 @@ function setCartOnMount(dispatch: React.Dispatch<Action>, carts) {
   dispatch({ type: 'SET_CARTS_MOUNT', payload: carts });
 }
 
+function getActiveStoreIds(state: CartsState): string[] {
+  return state.map((cart) => cart.restaurant.id);
+}
+
+function getItemsByStoreId(
+  state: CartsState,
+  storeId: string
+): Dish[] | undefined {
+  const cart = state.find((cart) => cart.restaurant.id === storeId);
+  return cart ? Object.values(cart.items) : undefined;
+}
+
 export {
   CartsProvider,
   useCartsState,
@@ -106,4 +119,6 @@ export {
   setCart,
   setCartOnMount,
   removeCart,
+  getActiveStoreIds,
+  getItemsByStoreId,
 };
