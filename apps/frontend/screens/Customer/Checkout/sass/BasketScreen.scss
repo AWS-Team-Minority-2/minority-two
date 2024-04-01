@@ -1,6 +1,7 @@
 .safeAreaViewBase {
   flex: 1;
   background-color: #fff;
+
   // padding-bottom: 10px;
 }
 
@@ -306,6 +307,7 @@
 .orderCompleteSection {
   margin-top: 150px;
   align-items: center;
+  z-index: 1;
 }
 
 // .orderCompleteSection > * {
@@ -357,4 +359,13 @@
 .completeText {
   color: #f2998d; /* Set border color */
   font-weight: bold;
+}
+
+.congratsEffect {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
 }

@@ -18,6 +18,7 @@ import {
   useCartsState,
 } from '@min-two/business-web';
 import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import LottieView from 'lottie-react-native';
 
 // Hide Navbar Flag
 
@@ -29,12 +30,6 @@ const ProcessedScreen = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.safeAreaViewBase}>
-      <View style={styles.nexaLogoConatiner}>
-        {/* <Image
-          style={styles.nexaLogoConatinerImage}
-          source={require('../../../assets/motto.png')}
-        /> */}
-      </View>
       <View style={styles.orderCompleteSection}>
         <FontAwesome name='check-circle' size={45} color='green' />
         <View style={styles.totalSection}>
@@ -68,6 +63,12 @@ const ProcessedScreen = ({ navigation, route }) => {
           <Text style={styles.completeText}>Complete</Text>
         </TouchableOpacity>
       </View>
+      <LottieView
+        source={require('../../../assets/congrats.json')}
+        autoPlay
+        loop={false}
+        style={styles.congratsEffect}
+      />
     </SafeAreaView>
   );
 };

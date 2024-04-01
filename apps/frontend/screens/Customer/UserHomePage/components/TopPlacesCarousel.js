@@ -26,7 +26,6 @@ const TopPlacesCarousel = ({ list, route }) => {
 
   useEffect(() => {
     setStoreIds(getActiveStoreIds(cartState));
-    console.log(storeIds, 'list');
   }, [cartState]);
 
   return (
