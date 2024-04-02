@@ -8,3 +8,4 @@ export { ServiceProfile } from './ServiceProfile';
 export { ServerProfile } from './ServerProfile';
 export { RestaurantProfile } from './RestaurantProfile';
 export { Review } from './Review';
+export { NotificationsScreen } from './NotificationsScreen';

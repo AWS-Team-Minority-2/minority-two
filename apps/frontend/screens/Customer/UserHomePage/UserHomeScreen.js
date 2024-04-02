@@ -200,7 +200,12 @@ const UserHomeScreen = ({ route }) => {
 
               {/* Notification icon */}
               <View style={styles.iconBttns}>
-                <TouchableOpacity style={styles.notification}>
+                <TouchableOpacity
+                  style={styles.notification}
+                  onPress={() => {
+                    navigation.navigate('Notifications');
+                  }}
+                >
                   <Ionicons
                     name='notifications-outline'
                     size={20}

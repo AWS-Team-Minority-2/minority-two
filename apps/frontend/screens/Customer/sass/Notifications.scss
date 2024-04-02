@@ -1,0 +1,23 @@
+.safeAreaViewBase {
+  flex: 1;
+  background-color: #fff;
+}
+
+.headerContainer {
+  align-items: center;
+  padding-top: 10px;
+}
+
+.headerStyleTexts {
+  font-family: 'BebasNeue_400Regular';
+  font-size: 25px;
+}
+
+.noNotficationsImage {
+  width: 200px;
+  height: 180px;
+}
+.noNotficationsView {
+  align-items: center;
+  top: 200px;
+}

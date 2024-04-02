@@ -11,6 +11,7 @@ export {
   ForgotPassword,
   UserHomeScreen,
   RestaurantProfile,
+  NotificationsScreen,
 } from './Customer';
 export { Homescreen } from './Homescren';
 export { UserProfile } from './Customer/UserProfilePage/UserProfile';

@@ -22,10 +22,12 @@ import {
   OpenCarts,
   ProcessedScreen,
   RestaurantProfile,
+  NotificationsScreen,
 } from './screens';
 import { AuthProvider, useAuthState } from '@min-two/user-iso';
 // The diffrence between a basket and a cart is that the basket are items from one store.
 // A Cart is a collection of baskets from diffrent stores.
+
 import {
   BasketProvider,
   CartsProvider,
@@ -125,7 +127,6 @@ function NavigationController() {
         <Stack.Screen name='Checkout' component={BasketScreen} />
         <Stack.Screen name='Carts' component={OpenCarts} />
         <Stack.Screen name='Complete' component={ProcessedScreen} />
-
         <Stack.Screen name='CustomerLogin' component={CustomerLoginScreen} />
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
         <Stack.Screen
@@ -151,6 +152,7 @@ function NavigationController() {
         <Stack.Screen name='ServiceProfile' component={ServiceProfile} />
         <Stack.Screen name='ServerProfile' component={ServerProfile} />
         <Stack.Screen name='Review' component={Review} />
+        <Stack.Screen name='Notifications' component={NotificationsScreen} />
       </Stack.Navigator>
       {/* Pass in User Id to navbar to handle customer actions */}
       {showNavBar && <NavBar id={user.id} />}
