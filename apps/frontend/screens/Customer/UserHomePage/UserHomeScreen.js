@@ -236,7 +236,13 @@ const UserHomeScreen = ({ route }) => {
               />
               <TextInput style={styles.textInput} placeholder='Search Nexa' />
               <View style={styles.divider} />
-              <TouchableOpacity onPress={() => navigation.navigate('UserMap')}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('UserMap', {
+                    zipCode: currentZip,
+                  })
+                }
+              >
                 <Feather
                   name='map'
                   size={17}
