@@ -20,6 +20,27 @@ type BusinessOutput {
   rating_count: Int!
   rating: String!
   distance: String
+  section: Section
+}
+
+type Section {
+  type: String!
+  sections: [MenuSection]
+}
+
+type Dish {
+  id: String!
+  name: String!
+  description: String!
+  price: String!
+  image_url: String!
+  rating: String!
+  out_of_stock: Boolean!
+}
+
+type MenuSection {
+  name: String!
+  dishes: [Dish]
 }
 
 type Mutation {

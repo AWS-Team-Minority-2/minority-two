@@ -16,20 +16,27 @@ import {
   Homescreen,
   UserHomeScreen,
   UserProfile,
-  BusinessProfile,
   AdminPortalScreen,
   AdminScreen,
   BasketScreen,
+  OpenCarts,
+  ProcessedScreen,
+  RestaurantProfile,
 } from './screens';
 import { AuthProvider, useAuthState } from '@min-two/user-iso';
-import { BasketProvider, RestaurantProvider } from '@min-two/business-web';
+// The diffrence between a basket and a cart is that the basket are items from one store.
+// A Cart is a collection of baskets from diffrent stores.
+import {
+  BasketProvider,
+  CartsProvider,
+  useCartsDispatch,
+} from '@min-two/business-web';
 
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
 import { NavBar } from './screens/Customer/NavBar';
 import { ServiceProfile } from './screens/Customer/ServiceProfile';
 import { ServerProfile } from './screens/Customer/ServerProfile';
-import { Review } from "./screens/Customer/Review";
-
+import { Review } from './screens/Customer/Review';
 
 import {
   ScreenProvider,
@@ -50,6 +57,7 @@ import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
 import { useFonts } from 'expo-font';
 import { Text } from 'react-native';
 import { EditBusiness } from './screens/Admin/updates/editBusiness';
+import { setCartOnMount } from '@min-two/business-web';
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
@@ -67,6 +75,7 @@ function NavigationController() {
   const showNavBar = !noNavScreens.includes(screen);
   const screenDispatch = useScreenDispatch();
   const [user, setUser] = useState({});
+  const cartDispatch = useCartsDispatch();
 
   useEffect(() => {
     const checkUser = async () => {
@@ -90,6 +99,21 @@ function NavigationController() {
     checkUser();
   }, []);
 
+  useEffect(() => {
+    const checkCarts = async () => {
+      try {
+        const value = await AsyncStorage.getItem('carts');
+        if (value !== null) {
+          setCartOnMount(cartDispatch, JSON.parse(value));
+        }
+      } catch (error) {
+        console.log('Error checking item: ', error);
+      }
+    };
+
+    checkCarts();
+  }, []);
+
   return (
     <>
       <Stack.Navigator
@@ -99,6 +123,9 @@ function NavigationController() {
       >
         <Stack.Screen name='Home' component={Homescreen} />
         <Stack.Screen name='Checkout' component={BasketScreen} />
+        <Stack.Screen name='Carts' component={OpenCarts} />
+        <Stack.Screen name='Complete' component={ProcessedScreen} />
+
         <Stack.Screen name='CustomerLogin' component={CustomerLoginScreen} />
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
         <Stack.Screen
@@ -115,18 +142,15 @@ function NavigationController() {
         <Stack.Screen name='ChangePassword' component={ChangePassword} />
         <Stack.Screen name='AccountInfo' component={AccountInfo} />
         <Stack.Screen name='AccountInfoName' component={AccountInfoName} />
-        <Stack.Screen name='BusinessProfile' component={BusinessProfile} />
-
+        <Stack.Screen name='RestaurantProfile' component={RestaurantProfile} />
         <Stack.Screen
           name='AccountInfoPhoneNumber'
           component={AccountInfoPhoneNumber}
         />
         <Stack.Screen name='AccountInfoEmail' component={AccountInfoEmail} />
-
         <Stack.Screen name='ServiceProfile' component={ServiceProfile} />
         <Stack.Screen name='ServerProfile' component={ServerProfile} />
-        <Stack.Screen name="Review" component={Review} />
-
+        <Stack.Screen name='Review' component={Review} />
       </Stack.Navigator>
       {/* Pass in User Id to navbar to handle customer actions */}
       {showNavBar && <NavBar id={user.id} />}
@@ -147,13 +171,13 @@ export default function App() {
       <ApolloProvider client={client}>
         <AuthProvider>
           <ScreenProvider>
-            <RestaurantProvider>
+            <CartsProvider>
               <BasketProvider>
                 <NavigationContainer>
                   <NavigationController />
                 </NavigationContainer>
               </BasketProvider>
-            </RestaurantProvider>
+            </CartsProvider>
           </ScreenProvider>
         </AuthProvider>
       </ApolloProvider>

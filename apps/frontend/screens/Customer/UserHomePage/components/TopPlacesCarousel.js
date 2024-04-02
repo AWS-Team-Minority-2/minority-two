@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   Text,
@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 import { useNavigation } from '@react-navigation/native';
+import { getActiveStoreIds, useCartsState } from '@min-two/business-web';
 
 const { width, height } = Dimensions.get('window');
 
@@ -19,6 +20,13 @@ const CARD_HEIGHT = 200;
 const TopPlacesCarousel = ({ list, route }) => {
   const dispatch = useScreenDispatch();
   const navigation = useNavigation();
+
+  const cartState = useCartsState();
+  const [storeIds, setStoreIds] = useState([]);
+
+  useEffect(() => {
+    setStoreIds(getActiveStoreIds(cartState));
+  }, [cartState]);
 
   return (
     <FlatList
@@ -37,8 +45,8 @@ const TopPlacesCarousel = ({ list, route }) => {
             }}
             onPress={() => {
               navigation.navigate(
-                item.type === 'restaurant' || item.type === 'shop'
-                  ? 'BusinessProfile'
+                item.type === 'restaurant'
+                  ? 'RestaurantProfile'
                   : 'ServiceProfile',
                 {
                   name: item.name,
@@ -47,6 +55,15 @@ const TopPlacesCarousel = ({ list, route }) => {
                   ratingCount: item.rating_count,
                   distance: item.distance,
                   profileImage: item.profile_image,
+                  sections: item.section,
+                  id: item.sid,
+                  address: item.address,
+                  city: item.city,
+                  state: item.state,
+                  zip: item.zip_code,
+                  // boolean
+                  hasCartsActive: storeIds.includes(item.sid),
+                  // pass in active state here
                 }
               );
             }}

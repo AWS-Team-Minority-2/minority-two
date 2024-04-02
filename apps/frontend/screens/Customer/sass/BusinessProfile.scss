@@ -138,6 +138,7 @@
 
 .businessTabView {
   margin-bottom: 25%;
+  padding-top: 12px;
 }
 
 .businessTab{
@@ -360,4 +361,34 @@
 
 .cart-icon {
   padding-top: 100px;
+}
+
+.featuredName {
+  font-weight: bold;
+  font-size: 16px;
+  padding-bottom: 10px;
+  padding-top: 20px;
+}
+
+.activeCartBttn {
+  position: absolute;
+  bottom: 2px;
+  width: 90%;
+  background-color: #f2998d;
+
+  align-items: center;
+  padding: 10px;
+  margin-left: 20px;
+  border-radius: 30px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  // margin: 0 10px 0 10px;
+}
+
+.viewCartText {
+  font-family: 'BebasNeue_400Regular';
+  font-size: 20px;
+  color: white;
+  padding-right: 20px;
 }

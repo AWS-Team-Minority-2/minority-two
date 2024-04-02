@@ -1,3 +1,5 @@
+type BusinessType = 'restaurant' | 'service' | 'shop';
+
 export interface BusinessBase {
   city: string;
   cover_image: string;
@@ -5,7 +7,7 @@ export interface BusinessBase {
   lat: string;
   long: string;
   name: string;
-  type: 'restaurant' | 'service' | 'shop';
+  type: BusinessType;
   is_featured: boolean;
   state: string;
   zip_code: number;
@@ -15,6 +17,7 @@ export interface BusinessBase {
   rating: string;
   rating_count: number;
   distance: string;
+  section: Section;
 }
 
 export interface Dish {
@@ -27,12 +30,32 @@ export interface Dish {
   outOfStock: boolean;
 }
 
-export interface MenuSection {
+interface MenuSection {
   name: string;
   dishes: Dish[];
 }
 
+interface Section {
+  type: BusinessType;
+  sections: MenuSection[];
+}
+
+interface RestaurantSection extends Section {
+  type: 'restaurant';
+}
+
 export interface Restaurant extends BusinessBase {
   type: 'restaurant'; // Override type to be 'restaurant'
-  menuSections?: MenuSection[]; // Add dishes property
+  section: RestaurantSection; // Add dishes property
+}
+// Use for state management only
+export interface RestaurantProvider {
+  name: string;
+  coverImage: string;
+  rating: number;
+  ratingCount: number;
+  distance: number;
+  profileImage: string;
+  sections?: any;
+  id: string;
 }
