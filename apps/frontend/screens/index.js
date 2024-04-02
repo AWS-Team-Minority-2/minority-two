@@ -20,3 +20,5 @@ export { ServerProfile } from './Customer/ServerProfile';
 export * from './Customer/Checkout/screen';
 export * from './Customer/Checkout/OpenCarts';
 export * from './Customer/Checkout/processed';
+export { Review } from "./Customer/Review";
+

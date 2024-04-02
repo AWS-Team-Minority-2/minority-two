@@ -1,0 +1,90 @@
+.reviewLayout{
+    flex: 1;
+    display: flex;
+    background-color: #fcfcfc;
+}
+
+.reviewAdjustment{
+    margin-left: 3%;
+    margin-right: 3%;
+    top: 3%;
+    flex: 1;
+}
+
+.leftIcon{
+   
+}
+
+.accInfoHeader{
+    color: #191919;
+    font-size: 30px;
+    font-family: 'BebasNeue_400Regular';
+    margin-top: 7%;
+}
+
+.topReviewSection{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 9%;
+    margin-top: 10%;
+}
+
+.topReviewRight{
+    // align-self: flex-end;
+}
+
+.topReviewLeft{
+    flex-direction: column;
+    align-items: center;
+}
+
+.overallRating{
+    font-size: 30px;
+}
+
+.starContainer{
+    flex-direction: row;
+    margin-top: 2%;
+ }
+
+ .ratingBars{
+    margin-right: auto;
+ }
+
+ .commentSectionMover{
+    margin-bottom: 15%;
+ }
+
+ .commentSection{
+    top: 5%;
+    width: 100%;
+    
+ }
+
+ .commentTop{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5%;
+ }
+
+ .commentText{
+    font-weight: 600;
+ }
+
+ .commentUserRating{
+    flex-direction: column;
+    margin-left: 3%;
+ }
+
+ .commentDate{
+    margin-left: auto;
+    color: #838383;
+ }
+
+ .commentDivider{
+    height: 1px;
+    background-color: #e4e4e4; /* Color of the divided line */
+    margin: 15px 0; /* Adjust margin as needed */
+ }

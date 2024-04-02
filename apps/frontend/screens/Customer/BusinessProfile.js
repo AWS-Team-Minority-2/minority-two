@@ -1,5 +1,7 @@
+
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useRef, useEffect } from 'react';
+
 import {
   SafeAreaView,
   ScrollView,
@@ -19,6 +21,7 @@ import { Feather, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { desserts, features } from './data/menu';
 import { FeaturedCard } from './FeaturedCard';
 import { FeaturedRow } from './FeaturedRow';
+
 
 const BusinessProfile = ({ route }) => {
   const navigation = useNavigation();
@@ -70,10 +73,11 @@ const BusinessProfile = ({ route }) => {
     // Adjust the threshold value as needed
     if (offsetY > 10) {
       setShowFeatureScroll(true);
-      console.log('true');
+      console.log("true");
     } else {
       setShowFeatureScroll(false);
-      console.log('false');
+      console.log("false");
+
     }
   };
 
@@ -100,6 +104,7 @@ const BusinessProfile = ({ route }) => {
               ))}
             </ScrollView>
           )}
+
         </View>
 
         <ScrollView
@@ -112,7 +117,7 @@ const BusinessProfile = ({ route }) => {
               url: coverImage,
             }}
             style={{ width: '100%', height: 185, ...styles.topView }}
-          >
+
             <TouchableOpacity
               style={styles.leftIcon}
               onPress={() => {
@@ -121,6 +126,7 @@ const BusinessProfile = ({ route }) => {
               }}
             >
               <Feather name='chevron-left' size={25} color='black' />
+
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.Favorite} onPress={toggleFavorite}>
@@ -128,6 +134,7 @@ const BusinessProfile = ({ route }) => {
                 name={isFavorite ? 'favorite' : 'favorite-outline'}
                 size={20}
                 color={isFavorite ? '#f2998d' : 'black'}
+
               />
             </TouchableOpacity>
             {showBanner && (
@@ -138,7 +145,7 @@ const BusinessProfile = ({ route }) => {
                 <MaterialIcons
                   name='favorite-outline'
                   size={20}
-                  color='white'
+
                 />
               </View>
             )}
