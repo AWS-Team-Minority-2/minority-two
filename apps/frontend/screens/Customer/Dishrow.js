@@ -12,7 +12,7 @@ import {
 } from '@min-two/business-web';
 
 import styles from './sass/Dishrow.scss';
-import SelectedItem from './SelectedItem';
+import { RestaurantSelectedItem } from './RestaurantSelected';
 
 const Dishrow = ({ dish, store, activeOverride }) => {
   const [isPressed, setIsPressed] = useState(false);
@@ -50,7 +50,7 @@ const Dishrow = ({ dish, store, activeOverride }) => {
           </View>
         </View>
       </TouchableOpacity>
-      <SelectedItem
+      <RestaurantSelectedItem
         isVisible={showItemPopup}
         item={dish}
         onClose={handleCloseModal}

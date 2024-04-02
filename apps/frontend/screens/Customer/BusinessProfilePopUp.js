@@ -28,6 +28,10 @@ const BusinessProfilePopUp = ({
   name,
   subCat,
   number,
+  city,
+  state,
+  zip,
+  address,
 }) => {
   const navigation = useNavigation();
   const dispatch = useScreenDispatch();
@@ -90,8 +94,10 @@ const BusinessProfilePopUp = ({
               >
                 <Entypo name='location-pin' size={26} color='black' />
                 <View style={styles.businessMapText}>
-                  <Text>2928 Georgia Ave NW</Text>
-                  <Text>Washington, DC 20001</Text>
+                  <Text>{address}</Text>
+                  <Text>
+                    {city}, {state} {zip}
+                  </Text>
                 </View>
                 <MaterialCommunityIcons
                   name='content-copy'
@@ -145,7 +151,7 @@ const BusinessProfilePopUp = ({
                 style={styles.businessMapContent}
               >
                 <Ionicons name='star-sharp' size={22} color='black' />
-                <Text style={styles.businessMapText}>Rate NuVegan Cafe</Text>
+                <Text style={styles.businessMapText}>Rate {name}</Text>
                 {rate ? (
                   <Entypo
                     name='minus'
@@ -185,7 +191,7 @@ const BusinessProfilePopUp = ({
             <View style={styles.businessMapBox}>
               <TouchableOpacity style={styles.businessMapContent}>
                 <MaterialIcons name='message' size={22} color='black' />
-                <Text style={styles.businessMapText}>Contact NuVegan Cafe</Text>
+                <Text style={styles.businessMapText}>Contact {name}</Text>
               </TouchableOpacity>
               <View style={styles.businessMapDivider}></View>
             </View>

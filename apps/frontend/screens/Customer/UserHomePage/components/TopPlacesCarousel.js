@@ -46,7 +46,7 @@ const TopPlacesCarousel = ({ list, route }) => {
             onPress={() => {
               navigation.navigate(
                 item.type === 'restaurant'
-                  ? 'BusinessProfile'
+                  ? 'RestaurantProfile'
                   : 'ServiceProfile',
                 {
                   name: item.name,
@@ -57,6 +57,10 @@ const TopPlacesCarousel = ({ list, route }) => {
                   profileImage: item.profile_image,
                   sections: item.section,
                   id: item.sid,
+                  address: item.address,
+                  city: item.city,
+                  state: item.state,
+                  zip: item.zip_code,
                   // boolean
                   hasCartsActive: storeIds.includes(item.sid),
                   // pass in active state here
