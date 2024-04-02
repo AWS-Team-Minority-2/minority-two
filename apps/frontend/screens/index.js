@@ -10,7 +10,6 @@ export {
   CustomerRegisterScreen,
   ForgotPassword,
   UserHomeScreen,
-  BusinessProfile,
   RestaurantProfile,
 } from './Customer';
 export { Homescreen } from './Homescren';
@@ -20,5 +19,4 @@ export { ServerProfile } from './Customer/ServerProfile';
 export * from './Customer/Checkout/screen';
 export * from './Customer/Checkout/OpenCarts';
 export * from './Customer/Checkout/processed';
-export { Review } from "./Customer/Review";
-
+export { Review } from './Customer/Review';

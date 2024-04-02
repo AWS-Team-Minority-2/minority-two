@@ -82,7 +82,7 @@ const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
       <TouchableOpacity
         style={styles.storeBttn}
         onPress={() => {
-          navigation.navigate('BusinessProfile', {
+          navigation.navigate('RestaurantProfile', {
             name: restaurantMetadata.name,
             coverImage: restaurantMetadata.coverImage,
             rating: restaurantMetadata.rating,
