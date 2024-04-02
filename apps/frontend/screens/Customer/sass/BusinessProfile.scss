@@ -200,7 +200,7 @@
 
 .businessPopUpBack {
   position: absolute;
-  top: 20;
+  top: 15;
   left: 15;
   z-index: 1; // Ensure the chevron icon is above the map
 }
@@ -230,16 +230,15 @@
   margin-bottom: 5%;
 }
 
+.businessMapBoxWithDropdown{
+  margin-bottom: 15%;
+}
+
 .businessMapContent {
   flex-direction: row;
   align-items: center;
   margin-right: 15px;
 }
-
-// .businessMapAddress{
-//     font-size: 14px;
-//     margin-left: 4%;
-// }
 
 .businessMapText {
   font-size: 14px;
@@ -258,7 +257,7 @@
 
 .dropdownHours {
   flex-direction: row;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 }
 
 .dropdownDays {

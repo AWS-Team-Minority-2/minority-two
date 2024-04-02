@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import { FeaturedCardStore } from "./FeaturedCardStore";
 import { shop } from "./data/store";
@@ -10,7 +10,9 @@ const FeaturedRowStore = ({ featuredName, featuredAmount }) => {
     <View>
       <View style={styles.featureSection}>
         <Text style={styles.featureName}>{featuredName}</Text>
-        <Text style={styles.featureAmount}>See all {featuredAmount}</Text>
+        <TouchableOpacity style={styles.featureAmount}>
+          See all {featuredAmount}
+        </TouchableOpacity>
       </View>
 
       <ScrollView

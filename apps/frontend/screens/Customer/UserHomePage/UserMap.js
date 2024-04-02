@@ -11,11 +11,17 @@ import {
   Dimensions,
 } from "react-native";
 // import TopPlacesCarousel from "./components/TopPlacesCarousel";
-import { Entypo, Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import MapView, { Callout, Marker } from 'react-native-maps';
-import { useStores } from '@min-two/business-web';
-
+import {
+  Entypo,
+  Ionicons,
+  Feather,
+  MaterialIcons,
+  FontAwesome,
+} from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import MapView, { Callout, Marker } from "react-native-maps";
+import { useStores } from "@min-two/business-web";
+import { markers, mapStandardStyle } from "../data/mapData";
 import styles from "./UserMap.scss";
 // import { TRUE } from "sass";
 
@@ -30,6 +36,20 @@ const UserMap = () => {
     setPickedAddress(address);
     setLocation(false);
   };
+
+  const initialMapState = {
+    markers,
+    region: {
+      latitude: 38.923141,
+      longitude: -77.021584,
+      latitudeDelta: 0.0093,
+      longitudeDelta: 0.0074,
+    },
+  };
+
+  const [state, setState] = useState(initialMapState);
+  const _map = useRef(null);
+  const scroll = useRef(null);
 
   const [mapLocation, setMapLocation] = useState({
     latitude: 38.923141,
@@ -203,19 +223,18 @@ const UserMap = () => {
         <View>
           <MapView
             style={{ height: 800 }}
-            region={mapLocation}
-            ref={(map) => (this.map = map)}
-            rotateEnabled={true}
-            loadingEnabled={true}
+            region={state.region}
+            ref={_map}
             loadingIndicatorColor="#F2998D"
-            // mapType="hybridFlyover" //Change Map type
           >
             <Marker
               coordinate={{
                 latitude: mapLocation.latitude,
                 longitude: mapLocation.longitude,
               }}
-            ></Marker>
+            >
+              <FontAwesome name="map-marker" size={35} color="#F2998D" />
+            </Marker>
           </MapView>
         </View>
       </View>

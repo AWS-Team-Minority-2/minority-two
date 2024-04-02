@@ -1,5 +1,4 @@
-
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import React, { useState, useRef, useEffect } from "react";
 import {
   SafeAreaView,
@@ -8,7 +7,6 @@ import {
   TouchableOpacity,
   View,
   Image,
-  PanResponder,
   findNodeHandle,
   ImageBackground,
 } from "react-native";
@@ -19,8 +17,7 @@ import BusinessProfilePopUp from "./BusinessProfilePopUp";
 import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { desserts, features } from "./data/menu";
 import { FeaturedCard } from "./FeaturedCard";
-import {FeaturedRow} from "./FeaturedRow";
-
+import { FeaturedRow } from "./FeaturedRow";
 
 const BusinessProfile = ({ route }) => {
   const navigation = useNavigation();
@@ -34,6 +31,27 @@ const BusinessProfile = ({ route }) => {
   const togglePopUp = () => {
     setIsPopUpVisible(!isPopUpVisible);
   };
+
+  // Define business details
+  const businessName = route.params.name;
+  const businessLocation = {
+    latitude: 38.92784,
+    longitude: -77.02336,
+    latitudeDelta: 0.00013,
+    longitudeDelta: 0.00694,
+  };
+  const businessHours = {
+    Monday: "11am-9pm",
+    Tuesday: "11am-9pm",
+    Wednesday: "11am-9pm",
+    Thursday: "11am-9pm",
+    Friday: "11am-9pm",
+    Saturday: "11am-9pm",
+    Sunday: "11am-7pm",
+  }; // Example business hours, replace with actual hours
+  const address = "2928 Georgia Ave NW"; // Example address, replace with actual address
+  const area = "Washington, DC 20001";
+  const phoneNumber = "+1 (202) 232-1700"; // Example phone number, replace with actual number
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [showBanner, setShowBanner] = useState(false);
@@ -102,7 +120,6 @@ const BusinessProfile = ({ route }) => {
               ))}
             </ScrollView>
           )}
-
         </View>
 
         <ScrollView
@@ -112,7 +129,7 @@ const BusinessProfile = ({ route }) => {
         >
           <ImageBackground
             source={{
-             url: coverImage
+              url: coverImage,
             }}
             style={{ width: "100%", height: 185, ...styles.topView }}
           >
@@ -146,12 +163,7 @@ const BusinessProfile = ({ route }) => {
               </View>
             )}
           </ImageBackground>
-          {/* <Image
-            source={{
-              uri: "https://d1ralsognjng37.cloudfront.net/8ec59378-146f-4eba-ad06-80dcc9574cde.webp",
-            }}
-            style={{ width: "100%", height: 165 }}
-          /> */}
+          
 
           <View style={styles.businessHeader}>
             <View style={styles.businessLogo}>
@@ -166,7 +178,7 @@ const BusinessProfile = ({ route }) => {
 
             <TouchableOpacity style={styles.businessInfo} onPress={togglePopUp}>
               <View style={styles.businessDetails}>
-                <Ionicons name='star-sharp' size={15} color='black' />
+                <Ionicons name="star-sharp" size={15} color="black" />
                 <Text>
                   {rating}({ratingCount})
                 </Text>
@@ -177,12 +189,18 @@ const BusinessProfile = ({ route }) => {
                   </>
                 )}
 
-                <Feather name='chevron-right' size={16} color='grey' />
+                <Feather name="chevron-right" size={16} color="grey" />
               </View>
             </TouchableOpacity>
             <BusinessProfilePopUp
               isVisible={isPopUpVisible}
               onClose={togglePopUp}
+              businessName={businessName}
+              businessLocation = {businessLocation}
+              businessHours={businessHours}
+              address={address}
+              area={area}
+              phoneNumber={phoneNumber}
             />
           </View>
 
@@ -193,7 +211,7 @@ const BusinessProfile = ({ route }) => {
                 key={index}
                 ref={(ref) => (sectionRefs.current[index] = ref)}
               >
-                {/* <FeaturedRow featuredName={item} /> */}
+                <FeaturedRow featuredName={item} />
               </View>
             ))}
           </View>

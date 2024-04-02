@@ -30,11 +30,11 @@ const FeaturedCardService = ({ item }) => {
         </TouchableOpacity>
       </View>
 
-      <SelectedItem
+      {/* <SelectedItem
         isVisible={isModalVisible}
         item={selectedItem}
         onClose={handleCloseModal}
-      />
+      /> */}
        <View style={styles.serviceDivider}></View>
     </>
   );

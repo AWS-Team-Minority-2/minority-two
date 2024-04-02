@@ -21,25 +21,23 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
 
-const BusinessProfilePopUp = ({ isVisible, onClose }) => {
+const BusinessProfilePopUp = ({
+  isVisible,
+  onClose,
+  businessName,
+  businessLocation,
+  businessHours,
+  address,
+  area,
+  phoneNumber,
+}) => {
   const navigation = useNavigation();
   const dispatch = useScreenDispatch();
-
-  const [mapLocation, setMapLocation] = useState({
-    latitude: 38.92784,
-    longitude: -77.02336,
-    latitudeDelta: 0.00013,
-    longitudeDelta: 0.00694,
-  });
 
   //Handles dropdown to show business hours
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to control dropdown visibility
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
-  };
-  const businessHours = {
-    "Monday-Saturday": "11am-9pm",
-    Sunday: "11am-7pm",
   };
 
   //handles dropdown for user to rate business
@@ -47,6 +45,8 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
   const toggleRating = () => {
     setRate(!rate);
   };
+
+  
   const [selectedRating, setSelectedRating] = useState(0);
 
   return (
@@ -60,7 +60,7 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
         <View style={styles.businessPopupLayout}>
           <MapView
             style={styles.businessMap}
-            region={mapLocation}
+            region={businessLocation}
             rotateEnabled={false}
             scrollEnabled={false}
           />
@@ -73,7 +73,7 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
             <MaterialCommunityIcons name="close" size={27} color="black" />
           </TouchableOpacity>
           <ScrollView style={styles.businessMapInfo}>
-            <Text style={styles.businessMapName}>NuVegan Cafe</Text>
+            <Text style={styles.businessMapName}>{businessName}</Text>
             <Text style={styles.businessMapSubInfo}>Vegan</Text>
 
             <View style={styles.businessMapBox}>
@@ -83,8 +83,8 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
               >
                 <Entypo name="location-pin" size={26} color="black" />
                 <View style={styles.businessMapText}>
-                  <Text>2928 Georgia Ave NW</Text>
-                  <Text>Washington, DC 20001</Text>
+                  <Text>{address}</Text>
+                  <Text>{area}</Text>
                 </View>
                 <MaterialCommunityIcons
                   name="content-copy"
@@ -102,7 +102,7 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
                 style={styles.businessMapContent}
               >
                 <MaterialCommunityIcons name="clock" size={22} color="black" />
-                <Text style={styles.businessMapText}>Open till 10:00pm</Text>
+                <Text style={styles.businessMapText}>{businessName} Hours</Text>
                 {isDropdownOpen ? (
                   <Entypo
                     name="minus"
@@ -138,7 +138,7 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
                 style={styles.businessMapContent}
               >
                 <Ionicons name="star-sharp" size={22} color="black" />
-                <Text style={styles.businessMapText}>Rate NuVegan Cafe</Text>
+                <Text style={styles.businessMapText}>Rate {businessName}</Text>
                 {rate ? (
                   <Entypo
                     name="minus"
@@ -155,41 +155,32 @@ const BusinessProfilePopUp = ({ isVisible, onClose }) => {
                   />
                 )}
               </TouchableOpacity>
-              {rate && (
-                <View style={styles.dropdownContent}>
-                  {/* <Picker
-                    selectedValue={selectedRating}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedRating(itemValue)
-                    }
-                  >
-                    <Picker.Item label="Select Rating" value={0} />
-                    <Picker.Item label="⭐" value={1} />
-                    <Picker.Item label="⭐⭐" value={2} />
-                    <Picker.Item label="⭐⭐⭐" value={3} />
-                    <Picker.Item label="⭐⭐⭐⭐" value={4} />
-                    <Picker.Item label="⭐⭐⭐⭐⭐" value={5} />
-                  </Picker> */}
-                </View>
-              )}
+              {rate && <View style={styles.dropdownContent}></View>}
               <View style={styles.businessMapDivider}></View>
             </View>
 
             <View style={styles.businessMapBox}>
               <TouchableOpacity style={styles.businessMapContent}>
                 <MaterialIcons name="message" size={22} color="black" />
-                <Text style={styles.businessMapText}>Contact NuVegan Cafe</Text>
+                <Text style={styles.businessMapText}>
+                  Contact {businessName}
+                </Text>
               </TouchableOpacity>
               <View style={styles.businessMapDivider}></View>
             </View>
 
-            <View style={styles.businessMapBox}>
+            <View
+              style={[
+                styles.businessMapBox,
+                isDropdownOpen && styles.businessMapBoxWithDropdown,
+              ]}
+            >
               <TouchableOpacity
                 // onPress={promptCall}
                 style={styles.businessMapContent}
               >
                 <MaterialIcons name="phone" size={22} color="black" />
-                <Text style={styles.businessMapText}>+1 (202) 232-1700</Text>
+                <Text style={styles.businessMapText}>{phoneNumber}</Text>
               </TouchableOpacity>
               <View style={styles.businessMapDivider}></View>
             </View>

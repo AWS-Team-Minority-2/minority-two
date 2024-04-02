@@ -52,7 +52,7 @@ const StoreProfile = () => {
   const [showBanner, setShowBanner] = useState(false);
   const sectionRefs = useRef([]);
 
-  const toggleFavorite = () => {
+  const toggleFavorite = ({ route }) => {
     setIsFavorite(!isFavorite);
   };
 
@@ -68,6 +68,26 @@ const StoreProfile = () => {
   const togglePopUp = () => {
     setIsPopUpVisible(!isPopUpVisible);
   };
+
+  const businessName = "Sonya's Market";
+  const businessLocation = {
+    latitude: 38.92784,
+    longitude: -77.02336,
+    latitudeDelta: 0.00013,
+    longitudeDelta: 0.00694,
+  };
+  const businessHours = {
+    Monday: "11am-9pm",
+    Tuesday: "11am-9pm",
+    Wednesday: "11am-9pm",
+    Thursday: "11am-9pm",
+    Friday: "11am-9pm",
+    Saturday: "11am-9pm",
+    Sunday: "11am-7pm",
+  }; // Example business hours, replace with actual hours
+  const address = "2928 Georgia Ave NW"; // Example address, replace with actual address
+  const area = "Washington, DC 20001";
+  const phoneNumber = "+1 (202) 232-1700";
 
   return (
     <SafeAreaView style={styles.storeProfileLayout}>
@@ -126,6 +146,12 @@ const StoreProfile = () => {
               <BusinessProfilePopUp
                 isVisible={isPopUpVisible}
                 onClose={togglePopUp}
+                businessName={businessName}
+                businessLocation={businessLocation}
+                businessHours={businessHours}
+                address={address}
+                area={area}
+                phoneNumber={phoneNumber}
               />
             </View>
           ))}
