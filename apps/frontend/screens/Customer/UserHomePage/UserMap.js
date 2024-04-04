@@ -33,10 +33,10 @@ const UserMap = ({ route }) => {
   const { allBusiness } = useStores(zipCode);
 
   const [mapLocation, setMapLocation] = useState({
-    latitude: 38.923141,
+    latitude: 38.9300,
     longitude: -77.021584,
-    latitudeDelta: 0.0093,
-    longitudeDelta: 0.0074,
+    latitudeDelta: 0.0100093,
+    longitudeDelta: 0.0145645074,
   });
 
   const CARD_WIDTH = 293;
@@ -47,57 +47,9 @@ const UserMap = ({ route }) => {
       <View style={styles.homeAdjustment}>
         <View style={styles.TopBar}>
           <View style={styles.homeHeader}>
-            {/* Location button w/ icons */}
-            {/* <TouchableOpacity
-              style={styles.location}
-              onPress={() => setLocation(true)}
-            >
-              <Entypo name='location-pin' size={21} color='#f2998d' />
-              <Text style={styles.address}>{pickedAddress}</Text>
-              <MaterialIcons
-                name='keyboard-arrow-down'
-                size={22}
-                color='#f2998d'
-              />
-            </TouchableOpacity> */}
-            {/* <TouchableOpacity
-              style={styles.location}
-              onPress={() => setLocation(true)}
-            >
-              <Entypo name='location-pin' size={21} color='black' />
-              <Text style={styles.address}>{pickedAddress}</Text>
-              <MaterialIcons
-                name='keyboard-arrow-down'
-                size={22}
-                color='black'
-              />
-            </TouchableOpacity> */}
-
-            {/* Pop Up screen from location */}
-
-            {/* Notification icon */}
-            {/* <TouchableOpacity style={styles.notification}>
-              <Ionicons name='notifications-outline' size={20} color='black' />
-            </TouchableOpacity> */}
+            
           </View>
 
-          {/* Search Box */}
-          {/* <Ionicons
-              name='search-outline'
-              size={17}
-              color='black'
-              style={styles.searchIcon}
-            />
-            <TextInput style={styles.textInput} placeholder='Search Nexa' />
-            <View style={styles.divider} />
-            <TouchableOpacity onPress={() => navigation.navigate('UserHome')}>
-              <Feather
-                name='list'
-                size={24}
-                color='black'
-                style={styles.mapIcon}
-              />
-            </TouchableOpacity> */}
           <HomescreenHeader currentZip={zipCode} parent={'map'} />
         </View>
         <View>

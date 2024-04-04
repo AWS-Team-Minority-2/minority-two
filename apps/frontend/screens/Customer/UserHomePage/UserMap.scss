@@ -188,26 +188,49 @@
 
 .mapOverViewParent {
   position: absolute;
-  bottom: 10px;
+  bottom: 10px;  
 }
 
 .mapCardOverlay {
   flex: 1;
   background-color: #fff;
-  width: 300px;
+  width: 290px;
   height: 180px;
   margin: 0 10px;
   border-radius: 15px;
   overflow: hidden;
 }
 
-.mapCardImage {
-  width: 100%;
-  height: 70%;
+.mapBottomCard{
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.buinessNameMapCard {
+.mapCardImage {
+  width: 100%;
+  height: 65%;
+}
+
+.mapInfo{
+  margin: 1px 5px;
+}
+
+.mapName {
   font-family: 'BebasNeue_400Regular';
-  padding: 5px 10px;
-  font-size: 20px;
+  font-size: 22px;
+}
+
+.mapCardInfo{
+  flex-direction: row;
+  align-items: center;
+}
+
+.mapBottomText{
+  font-size: 13px;
+    
+}
+
+.mapFav{
+  margin-right: 5%;
 }
