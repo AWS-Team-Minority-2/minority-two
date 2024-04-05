@@ -274,7 +274,7 @@
 .mapSwipeBar {
   width: 22%;
   height: 3px; // Adjust the height of the line as needed
-  background-color: grey;
+  background-color: #adadad;
   
   top: 0px;
 }
@@ -293,8 +293,11 @@
 
 
 .ring{
-  height: 10px;
-  width: 10px;
-  background-color: #f2998d;
-  border-radius: 5px;
+  padding: 5px;
+  background-color: #cdcdcd;
+  border-radius: 50%; /* Make it a circle */
+  width: 30px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  align-items: center;
+  justify-content: center;
 }

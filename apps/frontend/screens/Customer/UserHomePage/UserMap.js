@@ -14,12 +14,18 @@ import {
 // import TopPlacesCarousel from "./components/TopPlacesCarousel";
 import { Entypo, Ionicons, Feather, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import MapView, { Callout, Marker } from "react-native-maps";
+import MapView, {
+  Callout,
+  MapMarker,
+  Marker,
+  PROVIDER_GOOGLE,
+} from "react-native-maps";
 
 import styles from "./UserMap.scss";
 import { useStores } from "@min-two/business-web";
 import { MapCard } from "./MapCard";
 import { HomescreenHeader } from "./HomescreenHeader";
+import { BusinessMarkers } from "./components/BusinessMarkers";
 // import { TRUE } from "sass";
 
 const UserMap = ({ route }) => {
@@ -80,8 +86,14 @@ const UserMap = ({ route }) => {
             rotateEnabled={true}
             loadingEnabled={true}
             loadingIndicatorColor="#F2998D"
+            // initialRegion={{ latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}
+            // provider={PROVIDER_GOOGLE}
           >
-            <Marker coordinate={{ latitude: 38.93, longitude: -77.021584 }} />
+            {allBusiness
+              .filter((business) => !business.is_online)
+              .map((business, index) => (
+                <BusinessMarkers business={business} />
+              ))}
           </MapView>
         </View>
       </View>
