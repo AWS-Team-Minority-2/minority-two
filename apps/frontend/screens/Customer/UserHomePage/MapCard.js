@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from "react-native";
 import React, { useState } from "react";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 
@@ -12,16 +18,25 @@ const MapCard = ({ imageUrl, name, rating, ratingCount, distance }) => {
 
   return (
     <TouchableOpacity style={styles.mapCardOverlay}>
-      <Image source={{ uri: imageUrl }} style={styles.mapCardImage} />
+      <ImageBackground
+        source={{ uri: imageUrl }}
+        style={styles.mapCardImage}
+        resizeMode="cover" // Make sure the image covers the entire space
+      >
+        <View style={styles.ratingContainer}>
+          <Text style={styles.ratingText}>{rating}</Text>
+        </View>
+      </ImageBackground>
+
       <View style={styles.mapBottomCard}>
         <View style={styles.mapInfo}>
           <Text style={styles.mapName}>{name}</Text>
           <View style={styles.mapCardInfo}>
-            <FontAwesome name="map-marker" size={18} color="#555" />
-            <Text style={styles.mapBottomText}> {distance} • </Text>
-            <Text style={styles.mapBottomText}>
+            <FontAwesome name="map-marker" size={15} color="#555" />
+            <Text style={styles.mapBottomText}>{distance} mi</Text>
+            {/* <Text style={styles.mapBottomText}>
               {rating} ({ratingCount})
-            </Text>
+            </Text> */}
           </View>
         </View>
         <TouchableOpacity style={styles.mapFav} onPress={handleFavorite}>
