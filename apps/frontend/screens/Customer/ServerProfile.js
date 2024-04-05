@@ -23,6 +23,7 @@ import { FeaturedRow } from "./FeaturedRow";
 import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
 import { useNavigation } from "@react-navigation/native";
 import { Reviews } from "./data/serverReviews";
+import { FeaturedRowService } from "./FeaturedRowService";
 
 const ServerProfile = () => {
   const serverInfo = [
@@ -201,7 +202,7 @@ const ServerProfile = () => {
                   key={index}
                   ref={(ref) => (sectionRefs.current[index] = ref)}
                 >
-                  <FeaturedRow featuredName={item} />
+                  <FeaturedRowService featuredName={item} />
                 </View>
               ))}
             </View>

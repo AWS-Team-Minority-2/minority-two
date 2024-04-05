@@ -38,6 +38,7 @@ import { ServiceProfile } from './screens/Customer/ServiceProfile';
 import { ServerProfile } from './screens/Customer/ServerProfile';
 import { Review } from './screens/Customer/Review';
 
+import { StoreProfile } from './screens/Customer/StoreProfile';
 import {
   ScreenProvider,
   useScreenState,
@@ -147,10 +148,11 @@ function NavigationController() {
           name='AccountInfoPhoneNumber'
           component={AccountInfoPhoneNumber}
         />
+        <Stack.Screen name='Review' component={Review} />
         <Stack.Screen name='AccountInfoEmail' component={AccountInfoEmail} />
         <Stack.Screen name='ServiceProfile' component={ServiceProfile} />
         <Stack.Screen name='ServerProfile' component={ServerProfile} />
-        <Stack.Screen name='Review' component={Review} />
+        <Stack.Screen name='StoreProfile' component={StoreProfile} />
       </Stack.Navigator>
       {/* Pass in User Id to navbar to handle customer actions */}
       {showNavBar && <NavBar id={user.id} />}

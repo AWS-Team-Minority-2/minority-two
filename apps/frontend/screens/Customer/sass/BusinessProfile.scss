@@ -15,48 +15,47 @@
   margin-bottom: 4%;
 }
 
-.topView{
-    flex-direction: row;
-    justify-content: space-between;
+.topView {
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.leftIcon{
-    margin-left: 3%;
-    // margin-right: 2%;
-    margin-top: 2%;
-    // margin-bottom: 5px;
-    width: 30;
-    height:30;
-    background-color: white;
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
- }
+.leftIcon {
+  margin-left: 3%;
+  // margin-right: 2%;
+  margin-top: 2%;
+  // margin-bottom: 5px;
+  width: 30;
+  height: 30;
+  background-color: white;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
 
- .banner {
-    position: absolute;
-    width: 100%;
-    top: 0; /* Adjust as needed */
-    left: 0;
-    right: 0;
-    background-color: #f2998d; /* Choose your desired background color */
-    padding: 10px;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    flex-direction: row-reverse;
-  }
-  
+.banner {
+  position: absolute;
+  width: 100%;
+  top: 0; /* Adjust as needed */
+  left: 0;
+  right: 0;
+  background-color: #f2998d; /* Choose your desired background color */
+  padding: 10px;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  flex-direction: row-reverse;
+}
 
- .Favorite{
-    margin-right: 3%;
-    margin-top: 2%;
-    width: 30;
-    height:30;
-    background-color: white;
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
- }
+.Favorite {
+  margin-right: 3%;
+  margin-top: 2%;
+  width: 30;
+  height: 30;
+  background-color: white;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
 
 .featureScrollView {
   // margin-left: 10px;
@@ -141,19 +140,16 @@
   padding-top: 12px;
 }
 
-.businessTab{
-    top: 3%;
-    margin-left: 4%;
-    flex-direction: column;
-    
-
+.businessTab {
+  top: 3%;
+  margin-left: 4%;
+  flex-direction: column;
 }
 
-//In FeaturedRow.js - Handles Feature Tab Names
 .tabName {
   font-size: 22px;
   font-weight: 700;
-  margin-bottom: 4%;
+  margin-bottom: 3%;
 }
 
 .businessItem {
@@ -201,7 +197,7 @@
 
 .businessPopUpBack {
   position: absolute;
-  top: 20;
+  top: 15;
   left: 15;
   z-index: 1; // Ensure the chevron icon is above the map
 }
@@ -231,16 +227,15 @@
   margin-bottom: 5%;
 }
 
+.businessMapBoxWithDropdown {
+  margin-bottom: 15%;
+}
+
 .businessMapContent {
   flex-direction: row;
   align-items: center;
   margin-right: 15px;
 }
-
-// .businessMapAddress{
-//     font-size: 14px;
-//     margin-left: 4%;
-// }
 
 .businessMapText {
   font-size: 14px;
@@ -259,7 +254,7 @@
 
 .dropdownHours {
   flex-direction: row;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 }
 
 .dropdownDays {

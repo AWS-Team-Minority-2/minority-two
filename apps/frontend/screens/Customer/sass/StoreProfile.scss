@@ -1,0 +1,415 @@
+.storeProfileLayout{
+    flex: 1;
+    display: flex;
+    background-color: #fcfcfc;
+}
+
+.serverProfileAdjustment{
+    // margin-top: 0%;
+}
+
+
+.topView{
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.searchSection{
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   margin-top: 10%;
+   margin-right: 3%;
+   margin-left: 3%;
+}
+
+// .listButton{
+//    width: 40px; /* corrected */
+//    height: 40px; /* corrected */
+//    border: 1px solid #00000040;
+//    border-radius: 20px;
+//    justify-content: center;
+//    align-items: center;
+//    background-color: white;
+// }
+
+.searchContainer {
+   width: 90%;
+   height: 48.177px;
+   background-color: white;
+   border: 1px solid #00000040;
+   border-radius: 25px;
+   padding-left: 10px;
+   flex-direction: row;
+   align-items: center; /* Center children vertically */
+   justify-content: center; /* Center children horizontally */
+
+ }
+ 
+ .searchIcon {
+   margin-right: 10px;
+ }
+ 
+ .textInput {
+   flex: 1;
+   height: 100%; /* Ensure TextInput takes up full height of container */
+   // font-family: 'BebasNeue_400Regular';
+ }
+
+.leftIcon{
+    margin-left: 3%;
+    // margin-right: 2%;
+    margin-top: 2%;
+    // margin-bottom: 5px;
+    width: 30;
+    height:30;
+    background-color: white;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .banner {
+    position: absolute;
+    width: 100%;
+    top: 0; /* Adjust as needed */
+    left: 0;
+    right: 0;
+    background-color: #f2998d; /* Choose your desired background color */
+    padding: 10px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: row-reverse;
+  }
+
+  .storeInfo{
+    flex-direction: row;
+
+    
+  }
+
+  .rating{
+    position: absolute; /* Position over the image */
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
+    padding: 10px; /* Add some padding around the text */
+    border-radius: 10px; /* Optional: rounded corners */
+    overflow: hidden;
+  }
+  
+
+ .Favorite{
+    margin-right: 3%;
+    margin-top: 2%;
+    width: 30;
+    height:30;
+    background-color: white;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .storeTopView{
+    margin-top: 5%;
+    // margin-left: 3%;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+ }
+
+ .storeName{
+    color: #191919;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 1%;
+ }
+
+ .businessType{
+    color: #f2998d;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 2px;
+ }
+
+ .reviewContent{
+    margin-top: 8%;
+ }
+
+ 
+//  .divider {
+//    width: 1px;
+//    margin-right: 10px;
+//    height: 65%; /* Adjust the height of the divider as needed */
+//    background-color: #00000040; /* Adjust the color of the divider as needed */
+//  }
+ 
+
+
+ .scrollViewContainer{
+    flex-direction: row;
+ }
+
+ .itemContainer{
+   //  background-color: white;
+    width: 150px; /* Adjust width as needed */
+    height: 190px; /* Adjust height as needed */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+ }
+ 
+ .addButton{
+   position: absolute;
+   bottom: 0;
+   right: -10;
+   width: 26px; /* corrected */
+   height: 26px; /* corrected */
+   background-color: #f2998d;
+   border-radius: 20px;
+   justify-content: center;
+   align-items: center;
+}
+
+.addedButton{
+   // display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   background-color: #f2998d;
+   border-radius: 20px;
+   height: 26px;
+   width: 70px;
+   position: absolute;
+   bottom: 0;
+   right: -10;
+}
+
+.numberAdded{
+   margin: 0 5px;
+   color: #fcfcfc;
+   font-weight: 700;
+}
+
+
+ .imageAdjust{
+   justify-content: center;
+   align-items: center;
+   height: 60%;
+   width: 60%;
+   // padding: 30px;
+ }
+
+ .itemImage{
+    width: 100%;
+    height: 100%;
+   //  justify-content: center;
+    position: relative;
+   //  justify-content: center;
+   //  align-items: center;
+ }
+
+ .belowImage {
+   width: 80%;
+   height: 50%;
+   padding: 10px; /* Add padding as needed */
+ }
+
+ .itemTopContent{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Center content horizontally */
+    margin-top: 5px; /* Adjust spacing */
+ }
+
+ .itemPrices{
+    font-weight: 700;
+    margin-right: 2px; /* Adjust spacing */
+ }
+
+ .itemName {
+   text-align: center; /* Center text */
+   margin-top: 5px; /* Adjust spacing */
+   color: #383838;
+ }
+
+
+ .allReviews{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+ }
+
+ .allReviewsText{
+    font-size: 12px;
+    color: #f2998d;
+ }
+
+//In FeaturedRow.js - Handles Feature Tab Names
+
+.featureSection{
+   flex-direction: row;
+   align-items: center;
+   margin-right: 3%;
+   justify-content: space-between;
+ }
+
+.featureName {
+   font-size: 22px;
+   font-weight: 700;
+   // margin-bottom: 4%;
+ }
+
+ .featureAmount{
+   font-size: 13px;
+   font-weight: 500;
+   color: #383838;
+ }
+
+
+
+ .reviewBox{
+    background-color: white;
+    border: 0.5px rgb(198, 198, 198) solid;
+    width: 300px; /* Adjust width as needed */
+    height: 120px; /* Adjust height as needed */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent line breaks */
+    margin-right: 10px; /* Adjust spacing between review boxes */
+    padding: 10px;
+    border-radius: 10px;
+ }
+
+ .reviewUser{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+ }
+
+ .dateContainer {
+    flex: 1;
+    align-items: flex-end;
+  }
+
+ .reviewDate{
+    color: rgb(140, 140, 140);
+    margin-left: auto;
+    font-size: 12px;
+ }
+
+ .reviewName{
+    margin-left: 2%;
+    font-size: 13px;
+ }
+
+ .starContainer{
+    flex-direction: row;
+    margin-top: 2%;
+ }
+
+ .reviewComment{
+    margin-top: 4%;
+    font-weight: 600;
+ }
+
+ .businessTabView{
+   margin-bottom: 10%;
+}
+
+.businessTab{
+   top: 2%;
+   margin-left: 4%;
+   // flex-direction: column;
+}
+
+.topContainer {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   margin-top: 10%;
+   margin-left: 3%;
+   margin-right: 3%;
+
+   // background-color: red;
+ }
+
+ .topButton {
+   flex: 1; /* This will make each button flexibly fill the available space */
+   // padding: 10px 60px;
+   margin: 0 5px;
+   align-items: center;
+   // background-color: blue;
+ }
+
+ .selectedButtonText {
+   color: #f2998d;
+ }
+
+ .topButtonText {
+   font-size: 17px;
+   font-weight: bold;
+   color: black;
+   margin-bottom: 6px;
+ }
+
+ .underline {
+   width: 100%;
+   height: 2.5px; /* Adjust height as needed */
+ }
+
+ .selectedUnderline {
+   background-color: #f2998d;
+ }
+
+ .storeScroll{
+   margin-left: -18px;
+   margin-top: 4%;
+   margin-bottom: 7%;
+ }
+
+ 
+
+//  .detailView{
+//    margin-bottom: 10%;
+// }
+
+// .detailTab{
+//    margin-left: 4%;
+//    flex-direction: column;
+// }
+
+// .detailHeader{
+//    font-weight: 700;
+//    margin-bottom: 4%;
+//    margin-top: 2%;
+//    font-size: 14px;
+// }
+
+// .detailHourBox{
+//    display: flex;
+//    flex-direction: row;
+//    margin-top: 6%;
+// }
+
+// .detailDays{
+//    font-weight: 500;
+// }
+
+// .detailHours{
+//    margin-left: auto;
+//    margin-right: 5%;
+// }
+
+// .detailDivider{
+//    height: 1px;
+//    background-color: #e4e4e4; /* Color of the divided line */
+//    margin: 10px 0; /* Adjust margin as needed */
+// }
+
+// .detailView{
+//    margin-top: 5%;
+//    margin-left: 3%;
+// }

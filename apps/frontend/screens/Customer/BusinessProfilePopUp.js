@@ -36,13 +36,6 @@ const BusinessProfilePopUp = ({
   const navigation = useNavigation();
   const dispatch = useScreenDispatch();
 
-  const [mapLocation, setMapLocation] = useState({
-    latitude: 38.92784,
-    longitude: -77.02336,
-    latitudeDelta: 0.00013,
-    longitudeDelta: 0.00694,
-  });
-
   //Handles dropdown to show business hours
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to control dropdown visibility
   const toggleDropdown = () => {
@@ -58,6 +51,14 @@ const BusinessProfilePopUp = ({
   const toggleRating = () => {
     setRate(!rate);
   };
+
+  const [mapLocation, setMapLocation] = useState({
+    latitude: 38.92784,
+    longitude: -77.02336,
+    latitudeDelta: 0.00013,
+    longitudeDelta: 0.00694,
+  });
+
   const [selectedRating, setSelectedRating] = useState(0);
 
   return (
@@ -168,23 +169,7 @@ const BusinessProfilePopUp = ({
                   />
                 )}
               </TouchableOpacity>
-              {rate && (
-                <View style={styles.dropdownContent}>
-                  {/* <Picker
-                    selectedValue={selectedRating}
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedRating(itemValue)
-                    }
-                  >
-                    <Picker.Item label="Select Rating" value={0} />
-                    <Picker.Item label="⭐" value={1} />
-                    <Picker.Item label="⭐⭐" value={2} />
-                    <Picker.Item label="⭐⭐⭐" value={3} />
-                    <Picker.Item label="⭐⭐⭐⭐" value={4} />
-                    <Picker.Item label="⭐⭐⭐⭐⭐" value={5} />
-                  </Picker> */}
-                </View>
-              )}
+              {rate && <View style={styles.dropdownContent}></View>}
               <View style={styles.businessMapDivider}></View>
             </View>
 
@@ -196,7 +181,12 @@ const BusinessProfilePopUp = ({
               <View style={styles.businessMapDivider}></View>
             </View>
 
-            <View style={styles.businessMapBox}>
+            <View
+              style={[
+                styles.businessMapBox,
+                isDropdownOpen && styles.businessMapBoxWithDropdown,
+              ]}
+            >
               <TouchableOpacity
                 // onPress={promptCall}
                 style={styles.businessMapContent}
