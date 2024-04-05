@@ -16,6 +16,7 @@ import {
   useCartsDispatch,
   removeCart,
   useCartsState,
+  useNotifications,
 } from '@min-two/business-web';
 import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 import LottieView from 'lottie-react-native';
@@ -27,6 +28,7 @@ const ProcessedScreen = ({ navigation, route }) => {
   const cartDispatch = useCartsDispatch();
   const carts = useCartsState();
   const dispatch = useScreenDispatch();
+  const { uploadNotification } = useNotifications();
 
   return (
     <SafeAreaView style={styles.safeAreaViewBase}>
@@ -53,6 +55,18 @@ const ProcessedScreen = ({ navigation, route }) => {
               restaurant: params.restaurant,
               items: params.items,
             });
+
+            // HOLD NOTIFCATIONS WORKSPACE
+            uploadNotification({
+              contents: {
+                imageUrl: params.restaurant.profileImage,
+                name: params.restaurant.name,
+                type: 'processed',
+                userId: params.userId,
+              },
+            });
+            // HOLD NOTIFCATIONS WORKSPACE
+
             navigation.navigate('UserHome', {
               restaurant: params.restaurant,
               items: params.items,

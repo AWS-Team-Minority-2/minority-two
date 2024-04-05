@@ -1,5 +1,5 @@
 import { GQLContext } from '../GQLContext';
-import { User, UserDetails } from '@min-two/user-iso';
+import { NotificationBase, User, UserDetails } from '@min-two/user-iso';
 
 export const MutationResolver = {
   async RegisterUser(_root: {}, args: { user: User }, context: GQLContext) {
@@ -33,6 +33,19 @@ export const MutationResolver = {
     try {
       const attempt = await context.admin.login(args.adminCode);
       return attempt;
+    } catch (error) {
+      throw new Error('Failed to login');
+    }
+  },
+
+  async UploadNotification(
+    _root: {},
+    // @ts-ignore
+    args,
+    context: GQLContext
+  ) {
+    try {
+      console.log(args, 'hhhh');
     } catch (error) {
       throw new Error('Failed to login');
     }

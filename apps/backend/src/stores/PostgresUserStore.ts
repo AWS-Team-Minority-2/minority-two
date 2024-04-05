@@ -4,6 +4,9 @@ import {
   User,
   fetchOneByEmailQuery,
   UserDetails,
+  NotificationBase,
+  addUserNotificationQuery,
+  UnreadNotification,
 } from '@min-two/user-iso';
 import bcrypt from 'bcrypt';
 
@@ -33,6 +36,23 @@ export class PostgresUserStore {
     } catch (error) {
       console.log(error);
       throw new Error('Error while adding user to the database.');
+    }
+  }
+
+  async uploadUserNotification(notification: NotificationBase, userId: string) {
+    try {
+      const parsedNotifcation: UnreadNotification = {
+        imageUrl: notification.imageUrl,
+        name: notification.name,
+        type: notification.type,
+        receivedAt: new Date(),
+      };
+
+      const values = [parsedNotifcation, userId];
+      return await this.pool.query(addUserNotificationQuery, values);
+    } catch (error) {
+      console.log(error);
+      throw new Error('Error while adding notification to the database.');
     }
   }
 

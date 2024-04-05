@@ -38,3 +38,11 @@ export const GET_STORES = gql`
     }
   }
 `;
+
+export const UPLOAD_NOTIFICATION = gql`
+  mutation Mutation($details: NotificationUpload) {
+    UploadNotification(details: $details) {
+      message
+    }
+  }
+`;

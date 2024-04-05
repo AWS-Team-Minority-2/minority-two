@@ -47,6 +47,14 @@ type Mutation {
   RegisterUser(user: User): AddedUserResponse
   LoginUser(details: UserDetails): LoginResponse
   LoginAdmin(adminCode: String): AdminLoginResponse
+  UploadNotification(details: NotificationUpload): NotificationResponse
+}
+
+input NotificationUpload {
+  name: String!
+  image_url: String!
+  type: String!
+  user_id: String!
 }
 
 input UserDetails {
@@ -56,6 +64,10 @@ input UserDetails {
 
 type AdminLoginResponse {
   name: String!
+}
+
+type NotificationResponse {
+  message: String!
 }
 
 type LoginResponse {

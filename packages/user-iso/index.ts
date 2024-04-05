@@ -22,3 +22,21 @@ FROM users.user
 WHERE email = $1;`;
 
 export * from './context/auth';
+
+//  We only support one type of notification, update this when more types notiifcations become supported
+type NotifcationType = 'processed';
+export interface NotificationBase {
+  imageUrl: string;
+  name: string;
+  type: NotifcationType;
+}
+
+export interface UnreadNotification extends NotificationBase {
+  receivedAt: string | Date;
+}
+
+export const addUserNotificationQuery = `
+UPDATE users.user
+SET notifications = $1
+WHERE sid = $2;
+`;

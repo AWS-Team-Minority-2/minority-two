@@ -12,6 +12,8 @@ import { useNavigation } from '@react-navigation/native';
 import Currency from 'react-currency-formatter';
 import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
   removeCurrent,
   useBasketDispatch,
@@ -24,9 +26,24 @@ import {
 
 import styles from '../Checkout/sass/BasketScreen.scss';
 import { changeScreen, useScreenDispatch } from '@min-two/screen-iso';
+const navagation = useNavigation();
 
 const BasketScreen = ({ route }) => {
   const props = route.params;
+  const [userId, setUserId] = useState(null);
+
+  // useEffect(async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem('user');
+  //     const parsed = JSON.parse(value);
+
+  //     if (parsed) {
+  //       setUserId(parsed.id);
+  //     }
+  //   } catch (error) {
+  //     navagation.navigate('UserHome');
+  //   }
+  // }, []);
 
   const noCarts =
     'https://cdn.dribbble.com/users/295908/screenshots/2834564/media/805c806c3abfd012b6833e2cb290f47c.png?resize=800x600&vertical=center';
@@ -130,6 +147,7 @@ const BasketScreen = ({ route }) => {
                   total: total + total * 0.2,
                   restaurant: props.restaurantMetadata,
                   items: props.items,
+                  userId: userId,
                 });
               }}
               style={styles.placeOrderBttn}

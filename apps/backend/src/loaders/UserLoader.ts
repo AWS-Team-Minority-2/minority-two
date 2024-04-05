@@ -1,5 +1,5 @@
 import { PostgresUserStore } from '../stores/PostgresUserStore';
-import { User, UserDetails } from '@min-two/user-iso';
+import { NotificationBase, User, UserDetails } from '@min-two/user-iso';
 import { QueryResult } from 'pg';
 
 export interface UserLoaderClass {
@@ -36,6 +36,17 @@ export class UserLoader implements UserLoaderClass {
       return await this.store.loginUser(details);
     } catch (error) {
       throw new Error('Failed to get email');
+    }
+  };
+
+  uploadNotification = async (
+    notification: NotificationBase,
+    userId: string
+  ): Promise<any> => {
+    try {
+      return await this.store.uploadUserNotification(notification, userId);
+    } catch (error) {
+      throw new Error('Failed to upload notification');
     }
   };
 }
