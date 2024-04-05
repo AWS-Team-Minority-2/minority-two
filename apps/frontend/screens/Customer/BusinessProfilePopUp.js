@@ -1,5 +1,5 @@
 // PopUpScreen.js
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -8,28 +8,30 @@ import {
   Linking,
   PanResponder,
   ScrollView,
-} from "react-native";
-import styles from "./sass/BusinessProfile.scss";
-import MapView, { Callout, Marker } from "react-native-maps";
-import { Picker } from "@react-native-picker/picker";
+} from 'react-native';
+import styles from './sass/BusinessProfile.scss';
+import MapView, { Callout, Marker } from 'react-native-maps';
+import { Picker } from '@react-native-picker/picker';
 import {
   Entypo,
   Ionicons,
   MaterialIcons,
   MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
+} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 
 const BusinessProfilePopUp = ({
   isVisible,
   onClose,
-  businessName,
-  businessLocation,
-  businessHours,
+  hours,
+  name,
+  subCat,
+  number,
+  city,
+  state,
+  zip,
   address,
-  area,
-  phoneNumber,
 }) => {
   const navigation = useNavigation();
   const dispatch = useScreenDispatch();
@@ -39,6 +41,10 @@ const BusinessProfilePopUp = ({
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+  const businessHours = {
+    'Monday-Saturday': '11am-9pm',
+    Sunday: '11am-7pm',
+  };
 
   //handles dropdown for user to rate business
   const [rate, setRate] = useState(false);
@@ -46,12 +52,11 @@ const BusinessProfilePopUp = ({
     setRate(!rate);
   };
 
-  
   const [selectedRating, setSelectedRating] = useState(0);
 
   return (
     <Modal
-      animationType="slide"
+      animationType='slide'
       transparent={true}
       visible={isVisible}
       onRequestClose={onClose}
@@ -70,26 +75,28 @@ const BusinessProfilePopUp = ({
               onClose();
             }}
           >
-            <MaterialCommunityIcons name="close" size={27} color="black" />
+            <MaterialCommunityIcons name='close' size={27} color='black' />
           </TouchableOpacity>
           <ScrollView style={styles.businessMapInfo}>
-            <Text style={styles.businessMapName}>{businessName}</Text>
-            <Text style={styles.businessMapSubInfo}>Vegan</Text>
+            <Text style={styles.businessMapName}>{name}</Text>
+            <Text style={styles.businessMapSubInfo}>{subCat}</Text>
 
             <View style={styles.businessMapBox}>
               <TouchableOpacity
                 // onPress={copyAddress}
                 style={styles.businessMapContent}
               >
-                <Entypo name="location-pin" size={26} color="black" />
+                <Entypo name='location-pin' size={26} color='black' />
                 <View style={styles.businessMapText}>
                   <Text>{address}</Text>
-                  <Text>{area}</Text>
+                  <Text>
+                    {city}, {state} {zip}
+                  </Text>
                 </View>
                 <MaterialCommunityIcons
-                  name="content-copy"
+                  name='content-copy'
                   size={18}
-                  color="black"
+                  color='black'
                   style={styles.businessMapSubBttt}
                 />
               </TouchableOpacity>
@@ -101,20 +108,20 @@ const BusinessProfilePopUp = ({
                 onPress={toggleDropdown}
                 style={styles.businessMapContent}
               >
-                <MaterialCommunityIcons name="clock" size={22} color="black" />
-                <Text style={styles.businessMapText}>{businessName} Hours</Text>
+                <MaterialCommunityIcons name='clock' size={22} color='black' />
+                <Text style={styles.businessMapText}>Open till 10:00pm</Text>
                 {isDropdownOpen ? (
                   <Entypo
-                    name="minus"
+                    name='minus'
                     size={20}
-                    color="black"
+                    color='black'
                     style={styles.businessMapSubBttt}
                   />
                 ) : (
                   <Entypo
-                    name="plus"
+                    name='plus'
                     size={20}
-                    color="black"
+                    color='black'
                     style={styles.businessMapSubBttt}
                   />
                 )}
@@ -137,20 +144,20 @@ const BusinessProfilePopUp = ({
                 onPress={toggleRating}
                 style={styles.businessMapContent}
               >
-                <Ionicons name="star-sharp" size={22} color="black" />
-                <Text style={styles.businessMapText}>Rate {businessName}</Text>
+                <Ionicons name='star-sharp' size={22} color='black' />
+                <Text style={styles.businessMapText}>Rate {name}</Text>
                 {rate ? (
                   <Entypo
-                    name="minus"
+                    name='minus'
                     size={20}
-                    color="black"
+                    color='black'
                     style={styles.businessMapSubBttt}
                   />
                 ) : (
                   <Entypo
-                    name="plus"
+                    name='plus'
                     size={20}
-                    color="black"
+                    color='black'
                     style={styles.businessMapSubBttt}
                   />
                 )}
@@ -161,10 +168,8 @@ const BusinessProfilePopUp = ({
 
             <View style={styles.businessMapBox}>
               <TouchableOpacity style={styles.businessMapContent}>
-                <MaterialIcons name="message" size={22} color="black" />
-                <Text style={styles.businessMapText}>
-                  Contact {businessName}
-                </Text>
+                <MaterialIcons name='message' size={22} color='black' />
+                <Text style={styles.businessMapText}>Contact {name}</Text>
               </TouchableOpacity>
               <View style={styles.businessMapDivider}></View>
             </View>
@@ -179,8 +184,8 @@ const BusinessProfilePopUp = ({
                 // onPress={promptCall}
                 style={styles.businessMapContent}
               >
-                <MaterialIcons name="phone" size={22} color="black" />
-                <Text style={styles.businessMapText}>{phoneNumber}</Text>
+                <MaterialIcons name='phone' size={22} color='black' />
+                <Text style={styles.businessMapText}>+1 (202) 232-1700</Text>
               </TouchableOpacity>
               <View style={styles.businessMapDivider}></View>
             </View>

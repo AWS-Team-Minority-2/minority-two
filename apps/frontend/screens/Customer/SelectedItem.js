@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Modal, Image } from "react-native";
-import styles from "./sass/BusinessProfile";
-import { MaterialIcons, AntDesign } from "@expo/vector-icons";
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Modal, Image } from 'react-native';
+import styles from './sass/BusinessProfile';
+import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 
 const SelectedItem = ({ isVisible, item, onClose }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -11,7 +11,7 @@ const SelectedItem = ({ isVisible, item, onClose }) => {
   };
   return (
     <Modal
-      animationType="slide"
+      animationType='slide'
       transparent={true}
       visible={isVisible}
       onRequestClose={onClose}
@@ -33,9 +33,9 @@ const SelectedItem = ({ isVisible, item, onClose }) => {
               onPress={toggleFavorite}
             >
               <MaterialIcons
-                name={isFavorite ? "favorite" : "favorite-outline"}
+                name={isFavorite ? 'favorite' : 'favorite-outline'}
                 size={15}
-                color="#f2998d"
+                color='#f2998d'
               />
               <Text style={styles.itemFavoriteWords}>Favorite(22)</Text>
             </TouchableOpacity>

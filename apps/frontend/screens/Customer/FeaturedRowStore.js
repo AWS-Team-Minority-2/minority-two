@@ -1,8 +1,8 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import React from "react";
-import { FeaturedCardStore } from "./FeaturedCardStore";
-import { shop } from "./data/store";
-import styles from "./sass/StoreProfile";
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { FeaturedCardStore } from './FeaturedCardStore';
+import { shop } from './data/store';
+import styles from './sass/StoreProfile';
 
 //Handles each feature tab of all the rows
 const FeaturedRowStore = ({ featuredName, featuredAmount }) => {
@@ -11,7 +11,7 @@ const FeaturedRowStore = ({ featuredName, featuredAmount }) => {
       <View style={styles.featureSection}>
         <Text style={styles.featureName}>{featuredName}</Text>
         <TouchableOpacity style={styles.featureAmount}>
-          See all {featuredAmount}
+          <Text>See all {featuredAmount}</Text>
         </TouchableOpacity>
       </View>
 

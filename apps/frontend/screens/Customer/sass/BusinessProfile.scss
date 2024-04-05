@@ -15,48 +15,47 @@
   margin-bottom: 4%;
 }
 
-.topView{
-    flex-direction: row;
-    justify-content: space-between;
+.topView {
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.leftIcon{
-    margin-left: 3%;
-    // margin-right: 2%;
-    margin-top: 2%;
-    // margin-bottom: 5px;
-    width: 30;
-    height:30;
-    background-color: white;
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
- }
+.leftIcon {
+  margin-left: 3%;
+  // margin-right: 2%;
+  margin-top: 2%;
+  // margin-bottom: 5px;
+  width: 30;
+  height: 30;
+  background-color: white;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
 
- .banner {
-    position: absolute;
-    width: 100%;
-    top: 0; /* Adjust as needed */
-    left: 0;
-    right: 0;
-    background-color: #f2998d; /* Choose your desired background color */
-    padding: 10px;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    flex-direction: row-reverse;
-  }
-  
+.banner {
+  position: absolute;
+  width: 100%;
+  top: 0; /* Adjust as needed */
+  left: 0;
+  right: 0;
+  background-color: #f2998d; /* Choose your desired background color */
+  padding: 10px;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  flex-direction: row-reverse;
+}
 
- .Favorite{
-    margin-right: 3%;
-    margin-top: 2%;
-    width: 30;
-    height:30;
-    background-color: white;
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
- }
+.Favorite {
+  margin-right: 3%;
+  margin-top: 2%;
+  width: 30;
+  height: 30;
+  background-color: white;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
 
 .featureScrollView {
   // margin-left: 10px;
@@ -138,27 +137,25 @@
 
 .businessTabView {
   margin-bottom: 25%;
+  padding-top: 12px;
 }
 
-.businessTab{
-    top: 3%;
-    margin-left: 4%;
-    flex-direction: column;
- 
-
+.businessTab {
+  top: 3%;
+  margin-left: 4%;
+  flex-direction: column;
 }
 
-.tabName{
+.tabName {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 3%;
 }
 
-
-.businessItem{
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 5px;
+.businessItem {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
 .businessPrices {
@@ -230,7 +227,7 @@
   margin-bottom: 5%;
 }
 
-.businessMapBoxWithDropdown{
+.businessMapBoxWithDropdown {
   margin-bottom: 15%;
 }
 
@@ -361,4 +358,32 @@
   padding-top: 100px;
 }
 
+.featuredName {
+  font-weight: bold;
+  font-size: 16px;
+  padding-bottom: 10px;
+  padding-top: 20px;
+}
 
+.activeCartBttn {
+  position: absolute;
+  bottom: 2px;
+  width: 90%;
+  background-color: #f2998d;
+
+  align-items: center;
+  padding: 10px;
+  margin-left: 20px;
+  border-radius: 30px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  // margin: 0 10px 0 10px;
+}
+
+.viewCartText {
+  font-family: 'BebasNeue_400Regular';
+  font-size: 20px;
+  color: white;
+  padding-right: 20px;
+}
