@@ -52,6 +52,13 @@ const BusinessProfilePopUp = ({
     setRate(!rate);
   };
 
+  const [mapLocation, setMapLocation] = useState({
+    latitude: 38.92784,
+    longitude: -77.02336,
+    latitudeDelta: 0.00013,
+    longitudeDelta: 0.00694,
+  });
+
   const [selectedRating, setSelectedRating] = useState(0);
 
   return (
@@ -65,7 +72,7 @@ const BusinessProfilePopUp = ({
         <View style={styles.businessPopupLayout}>
           <MapView
             style={styles.businessMap}
-            region={businessLocation}
+            region={mapLocation}
             rotateEnabled={false}
             scrollEnabled={false}
           />
