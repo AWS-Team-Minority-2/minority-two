@@ -17,7 +17,7 @@ const MapCard = ({ imageUrl, name, rating, ratingCount, distance }) => {
   };
 
   return (
-    <TouchableOpacity style={styles.mapCardOverlay}>
+    <View style={styles.mapCardOverlay}>
       <ImageBackground
         source={{ uri: imageUrl }}
         style={styles.mapCardImage}
@@ -47,7 +47,7 @@ const MapCard = ({ imageUrl, name, rating, ratingCount, distance }) => {
           />
         </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 

@@ -189,6 +189,7 @@
 .mapOverViewParent {
   position: absolute;
   bottom: 10px;  
+  flex: 1;
 }
 
 .mapCardOverlay {
@@ -196,7 +197,7 @@
   background-color: #fff;
   width: 290px;
   height: 180px;
-  margin: 0 10px;
+  margin: 0 5px;
   border-radius: 15px;
   overflow: hidden;
 }
@@ -298,6 +299,16 @@
   border-radius: 50%; /* Make it a circle */
   width: 30px; /* Adjust as needed */
   height: 30px; /* Adjust as needed */
+  align-items: center;
+  justify-content: center;
+}
+
+.selectedRing{
+  padding: 5px;
+  background-color: #f2998d;
+  border-radius: 50%; /* Make it a circle */
+  width: 40px; /* Adjust as needed */
+  height: 40px; /* Adjust as needed */
   align-items: center;
   justify-content: center;
 }

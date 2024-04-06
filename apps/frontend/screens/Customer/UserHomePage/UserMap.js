@@ -30,20 +30,11 @@ import { BusinessMarkers } from "./components/BusinessMarkers";
 
 const UserMap = ({ route }) => {
   const navigation = useNavigation();
-  const [location, setLocation] = useState(false); // For the pop screen to show up or not
-  const [pickedAddress, setPickedAddress] = useState("Howard University"); // Current address displayed
 
   const props = route.params;
   const zipCode = props.zipCode;
 
   const { allBusiness } = useStores(zipCode);
-
-  const [mapLocation, setMapLocation] = useState({
-    latitude: 38.93,
-    longitude: -77.021584,
-    latitudeDelta: 0.0100093,
-    longitudeDelta: 0.0145645074,
-  });
 
   const CARD_WIDTH = 293;
   const CARD_HEIGHT = 200;
@@ -69,6 +60,46 @@ const UserMap = ({ route }) => {
     })
   ).current;
 
+  const [mapLocation, setMapLocation] = useState({
+    latitude: 38.93,
+    longitude: -77.021584,
+    latitudeDelta: 0.0100093,
+    longitudeDelta: 0.0145645074,
+  });
+
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const scrollViewRef = useRef(null);
+
+  const handleMarkerPress = (latitude, longitude, index) => {
+    // Update map location to the clicked marker's coordinates
+    setMapLocation({
+      latitude,
+      longitude,
+      latitudeDelta: 0.00922,
+      longitudeDelta: 0.00421,
+    });
+    // Show the scroll view
+    setShowScrollView(true);
+
+    if (scrollViewRef.current) {
+      const cardWidth = 300; // Width of each card
+      const screenWidth = Dimensions.get("window").width;
+      const scrollToX = index * cardWidth - (screenWidth - cardWidth) / 2;
+      scrollViewRef.current.scrollTo({ x: scrollToX, animated: true });
+    }
+
+    // Toggle the selection state of the clicked marker
+    setSelectedMarker((prevSelectedMarker) => {
+      if (prevSelectedMarker === `${latitude}-${longitude}`) {
+        // If the clicked marker is already selected, deselect it
+        return null;
+      } else {
+        // If another marker is selected or no marker is selected, select the clicked marker
+        return `${latitude}-${longitude}`;
+      }
+    });
+  };
+
   return (
     <SafeAreaView style={styles.homeScreenLayout}>
       <View style={styles.homeAdjustment}>
@@ -82,23 +113,32 @@ const UserMap = ({ route }) => {
           <MapView
             style={{ height: 800 }}
             region={mapLocation}
-            ref={(map) => (this.map = map)}
             rotateEnabled={true}
             zoomEnabled={true}
             loadingEnabled={true}
             loadingIndicatorColor="#F2998D"
             showsUserLocation={true}
-            // initialRegion={{ latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}
           >
             {allBusiness
               .filter((business) => !business.is_online)
               .map((business, index) => (
-                <BusinessMarkers key={index} business={business} />
+                <TouchableOpacity
+                  key={index}
+                  onPress={() =>
+                    handleMarkerPress(business.lat, business.long, index)
+                  }
+                >
+                  <BusinessMarkers
+                    key={index}
+                    business={business}
+                    isSelected={
+                      selectedMarker === `${business.lat}-${business.long}`
+                    }
+                  />
+                </TouchableOpacity>
               ))}
           </MapView>
         </View>
-
-        
       </View>
 
       {!showScrollView ? (
@@ -111,26 +151,23 @@ const UserMap = ({ route }) => {
           style={styles.mapOverViewParent}
           horizontal
           showsHorizontalScrollIndicator={false}
+          ref={scrollViewRef}
         >
           {allBusiness
             .filter((b) => !b.is_online)
             .map((b, index) => (
-              <MapCard
-                key={index}
-                imageUrl={b.cover_image}
-                name={b.name}
-                rating={b.rating}
-                ratingCount={b.rating_count}
-                distance={b.distance}
-                onPress={() =>
-                  setMapLocation({
-                    latitude: b.latitude,
-                    longitude: b.longitude,
-                    latitudeDelta: 0.0100093,
-                    longitudeDelta: 0.0145645074,
-                  })
-                }
-              />
+              <TouchableOpacity
+                onPress={() => handleMarkerPress(b.lat, b.long, index)}
+              >
+                <MapCard
+                  key={index}
+                  imageUrl={b.cover_image}
+                  name={b.name}
+                  rating={b.rating}
+                  ratingCount={b.rating_count}
+                  distance={b.distance}
+                />
+              </TouchableOpacity>
             ))}
         </ScrollView>
       )}
