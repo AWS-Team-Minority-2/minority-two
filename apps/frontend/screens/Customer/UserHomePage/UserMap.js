@@ -84,18 +84,21 @@ const UserMap = ({ route }) => {
             region={mapLocation}
             ref={(map) => (this.map = map)}
             rotateEnabled={true}
+            zoomEnabled={true}
             loadingEnabled={true}
             loadingIndicatorColor="#F2998D"
+            showsUserLocation={true}
             // initialRegion={{ latitudeDelta: 0.0922, longitudeDelta: 0.0421 }}
-            // provider={PROVIDER_GOOGLE}
           >
             {allBusiness
               .filter((business) => !business.is_online)
               .map((business, index) => (
-                <BusinessMarkers business={business} />
+                <BusinessMarkers key={index} business={business} />
               ))}
           </MapView>
         </View>
+
+        
       </View>
 
       {!showScrollView ? (
