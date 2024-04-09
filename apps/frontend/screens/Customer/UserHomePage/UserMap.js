@@ -1,32 +1,24 @@
-import React, { useState, useRef, Component } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
   SafeAreaView,
   TouchableOpacity,
-  TextInput,
-  Modal,
   PanResponder,
   Animated,
   Dimensions,
   ScrollView,
 } from "react-native";
-// import TopPlacesCarousel from "./components/TopPlacesCarousel";
-import { Entypo, Ionicons, Feather, MaterialIcons } from "@expo/vector-icons";
+
+import {} from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import MapView, {
-  Callout,
-  MapMarker,
-  Marker,
-  PROVIDER_GOOGLE,
-} from "react-native-maps";
+import MapView from "react-native-maps";
 
 import styles from "./UserMap.scss";
 import { useStores } from "@min-two/business-web";
 import { MapCard } from "./MapCard";
 import { HomescreenHeader } from "./HomescreenHeader";
 import { BusinessMarkers } from "./components/BusinessMarkers";
-// import { TRUE } from "sass";
 
 const UserMap = ({ route }) => {
   const navigation = useNavigation();
@@ -35,9 +27,6 @@ const UserMap = ({ route }) => {
   const zipCode = props.zipCode;
 
   const { allBusiness } = useStores(zipCode);
-
-  const CARD_WIDTH = 293;
-  const CARD_HEIGHT = 200;
 
   const [showScrollView, setShowScrollView] = useState(false);
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
@@ -147,29 +136,31 @@ const UserMap = ({ route }) => {
           <Text style={styles.mapResults}>33 Results</Text>
         </View>
       ) : (
-        <ScrollView
-          style={styles.mapOverViewParent}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          ref={scrollViewRef}
-        >
-          {allBusiness
-            .filter((b) => !b.is_online)
-            .map((b, index) => (
-              <TouchableOpacity
-                onPress={() => handleMarkerPress(b.lat, b.long, index)}
-              >
-                <MapCard
-                  key={index}
-                  imageUrl={b.cover_image}
-                  name={b.name}
-                  rating={b.rating}
-                  ratingCount={b.rating_count}
-                  distance={b.distance}
-                />
-              </TouchableOpacity>
-            ))}
-        </ScrollView>
+        <>
+          <ScrollView
+            style={styles.mapOverViewParent}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            ref={scrollViewRef}
+          >
+            {allBusiness
+              .filter((b) => !b.is_online)
+              .map((b, index) => (
+                <TouchableOpacity
+                  onPress={() => handleMarkerPress(b.lat, b.long, index)}
+                >
+                  <MapCard
+                    key={index}
+                    imageUrl={b.cover_image}
+                    name={b.name}
+                    rating={b.rating}
+                    ratingCount={b.rating_count}
+                    distance={b.distance}
+                  />
+                </TouchableOpacity>
+              ))}
+          </ScrollView>
+        </>
       )}
     </SafeAreaView>
   );

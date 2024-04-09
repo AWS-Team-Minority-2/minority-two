@@ -186,6 +186,16 @@
   color: #f2998d;
 }
 
+.scrollArea{
+  flex-direction: column;
+}
+
+.closeText {
+  text-align: center;
+  top: 0;
+  font-size: 18px;
+}
+
 .mapOverViewParent {
   position: absolute;
   bottom: 10px;  
