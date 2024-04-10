@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -8,22 +8,24 @@ import {
   Path,
   svg,
   Image,
-} from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
 
-import styles from './sass/Business.scss';
+import styles from "./sass/Business.scss";
 
 const BusinessLoginScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useScreenDispatch();
   return (
     <SafeAreaView style={styles.screenLayout}>
       <View style={styles.screenAdjustment}>
         <TouchableOpacity
           style={styles.leftIcon}
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate("Home")}
         >
-          <Feather name='chevron-left' size={40} color='black' />
+          <Feather name="chevron-left" size={40} color="black" />
         </TouchableOpacity>
         <View style={styles.welcomeTextContainer}>
           <Text style={styles.welcomeText}>Welcome!</Text>
@@ -36,13 +38,13 @@ const BusinessLoginScreen = () => {
             <Text style={styles.fieldHeader}>Email Address</Text>
             <TextInput
               style={styles.inputContainer}
-              placeholder='Business@gmail.com'
+              placeholder="Business@gmail.com"
             />
           </View>
 
           <View style={styles.fieldParent}>
             <Text style={styles.fieldHeader}>Owner ID</Text>
-            <TextInput style={styles.inputContainer} placeholder='345910' />
+            <TextInput style={styles.inputContainer} placeholder="345910" />
           </View>
 
           <View style={styles.fieldParent}>
@@ -53,7 +55,13 @@ const BusinessLoginScreen = () => {
         <TouchableOpacity style={styles.forgotPassword}>
           <Text styles={styles.forgotPasswordText}>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBttn}>
+        <TouchableOpacity
+          style={styles.loginBttn}
+          onPress={() => {
+            changeScreen(dispatch, "BusinessInsights");
+            navigation.navigate("BusinessInsights");
+          }}
+        >
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
         <View style={styles.subOptions}>
@@ -62,7 +70,7 @@ const BusinessLoginScreen = () => {
         <TouchableOpacity style={styles.otherProviderContainer}>
           <View style={styles.imageContainer}>
             <Image
-              source={require('./assets/amazon.png')}
+              source={require("./assets/amazon.png")}
               style={styles.image}
             />
           </View>
@@ -71,7 +79,7 @@ const BusinessLoginScreen = () => {
         <TouchableOpacity style={styles.otherProviderContainer}>
           <View style={styles.imageContainer}>
             <Image
-              source={require('./assets/google.png')}
+              source={require("./assets/google.png")}
               style={styles.image}
             />
           </View>
@@ -85,7 +93,7 @@ const BusinessLoginScreen = () => {
         <TouchableOpacity>
           <Text
             style={styles.subTwoText}
-            onPress={() => navigation.navigate('BusinessRegister')}
+            onPress={() => navigation.navigate("BusinessRegister")}
           >
             Register
           </Text>
