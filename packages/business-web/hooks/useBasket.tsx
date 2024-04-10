@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { Dish, RestaurantProvider } from '@min-two/business-iso';
+import {
+  BusinessProvider,
+  CartItemState,
+  CartItem,
+} from '@min-two/business-iso';
 import { Cart } from './locals';
-
-// update resturant name
-//  reove resturant -- if items in basket pushes to cart and empty in here
 
 type BasketState = Cart;
 
@@ -27,12 +28,12 @@ function basketReducer(state: BasketState, action: Action): BasketState {
     case 'SET_STORE':
       return {
         ...state,
-        restaurant: action.payload,
+        business: action.payload,
       };
     case 'REMOVE_CURRENT':
       return {
         items: [],
-        restaurant: null,
+        business: null,
       };
     case 'REMOVE_FROM_BASKET':
       const index = state.items.findIndex(
@@ -56,7 +57,7 @@ function basketReducer(state: BasketState, action: Action): BasketState {
       return {
         ...state,
         items: action.payload.items, // Corrected to access action.payload.items
-        restaurant: action.payload.store, // Corrected to access action.payload.items
+        business: action.payload.store, // Corrected to access action.payload.items
       };
     default:
       return state;
@@ -93,31 +94,28 @@ function useBasketDispatch(): React.Dispatch<Action> {
 
 const initialState: BasketState = {
   items: [],
-  restaurant: null,
+  business: null,
 };
 
-function addToBasket(dispatch: React.Dispatch<Action>, dish: Dish) {
-  dispatch({ type: 'ADD_TO_BASKET', payload: dish });
+function addToBasket(dispatch: React.Dispatch<Action>, item: CartItem) {
+  dispatch({ type: 'ADD_TO_BASKET', payload: item });
 }
 
 function removeFromBasket(state, dispatch: React.Dispatch<Action>, id: string) {
-  // const items = selectBasketItems(state);
-  // console.log(items);
-
   dispatch({ type: 'REMOVE_FROM_BASKET', payload: { id } });
 }
 
-function setResturant(
+function setBusiness(
   dispatch: React.Dispatch<Action>,
-  store: RestaurantProvider
+  store: BusinessProvider
 ) {
   dispatch({ type: 'SET_STORE', payload: { store } });
 }
 
 function setBasketFromCart(
   dispatch: React.Dispatch<Action>,
-  items: Dish[],
-  store: RestaurantProvider
+  items: CartItemState,
+  store: BusinessProvider
 ) {
   dispatch({
     type: 'SET_BASKET_FUNCTION',
@@ -152,7 +150,7 @@ export {
   addToBasket,
   removeFromBasket,
   selectBasketItems,
-  setResturant,
+  setBusiness,
   removeCurrent,
   setBasketFromCart,
 };

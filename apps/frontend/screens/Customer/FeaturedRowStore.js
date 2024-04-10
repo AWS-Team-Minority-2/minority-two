@@ -1,17 +1,22 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { FeaturedCardStore } from './FeaturedCardStore';
-import { shop } from './data/store';
 import styles from './sass/StoreProfile';
 
 //Handles each feature tab of all the rows
-const FeaturedRowStore = ({ featuredName, featuredAmount }) => {
+const FeaturedRowStore = ({
+  featuredName,
+  featuredAmount,
+  items,
+  store,
+  activeOverride,
+}) => {
   return (
     <View>
       <View style={styles.featureSection}>
         <Text style={styles.featureName}>{featuredName}</Text>
         <TouchableOpacity style={styles.featureAmount}>
-          <Text>See all {featuredAmount}</Text>
+          {items.length < 1 && <Text>See all {items.length}</Text>}
         </TouchableOpacity>
       </View>
 
@@ -20,11 +25,13 @@ const FeaturedRowStore = ({ featuredName, featuredAmount }) => {
         showsHorizontalScrollIndicator={false}
         style={styles.storeScroll}
       >
-        {shop
-          .filter((filteredItem) => filteredItem.feature === featuredName)
-          .map((filteredItem, index) => (
-            <FeaturedCardStore item={filteredItem} />
-          ))}
+        {items.map((item, index) => (
+          <FeaturedCardStore
+            item={item}
+            store={store}
+            activeOverride={activeOverride}
+          />
+        ))}
       </ScrollView>
     </View>
   );

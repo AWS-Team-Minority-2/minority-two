@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useState, useRef, useEffect } from "react";
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -9,15 +9,15 @@ import {
   Image,
   findNodeHandle,
   ImageBackground,
-} from "react-native";
-import styles from "./sass/BusinessProfile";
-import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
-import BusinessProfilePopUp from "./BusinessProfilePopUp";
+} from 'react-native';
+import styles from './sass/BusinessProfile';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import BusinessProfilePopUp from './BusinessProfilePopUp';
 // import { useAuthState } from "@min-two/user-iso";
-import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { desserts, features } from "./data/menu";
-import { FeaturedCard } from "./FeaturedCard";
-import { FeaturedRow } from "./FeaturedRow";
+import { Feather, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { desserts, features } from './data/menu';
+import { FeaturedCard } from './FeaturedCard';
+import { FeaturedRow } from './FeaturedRow';
 
 const BusinessProfile = ({ route }) => {
   const navigation = useNavigation();
@@ -41,17 +41,17 @@ const BusinessProfile = ({ route }) => {
     longitudeDelta: 0.00694,
   };
   const businessHours = {
-    Monday: "11am-9pm",
-    Tuesday: "11am-9pm",
-    Wednesday: "11am-9pm",
-    Thursday: "11am-9pm",
-    Friday: "11am-9pm",
-    Saturday: "11am-9pm",
-    Sunday: "11am-7pm",
+    Monday: '11am-9pm',
+    Tuesday: '11am-9pm',
+    Wednesday: '11am-9pm',
+    Thursday: '11am-9pm',
+    Friday: '11am-9pm',
+    Saturday: '11am-9pm',
+    Sunday: '11am-7pm',
   }; // Example business hours, replace with actual hours
-  const address = "2928 Georgia Ave NW"; // Example address, replace with actual address
-  const area = "Washington, DC 20001";
-  const phoneNumber = "+1 (202) 232-1700"; // Example phone number, replace with actual number
+  const address = '2928 Georgia Ave NW'; // Example address, replace with actual address
+  const area = 'Washington, DC 20001';
+  const phoneNumber = '+1 (202) 232-1700'; // Example phone number, replace with actual number
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [showBanner, setShowBanner] = useState(false);
@@ -90,10 +90,10 @@ const BusinessProfile = ({ route }) => {
     // Adjust the threshold value as needed
     if (offsetY > 10) {
       setShowFeatureScroll(true);
-      console.log("true");
+      console.log('true');
     } else {
       setShowFeatureScroll(false);
-      console.log("false");
+      console.log('false');
     }
   };
 
@@ -131,39 +131,38 @@ const BusinessProfile = ({ route }) => {
             source={{
               url: coverImage,
             }}
-            style={{ width: "100%", height: 185, ...styles.topView }}
+            style={{ width: '100%', height: 185, ...styles.topView }}
           >
             <TouchableOpacity
               style={styles.leftIcon}
               onPress={() => {
-                changeScreen(dispatch, "Home");
-                navigation.navigate("UserHome");
+                changeScreen(dispatch, 'Home');
+                navigation.navigate('UserHome');
               }}
             >
-              <Feather name="chevron-left" size={25} color="black" />
+              <Feather name='chevron-left' size={25} color='black' />
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.Favorite} onPress={toggleFavorite}>
               <MaterialIcons
-                name={isFavorite ? "favorite" : "favorite-outline"}
+                name={isFavorite ? 'favorite' : 'favorite-outline'}
                 size={20}
-                color={isFavorite ? "#f2998d" : "black"}
+                color={isFavorite ? '#f2998d' : 'black'}
               />
             </TouchableOpacity>
             {showBanner && (
               <View style={styles.banner}>
-                <Text style={{ color: "white", marginLeft: 5 }}>
+                <Text style={{ color: 'white', marginLeft: 5 }}>
                   Added to favorites
                 </Text>
                 <MaterialIcons
-                  name="favorite-outline"
+                  name='favorite-outline'
                   size={20}
-                  color="white"
+                  color='white'
                 />
               </View>
             )}
           </ImageBackground>
-          
 
           <View style={styles.businessHeader}>
             <View style={styles.businessLogo}>
@@ -178,7 +177,7 @@ const BusinessProfile = ({ route }) => {
 
             <TouchableOpacity style={styles.businessInfo} onPress={togglePopUp}>
               <View style={styles.businessDetails}>
-                <Ionicons name="star-sharp" size={15} color="black" />
+                <Ionicons name='star-sharp' size={15} color='black' />
                 <Text>
                   {rating}({ratingCount})
                 </Text>
@@ -189,14 +188,14 @@ const BusinessProfile = ({ route }) => {
                   </>
                 )}
 
-                <Feather name="chevron-right" size={16} color="grey" />
+                <Feather name='chevron-right' size={16} color='grey' />
               </View>
             </TouchableOpacity>
             <BusinessProfilePopUp
               isVisible={isPopUpVisible}
               onClose={togglePopUp}
               businessName={businessName}
-              businessLocation = {businessLocation}
+              businessLocation={businessLocation}
               businessHours={businessHours}
               address={address}
               area={area}

@@ -28,6 +28,8 @@ const TopPlacesCarousel = ({ list, route }) => {
     setStoreIds(getActiveStoreIds(cartState));
   }, [cartState]);
 
+  console.log(storeIds, 'ids');
+
   return (
     <FlatList
       data={list}
@@ -48,7 +50,7 @@ const TopPlacesCarousel = ({ list, route }) => {
                 item.type === 'restaurant'
                   ? 'RestaurantProfile'
                   : item.type === 'service'
-                  ? 'ServiceProfile' // Navigate to ServiceProfile if type is "service"
+                  ? 'ServiceProfile'
                   : 'StoreProfile',
                 {
                   name: item.name,

@@ -18,10 +18,6 @@ const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
   const cartDispatch = useCartsDispatch();
   const cartState = useCartsState();
 
-  // useEffect(() => {
-  //   console.log(cartState, 'from cart row');
-  // }, [cartState]);
-
   return (
     <View style={styles.touchableOpacityParent}>
       <View style={styles.cartRowParent}>
@@ -57,7 +53,7 @@ const CartRow = ({ imageUrl, name, items, restaurantMetadata }) => {
         <TouchableOpacity
           onPress={() => {
             removeCart(cartDispatch, {
-              restaurant: restaurantMetadata,
+              business: restaurantMetadata,
               items: items,
             });
           }}

@@ -1,4 +1,7 @@
-import { QueryResolver } from './src/resolvers/QueryResolver.js';
+import {
+  QueryResolver,
+  // SectionUnionResolver,
+} from './src/resolvers/QueryResolver.js';
 import { MutationResolver } from './src/resolvers/MutationResolver.js';
 
 // User Loader and Store
@@ -36,8 +39,18 @@ export const getProjectServer = _.memoize(async () => {
     resolvers: {
       Query: QueryResolver,
       Mutation: MutationResolver,
+      SectionUnion: {
+        __resolveType: (section: any) => {
+          if (section.type === 'shop') {
+            return 'StoreItemSection';
+          } else {
+            return 'MenuSectionObject';
+          }
+        },
+      },
     },
   });
+
   const server = new ApolloServer({
     schema,
     context: (): GQLContext => {

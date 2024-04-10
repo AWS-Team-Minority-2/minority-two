@@ -7,7 +7,7 @@ export const QueryResolver = {
     context: GQLContext
   ) {
     try {
-      // // Filter Business within zip code
+      // Filter Business within zip code
       const business = context.business.getStoresInRange(args.zip_code);
       return business;
     } catch (error) {

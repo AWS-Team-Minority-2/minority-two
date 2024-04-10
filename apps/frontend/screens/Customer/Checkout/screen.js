@@ -38,7 +38,7 @@ const BasketScreen = ({ route }) => {
   // const basketState = useBasketState();
   const total = selectBasketTotal(state);
   const items = selectBasketItems(state);
-  const store = state.restaurant;
+  const store = state.business;
 
   // console.log(total);
 
@@ -58,7 +58,7 @@ const BasketScreen = ({ route }) => {
   useEffect(() => {
     if (total == 0) {
       navigation.navigate('UserHome', {
-        restaurant: props.restaurantMetadata,
+        business: props.restaurantMetadata,
         items: props.items,
       });
     }
@@ -128,7 +128,7 @@ const BasketScreen = ({ route }) => {
                 changeScreen(screenDispatch, 'Landing');
                 navigation.navigate('Complete', {
                   total: total + total * 0.2,
-                  restaurant: props.restaurantMetadata,
+                  business: props.restaurantMetadata,
                   items: props.items,
                 });
               }}

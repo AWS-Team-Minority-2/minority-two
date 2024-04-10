@@ -25,8 +25,9 @@ const RestaurantSelectedItem = ({
   const [isFavorite, setIsFavorite] = useState(false);
   const cartDisptach = useCartsDispatch();
   const items = useCartsState();
+
   const existingCartIndex = items.findIndex(
-    (cart) => cart.restaurant.id === store.id
+    (cart) => cart.business.id === store.id
   );
   const [unReducedItems, setunreducedItems] = useState([]);
 
@@ -97,7 +98,7 @@ const RestaurantSelectedItem = ({
               style={styles.addButton}
               onPress={async () => {
                 setCart(cartDisptach, {
-                  restaurant: store,
+                  business: store,
                   items: [...groupedItems, item],
                 });
                 setShowItemPopup(false);

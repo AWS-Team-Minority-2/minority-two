@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -6,17 +6,18 @@ import {
   ImageBackground,
   ScrollView,
   FlatList,
-} from "react-native";
-import SelectedItem from "./SelectedItem";
-import styles from "./sass/StoreProfile";
+} from 'react-native';
+import SelectedItem from './SelectedItem';
+import styles from './sass/StoreProfile';
 import {
   Feather,
   Ionicons,
   MaterialIcons,
   FontAwesome,
-} from "@expo/vector-icons";
+} from '@expo/vector-icons';
+import { RestaurantSelectedItem } from './RestaurantSelected';
 
-const FeaturedCardStore = ({ item }) => {
+const FeaturedCardStore = ({ item, store, activeOverride }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -53,6 +54,8 @@ const FeaturedCardStore = ({ item }) => {
 
   const scrollRef = useRef(null);
 
+  // const [hasActiveCart, setHasActiveCart] = useState(hasCartsActive);
+
   return (
     <>
       <View style={styles.scrollViewContainer}>
@@ -60,33 +63,33 @@ const FeaturedCardStore = ({ item }) => {
           <View style={styles.itemContainer}>
             <View style={styles.imageAdjust}>
               <ImageBackground
-                source={{ uri: item.image }}
+                source={{ uri: item.image_url }}
                 style={styles.itemImage}
               >
                 {added ? (
                   <TouchableOpacity style={styles.addedButton}>
                     {quantity > 1 ? (
                       <MaterialIcons
-                        name="remove"
+                        name='remove'
                         size={20}
-                        color="white"
+                        color='white'
                         onPress={decreaseQuantity}
                         style={styles.minusButton}
                       />
                     ) : (
                       <MaterialIcons
-                        name="delete"
+                        name='delete'
                         size={20}
-                        color="white"
+                        color='white'
                         onPress={revertToAdd}
                         style={styles.garbageIcon}
                       />
                     )}
                     <Text style={styles.numberAdded}>{quantity}</Text>
                     <MaterialIcons
-                      name="add"
+                      name='add'
                       size={23}
-                      color="white"
+                      color='white'
                       onPress={increaseQuantity}
                       style={styles.plusButton}
                     />
@@ -96,7 +99,7 @@ const FeaturedCardStore = ({ item }) => {
                     style={styles.addButton}
                     onPress={toggleAdd}
                   >
-                    <MaterialIcons name="add" size={20} color="white" />
+                    <MaterialIcons name='add' size={20} color='white' />
                   </TouchableOpacity>
                 )}
               </ImageBackground>
@@ -105,7 +108,7 @@ const FeaturedCardStore = ({ item }) => {
             <View style={styles.belowImage}>
               <View style={styles.itemTopContent}>
                 <Text style={styles.itemPrices}>${item.price}</Text>
-                <Text style={styles.itemMeasurement}>• {item.measurement}</Text>
+                <Text style={styles.itemMeasurement}> • {item.size}</Text>
               </View>
               <Text style={styles.itemName}>{item.name}</Text>
             </View>
@@ -113,15 +116,16 @@ const FeaturedCardStore = ({ item }) => {
         </TouchableOpacity>
       </View>
 
-      <SelectedItem
+      <RestaurantSelectedItem
         isVisible={isModalVisible}
-        item={selectedItem}
+        item={item}
         onClose={handleCloseModal}
+        setShowItemPopup={setModalVisible}
+        store={store}
+        activeOverride={activeOverride}
       />
     </>
   );
 };
 
 export { FeaturedCardStore };
-
-

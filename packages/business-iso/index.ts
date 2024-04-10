@@ -35,21 +35,48 @@ interface MenuSection {
   dishes: Dish[];
 }
 
+export interface StoreItem {
+  id: string;
+  name: string;
+  size?: string;
+  price: number;
+  imageUrl: string;
+  outOfStock: boolean;
+}
+
+interface StoreItemSection {
+  name: string;
+  items: StoreItem[];
+}
+
+type Sections = MenuSection | StoreItemSection;
+
 interface Section {
   type: BusinessType;
-  sections: MenuSection[];
+  sections: Sections[];
 }
 
 interface RestaurantSection extends Section {
   type: 'restaurant';
+  sections: MenuSection[];
 }
 
 export interface Restaurant extends BusinessBase {
   type: 'restaurant'; // Override type to be 'restaurant'
   section: RestaurantSection; // Add dishes property
 }
+
+interface StoreSection extends Section {
+  type: 'shop';
+  sections: StoreItemSection[];
+}
+
+export interface ShoppingStore extends BusinessBase {
+  type: 'shop'; // Override type to be 'restaurant'
+  section: StoreSection;
+}
 // Use for state management only
-export interface RestaurantProvider {
+export interface BusinessProvider {
   name: string;
   coverImage: string;
   rating: number;
@@ -59,3 +86,6 @@ export interface RestaurantProvider {
   sections?: any;
   id: string;
 }
+
+export type CartItemState = Dish[] | StoreItem[];
+export type CartItem = Dish | StoreItem;

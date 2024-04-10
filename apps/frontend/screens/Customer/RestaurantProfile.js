@@ -22,7 +22,7 @@ import { Dishrow } from './Dishrow';
 import {
   useBasketState,
   useBasketDispatch,
-  setResturant,
+  setBusiness,
   getItemsByStoreId,
   useCartsState,
   setBasketFromCart,
@@ -76,7 +76,7 @@ const RestaurantProfile = ({ route }) => {
 
   //  if store is the same then do nothing ?
   useEffect(() => {
-    setResturant(basketDisptach, store);
+    setBusiness(basketDisptach, store);
   }, []);
 
   const sectionsObj = sections.sections;

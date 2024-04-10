@@ -52,10 +52,14 @@ const OpenCarts = () => {
               <View style={styles.cartsContainer}>
                 {carts.map((c, index) => (
                   <CartRow
-                    name={c.restaurant.name}
-                    imageUrl={c.restaurant.profileImage}
+                    name={c.business.name}
+                    imageUrl={
+                      c.business.type == 'store'
+                        ? c.business.profileImage
+                        : c.business.coverImage
+                    }
                     items={c.items}
-                    restaurantMetadata={c.restaurant}
+                    restaurantMetadata={c.business}
                   />
                 ))}
               </View>

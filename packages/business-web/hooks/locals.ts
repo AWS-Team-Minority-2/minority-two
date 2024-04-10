@@ -1,6 +1,6 @@
-import { Dish, RestaurantProvider } from '@min-two/business-iso';
+import { BusinessProvider, CartItemState } from '@min-two/business-iso';
 
 export type Cart = {
-  restaurant: RestaurantProvider;
-  items: Dish[];
+  business: BusinessProvider;
+  items: CartItemState;
 };
