@@ -28,8 +28,6 @@ const TopPlacesCarousel = ({ list, route }) => {
     setStoreIds(getActiveStoreIds(cartState));
   }, [cartState]);
 
-  console.log(storeIds, 'ids');
-
   return (
     <FlatList
       data={list}

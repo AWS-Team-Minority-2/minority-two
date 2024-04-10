@@ -53,11 +53,7 @@ const OpenCarts = () => {
                 {carts.map((c, index) => (
                   <CartRow
                     name={c.business.name}
-                    imageUrl={
-                      c.business.type == 'store'
-                        ? c.business.profileImage
-                        : c.business.coverImage
-                    }
+                    imageUrl={c.business.profileImage}
                     items={c.items}
                     restaurantMetadata={c.business}
                   />
