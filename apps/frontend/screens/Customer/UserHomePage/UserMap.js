@@ -10,9 +10,20 @@ import {
   ScrollView,
 } from "react-native";
 
-import {} from "@expo/vector-icons";
+// import TopPlacesCarousel from "./components/TopPlacesCarousel";
+import {
+  Entypo,
+  Ionicons,
+  Feather,
+  MaterialIcons,
+  FontAwesome,
+} from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import MapView from "react-native-maps";
+import MapView, { Callout, Marker } from "react-native-maps";
+import { useStores } from "@min-two/business-web";
+import { markers, mapStandardStyle } from "../data/mapData";
+import styles from "./UserMap.scss";
+// import { TRUE } from "sass";
 
 import styles from "./UserMap.scss";
 import { useStores } from "@min-two/business-web";
@@ -27,6 +38,26 @@ const UserMap = ({ route }) => {
   const zipCode = props.zipCode;
 
   const { allBusiness } = useStores(zipCode);
+  const initialMapState = {
+    markers,
+    region: {
+      latitude: 38.923141,
+      longitude: -77.021584,
+      latitudeDelta: 0.0093,
+      longitudeDelta: 0.0074,
+    },
+  };
+
+  const [state, setState] = useState(initialMapState);
+  const _map = useRef(null);
+  const scroll = useRef(null);
+
+  const [mapLocation, setMapLocation] = useState({
+    latitude: 38.923141,
+    longitude: -77.021584,
+    latitudeDelta: 0.0093,
+    longitudeDelta: 0.0074,
+  });
 
   const [showScrollView, setShowScrollView] = useState(false);
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
@@ -126,6 +157,7 @@ const UserMap = ({ route }) => {
                   />
                 </TouchableOpacity>
               ))}
+
           </MapView>
         </View>
       </View>
