@@ -1,60 +1,64 @@
-import React, { useState, useRef } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ImageBackground,
-  ScrollView,
-  FlatList,
-} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import SelectedItem from './SelectedItem';
 import styles from './sass/StoreProfile';
-import {
-  Feather,
-  Ionicons,
-  MaterialIcons,
-  FontAwesome,
-} from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { RestaurantSelectedItem } from './RestaurantSelected';
+import {
+  addCartStateGlobal,
+  useBasketState,
+  useBasketDispatch,
+  useCartsDispatch,
+  setCart,
+  useCartsState,
+} from '@min-two/business-web';
 
-const FeaturedCardStore = ({ item, store, activeOverride }) => {
-  const [selectedItem, setSelectedItem] = useState(null);
+const FeaturedCardStore = ({ item, store, activeOverride, itemCount }) => {
   const [isModalVisible, setModalVisible] = useState(false);
+  const [itemCountState, setItemCount] = useState(0);
+
+  useEffect(() => {
+    if (itemCount != 0) {
+      setItemCount(itemCount);
+    } else {
+      setItemCount(0);
+    }
+  }, [itemCount]);
 
   const handleItemSelection = () => {
-    setSelectedItem(item);
     setModalVisible(true);
   };
-
   const handleCloseModal = () => {
     setModalVisible(false);
   };
 
-  const [added, setAdded] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  const cartDisptach = useCartsDispatch();
+  const items = useCartsState();
 
-  const toggleAdd = () => {
-    setAdded(true);
-  };
+  const existingCartIndex = items.findIndex(
+    (cart) => cart.business.id === store.id
+  );
 
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const revertToAdd = () => {
-    setAdded(false);
-    setQuantity(1);
-  };
-
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
+  // use for state management only
+  const [ungroupedCartItems, setUngroupedCartItems] = useState([]);
+  useEffect(() => {
+    if (existingCartIndex !== -1) {
+      const cart = items[existingCartIndex].items;
+      setUngroupedCartItems(cart);
+    } else {
+      setUngroupedCartItems([]);
     }
-  };
+  }, [existingCartIndex, items]);
 
-  const scrollRef = useRef(null);
+  useEffect(() => {
+    // setunreducedItems(items);
+    addCartStateGlobal({ carts: items });
+  }, [items]);
 
-  // const [hasActiveCart, setHasActiveCart] = useState(hasCartsActive);
+  const basketState = useBasketState();
+  const dispatch = useBasketDispatch();
+
+  // TODO: Set basket from cart, and handle basket actions here
 
   return (
     <>
@@ -66,38 +70,56 @@ const FeaturedCardStore = ({ item, store, activeOverride }) => {
                 source={{ uri: item.image_url }}
                 style={styles.itemImage}
               >
-                {added ? (
-                  <TouchableOpacity style={styles.addedButton}>
-                    {quantity > 1 ? (
-                      <MaterialIcons
-                        name='remove'
-                        size={20}
-                        color='white'
-                        onPress={decreaseQuantity}
-                        style={styles.minusButton}
-                      />
+                {itemCountState >= 1 ? (
+                  <View style={styles.addedButton}>
+                    {itemCountState > 1 ? (
+                      <TouchableOpacity>
+                        <MaterialIcons
+                          name='remove'
+                          size={20}
+                          color='white'
+                          onPress={() => {
+                            setItemCount(itemCountState - 1);
+                          }}
+                          style={styles.minusButton}
+                        />
+                      </TouchableOpacity>
                     ) : (
-                      <MaterialIcons
-                        name='delete'
-                        size={20}
-                        color='white'
-                        onPress={revertToAdd}
-                        style={styles.garbageIcon}
-                      />
+                      <TouchableOpacity>
+                        <MaterialIcons
+                          name='delete'
+                          size={20}
+                          color='white'
+                          onPress={() => {
+                            setItemCount(0);
+                          }}
+                          style={styles.garbageIcon}
+                        />
+                      </TouchableOpacity>
                     )}
-                    <Text style={styles.numberAdded}>{quantity}</Text>
-                    <MaterialIcons
-                      name='add'
-                      size={23}
-                      color='white'
-                      onPress={increaseQuantity}
-                      style={styles.plusButton}
-                    />
-                  </TouchableOpacity>
+                    <Text style={styles.numberAdded}>{itemCountState}</Text>
+                    <TouchableOpacity>
+                      <MaterialIcons
+                        name='add'
+                        size={23}
+                        color='white'
+                        onPress={async () => {
+                          setCart(cartDisptach, {
+                            business: store,
+                            items: [...ungroupedCartItems, item],
+                          });
+                          setItemCount(itemCountState + 1);
+                        }}
+                        style={styles.plusButton}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 ) : (
                   <TouchableOpacity
                     style={styles.addButton}
-                    onPress={toggleAdd}
+                    onPress={() => {
+                      setItemCount(itemCountState + 1);
+                    }}
                   >
                     <MaterialIcons name='add' size={20} color='white' />
                   </TouchableOpacity>

@@ -192,6 +192,7 @@ const StoreProfile = ({ route }) => {
                   items={item.items}
                   store={store}
                   activeOverride={setHasActiveCart}
+                  activeItems={ungroupedItems}
                 />
               </View>
             ))}
