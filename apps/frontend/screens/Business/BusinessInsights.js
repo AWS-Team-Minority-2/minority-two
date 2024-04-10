@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { View, Text, SafeAreaView, Image, ScrollView } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Reviews } from "./data/Reviews";
@@ -15,6 +16,13 @@ const BusinessInsights = () => {
     Friday: "11am-9pm",
     Saturday: "11am-9pm",
     Sunday: "11am-7pm",
+  };
+
+  const [selectedInterval, setSelectedInterval] = useState("today");
+
+  const handleIntervalChange = (value) => {
+    setSelectedInterval(value);
+    // You can add logic here to handle the selected interval change
   };
 
   const renderStars = (rating) => {
@@ -67,6 +75,20 @@ const BusinessInsights = () => {
           <Text style={styles.businessInsightsHeader}>
             Nuvegan Cafe Business Stats:
           </Text>
+
+          {/* <View style={styles.pickerContainer}>
+            <Picker
+              selectedValue={selectedInterval}
+              onValueChange={(itemValue) => handleIntervalChange(itemValue)}
+              style={styles.picker}
+            >
+              <Picker.Item label="Today" value="today" />
+              <Picker.Item label="Last Week" value="lastWeek" />
+              <Picker.Item label="Last Month" value="lastMonth" />
+              <Picker.Item label="Last Year" value="lastYear" />
+            </Picker>
+          </View> */}
+          
           <View style={styles.businessInsightsStatsBox}>
             <View style={styles.businessInsightsSection}>
               <View style={styles.businessInsightsTitleBox}>
@@ -135,15 +157,6 @@ const BusinessInsights = () => {
                 </Text>
               </View>
             ))}
-            {/* <TouchableOpacity
-                style={styles.allReviews}
-                onPress={() => {
-                  changeScreen(dispatch, "Review");
-                  navigation.navigate("Review");
-                }}
-              >
-                <Text style={styles.allReviewsText}>All Reviews</Text>
-              </TouchableOpacity> */}
           </ScrollView>
         </View>
 
