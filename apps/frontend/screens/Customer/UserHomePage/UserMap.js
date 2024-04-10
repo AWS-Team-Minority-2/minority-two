@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,7 @@ import {
   Animated,
   Dimensions,
   ScrollView,
-} from "react-native";
+} from 'react-native';
 
 // import TopPlacesCarousel from "./components/TopPlacesCarousel";
 import {
@@ -17,19 +17,17 @@ import {
   Feather,
   MaterialIcons,
   FontAwesome,
-} from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import MapView, { Callout, Marker } from "react-native-maps";
-import { useStores } from "@min-two/business-web";
-import { markers, mapStandardStyle } from "../data/mapData";
-import styles from "./UserMap.scss";
+} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import MapView, { Callout, Marker } from 'react-native-maps';
+import { useStores } from '@min-two/business-web';
+import { markers, mapStandardStyle } from '../data/mapData';
 // import { TRUE } from "sass";
 
-import styles from "./UserMap.scss";
-import { useStores } from "@min-two/business-web";
-import { MapCard } from "./MapCard";
-import { HomescreenHeader } from "./HomescreenHeader";
-import { BusinessMarkers } from "./components/BusinessMarkers";
+import styles from './UserMap.scss';
+import { MapCard } from './MapCard';
+import { HomescreenHeader } from './HomescreenHeader';
+import { BusinessMarkers } from './components/BusinessMarkers';
 
 const UserMap = ({ route }) => {
   const navigation = useNavigation();
@@ -51,13 +49,6 @@ const UserMap = ({ route }) => {
   const [state, setState] = useState(initialMapState);
   const _map = useRef(null);
   const scroll = useRef(null);
-
-  const [mapLocation, setMapLocation] = useState({
-    latitude: 38.923141,
-    longitude: -77.021584,
-    latitudeDelta: 0.0093,
-    longitudeDelta: 0.0074,
-  });
 
   const [showScrollView, setShowScrollView] = useState(false);
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
@@ -103,7 +94,7 @@ const UserMap = ({ route }) => {
 
     if (scrollViewRef.current) {
       const cardWidth = 300; // Width of each card
-      const screenWidth = Dimensions.get("window").width;
+      const screenWidth = Dimensions.get('window').width;
       const scrollToX = index * cardWidth - (screenWidth - cardWidth) / 2;
       scrollViewRef.current.scrollTo({ x: scrollToX, animated: true });
     }
@@ -126,7 +117,7 @@ const UserMap = ({ route }) => {
         <View style={styles.TopBar}>
           <View style={styles.homeHeader}></View>
 
-          <HomescreenHeader currentZip={zipCode} parent={"map"} />
+          <HomescreenHeader currentZip={zipCode} parent={'map'} />
         </View>
 
         <View>
@@ -136,7 +127,7 @@ const UserMap = ({ route }) => {
             rotateEnabled={true}
             zoomEnabled={true}
             loadingEnabled={true}
-            loadingIndicatorColor="#F2998D"
+            loadingIndicatorColor='#F2998D'
             showsUserLocation={true}
           >
             {allBusiness
@@ -157,7 +148,6 @@ const UserMap = ({ route }) => {
                   />
                 </TouchableOpacity>
               ))}
-
           </MapView>
         </View>
       </View>
