@@ -21,7 +21,7 @@
 .TopBar {
   position: sticky; // Stick the TopBar to the top of the viewport
   top: 0; // Stick it at the very top
-  background-color: 'white'; // Set a background color if needed
+  background-color: transparent; // Set a background color if needed
   z-index: 100; // Ensure it stays on top of other content
   margin-left: 3%;
   margin-right: 3%;
@@ -184,7 +184,7 @@
 }
 
 .slider {
-  margin-left: 3%;
+  margin-left: 2%;
   margin-top: 10px;
   margin-bottom: 5px;
   flex-direction: column;

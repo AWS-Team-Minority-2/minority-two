@@ -105,7 +105,7 @@ function NavigationController() {
       try {
         const value = await AsyncStorage.getItem('carts');
         if (value !== null) {
-          setCartOnMount(cartDispatch, JSON.parse(value));
+          // setCartOnMount(cartDispatch, JSON.parse(value));
         }
       } catch (error) {
         console.log('Error checking item: ', error);
