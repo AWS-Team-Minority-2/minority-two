@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles from './sass/BusinessHome.scss';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { useUpdateDishRow } from '@min-two/business-web';
 
 import Toast from 'react-native-toast-message';
 
@@ -30,7 +31,7 @@ const EditDishRowPopup = ({ isVisible, onClose, item }) => {
       visible={isVisible}
       onRequestClose={onClose}
     >
-      <View style={styles.modalContainer}>
+      <View style={styles.modalContainerSections}>
         {item && (
           <View style={styles.popUpContent}>
             <TouchableOpacity style={styles.modalCloseButton} onPress={onClose}>

@@ -290,6 +290,13 @@
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
 }
 
+.modalContainerSections {
+  flex: 1;
+  justify-content: center;
+  padding: 0 10px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
 .modalCloseButton {
   //    flex-direction: row-reverse;
   margin-bottom: 3%;
@@ -356,6 +363,18 @@
   background-color: #f2998d;
   border-radius: 10px;
   margin-top: 7%;
+}
+
+.addButtonSection {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2998d;
+  border-radius: 10px;
+  margin-top: 2%;
 }
 
 .addButtonText {
@@ -467,4 +486,13 @@
 }
 .itemUrlPhoto {
   padding: 10px;
+}
+
+.addSectionBttn {
+  margin-top: 30px;
+  padding: 10px;
+  // width: 300px;
+  align-items: center;
+  border: 1px solid #00000040;
+  border-radius: 100px;
 }

@@ -39,3 +39,13 @@ export function BusinessEditable(storeId: string) {
     store: store,
   };
 }
+
+export function addNewSectionOwner() {
+  const testIfCanPass = () => {
+    console.log('working test working');
+  };
+
+  return {
+    test: testIfCanPass,
+  };
+}
