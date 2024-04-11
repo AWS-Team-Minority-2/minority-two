@@ -1,24 +1,32 @@
-import React, { useRef, useState } from "react";
-import { View, Text, SafeAreaView, Image, ScrollView } from "react-native";
-import { Picker } from "@react-native-picker/picker";
-import { Feather, FontAwesome } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { Reviews } from "./data/Reviews";
+import React, { useRef, useState } from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import { Feather, FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { Reviews } from './data/Reviews';
 
-import styles from "./sass/BusinessInsight.scss";
+import styles from './sass/BusinessInsight.scss';
 
 const BusinessInsights = () => {
   const scrollRef = useRef(null);
   const Business = {
-    Tuesday: "11am-9pm",
-    Wednesday: "11am-9pm",
-    Thursday: "11am-9pm",
-    Friday: "11am-9pm",
-    Saturday: "11am-9pm",
-    Sunday: "11am-7pm",
+    Tuesday: '11am-9pm',
+    Wednesday: '11am-9pm',
+    Thursday: '11am-9pm',
+    Friday: '11am-9pm',
+    Saturday: '11am-9pm',
+    Sunday: '11am-7pm',
   };
 
-  const [selectedInterval, setSelectedInterval] = useState("today");
+  const [selectedInterval, setSelectedInterval] = useState('today');
+  const navigation = useNavigation();
 
   const handleIntervalChange = (value) => {
     setSelectedInterval(value);
@@ -30,11 +38,11 @@ const BusinessInsights = () => {
     for (let i = 0; i < 5; i++) {
       if (i < Math.floor(rating)) {
         stars.push(
-          <FontAwesome key={i} name="star" size={14} color="#f2998d" />
+          <FontAwesome key={i} name='star' size={14} color='#f2998d' />
         );
       } else {
         stars.push(
-          <FontAwesome key={i} name="star-o" size={14} color="black" />
+          <FontAwesome key={i} name='star-o' size={14} color='black' />
         );
       }
     }
@@ -50,7 +58,7 @@ const BusinessInsights = () => {
           <View style={styles.businessInsightsLogo}>
             <Image
               source={{
-                uri: "https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_300,q_100,fl_lossy,dpr_2.0,c_fit,f_auto,h_300/mk14instqbi8fwbokgm0",
+                uri: 'https://media-cdn.grubhub.com/image/upload/d_search:browse-images:default.jpg/w_300,q_100,fl_lossy,dpr_2.0,c_fit,f_auto,h_300/mk14instqbi8fwbokgm0',
               }}
               style={styles.image}
             />
@@ -70,6 +78,16 @@ const BusinessInsights = () => {
           </View>
         </View>
 
+        <TouchableOpacity
+          style={styles.visitbusinessTextParent}
+          onPress={() => {
+            navigation.navigate('BusinessSideStore');
+          }}
+        >
+          <Text style={styles.visitbusinessText}>Visit Store </Text>
+          {/* <View style={styles.starContainer}>{renderStars(4.0)}</View> */}
+        </TouchableOpacity>
+
         {/* First Stat Box */}
         <View style={styles.businessInsightsStats}>
           <Text style={styles.businessInsightsHeader}>
@@ -88,12 +106,12 @@ const BusinessInsights = () => {
               <Picker.Item label="Last Year" value="lastYear" />
             </Picker>
           </View> */}
-          
+
           <View style={styles.businessInsightsStatsBox}>
             <View style={styles.businessInsightsSection}>
               <View style={styles.businessInsightsTitleBox}>
                 <Text style={styles.businessInsightsTitle}>Orders</Text>
-                <Feather name="arrow-right" size={14} color="black" />
+                <Feather name='arrow-right' size={14} color='black' />
               </View>
 
               <Text style={styles.businessInsightsStat}>15</Text>
@@ -103,7 +121,7 @@ const BusinessInsights = () => {
             <View style={styles.businessInsightsSection}>
               <View style={styles.businessInsightsTitleBox}>
                 <Text style={styles.businessInsightsTitle}>Items in Cart</Text>
-                <Feather name="arrow-right" size={14} color="black" />
+                <Feather name='arrow-right' size={14} color='black' />
               </View>
 
               <Text style={styles.businessInsightsStat}>8</Text>
@@ -113,7 +131,7 @@ const BusinessInsights = () => {
             <View style={styles.businessInsightsSection}>
               <View style={styles.businessInsightsTitleBox}>
                 <Text style={styles.businessInsightsTitle}>Revenue</Text>
-                <Feather name="arrow-right" size={14} color="black" />
+                <Feather name='arrow-right' size={14} color='black' />
               </View>
 
               <Text style={styles.businessInsightsStat}>$258</Text>
@@ -141,7 +159,7 @@ const BusinessInsights = () => {
                 style={[styles.reviewBox, index === 0 && { marginLeft: 25 }]}
               >
                 <View style={styles.reviewUser}>
-                  <FontAwesome name="user-circle-o" size={18} color="black" />
+                  <FontAwesome name='user-circle-o' size={18} color='black' />
                   <Text style={styles.reviewName}>{review.name}</Text>
                   <View style={styles.dateContainer}>
                     <Text style={styles.reviewDate}>{review.date}</Text>
@@ -170,7 +188,7 @@ const BusinessInsights = () => {
                 <View style={styles.imageTPBox}>
                   <Image
                     source={{
-                      uri: "https://i0.wp.com/www.deliciouslykind.com/wp-content/uploads/2018/10/NuVegan-RS.jpg?fit=1306%2C900&ssl=1",
+                      uri: 'https://i0.wp.com/www.deliciouslykind.com/wp-content/uploads/2018/10/NuVegan-RS.jpg?fit=1306%2C900&ssl=1',
                     }}
                     style={styles.imageTP}
                   />
@@ -190,7 +208,7 @@ const BusinessInsights = () => {
                 <View style={styles.imageTPBox}>
                   <Image
                     source={{
-                      uri: "https://images.happycow.net/venues/1024/17/90/hcmp1790_381754.jpeg",
+                      uri: 'https://images.happycow.net/venues/1024/17/90/hcmp1790_381754.jpeg',
                     }}
                     style={styles.imageTP}
                   />
@@ -210,7 +228,7 @@ const BusinessInsights = () => {
                 <View style={styles.imageTPBox}>
                   <Image
                     source={{
-                      uri: "https://imagedelivery.net/olI9wp0b6luWFB9nPfnqjQ/res/abillionveg/image/upload/pioxk2apwe1boagms0hz/1572376816.jpg/w=480",
+                      uri: 'https://imagedelivery.net/olI9wp0b6luWFB9nPfnqjQ/res/abillionveg/image/upload/pioxk2apwe1boagms0hz/1572376816.jpg/w=480',
                     }}
                     style={styles.imageTP}
                   />

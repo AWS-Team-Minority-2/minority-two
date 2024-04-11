@@ -27,6 +27,7 @@ import {
   updateCustomerLastName,
   updateCustomerPhoneNumber,
   updateCustomerEmail,
+  queryStoreDataById,
 } from './src/controllers';
 
 const PATH = '/graphql';
@@ -87,6 +88,18 @@ node.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 node.get('/', async (req, res) => {
   return res.status(200).send({ message: 'Port opended, see /graphql' });
+});
+
+node.post('/get/business/via/id', async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+  try {
+    const store = await queryStoreDataById(req.body.id);
+    return res.status(200).send({ store: store });
+  } catch (e) {
+    return res.status(400).send({ error: 'Error getting store data' });
+  }
 });
 
 node.post('/admin/actions/suspend', async (req, res) => {
