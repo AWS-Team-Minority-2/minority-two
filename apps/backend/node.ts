@@ -1,4 +1,7 @@
-import { QueryResolver } from './src/resolvers/QueryResolver.js';
+import {
+  QueryResolver,
+  // SectionUnionResolver,
+} from './src/resolvers/QueryResolver.js';
 import { MutationResolver } from './src/resolvers/MutationResolver.js';
 
 // User Loader and Store
@@ -24,6 +27,7 @@ import {
   updateCustomerLastName,
   updateCustomerPhoneNumber,
   updateCustomerEmail,
+  queryStoreDataById,
 } from './src/controllers';
 
 const PATH = '/graphql';
@@ -36,8 +40,18 @@ export const getProjectServer = _.memoize(async () => {
     resolvers: {
       Query: QueryResolver,
       Mutation: MutationResolver,
+      SectionUnion: {
+        __resolveType: (section: any) => {
+          if (section.type === 'shop') {
+            return 'StoreItemSection';
+          } else {
+            return 'MenuSectionObject';
+          }
+        },
+      },
     },
   });
+
   const server = new ApolloServer({
     schema,
     context: (): GQLContext => {
@@ -74,6 +88,18 @@ node.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 node.get('/', async (req, res) => {
   return res.status(200).send({ message: 'Port opended, see /graphql' });
+});
+
+node.post('/get/business/via/id', async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+  try {
+    const store = await queryStoreDataById(req.body.id);
+    return res.status(200).send({ store: store });
+  } catch (e) {
+    return res.status(400).send({ error: 'Error getting store data' });
+  }
 });
 
 node.post('/admin/actions/suspend', async (req, res) => {

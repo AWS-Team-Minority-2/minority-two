@@ -11,11 +11,13 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 
 import styles from './sass/Business.scss';
 
 const BusinessLoginScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useScreenDispatch();
   return (
     <SafeAreaView style={styles.screenLayout}>
       <View style={styles.screenAdjustment}>
@@ -53,7 +55,14 @@ const BusinessLoginScreen = () => {
         <TouchableOpacity style={styles.forgotPassword}>
           <Text styles={styles.forgotPasswordText}>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBttn}>
+        <TouchableOpacity
+          style={styles.loginBttn}
+          onPress={() => {
+            // Just used to bypass navbar
+            changeScreen(dispatch, 'Landing');
+            navigation.navigate('BusinessInsights');
+          }}
+        >
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
         <View style={styles.subOptions}>

@@ -3,37 +3,53 @@ import { gql } from '@apollo/client';
 export const GET_STORES = gql`
   query GetMinorityBusiness($zipCode: String!) {
     getMinorityBusiness(zip_code: $zipCode) {
-      name
-      cover_image
       address
       city
-      state
-      zip_code
+      cover_image
+      distance
+      is_featured
+      is_online
+      is_pending
       long
       lat
-      is_online
-      type
-      is_featured
-      is_pending
-      sid
-      profile_image
+      name
       rating_count
       rating
-      distance
+      profile_image
+      sid
+      state
+      type
+      zip_code
       section {
-        sections {
-          name
-          dishes {
-            id
+        ... on MenuSectionObject {
+          type
+          sections {
+            dishes {
+              id
+              name
+              description
+              price
+              image_url
+              rating
+              out_of_stock
+            }
             name
-            description
-            price
-            image_url
-            rating
-            out_of_stock
           }
         }
-        type
+        ... on StoreItemSection {
+          type
+          sections {
+            name
+            items {
+              id
+              name
+              price
+              image_url
+              size
+              out_of_stock
+            }
+          }
+        }
       }
     }
   }

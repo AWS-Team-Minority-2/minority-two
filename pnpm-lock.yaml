@@ -190,6 +190,9 @@ importers:
       react-native:
         specifier: 0.71.8
         version: 0.71.8(@babel/core@7.23.9)(react@18.2.0)
+      react-native-element-dropdown:
+        specifier: ^2.10.4
+        version: 2.10.4(react-native@0.71.8)(react@18.2.0)
       react-native-maps:
         specifier: 1.3.2
         version: 1.3.2(react-native@0.71.8)(react@18.2.0)
@@ -12269,6 +12272,18 @@ packages:
     transitivePeerDependencies:
       - '@babel/preset-env'
       - supports-color
+    dev: false
+
+  /react-native-element-dropdown@2.10.4(react-native@0.71.8)(react@18.2.0):
+    resolution: {integrity: sha512-sbzByNSQmS3iZuNxzeqs0L04MrYQt8uSNUcmnAZAN/vi5IqZ7N0TPHzZ996PSttpYrF2NkiByd+Zlw9Em+VgAw==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      lodash: 4.17.21
+      react: 18.2.0
+      react-native: 0.71.8(@babel/core@7.23.9)(react@18.2.0)
     dev: false
 
   /react-native-gradle-plugin@0.71.19:

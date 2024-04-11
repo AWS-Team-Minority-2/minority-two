@@ -50,11 +50,11 @@ const ProcessedScreen = ({ navigation, route }) => {
           style={styles.completeOrderBttn}
           onPress={() => {
             removeCart(cartDispatch, {
-              restaurant: params.restaurant,
+              business: params.business,
               items: params.items,
             });
             navigation.navigate('UserHome', {
-              restaurant: params.restaurant,
+              business: params.business,
               items: params.items,
             });
             changeScreen(dispatch, 'UserHome');

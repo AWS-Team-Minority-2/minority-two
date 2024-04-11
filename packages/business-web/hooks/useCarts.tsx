@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { Cart } from './locals';
-import { Dish } from '@min-two/business-iso';
+import { CartItem } from '@min-two/business-iso';
 
 type CartsState = Cart[];
 
@@ -17,9 +17,9 @@ const CartsDispatchContext = createContext<React.Dispatch<Action> | undefined>(
 function cartsReducer(state: CartsState, action: Action): CartsState {
   switch (action.type) {
     case 'SET_CARTS':
-      const { restaurant, items } = action.payload;
+      const { business, items } = action.payload;
       const existingCartIndex = state.findIndex(
-        (cart) => cart.restaurant.id === restaurant.id
+        (cart) => cart.business.id === business.id
       );
 
       if (existingCartIndex !== -1) {
@@ -37,7 +37,7 @@ function cartsReducer(state: CartsState, action: Action): CartsState {
 
     case 'REMOVE_CARTS':
       const cartToRemoveIndex = state.findIndex(
-        (cart) => cart.restaurant.id === action.payload.restaurant.id
+        (cart) => cart.business.id === action.payload.business.id
       );
 
       if (cartToRemoveIndex !== -1) {
@@ -47,8 +47,6 @@ function cartsReducer(state: CartsState, action: Action): CartsState {
       } else {
         return state;
       }
-
-    // console.log(cartToRemoveIndex);
 
     case 'SET_CARTS_MOUNT':
       return action.payload;
@@ -100,15 +98,15 @@ function setCartOnMount(dispatch: React.Dispatch<Action>, carts) {
   dispatch({ type: 'SET_CARTS_MOUNT', payload: carts });
 }
 
-function getActiveStoreIds(state: CartsState): string[] {
-  return state.map((cart) => cart.restaurant.id);
+function getActiveStoreIds(state: CartsState): any {
+  return state.map((cart) => cart.business.id);
 }
 
 function getItemsByStoreId(
   state: CartsState,
   storeId: string
-): Dish[] | undefined {
-  const cart = state.find((cart) => cart.restaurant.id === storeId);
+): CartItem[] | undefined {
+  const cart = state.find((cart) => cart.business.id === storeId);
   return cart ? Object.values(cart.items) : undefined;
 }
 

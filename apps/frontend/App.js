@@ -59,6 +59,8 @@ import { useFonts } from 'expo-font';
 import { Text } from 'react-native';
 import { EditBusiness } from './screens/Admin/updates/editBusiness';
 import { setCartOnMount } from '@min-two/business-web';
+import { BusinessInsights } from './screens';
+import { BusinessSideStore } from './screens/Business';
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
@@ -126,7 +128,6 @@ function NavigationController() {
         <Stack.Screen name='Checkout' component={BasketScreen} />
         <Stack.Screen name='Carts' component={OpenCarts} />
         <Stack.Screen name='Complete' component={ProcessedScreen} />
-
         <Stack.Screen name='CustomerLogin' component={CustomerLoginScreen} />
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
         <Stack.Screen
@@ -153,6 +154,8 @@ function NavigationController() {
         <Stack.Screen name='ServiceProfile' component={ServiceProfile} />
         <Stack.Screen name='ServerProfile' component={ServerProfile} />
         <Stack.Screen name='StoreProfile' component={StoreProfile} />
+        <Stack.Screen name='BusinessInsights' component={BusinessInsights} />
+        <Stack.Screen name='BusinessSideStore' component={BusinessSideStore} />
       </Stack.Navigator>
       {/* Pass in User Id to navbar to handle customer actions */}
       {showNavBar && <NavBar id={user.id} />}
