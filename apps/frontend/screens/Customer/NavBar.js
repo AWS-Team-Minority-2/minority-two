@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import {
   AntDesign,
-  MaterialIcons,
-  MaterialCommunityIcons,
   Feather,
-} from '@expo/vector-icons';
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import styles from './sass/NavBar.scss';
 import { useNavigation } from '@react-navigation/native';
 import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
@@ -57,7 +57,13 @@ const NavBar = ({ id }) => {
         {/* Favorites Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => handleButtonPress('Favorites')}
+          onPress={() => [
+            handleButtonPress("Favorites"),
+            navigation.navigate("UserFavorites"),
+          ]}
+          
+
+
         >
           <MaterialIcons
             name='favorite-outline'
@@ -81,7 +87,11 @@ const NavBar = ({ id }) => {
         {/* Browse Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => handleButtonPress('Browse')}
+          onPress={() => [
+            handleButtonPress("Browse"),
+            navigation.navigate("UserBrowse"),
+          ]}
+
         >
           <MaterialCommunityIcons
             name='store-search-outline'

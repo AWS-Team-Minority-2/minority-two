@@ -10,6 +10,18 @@ export {
   CustomerLoginScreen,
   CustomerRegisterScreen,
   ForgotPassword,
+
+  UserHomeScreen
+} from './Customer';
+export { Browse } from './Customer/Browse';
+export { UserProfile } from './Customer/UserProfilePage/UserProfile';
+export { Homescreen } from './Homescren';
+export { ServicesBrowse } from './Customer/ServicesBrowse';
+export { RestaurantsBrowse } from './Customer/RestaurantsBrowse';
+export { ShopsBrowse } from './Customer/ShopsBrowse';
+
+
+
   UserHomeScreen,
   RestaurantProfile,
 } from "./Customer";
@@ -21,3 +33,4 @@ export * from "./Customer/Checkout/screen";
 export * from "./Customer/Checkout/OpenCarts";
 export * from "./Customer/Checkout/processed";
 export { Review } from "./Customer/Review";
+
