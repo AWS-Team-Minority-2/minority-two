@@ -29,7 +29,24 @@ export class PostgresUserStore {
         user.state,
         user.zipCode,
       ];
-      return await this.pool.query(registerUserQuery, values);
+      await this.pool.query(registerUserQuery, values);
+      const userFound = await this.fetchUserByEmail(user.email);
+
+      return {
+        id: userFound.id,
+        userMetadata: {
+          address: {
+            city: userFound.city,
+            state: userFound.state,
+            street: userFound.address,
+            zipcode: userFound.zipcode,
+          },
+          email: userFound.email,
+          firstname: userFound.firstname,
+          lastname: userFound.lastname,
+          phonenumber: userFound.phonenumber,
+        },
+      };
     } catch (error) {
       console.log(error);
       throw new Error('Error while adding user to the database.');

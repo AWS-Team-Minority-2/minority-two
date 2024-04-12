@@ -65,7 +65,7 @@ type BusinessOutput {
 }
 
 type Mutation {
-  RegisterUser(user: UserInput): AddedUserResponse
+  RegisterUser(user: UserInput): LoginResponse
   LoginUser(details: UserDetailsInput): LoginResponse
   LoginAdmin(adminCode: String): AdminLoginResponse
 }
@@ -85,7 +85,7 @@ type LoginResponse {
 }
 
 type AddedUserResponse {
-  message: String
+  id: String
 }
 
 type UserOutput {
