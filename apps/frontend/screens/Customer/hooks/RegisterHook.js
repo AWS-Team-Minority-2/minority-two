@@ -4,6 +4,7 @@ import { REGISTER_USER } from '../gql';
 import { useNavigation } from '@react-navigation/native';
 import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
 import { doLogin, useAuthDispatch } from '@min-two/user-iso';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /* Hook that handles users forms **/
 export function useRegisterForm() {
