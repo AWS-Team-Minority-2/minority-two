@@ -1,4 +1,7 @@
-import { QueryResolver } from './src/resolvers/QueryResolver.js';
+import {
+  QueryResolver,
+  // SectionUnionResolver,
+} from './src/resolvers/QueryResolver.js';
 import { MutationResolver } from './src/resolvers/MutationResolver.js';
 
 // User Loader and Store
@@ -20,6 +23,11 @@ import bodyParser from 'body-parser';
 import {
   handleSuspendBusiness,
   handleUnsuspendBusiness,
+  updateCustomerFirstName,
+  updateCustomerLastName,
+  updateCustomerPhoneNumber,
+  updateCustomerEmail,
+  queryStoreDataById,
 } from './src/controllers';
 
 const PATH = '/graphql';
@@ -32,8 +40,18 @@ export const getProjectServer = _.memoize(async () => {
     resolvers: {
       Query: QueryResolver,
       Mutation: MutationResolver,
+      SectionUnion: {
+        __resolveType: (section: any) => {
+          if (section.type === 'shop') {
+            return 'StoreItemSection';
+          } else {
+            return 'MenuSectionObject';
+          }
+        },
+      },
     },
   });
+
   const server = new ApolloServer({
     schema,
     context: (): GQLContext => {
@@ -72,6 +90,18 @@ node.get('/', async (req, res) => {
   return res.status(200).send({ message: 'Port opended, see /graphql' });
 });
 
+node.post('/get/business/via/id', async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+  try {
+    const store = await queryStoreDataById(req.body.id);
+    return res.status(200).send({ store: store });
+  } catch (e) {
+    return res.status(400).send({ error: 'Error getting store data' });
+  }
+});
+
 node.post('/admin/actions/suspend', async (req, res) => {
   if (!req.body.id) {
     return res.status(400).send({ error: 'No data provided' });
@@ -106,6 +136,54 @@ node.post('/admin/actions/unsuspend', async (req, res) => {
 
   res.status(200).send({ message: 'Business unsuspend' });
   return;
+});
+
+node.post('/update/customer/names', async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+
+  if (req.body.data.firstName) {
+    await updateCustomerFirstName({
+      name: req.body.data.firstName,
+      id: req.body.id,
+    });
+  }
+
+  if (req.body.data.lastName) {
+    await updateCustomerLastName({
+      name: req.body.data.lastName,
+      id: req.body.id,
+    });
+  }
+
+  return res.status(200).send({ message: 'Updated' });
+});
+
+node.post('/update/customer/number', async (req, res) => {
+  if (!req.body.id || !req.body.data) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+
+  await updateCustomerPhoneNumber({
+    id: req.body.id,
+    number: req.body.data,
+  });
+
+  return res.status(200).send({ message: 'Updated' });
+});
+
+node.post('/update/customer/email', async (req, res) => {
+  if (!req.body.id || !req.body.data) {
+    return res.status(400).send({ error: 'No data provided' });
+  }
+
+  await updateCustomerEmail({
+    id: req.body.id,
+    email: req.body.data,
+  });
+
+  return res.status(200).send({ message: 'Updated' });
 });
 
 createMinBusinessServer(node).then(() => {

@@ -1,3 +1,6 @@
+
+import React, { useEffect, useState } from 'react';
+import Toast from 'react-native-toast-message';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { AuthProvider } from '@min-two/user-iso';
 import {
@@ -17,9 +20,29 @@ import {
   Homescreen,
   UserHomeScreen,
   UserProfile,
+  AdminPortalScreen,
+  AdminScreen,
+  BasketScreen,
+  OpenCarts,
+  ProcessedScreen,
+  RestaurantProfile,
 } from './screens';
+import { AuthProvider, useAuthState } from '@min-two/user-iso';
+// The diffrence between a basket and a cart is that the basket are items from one store.
+// A Cart is a collection of baskets from diffrent stores.
+import {
+  BasketProvider,
+  CartsProvider,
+  useCartsDispatch,
+} from '@min-two/business-web';
+
 // import UserProfile from './screens/Customer/UserProfilePage/UserProfile';
-import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
+import { NavBar } from './screens/Customer/NavBar';
+import { ServiceProfile } from './screens/Customer/ServiceProfile';
+import { ServerProfile } from './screens/Customer/ServerProfile';
+import { Review } from './screens/Customer/Review';
+
+import { StoreProfile } from './screens/Customer/StoreProfile';
 import {
   ScreenProvider,
   changeScreen,
@@ -45,6 +68,13 @@ import { ServicesBrowse } from './screens/Customer/ServicesBrowse';
 import { RestaurantsBrowse } from './screens/Customer/RestaurantsBrowse';
 import { ShopsBrowse } from './screens/Customer/ShopsBrowse';
 
+import { BebasNeue_400Regular } from '@expo-google-fonts/bebas-neue';
+import { useFonts } from 'expo-font';
+import { Text } from 'react-native';
+import { EditBusiness } from './screens/Admin/updates/editBusiness';
+import { setCartOnMount } from '@min-two/business-web';
+import { BusinessInsights } from './screens';
+import { BusinessSideStore } from './screens/Business';
 
 const Stack = createNativeStackNavigator();
 const userPages = [UserHomeScreen, UserProfile];
@@ -61,6 +91,8 @@ function NavigationController() {
   const noNavScreens = ['Landing', 'Register', 'Login'];
   const showNavBar = !noNavScreens.includes(screen);
   const screenDispatch = useScreenDispatch();
+  const [user, setUser] = useState({});
+  const cartDispatch = useCartsDispatch();
 
   useEffect(() => {
     const checkUser = async () => {
@@ -69,6 +101,7 @@ function NavigationController() {
         if (value !== null) {
           try {
             doLogin(dispatch, JSON.parse(value));
+            setUser(JSON.parse(value));
             changeScreen(screenDispatch, 'UserHome');
             navigation.navigate('UserHome');
           } catch (e) {
@@ -83,6 +116,21 @@ function NavigationController() {
     checkUser();
   }, []);
 
+  useEffect(() => {
+    const checkCarts = async () => {
+      try {
+        const value = await AsyncStorage.getItem('carts');
+        if (value !== null) {
+          // setCartOnMount(cartDispatch, JSON.parse(value));
+        }
+      } catch (error) {
+        console.log('Error checking item: ', error);
+      }
+    };
+
+    checkCarts();
+  }, []);
+
   return (
     <>
       <Stack.Navigator
@@ -91,6 +139,9 @@ function NavigationController() {
         }}
       >
         <Stack.Screen name='Home' component={Homescreen} />
+        <Stack.Screen name='Checkout' component={BasketScreen} />
+        <Stack.Screen name='Carts' component={OpenCarts} />
+        <Stack.Screen name='Complete' component={ProcessedScreen} />
         <Stack.Screen name='CustomerLogin' component={CustomerLoginScreen} />
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
         <Stack.Screen
@@ -109,19 +160,30 @@ function NavigationController() {
         <Stack.Screen name='ChangePassword' component={ChangePassword} />
         <Stack.Screen name='AccountInfo' component={AccountInfo} />
         <Stack.Screen name='AccountInfoName' component={AccountInfoName} />
+        <Stack.Screen name='RestaurantProfile' component={RestaurantProfile} />
         <Stack.Screen
           name='AccountInfoPhoneNumber'
           component={AccountInfoPhoneNumber}
         />
+        <Stack.Screen name='Review' component={Review} />
         <Stack.Screen name='AccountInfoEmail' component={AccountInfoEmail} />
+
         <Stack.Screen name='AdminBusinessEdit' component={EditBusiness} />
         <Stack.Screen name='ServicesBrowse' component={ServicesBrowse}/>
         <Stack.Screen name='RestaurantsBrowse' component={RestaurantsBrowse}/>
         <Stack.Screen name='ShopsBrowse' component={ShopsBrowse}/>
         
         
+
+        <Stack.Screen name='ServiceProfile' component={ServiceProfile} />
+        <Stack.Screen name='ServerProfile' component={ServerProfile} />
+        <Stack.Screen name='StoreProfile' component={StoreProfile} />
+        <Stack.Screen name='BusinessInsights' component={BusinessInsights} />
+        <Stack.Screen name='BusinessSideStore' component={BusinessSideStore} />
+
       </Stack.Navigator>
-      {showNavBar && <NavBar />}
+      {/* Pass in User Id to navbar to handle customer actions */}
+      {showNavBar && <NavBar id={user.id} />}
     </>
   );
 }
@@ -135,15 +197,22 @@ export default function App() {
   }
 
   return (
-    <ApolloProvider client={client}>
-      <AuthProvider>
-        <ScreenProvider>
-          <NavigationContainer>
-            <NavigationController />
-          </NavigationContainer>
-        </ScreenProvider>
-      </AuthProvider>
-    </ApolloProvider>
+    <>
+      <ApolloProvider client={client}>
+        <AuthProvider>
+          <ScreenProvider>
+            <CartsProvider>
+              <BasketProvider>
+                <NavigationContainer>
+                  <NavigationController />
+                </NavigationContainer>
+              </BasketProvider>
+            </CartsProvider>
+          </ScreenProvider>
+        </AuthProvider>
+      </ApolloProvider>
+      <Toast />
+    </>
   );
 }
 

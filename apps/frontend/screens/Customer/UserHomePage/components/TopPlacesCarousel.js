@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   Text,
@@ -8,13 +8,26 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import { useNavigation } from '@react-navigation/native';
+import { getActiveStoreIds, useCartsState } from '@min-two/business-web';
 
 const { width, height } = Dimensions.get('window');
 
 const CARD_WIDTH = 293;
 const CARD_HEIGHT = 200;
 
-const TopPlacesCarousel = ({ list }) => {
+const TopPlacesCarousel = ({ list, route }) => {
+  const dispatch = useScreenDispatch();
+  const navigation = useNavigation();
+
+  const cartState = useCartsState();
+  const [storeIds, setStoreIds] = useState([]);
+
+  useEffect(() => {
+    setStoreIds(getActiveStoreIds(cartState));
+  }, [cartState]);
+
   return (
     <FlatList
       data={list}
@@ -29,6 +42,32 @@ const TopPlacesCarousel = ({ list }) => {
             style={{
               marginLeft: index === 0 ? 2 : -25, // Adjust the marginLeft for the first card
               marginRight: index === list.length - 1 ? -35 : 0, // Adjust the marginRight for the last card
+            }}
+            onPress={() => {
+              navigation.navigate(
+                item.type === 'restaurant'
+                  ? 'RestaurantProfile'
+                  : item.type === 'service'
+                  ? 'ServiceProfile'
+                  : 'StoreProfile',
+                {
+                  name: item.name,
+                  coverImage: item.cover_image,
+                  rating: item.rating,
+                  ratingCount: item.rating_count,
+                  distance: item.distance,
+                  profileImage: item.profile_image,
+                  sections: item.section,
+                  id: item.sid,
+                  address: item.address,
+                  city: item.city,
+                  state: item.state,
+                  zip: item.zip_code,
+                  // boolean
+                  hasCartsActive: storeIds.includes(item.sid),
+                  // pass in active state here
+                }
+              );
             }}
           >
             <View style={[styles.card, styles.dark]}>

@@ -1,5 +1,46 @@
 type Query {
-  getMinorityBusiness: [BusinessOutput]
+  getMinorityBusiness(zip_code: String!): [BusinessOutput]
+}
+
+union SectionUnion = MenuSectionObject | StoreItemSection
+
+type Item {
+  id: String!
+  name: String!
+  price: String!
+  image_url: String!
+  size: String
+  out_of_stock: Boolean!
+}
+
+type StoreItem {
+  name: String!
+  items: [Item]
+}
+
+type StoreItemSection {
+  type: String!
+  sections: [StoreItem]
+}
+
+type Dish {
+  id: String!
+  name: String!
+  description: String!
+  price: String!
+  image_url: String!
+  rating: String!
+  out_of_stock: Boolean!
+}
+
+type MenuItem {
+  name: String!
+  dishes: [Dish]!
+}
+
+type MenuSectionObject {
+  type: String!
+  sections: [MenuItem]
 }
 
 type BusinessOutput {
@@ -12,18 +53,24 @@ type BusinessOutput {
   long: String
   lat: String
   is_online: Boolean!
-  render_type: String!
+  type: String!
+  is_featured: Boolean!
   is_pending: Boolean!
   sid: String!
+  profile_image: String
+  rating_count: Int!
+  rating: String!
+  distance: String
+  section: SectionUnion
 }
 
 type Mutation {
-  RegisterUser(user: User): AddedUserResponse
-  LoginUser(details: UserDetails): LoginResponse
+  RegisterUser(user: UserInput): AddedUserResponse
+  LoginUser(details: UserDetailsInput): LoginResponse
   LoginAdmin(adminCode: String): AdminLoginResponse
 }
 
-input UserDetails {
+input UserDetailsInput {
   email: String!
   password: String!
 }
@@ -74,7 +121,7 @@ type UserResponse {
   zipcode: Int!
 }
 
-input User {
+input UserInput {
   firstName: String!
   lastName: String!
   phoneNumber: String!

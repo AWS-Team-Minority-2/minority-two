@@ -1,0 +1,6 @@
+UPDATE stores.store
+SET 
+  section = '{"type": "shop", "sections": [{"name": "Lemonade", "items": [{"id": "mb-8832", "name": "BLACK CHERRY", "size": "15c/12oz", "price": 29, "image_url": "https://www.meandthebees.com/cdn/shop/products/bottle-bc_large.jpg?v=1643821938", "out_of_stock": false}, {"id": "mb-8102", "name": "PRICKLY PEAR", "size": "15c/12oz", "price": 29, "image_url": "https://www.meandthebees.com/cdn/shop/products/pricklypear_large.jpg?v=1574142334", "out_of_stock": false}, {"id": "mb-1338", "name": "CLASSIC LEMONADE", "size": "15c/12oz", "price": 29, "image_url": "https://www.meandthebees.com/cdn/shop/products/classic_large.jpg?v=1574142063", "out_of_stock": false}, {"id": "mb-8762", "name": "LEMONADE WITH MINT", "size": "15c/12oz", "price": 29, "image_url": "https://www.meandthebees.com/cdn/shop/products/mint_large.jpg?v=1574142088", "out_of_stock": false}, {"id": "mb-1488", "name": "LEMONADE WITH GINGER", "size": "15c/12oz", "price": 29, "image_url": "https://www.meandthebees.com/cdn/shop/products/ginger_14db67bf-7775-48fa-ad01-1286a482ef4d_large.jpg?v=1574142159", "out_of_stock": false}]}]}'::JSONB,
+  profile_image = 'https://s.yimg.com/ny/api/res/1.2/DaaQWEq_NWzZ_zeo9YlUcQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQyNg--/https://media.zenfs.com/en-US/nbc_news_122/4fab57ecd05c300ba5d236da68321866'
+WHERE sid = 'Nexa-2';
+

@@ -1,212 +1,189 @@
-import React, { useState, useRef, Component } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
   SafeAreaView,
   TouchableOpacity,
-  TextInput,
-  Modal,
   PanResponder,
   Animated,
   Dimensions,
+  ScrollView,
 } from 'react-native';
+
 // import TopPlacesCarousel from "./components/TopPlacesCarousel";
-import { Entypo, Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
+import {
+  Entypo,
+  Ionicons,
+  Feather,
+  MaterialIcons,
+  FontAwesome,
+} from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import { useStores } from '@min-two/business-web';
-
-import styles from './UserMap.scss';
+import { markers, mapStandardStyle } from '../data/mapData';
 // import { TRUE } from "sass";
 
-const UserMap = () => {
-  const { featured, shops, restaurants, services } = useStores();
+import styles from './UserMap.scss';
+import { MapCard } from './MapCard';
+import { HomescreenHeader } from './HomescreenHeader';
+import { BusinessMarkers } from './components/BusinessMarkers';
 
+const UserMap = ({ route }) => {
   const navigation = useNavigation();
-  const [location, setLocation] = useState(false); // For the pop screen to show up or not
-  const [pickedAddress, setPickedAddress] = useState('Howard University'); // Current address displayed
 
-  const handleAddressClick = (address) => {
-    setPickedAddress(address);
-    setLocation(false);
+  const props = route.params;
+  const zipCode = props.zipCode;
+
+  const { allBusiness } = useStores(zipCode);
+  const initialMapState = {
+    markers,
+    region: {
+      latitude: 38.923141,
+      longitude: -77.021584,
+      latitudeDelta: 0.0093,
+      longitudeDelta: 0.0074,
+    },
   };
 
-  const [mapLocation, setMapLocation] = useState({
-    latitude: 38.923141,
-    longitude: -77.021584,
-    latitudeDelta: 0.0093,
-    longitudeDelta: 0.0074,
-  });
+  const [state, setState] = useState(initialMapState);
+  const _map = useRef(null);
+  const scroll = useRef(null);
 
-  // Handles the ability for the User to swipes the pop up screen down
+  const [showScrollView, setShowScrollView] = useState(false);
+  const [scrollY, setScrollY] = useState(new Animated.Value(0));
   const panResponder = useRef(
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
-      onPanResponderRelease: (_, gestureState) => {
-        if (gestureState.dy > 50) {
-          setLocation(false); // Close the modal if user swipes down
+      onPanResponderMove: (_, gestureState) => {
+        if (0 > gestureState.dy) {
+          // Swipe down
+          setShowScrollView(true);
+        } else {
+          // Swipe up
+          setShowScrollView(false);
         }
+      },
+      onPanResponderRelease: () => {
+        // Reset
+        setShowScrollView(false);
       },
     })
   ).current;
 
-  const CARD_WIDTH = 293;
-  const CARD_HEIGHT = 200;
+  const [mapLocation, setMapLocation] = useState({
+    latitude: 38.93,
+    longitude: -77.021584,
+    latitudeDelta: 0.0100093,
+    longitudeDelta: 0.0145645074,
+  });
 
-  function renderModal() {
-    // List of Locations
-    const pastLocations = {
-      'Howard University': '2400 Sixth St NW, Washington DC 20001',
-      'Vie Towers': '1615 Belcrest Rd, Hyattsvill MD 20782',
-      '256 Highway St': 'New York, NY 11245',
-      '154 Harvard Avenue': 'Boston, MA 02134',
-    };
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const scrollViewRef = useRef(null);
 
-    return (
-      // Pop up screen for User to select location
-      <Modal visible={location} animationType='slide' transparent={true}>
-        <View style={[styles.locationPopUp, { marginTop: 50 }]}>
-          <View {...panResponder.panHandlers}>
-            <View style={styles.locationBox}>
-              <View style={styles.locationContent}>
-                <Text style={styles.locationHeader}>Enter Location</Text>
+  const handleMarkerPress = (latitude, longitude, index) => {
+    // Update map location to the clicked marker's coordinates
+    setMapLocation({
+      latitude,
+      longitude,
+      latitudeDelta: 0.00922,
+      longitudeDelta: 0.00421,
+    });
+    // Show the scroll view
+    setShowScrollView(true);
 
-                {/* Search box in pop up screen */}
-                <View style={styles.searchContainer}>
-                  <Ionicons
-                    name='search-outline'
-                    size={17}
-                    color='black'
-                    style={styles.searchIcon}
-                  />
-                  <TextInput
-                    style={styles.textInput}
-                    placeholder='Search Nexa'
-                  />
-                </View>
+    if (scrollViewRef.current) {
+      const cardWidth = 300; // Width of each card
+      const screenWidth = Dimensions.get('window').width;
+      const scrollToX = index * cardWidth - (screenWidth - cardWidth) / 2;
+      scrollViewRef.current.scrollTo({ x: scrollToX, animated: true });
+    }
 
-                <Text style={styles.pastLocations}>Past Locations</Text>
-
-                {/* List of locations in pop up screen */}
-                {Object.entries(pastLocations).map(
-                  ([address, description], index) => (
-                    <TouchableOpacity
-                      key={index}
-                      onPress={() => handleAddressClick(address)}
-                    >
-                      <View style={[styles.pastLocationContainer]}>
-                        <View style={styles.sectionLocation}>
-                          <Entypo
-                            name='location-pin'
-                            size={27}
-                            color='black'
-                            style={[
-                              styles.pin,
-                              pickedAddress === address && styles.pickedAddress,
-                            ]}
-                          />
-                          <View style={styles.wholeLocation}>
-                            <Text
-                              style={[
-                                styles.pastLocation,
-                                pickedAddress === address &&
-                                  styles.pickedAddress,
-                              ]}
-                            >
-                              {address}
-                            </Text>
-                            <Text
-                              style={[
-                                styles.address,
-                                pickedAddress === address &&
-                                  styles.pickedAddress,
-                              ]}
-                            >
-                              {description}
-                            </Text>
-                          </View>
-                        </View>
-
-                        <View style={styles.locationDivider} />
-                      </View>
-                    </TouchableOpacity>
-                  )
-                )}
-              </View>
-            </View>
-          </View>
-        </View>
-      </Modal>
-    );
-  }
+    // Toggle the selection state of the clicked marker
+    setSelectedMarker((prevSelectedMarker) => {
+      if (prevSelectedMarker === `${latitude}-${longitude}`) {
+        // If the clicked marker is already selected, deselect it
+        return null;
+      } else {
+        // If another marker is selected or no marker is selected, select the clicked marker
+        return `${latitude}-${longitude}`;
+      }
+    });
+  };
 
   return (
     <SafeAreaView style={styles.homeScreenLayout}>
       <View style={styles.homeAdjustment}>
         <View style={styles.TopBar}>
-          <View style={styles.homeHeader}>
-            {/* Location button w/ icons */}
-            <TouchableOpacity
-              style={styles.location}
-              onPress={() => setLocation(true)}
-            >
-              <Entypo name='location-pin' size={21} color='black' />
-              <Text style={styles.address}>{pickedAddress}</Text>
-              <MaterialIcons
-                name='keyboard-arrow-down'
-                size={22}
-                color='black'
-              />
-            </TouchableOpacity>
+          <View style={styles.homeHeader}></View>
 
-            {/* Pop Up screen from location */}
-            {renderModal()}
-
-            {/* Notification icon */}
-            <TouchableOpacity style={styles.notification}>
-              <Ionicons name='notifications-outline' size={20} color='black' />
-            </TouchableOpacity>
-          </View>
-
-          {/* Search Box */}
-          <View style={styles.searchContainer}>
-            <Ionicons
-              name='search-outline'
-              size={17}
-              color='black'
-              style={styles.searchIcon}
-            />
-            <TextInput style={styles.textInput} placeholder='Search Nexa' />
-            <View style={styles.divider} />
-            <TouchableOpacity onPress={() => navigation.navigate('UserHome')}>
-              <Feather
-                name='list'
-                size={24}
-                color='black'
-                style={styles.mapIcon}
-              />
-            </TouchableOpacity>
-          </View>
+          <HomescreenHeader currentZip={zipCode} parent={'map'} />
         </View>
+
         <View>
           <MapView
             style={{ height: 800 }}
             region={mapLocation}
-            ref={(map) => (this.map = map)}
             rotateEnabled={true}
+            zoomEnabled={true}
             loadingEnabled={true}
             loadingIndicatorColor='#F2998D'
-            // mapType="hybridFlyover" //Change Map type
+            showsUserLocation={true}
           >
-            <Marker
-              coordinate={{
-                latitude: mapLocation.latitude,
-                longitude: mapLocation.longitude,
-              }}
-            ></Marker>
+            {allBusiness
+              .filter((business) => !business.is_online)
+              .map((business, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() =>
+                    handleMarkerPress(business.lat, business.long, index)
+                  }
+                >
+                  <BusinessMarkers
+                    key={index}
+                    business={business}
+                    isSelected={
+                      selectedMarker === `${business.lat}-${business.long}`
+                    }
+                  />
+                </TouchableOpacity>
+              ))}
           </MapView>
         </View>
       </View>
+
+      {!showScrollView ? (
+        <View style={styles.mapSwipe} {...panResponder.panHandlers}>
+          <View style={styles.mapSwipeBar}></View>
+          <Text style={styles.mapResults}>33 Results</Text>
+        </View>
+      ) : (
+        <>
+          <ScrollView
+            style={styles.mapOverViewParent}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            ref={scrollViewRef}
+          >
+            {allBusiness
+              .filter((b) => !b.is_online)
+              .map((b, index) => (
+                <TouchableOpacity
+                  onPress={() => handleMarkerPress(b.lat, b.long, index)}
+                >
+                  <MapCard
+                    key={index}
+                    imageUrl={b.cover_image}
+                    name={b.name}
+                    rating={b.rating}
+                    ratingCount={b.rating_count}
+                    distance={b.distance}
+                  />
+                </TouchableOpacity>
+              ))}
+          </ScrollView>
+        </>
+      )}
     </SafeAreaView>
   );
 };

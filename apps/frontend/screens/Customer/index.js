@@ -9,3 +9,9 @@ export {ServicesBrowse} from './ServicesBrowse';
 export {RestaurantsBrowse} from './RestaurantsBrowse';
 export {ShopsBrowse} from './ShopsBrowse';
 
+export { ServiceProfile } from './ServiceProfile';
+export { ServerProfile } from './ServerProfile';
+export { RestaurantProfile } from './RestaurantProfile';
+export { Review } from './Review';
+
+export { StoreProfile } from './StoreProfile';

@@ -28,6 +28,7 @@
     "watch": "^1.0.2"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.2",
     "esbuild": "^0.19.8",
     "graphql": "^16.0.0",
     "graphql-modules": "^2.1.2",

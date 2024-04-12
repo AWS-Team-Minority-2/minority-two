@@ -1,22 +1,23 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Text,
   TouchableOpacity,
   View,
   TextInput,
-} from "react-native";
-import styles from "./AccInfo.scss";
-import { useScreenDispatch, changeScreen } from "@min-two/screen-iso";
-import { useAuthState } from "@min-two/user-iso";
-import { Feather, MaterialIcons } from "@expo/vector-icons";
+} from 'react-native';
+import styles from './AccInfo.scss';
+import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import { useAuthState } from '@min-two/user-iso';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
-const ChangePassword = () => {
+const ChangePassword = ({ route }) => {
   const navigation = useNavigation();
   const { user: loggedUser } = useAuthState();
 
   const dispatch = useScreenDispatch();
+  const { id } = route.params;
 
   //   const [inputValue, setInputValue] = useState(
   //     loggedUser.userMetadata.firstname
@@ -31,11 +32,13 @@ const ChangePassword = () => {
         <TouchableOpacity
           style={styles.leftIcon}
           onPress={() => {
-            changeScreen(dispatch, "Security");
-            navigation.navigate("Security");
+            changeScreen(dispatch, 'Security');
+            navigation.navigate('Security', {
+              id,
+            });
           }}
         >
-          <Feather name="chevron-left" size={33} color="black" />
+          <Feather name='chevron-left' size={33} color='black' />
         </TouchableOpacity>
         <Text style={styles.accInfoHeader}>Change Password</Text>
         <Text style={styles.accInfoText}>
@@ -49,15 +52,15 @@ const ChangePassword = () => {
             <TextInput
               style={styles.inputContainer}
               defaultValue={loggedUser.userMetadata.password}
-              id="inputField"
+              id='inputField'
               //   onChangeText={(newText) => setInputValue(newText)} // Update input value
               // onChangeText={(newText) => handleFormChange('firstName', newText)}
             />
             <TouchableOpacity>
               <MaterialIcons
-                name="remove-red-eye"
+                name='remove-red-eye'
                 size={20}
-                color="black"
+                color='black'
                 style={styles.icon}
               />
             </TouchableOpacity>
@@ -71,9 +74,9 @@ const ChangePassword = () => {
             />
             <TouchableOpacity>
               <MaterialIcons
-                name="remove-red-eye"
+                name='remove-red-eye'
                 size={20}
-                color="black"
+                color='black'
                 style={styles.icon}
               />
             </TouchableOpacity>

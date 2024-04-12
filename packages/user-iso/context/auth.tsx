@@ -10,6 +10,7 @@ export type User = {
   city: string;
   state: string;
   zipCode: number;
+  id: string;
 };
 
 interface AuthState {

@@ -12,7 +12,7 @@
   margin-bottom: 105px;
 }
 
-.TopBarBorder{
+.TopBarBorder {
   width: 100%;
   border-bottom-width: 0.5px;
   border-bottom-color: #e4e4e4;
@@ -21,12 +21,11 @@
 .TopBar {
   position: sticky; // Stick the TopBar to the top of the viewport
   top: 0; // Stick it at the very top
-  background-color: 'white'; // Set a background color if needed
+  background-color: transparent; // Set a background color if needed
   z-index: 100; // Ensure it stays on top of other content
   margin-left: 3%;
   margin-right: 3%;
 }
-
 
 .homeHeader {
   display: flex;
@@ -56,8 +55,8 @@
 }
 
 .locationContent {
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 15px;
+  margin-right: 15px;
   margin-top: 25px;
   padding-bottom: 25px;
   align-content: center;
@@ -130,7 +129,7 @@
   color: #f2998d;
 }
 
-.showedAddress{
+.showedAddress {
   font-size: 13px;
   font-weight: 600;
   color: #f2998d;
@@ -248,4 +247,27 @@
 
 .selectedButton {
   color: #f2998d;
+}
+
+.iconBttns {
+  display: flex;
+  flex-direction: row;
+}
+
+.cartLengthBttn {
+  height: 15px;
+  width: 15px;
+  background-color: #f2998d;
+  align-items: center;
+  border-radius: 999px;
+  padding-top: 0.5px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.cartLengthText {
+  color: white;
+  font-family: 'BebasNeue_400Regular';
+  font-size: 12px;
 }
