@@ -1,15 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import Toast from 'react-native-toast-message';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { AuthProvider } from '@min-two/user-iso';
-import {
-  NavigationContainer,
-  useNavigation
-} from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { registerRootComponent } from 'expo';
-import React, { useEffect } from 'react';
 import {
   AdminPortalScreen,
   AdminScreen,
@@ -20,8 +14,6 @@ import {
   Homescreen,
   UserHomeScreen,
   UserProfile,
-  AdminPortalScreen,
-  AdminScreen,
   BasketScreen,
   OpenCarts,
   ProcessedScreen,
@@ -51,12 +43,8 @@ import {
 } from '@min-two/screen-iso';
 import { doLogin, useAuthDispatch } from '@min-two/user-iso';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFonts } from 'expo-font';
-import { Text } from 'react-native';
-import { EditBusiness } from './screens/Admin/updates/editBusiness';
 import { Browse } from './screens/Customer/Browse';
 import { Favorites } from './screens/Customer/Favorites';
-import { NavBar } from './screens/Customer/NavBar';
 import { UserMap } from './screens/Customer/UserHomePage/UserMap';
 import { AccountInfo } from './screens/Customer/UserProfilePage/AccountInfo';
 import { AccountInfoEmail } from './screens/Customer/UserProfilePage/AccountInfoEmail';
@@ -154,7 +142,7 @@ function NavigationController() {
         <Stack.Screen name='AdminPortal' component={AdminPortalScreen} />
         <Stack.Screen name='UserHome' component={UserHomeScreen} />
         <Stack.Screen name='UserFavorites' component={Favorites} />
-        <Stack.Screen name='UserBrowse' component={Browse}/>
+        <Stack.Screen name='UserBrowse' component={Browse} />
         <Stack.Screen name='UserProfile' component={UserProfile} />
         <Stack.Screen name='Security' component={Security} />
         <Stack.Screen name='ChangePassword' component={ChangePassword} />
@@ -169,18 +157,15 @@ function NavigationController() {
         <Stack.Screen name='AccountInfoEmail' component={AccountInfoEmail} />
 
         <Stack.Screen name='AdminBusinessEdit' component={EditBusiness} />
-        <Stack.Screen name='ServicesBrowse' component={ServicesBrowse}/>
-        <Stack.Screen name='RestaurantsBrowse' component={RestaurantsBrowse}/>
-        <Stack.Screen name='ShopsBrowse' component={ShopsBrowse}/>
-        
-        
+        <Stack.Screen name='ServicesBrowse' component={ServicesBrowse} />
+        <Stack.Screen name='RestaurantsBrowse' component={RestaurantsBrowse} />
+        <Stack.Screen name='ShopsBrowse' component={ShopsBrowse} />
 
         <Stack.Screen name='ServiceProfile' component={ServiceProfile} />
         <Stack.Screen name='ServerProfile' component={ServerProfile} />
         <Stack.Screen name='StoreProfile' component={StoreProfile} />
         <Stack.Screen name='BusinessInsights' component={BusinessInsights} />
         <Stack.Screen name='BusinessSideStore' component={BusinessSideStore} />
-
       </Stack.Navigator>
       {/* Pass in User Id to navbar to handle customer actions */}
       {showNavBar && <NavBar id={user.id} />}
