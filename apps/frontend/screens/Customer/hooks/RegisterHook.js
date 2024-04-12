@@ -3,11 +3,13 @@ import { useMutation } from '@apollo/client';
 import { REGISTER_USER } from '../gql';
 import { useNavigation } from '@react-navigation/native';
 import { useScreenDispatch, changeScreen } from '@min-two/screen-iso';
+import { doLogin, useAuthDispatch } from '@min-two/user-iso';
 
 /* Hook that handles users forms **/
 export function useRegisterForm() {
   const navigation = useNavigation();
-  const dispatch = useScreenDispatch();
+  const dispatch = useAuthDispatch();
+  const screenDispatch = useScreenDispatch();
 
   // Use this form to register the user
   const [formData, setFormData] = useState({
@@ -112,6 +114,16 @@ export function useRegisterForm() {
   //  talk to the database with a mutation in graphql
   const [registerUser, { loading, error }] = useMutation(REGISTER_USER);
 
+  const addUserToStorage = async (user) => {
+    try {
+      // Adding the item to AsyncStorage
+      await AsyncStorage.setItem('user', user);
+      // Setting the state to indicate that item is added
+    } catch (error) {
+      console.log('Error adding user: ', error);
+    }
+  };
+
   // try to send the data to the backend
   const submit = useCallback(async () => {
     try {
@@ -122,7 +134,10 @@ export function useRegisterForm() {
       });
 
       if (data) {
-        changeScreen(dispatch, 'UserHome');
+        doLogin(dispatch, data.RegisterUser);
+        addUserToStorage(JSON.stringify(data.RegisterUser));
+        changeScreen(screenDispatch, 'UserHome');
+
         navigation.navigate('UserHome');
       }
     } catch (error) {
